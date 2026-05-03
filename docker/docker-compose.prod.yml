@@ -1,0 +1,331 @@
+# ==============================================================================
+# DOCKER COMPOSE PRODUCTION - Hệ thống Tìm kiếm và Hỏi đáp Tài liệu Nội bộ
+# Đề tài Thạc sĩ: Semantic Search + RAG Chatbot
+# ==============================================================================
+# Cách sử dụng:
+#   Production: docker-compose -f docker-compose.prod.yml up -d
+#   Logs:      docker-compose -f docker-compose.prod.yml logs -f [service]
+# ==============================================================================
+
+version: "3.8"
+
+services:
+  # ---------------------------------------------------------------------------
+  # NGINX - Reverse Proxy với SSL Termination
+  # ---------------------------------------------------------------------------
+  nginx:
+    image: nginx:alpine
+    container_name: hlv_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    depends_on:
+      - backend
+      - frontend
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - hlv_network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+    mem_limit: 256m
+    mem_reservation: 128m
+
+  # ---------------------------------------------------------------------------
+  # POSTGRESQL PRODUCTION - Database với pgvector
+  # ---------------------------------------------------------------------------
+  postgresql:
+    image: pgvector/pgvector:pg16
+    container_name: hlv_postgresql_prod
+    restart: always
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ./backups:/backups
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    networks:
+      - hlv_network
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4G
+        reservations:
+          cpus: "1"
+          memory: 2G
+    # Security: Không expose port ra bên ngoài, chỉ qua internal network
+    mem_limit: 4g
+    mem_reservation: 2g
+    # Backup automation (production ready)
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  # ---------------------------------------------------------------------------
+  # REDIS PRODUCTION - Cache với persistence
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: hlv_redis_prod
+    restart: always
+    command: >
+      redis-server
+      --requirepass ${REDIS_PASSWORD}
+      --maxmemory 2gb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --appendfsync everysec
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data_prod:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hlv_network
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+    mem_limit: 2g
+    mem_reservation: 512m
+
+  # ---------------------------------------------------------------------------
+  # MINIO PRODUCTION - Object Storage
+  # ---------------------------------------------------------------------------
+  minio:
+    image: minio/minio:latest
+    container_name: hlv_minio_prod
+    restart: always
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_DEFAULT_BUCKETS: ${MINIO_BUCKETS}
+    volumes:
+      - minio_data_prod:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - hlv_network
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 1G
+    mem_limit: 2g
+    mem_reservation: 1g
+
+  # ---------------------------------------------------------------------------
+  # BACKEND API PRODUCTION - .NET 8 optimized build
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: ..
+      dockerfile: DoAnThacSI/docker/Dockerfile.backend
+    container_name: hlv_backend_prod
+    restart: always
+    environment:
+      # Database - sử dụng internal network hostname
+      ConnectionStrings__DefaultConnection: "Host=postgresql;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};SSL Mode=Prefer"
+      ConnectionStrings__Redis: "Host=redis;Port=6379;Password=${REDIS_PASSWORD};AbortConnect=false"
+      # MinIO
+      MinioConfig__Endpoint: "minio:9000"
+      MinioConfig__AccessKey: ${MINIO_ROOT_USER}
+      MinioConfig__SecretKey: ${MINIO_ROOT_PASSWORD}
+      MinioConfig__BucketName: ${MINIO_BUCKETS}
+      # OpenAI
+      OpenAiConfig__ApiKey: ${OPENAI_API_KEY}
+      OpenAiConfig__EmbeddingModel: ${OPENAI_EMBEDDING_MODEL}
+      OpenAiConfig__ChatModel: ${OPENAI_CHAT_MODEL}
+      # JWT Production
+      JwtConfig__Secret: ${JWT_SECRET}
+      JwtConfig__Issuer: ${JWT_ISSUER}
+      JwtConfig__Audience: ${JWT_AUDIENCE}
+      JwtConfig__ExpiryMinutes: 60
+      # Application
+      AppConfig__Environment: Production
+      AppConfig__AllowOrigins: "https://${DOMAIN_NAME:-localhost}"
+      AppConfig__MaxUploadSizeMb: 50
+      # Rate Limiting
+      RateLimitConfig__PermitLimit: 100
+      RateLimitConfig__WindowSeconds: 60
+      # Serilog Production
+      Serilog__MinimumLevel: Warning
+      Serilog__WriteTo__0__Args__serverUrl: "http://seq:5341"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    networks:
+      - hlv_network
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4G
+        reservations:
+          cpus: "1"
+          memory: 2G
+    mem_limit: 4g
+    mem_reservation: 2g
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    # Security: Read-only filesystem
+    read_only: false
+    security_opt:
+      - no-new-privileges:true
+
+  # ---------------------------------------------------------------------------
+  # FRONTEND PRODUCTION - Static build với Nginx
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ..
+      dockerfile: DoAnThacSI/docker/Dockerfile.frontend
+    container_name: hlv_frontend_prod
+    restart: always
+    environment:
+      NEXT_PUBLIC_API_URL: https://${DOMAIN_NAME:-localhost}/api
+      NEXT_PUBLIC_APP_ENV: production
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - hlv_network
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+    mem_limit: 1g
+    mem_reservation: 512m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # SEQ PRODUCTION - Centralized Logging
+  # ---------------------------------------------------------------------------
+  seq:
+    image: datalust/seq:latest
+    container_name: hlv_seq_prod
+    restart: always
+    ports:
+      - "127.0.0.1:5341:5341"
+      - "127.0.0.1:5340:80"
+    environment:
+      ACCEPT_EULA: Y
+    volumes:
+      - seq_data_prod:/data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - hlv_network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1G
+        reservations:
+          cpus: "0.25"
+          memory: 512M
+    mem_limit: 1g
+    mem_reservation: 512m
+
+# ==============================================================================
+# VOLUMES PRODUCTION - Với labels cho backup
+# ==============================================================================
+volumes:
+  postgres_data_prod:
+    driver: local
+    name: hlv_postgres_prod
+  redis_data_prod:
+    driver: local
+    name: hlv_redis_prod
+  minio_data_prod:
+    driver: local
+    name: hlv_minio_prod
+  seq_data_prod:
+    driver: local
+    name: hlv_seq_prod
+  nginx_logs:
+    driver: local
+    name: hlv_nginx_logs
+
+# ==============================================================================
+# NETWORKS PRODUCTION
+# ==============================================================================
+networks:
+  hlv_network:
+    driver: bridge
+    name: hlv_prod_network
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

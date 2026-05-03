@@ -1,0 +1,67 @@
+# Dockerfile - Backend .NET 8 API
+# Multi-stage build cho production optimization
+
+# ============================================
+# STAGE 1: BUILD
+# ============================================
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+# Set working directory
+WORKDIR /src
+
+# Copy project file first (for better layer caching)
+COPY AIBaseFramework.sln ./
+COPY src/AIBaseFramework.API/AIBaseFramework.API.csproj ./src/AIBaseFramework.API/
+
+# Restore dependencies
+RUN dotnet restore ./src/AIBaseFramework.API/AIBaseFramework.API.csproj
+
+# Copy source code
+COPY src/AIBaseFramework.API/ ./src/AIBaseFramework.API/
+
+# Build and publish
+WORKDIR /src/src/AIBaseFramework.API
+RUN dotnet build -c Release -o /app/build --no-restore
+RUN dotnet publish -c Release -o /app/publish --no-build
+
+# ============================================
+# STAGE 2: RUNTIME
+# ============================================
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user for security
+RUN groupadd -g 1001 appgroup && \
+    useradd -r -u 1001 -g appgroup -s /bin/false -d /app appuser
+
+# Set working directory
+WORKDIR /app
+
+# Copy published output
+COPY --from=build /app/publish .
+
+# Create directories for logs and uploads
+RUN mkdir -p /app/logs /app/uploads && \
+    chown -R appuser:appgroup /app
+
+# Switch to non-root user
+USER appuser
+
+# Expose ports
+EXPOSE 5000
+EXPOSE 5001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:5000/health || exit 1
+
+# Environment variables
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:5000
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
+# Entry point
+ENTRYPOINT ["dotnet", "AIBaseFramework.API.dll"]

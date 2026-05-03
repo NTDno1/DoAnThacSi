@@ -1,0 +1,66 @@
+# ==============================================================================
+# DOCKERFILE - OLLAMA (LLM Local)
+# Đề tài Thạc sĩ: Hệ thống Tìm kiếm và Hỏi đáp Tài liệu Nội bộ
+# 
+# Dockerfile này dùng để pre-download models trong build stage
+# Để tiết kiệm thời gian khi start container lần đầu
+# ==============================================================================
+
+# Base image với Ollama
+FROM ollama/ollama:latest AS base
+
+# ==============================================================================
+# STAGE: Pre-download Models (Optional)
+# Uncomment các dòng bên dưới để pre-download models
+# Lưu ý: Việc pre-download sẽ tăng thời gian build image
+# ==============================================================================
+FROM base AS models
+
+# Set environment
+ENV OLLAMA_HOST=0.0.0.0:11434
+
+# Download Chat Models
+# RUN ollama pull llama3.2:3b  # 3B params - recommended
+# RUN ollama pull llama3.2:1b  # 1B params - very fast
+# RUN ollama pull mistral:7b    # 7B params - better quality
+# RUN ollama pull phi3:latest   # 3.8B params - fast
+# RUN ollama pull qwen2.5:7b   # 7B params - good Vietnamese
+
+# Download Embedding Models
+# RUN ollama pull nomic-embed-text    # 768 dimensions - recommended
+# RUN ollama pull mxbai-embed-large  # 1024 dimensions - high quality
+
+# ==============================================================================
+# STAGE: Runtime (Default - không pre-download models)
+# ==============================================================================
+FROM base AS runtime
+
+# Environment variables
+ENV OLLAMA_HOST=0.0.0.0:11434
+ENV OLLAMA_NUM_PARALLEL=4
+ENV OLLAMA_MAX_LOADED_MODELS=2
+
+# Expose ports
+EXPOSE 11434
+EXPOSE 11436
+
+# Default command - chạy Ollama server
+CMD ["serve"]
+
+# ==============================================================================
+# BUILD INSTRUCTIONS:
+# 
+# 1. Build without pre-downloading models (fast build):
+#    docker build -t hlv-ollama -f Dockerfile.ollama .
+#
+# 2. Build with pre-downloading models (slow build, models available immediately):
+#    docker build -t hlv-ollama:full --target models -f Dockerfile.ollama .
+#
+# 3. Run:
+#    docker run -d --name hlv_ollama --gpus all -p 11434:11434 hlv-ollama
+#
+# 4. Download models manually after container started:
+#    docker exec hlv_ollama ollama pull llama3.2:3b
+#    docker exec hlv_ollama ollama pull nomic-embed-text
+#
+# ==============================================================================

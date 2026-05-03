@@ -1,0 +1,241 @@
+# Docker Compose - Development Environment
+# AI Base Framework - 100% Offline Local
+
+version: '3.8'
+
+services:
+  # ============================================
+  # OLLAMA - Local LLM (Thay thế OpenAI)
+  # ============================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: aibf_ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"  # Ollama API
+      - "11436:11436"  # Ollama metrics
+    environment:
+      CUDA_VISIBLE_DEVICES: "${CUDA_VISIBLE_DEVICES:-0}"
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_NUM_PARALLEL: "${OLLAMA_NUM_PARALLEL:-4}"
+      OLLAMA_MAX_LOADED_MODELS: "${OLLAMA_MAX_LOADED_MODELS:-2}"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    networks:
+      - aibf_network
+
+  # ============================================
+  # POSTGRESQL - Primary Database + pgvector
+  # ============================================
+  postgresql:
+    image: pgvector/pgvector:pg16
+    container_name: aibf_postgresql
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-aibfuser}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-aibfpass123}"
+      POSTGRES_DB: "${POSTGRES_DB:-aibaseframework}"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-aibfuser} -d ${POSTGRES_DB:-aibaseframework}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aibf_network
+
+  # ============================================
+  # REDIS - Cache và Session Store
+  # ============================================
+  redis:
+    image: redis:7-alpine
+    container_name: aibf_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --requirepass "${REDIS_PASSWORD:-redis123}"
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis123}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aibf_network
+
+  # ============================================
+  # MINIO - Object Storage (S3-compatible)
+  # ============================================
+  minio:
+    image: minio/minio:latest
+    container_name: aibf_minio
+    restart: unless-stopped
+    ports:
+      - "9000:9000"   # API
+      - "9001:9001"   # Console
+    environment:
+      MINIO_ROOT_USER: "${MINIO_ROOT_USER:-minioadmin}"
+      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD:-minioadmin123}"
+      MINIO_DEFAULT_BUCKETS: "${MINIO_BUCKETS:-documents,uploads,embeddings}"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - aibf_network
+
+  # ============================================
+  # BACKEND - .NET 8 API
+  # ============================================
+  backend:
+    build:
+      context: ../03.BACKEND
+      dockerfile: ../../DoAnThacSI/PlanTrienKhaiVaCode/02.INFRASTRUCTURE/docker/Dockerfile.backend
+    container_name: aibf_backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"   # HTTP
+      - "5001:5001"   # HTTPS (dev)
+    environment:
+      # Database
+      ConnectionStrings__DefaultConnection: "Host=postgresql;Port=5432;Database=${POSTGRES_DB:-aibaseframework};Username=${POSTGRES_USER:-aibfuser};Password=${POSTGRES_PASSWORD:-aibfpass123}"
+      # Redis
+      ConnectionStrings__Redis: "redis://:${REDIS_PASSWORD:-redis123}@redis:6379"
+      # MinIO
+      MinIOConfig__Endpoint: "minio:9000"
+      MinIOConfig__AccessKey: "${MINIO_ROOT_USER:-minioadmin}"
+      MinIOConfig__SecretKey: "${MINIO_ROOT_PASSWORD:-minioadmin123}"
+      MinIOConfig__BucketName: "${MINIO_BUCKET:-documents}"
+      # Ollama (LLM Local)
+      OllamaConfig__BaseUrl: "http://ollama:11434"
+      OllamaConfig__ChatModel: "${OLLAMA_CHAT_MODEL:-llama3.2:3b}"
+      OllamaConfig__EmbeddingModel: "${OLLAMA_EMBEDDING_MODEL:-nomic-embed-text}"
+      OllamaConfig__Temperature: "${OLLAMA_TEMPERATURE:-0.3}"
+      OllamaConfig__MaxTokens: "${OLLAMA_MAX_TOKENS:-2000}"
+      # JWT
+      JwtConfig__Secret: "${JWT_SECRET:-your-256-bit-secret-key-minimum-32-characters}"
+      JwtConfig__Issuer: "${JWT_ISSUER:-AIBaseFrameworkAPI}"
+      JwtConfig__Audience: "${JWT_AUDIENCE:-AIBaseFrameworkClient}"
+      JwtConfig__ExpiryMinutes: "${JWT_EXPIRY_MINUTES:-60}"
+      # CORS
+      AllowedOrigins__0: "http://localhost:3000"
+      # Serilog
+      Serilog__MinimumLevel__Default: Information
+      Serilog__WriteTo__1__Args__serverUrl: "http://seq:5340"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ./appsettings.json:/app/appsettings.json:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - aibf_network
+
+  # ============================================
+  # FRONTEND - Next.js 14
+  # ============================================
+  frontend:
+    build:
+      context: ../04.FRONTEND
+      dockerfile: ../../DoAnThacSI/PlanTrienKhaiVaCode/02.INFRASTRUCTURE/docker/Dockerfile.frontend
+    container_name: aibf_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: "http://localhost:5000"
+      NEXT_PUBLIC_APP_ENV: "development"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - aibf_network
+
+  # ============================================
+  # SEQ - Log Aggregation
+  # ============================================
+  seq:
+    image: datalust/seq:latest
+    container_name: aibf_seq
+    restart: unless-stopped
+    ports:
+      - "5340:80"    # Web UI
+      - "5341:5341"  # Ingestion
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_FIRSTRUN_ADMINPASSWORD: "${SEQ_PASSWORD:-admin123}"
+    volumes:
+      - seq_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - aibf_network
+
+# ============================================
+# NETWORKS
+# ============================================
+networks:
+  aibf_network:
+    driver: bridge
+    name: aibf_network
+
+# ============================================
+# VOLUMES
+# ============================================
+volumes:
+  ollama_data:
+    name: aibf_ollama_data
+  postgres_data:
+    name: hlv_postgres_data
+  redis_data:
+    name: aibf_redis_data
+  minio_data:
+    name: aibf_minio_data
+  seq_data:
+    name: aibf_seq_data

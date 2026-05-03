@@ -1,0 +1,81 @@
+# ==============================================================================
+# DOCKERFILE - FRONTEND React + Vite
+# Đề tài Thạc sĩ: Hệ thống Tìm kiếm và Hỏi đáp Tài liệu Nội bộ
+# ==============================================================================
+# Multi-stage build: Build stage (Node) + Runtime stage (Nginx)
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 1: BUILD - Biên dịch React app
+# ==============================================================================
+FROM node:20-alpine AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY src/Fe/package.json ./
+COPY src/Fe/package-lock.json* ./
+
+# Install dependencies (sử dụng package-lock nếu có)
+RUN npm ci --prefer-offline
+
+# Copy source code
+COPY src/Fe/ ./
+
+# Build production version
+# Environment variables cần thiết cho build
+ARG NEXT_PUBLIC_API_URL=http://localhost:5000
+ARG NEXT_PUBLIC_APP_ENV=production
+
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_APP_ENV=${NEXT_PUBLIC_APP_ENV}
+
+RUN npm run build
+
+# ==============================================================================
+# STAGE 2: RUNTIME - Nginx để serve static files
+# ==============================================================================
+FROM nginx:alpine AS runtime
+
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy custom nginx configuration
+COPY DoAnThacSI/docker/nginx.conf /etc/nginx/nginx.conf
+
+# Copy built assets từ builder stage
+COPY --from=builder /app/.next /usr/share/nginx/html
+COPY --from=builder /app/public /usr/share/nginx/html/public
+
+# Install curl cho health check
+RUN apk add --no-cache curl
+
+# Create non-root user
+RUN addgroup -g 101 -S nginx && \
+    adduser -S nginx -u 101
+
+# Set permissions
+RUN chown -R nginx:nginx /usr/share/nginx/html && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chown -R nginx:nginx /var/log/nginx && \
+    chown -R nginx:nginx /etc/nginx/conf.d && \
+    touch /var/run/nginx.pid && \
+    chown -R nginx:nginx /var/run/nginx.pid
+
+# Switch to non-root user
+USER nginx
+
+# Expose port 80
+EXPOSE 80
+
+# ==============================================================================
+# HEALTH CHECK
+# ==============================================================================
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost/health || exit 1
+
+# ==============================================================================
+# STARTUP COMMAND
+# ==============================================================================
+CMD ["nginx", "-g", "daemon off;"]

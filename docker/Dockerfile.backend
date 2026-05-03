@@ -1,0 +1,68 @@
+# ==============================================================================
+# DOCKERFILE - BACKEND .NET 8 API
+# Đề tài Thạc sĩ: Hệ thống Tìm kiếm và Hỏi đáp Tài liệu Nội bộ
+# ==============================================================================
+# Multi-stage build để tối ưu kích thước image production
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 1: BUILD - Biên dịch ứng dụng
+# ==============================================================================
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy project files trước để tận dụng Docker layer caching
+COPY ["src/Be/HoaLienVien.API/HoaLienVien.API.csproj", "src/Be/HoaLienVien.API/"]
+COPY ["src/Be/HoaLienVien.Core/HoaLienVien.Core.csproj", "src/Be/HoaLienVien.Core/"]
+COPY ["src/Be/HoaLienVien.Infrastructure/HoaLienVien.Infrastructure.csproj", "src/Be/HoaLienVien.Infrastructure/"]
+COPY ["src/Be/HoaLienVien.Shared/HoaLienVien.Shared.csproj", "src/Be/HoaLienVien.Shared/"]
+
+# Restore dependencies
+RUN dotnet restore "src/Be/HoaLienVien.API/HoaLienVien.API.csproj"
+
+# Copy source code
+COPY src/Be/ /src/src/Be/
+
+# Build và publish
+WORKDIR "/src/src/Be/HoaLienVien.API"
+RUN dotnet build "HoaLienVien.API.csproj" -c Release -o /app/build
+RUN dotnet publish "HoaLienVien.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# ==============================================================================
+# STAGE 2: RUNTIME - Runtime image cho production
+# ==============================================================================
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+# Cài đặt các package cần thiết cho production
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy published output từ build stage
+COPY --from=build /app/publish .
+
+# Tạo non-root user cho security
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 --ingroup appgroup appuser
+
+# Chuyển quyền sở hữu
+RUN chown -R appuser:appgroup /app
+
+# Switch sang non-root user
+USER appuser
+
+# Expose ports
+EXPOSE 5000
+EXPOSE 5001
+
+# ==============================================================================
+# HEALTH CHECK - Kiểm tra trạng thái container
+# ==============================================================================
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:5000/api/health || exit 1
+
+# ==============================================================================
+# STARTUP COMMAND
+# ==============================================================================
+ENTRYPOINT ["dotnet", "HoaLienVien.API.dll"]

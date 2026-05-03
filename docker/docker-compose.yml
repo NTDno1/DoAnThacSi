@@ -1,0 +1,279 @@
+# ==============================================================================
+# DOCKER COMPOSE - Hệ thống Tìm kiếm và Hỏi đáp Tài liệu Nội bộ
+# Đề tài Thạc sĩ: Semantic Search + RAG Chatbot
+# 
+# CẤU HÌNH: 100% LOCAL - Tất cả services chạy trên Docker
+# LLM: Sử dụng Ollama thay vì OpenAI API (KHÔNG cần Internet)
+# ==============================================================================
+# Cách sử dụng:
+#   Development: docker-compose up -d
+#   Xem logs:   docker-compose logs -f [service_name]
+#   Stop:       docker-compose down
+#   Rebuild:    docker-compose up -d --build
+#
+# LƯU Ý QUAN TRỌNG:
+#   - Hệ thống chạy 100% offline (không cần OpenAI API key)
+#   - Ollama cung cấp LLM và Embedding models local
+#   - Models được download tự động hoặc pre-download
+# ==============================================================================
+
+version: "3.8"
+
+services:
+  # ---------------------------------------------------------------------------
+  # OLLAMA - LLM Local Engine (THAY THẾ OpenAI API)
+  # Container này chạy các LLM models trực tiếp trên máy local
+  # Không cần kết nối Internet sau khi download models
+  # ---------------------------------------------------------------------------
+  ollama:
+    image: ollama/ollama:latest
+    container_name: hlv_ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"  # Ollama API endpoint
+      - "11436:11436"  # Ollama metrics (optional)
+    environment:
+      # GPU Configuration (NVIDIA CUDA)
+      # Set CUDA_VISIBLE_DEVICES="" để chạy CPU-only mode
+      CUDA_VISIBLE_DEVICES: "${CUDA_VISIBLE_DEVICES:-0}"
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_NUM_PARALLEL: "${OLLAMA_NUM_PARALLEL:-4}"
+      OLLAMA_MAX_LOADED_MODELS: "${OLLAMA_MAX_LOADED_MODELS:-2}"
+    volumes:
+      - ollama_data:/root/.ollama
+    # GPU Support: NVIDIA GPU (CUDA)
+    # Nếu không có GPU, container vẫn chạy được ở CPU mode (chậm hơn)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    networks:
+      - hlv_network
+
+  # ---------------------------------------------------------------------------
+  # POSTGRESQL - Cơ sở dữ liệu chính với pgvector cho Semantic Search
+  # ---------------------------------------------------------------------------
+  postgresql:
+    image: pgvector/pgvector:pg16
+    container_name: hlv_postgresql
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-hlvuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hlvpass123}
+      POSTGRES_DB: ${POSTGRES_DB:-hoalienvien}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-hlvuser} -d ${POSTGRES_DB:-hoalienvien}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - hlv_network
+
+  # ---------------------------------------------------------------------------
+  # REDIS - Cache và Session Store
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: hlv_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis123}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hlv_network
+
+  # ---------------------------------------------------------------------------
+  # MINIO - Object Storage cho tài liệu và embeddings
+  # ---------------------------------------------------------------------------
+  minio:
+    image: minio/minio:latest
+    container_name: hlv_minio
+    restart: unless-stopped
+    ports:
+      - "9000:9000"   # API endpoint
+      - "9001:9001"   # Console (Web UI)
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_DEFAULT_BUCKETS: ${MINIO_BUCKETS:-documents,uploads,embeddings}
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - hlv_network
+
+  # ---------------------------------------------------------------------------
+  # BACKEND API - .NET 8 Web API
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: ..
+      dockerfile: DoAnThacSI/docker/Dockerfile.backend
+    container_name: hlv_backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    environment:
+      # Database
+      ConnectionStrings__DefaultConnection: "Host=postgresql;Port=5432;Database=${POSTGRES_DB:-hoalienvien};Username=${POSTGRES_USER:-hlvuser};Password=${POSTGRES_PASSWORD:-hlvpass123}"
+      # Redis
+      ConnectionStrings__Redis: "Host=redis;Port=6379;Password=${REDIS_PASSWORD:-redis123}"
+      # MinIO
+      MinioConfig__Endpoint: "minio:9000"
+      MinioConfig__AccessKey: ${MINIO_ROOT_USER:-minioadmin}
+      MinioConfig__SecretKey: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MinioConfig__BucketName: ${MINIO_BUCKETS:-documents}
+      # ===== LLM LOCAL - Sử dụng Ollama thay vì OpenAI =====
+      # Ollama endpoint (local container)
+      OllamaConfig__BaseUrl: "http://ollama:11434"
+      # Ollama Chat Model - Models có sẵn:
+      #   llama3.2:3b (3B params, fast, recommended)
+      #   llama3.2:1b (1B params, very fast, low memory)
+      #   mistral:7b (7B params, better quality)
+      #   phi3:latest (3.8B params, fast)
+      #   qwen2.5:7b (7B params, good Vietnamese)
+      OllamaConfig__ChatModel: ${OLLAMA_CHAT_MODEL:-llama3.2:3b}
+      # Ollama Embedding Model - Models có sẵn:
+      #   nomic-embed-text (768 dimensions, fast, recommended)
+      #   mxbai-embed-large (1024 dimensions, high quality)
+      OllamaConfig__EmbeddingModel: ${OLLAMA_EMBEDDING_MODEL:-nomic-embed-text}
+      OllamaConfig__Temperature: ${OLLAMA_TEMPERATURE:-0.3}
+      OllamaConfig__MaxTokens: ${OLLAMA_MAX_TOKENS:-2000}
+      # OPENAI - ĐỂ TRỐNG khi sử dụng Ollama (offline mode)
+      OpenAiConfig__ApiKey: ""
+      # JWT
+      JwtConfig__Secret: ${JWT_SECRET:-your-256-bit-secret-key-change-in-production}
+      JwtConfig__Issuer: ${JWT_ISSUER:-HoaLienVienAPI}
+      JwtConfig__Audience: ${JWT_AUDIENCE:-HoaLienVienClient}
+      # Application
+      AppConfig__Environment: Development
+      AppConfig__AllowOrigins: "http://localhost:3000,http://localhost:5173"
+      AppConfig__MaxUploadSizeMb: 50
+      # Serilog
+      Serilog__WriteTo__0__Args__serverUrl: "http://seq:5341"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ../src:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - hlv_network
+
+  # ---------------------------------------------------------------------------
+  # FRONTEND - React + Vite
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ..
+      dockerfile: DoAnThacSI/docker/Dockerfile.frontend
+    container_name: hlv_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5000
+      NEXT_PUBLIC_API_BASE: /api
+      NEXT_PUBLIC_APP_ENV: development
+    depends_on:
+      - backend
+    volumes:
+      - ../src/Fe:/app
+      - /app/node_modules
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - hlv_network
+
+  # ---------------------------------------------------------------------------
+  # SEQ - Logging và Monitoring
+  # ---------------------------------------------------------------------------
+  seq:
+    image: datalust/seq:latest
+    container_name: hlv_seq
+    restart: unless-stopped
+    ports:
+      - "5341:5341"  # Ingestion API
+      - "5340:80"    # Web UI
+    environment:
+      ACCEPT_EULA: Y
+    volumes:
+      - seq_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - hlv_network
+
+# ==============================================================================
+# VOLUMES - Lưu trữ dữ liệu bền vững
+# ==============================================================================
+volumes:
+  ollama_data:
+    driver: local
+    name: hlv_ollama_data
+  postgres_data:
+    driver: local
+    name: hlv_postgres_data
+  redis_data:
+    driver: local
+    name: hlv_redis_data
+  minio_data:
+    driver: local
+    name: hlv_minio_data
+  seq_data:
+    driver: local
+    name: hlv_seq_data
+
+# ==============================================================================
+# NETWORKS - Mạng nội bộ cho các services giao tiếp
+# ==============================================================================
+networks:
+  hlv_network:
+    driver: bridge
+    name: hlv_internal_network

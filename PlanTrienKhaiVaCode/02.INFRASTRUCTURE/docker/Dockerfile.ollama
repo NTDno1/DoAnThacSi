@@ -1,0 +1,83 @@
+# Dockerfile - Ollama LLM (Local)
+# Optional: Pre-download models during build
+
+# ============================================
+# STAGE 1: BASE
+# ============================================
+FROM ollama/ollama:latest AS base
+
+# Set environment variables
+ENV OLLAMA_HOST=0.0.0.0:11434
+ENV OLLAMA_NUM_PARALLEL=4
+ENV OLLAMA_MAX_LOADED_MODELS=2
+
+# ============================================
+# STAGE 2: MODELS (Optional - Uncomment to use)
+# ============================================
+# Uncomment this stage and run with: docker build --target models -t hlv-ollama:full .
+# This will pre-download models during build (slower but models ready on first run)
+
+# FROM base AS models
+
+# # Update and install curl for health checks
+# RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# # Download recommended models (total ~3.5GB)
+# # Chat model
+# RUN ollama pull llama3.2:3b
+
+# # Embedding model
+# RUN ollama pull nomic-embed-text
+
+# # Optional: Better quality models (uncomment if you have enough VRAM)
+# # RUN ollama pull mistral:7b
+# # RUN ollama pull phi3:latest
+# # RUN ollama pull qwen2.5:7b
+
+# # Optional: Better embedding model
+# # RUN ollama pull mxbai-embed-large
+
+# ============================================
+# STAGE 3: RUNTIME (Default)
+# ============================================
+FROM base AS runtime
+
+# Update and install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Expose ports
+EXPOSE 11434  # Ollama API
+EXPOSE 11436  # Ollama metrics
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+    CMD curl -f http://localhost:11434/api/tags || exit 1
+
+# Start Ollama
+CMD ["serve"]
+
+# ============================================
+# USAGE EXAMPLES
+# ============================================
+# 
+# Build without pre-downloaded models (faster build, download on first use):
+#   docker build -t hlv-ollama -f Dockerfile.ollama .
+#
+# Build with pre-downloaded models (slower build, ready immediately):
+#   docker build --target models -t hlv-ollama:full -f Dockerfile.ollama .
+#
+# Run:
+#   docker run -d \
+#     --name hlv_ollama \
+#     --gpus all \
+#     -p 11434:11434 \
+#     -p 11436:11436 \
+#     -v ollama_data:/root/.ollama \
+#     hlv-ollama
+#
+# Download models manually after container starts:
+#   docker exec hlv_ollama ollama pull llama3.2:3b
+#   docker exec hlv_ollama ollama pull nomic-embed-text
+#
+# Check downloaded models:
+#   docker exec hlv_ollama ollama list
