@@ -2,9 +2,9 @@
 
 **Đề tài luận văn thạc sĩ**
 
-**Phiên bản:** 1.0  
-**Ngày cập nhật:** 2026-05-03  
-**Trạng thái:** Đang phát triển
+**Phiên bản:** 1.1
+**Ngày cập nhật:** 2026-05-03
+**Trạng thái:** Đang phát triển (đã bổ sung M10 RAG-SQL Engine)
 
 ---
 
@@ -65,8 +65,85 @@ Hệ thống AI thông minh cho phép người dùng tìm kiếm và hỏi đáp
 | **Dashboard Admin** | Quản lý người dùng, tài liệu, và theo dõi usage |
 | **Đa ngôn ngữ** | Hỗ trợ tiếng Việt và tiếng Anh |
 | **Phân quyền RBAC** | Kiểm soát truy cập theo vai trò và phòng ban |
+| **Truy cập kết hợp Public/Private** | Không cần đăng nhập vẫn truy vấn được tài liệu, LLM và dữ liệu công khai; đăng nhập để mở rộng truy vấn database theo quyền RBAC |
+| **Auto-DB Query (RAG-SQL)** | Người dùng đã xác thực có thể yêu cầu chatbot tự động truy vấn database thông qua SQL theo phạm vi quyền được cấp phát |
 
-### 1.4. Tech Stack tổng quan
+### 1.4. Mô hình truy cập kép (Public + Authenticated)
+
+Hệ thống hỗ trợ hai chế độ truy cập linh hoạt, cho phép người dùng sử dụng ngay mà không cần đăng nhập, đồng thời mở rộng khả năng khi đã xác thực.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                    MÔ HÌNH TRUY CẬP KẾT HỢP: PUBLIC + AUTHENTICATED               │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  ┌──────────────────────────────────┐   ┌──────────────────────────────────┐        │
+│  │      REQUEST KHÔNG TOKEN         │   │        REQUEST CÓ TOKEN          │        │
+│  │         (Anonymous/Guest)         │   │       (Authenticated User)        │        │
+│  └───────────────┬──────────────────┘   └───────────────┬──────────────────┘        │
+│                  │                                      │                             │
+│                  ▼                                      ▼                             │
+│  ┌──────────────────────────────────┐   ┌──────────────────────────────────┐        │
+│  │  ✅ Tài liệu public (doc)       │   │  ✅ Tất cả quyền của Anonymous    │        │
+│  │  ✅ LLM (chatbot RAG)           │   │  ✅ Tài liệu theo phân quyền     │        │
+│  │  ✅ Dữ liệu public trong DB     │   │  ✅ Database query theo RBAC      │        │
+│  │  ✅ Semantic/Hybrid Search       │   │  ✅ Auto-DB Query (RAG-SQL)       │        │
+│  │  ❌ Database RBAC private        │   │  ✅ Chat history cá nhân          │        │
+│  │  ❌ Chat history riêng tư        │   │  ✅ Upload/quản lý tài liệu      │        │
+│  │  ❌ Upload tài liệu cá nhân      │   │                                  │        │
+│  └──────────────────────────────────┘   └──────────────────────────────────┘        │
+│                                                                                     │
+│  ┌───────────────────────────────────────────────────────────────────────────────┐   │
+│  │                          CHI TIẾT QUYỀN RBAC                                   │   │
+│  ├───────────────────────────────────────────────────────────────────────────────┤   │
+│  │                                                                               │   │
+│  │  Role         │ Tài liệu    │ Database Tables  │ Auto-DB Query │ Admin       │   │
+│  │  ─────────────┼─────────────┼──────────────────┼───────────────┼─────────────│   │
+│  │  Anonymous    │ Public only │ Public data only │ ❌            │ ❌           │   │
+│  │  Viewer       │ Assigned    │ Read-only (granted│ Limited       │ ❌           │   │
+│  │               │ dept+public │ tables)          │               │             │   │
+│  │  Editor       │ Assigned    │ Read+Write        │ Yes           │ ❌           │   │
+│  │               │ dept+public │ (granted tables)  │               │             │   │
+│  │  Manager      │ All dept    │ Full access       │ Yes           │ Read-only   │   │
+│  │               │ + public    │ (dept scope)      │               │             │   │
+│  │  Admin        │ All         │ All tables        │ Yes           │ Full        │   │
+│  │               │             │                  │               │             │   │
+│  └───────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  ┌───────────────────────────────────────────────────────────────────────────────┐   │
+│  │                    AUTO-DB QUERY (RAG-SQL) FLOW                                  │   │
+│  ├───────────────────────────────────────────────────────────────────────────────┤   │
+│  │                                                                               │   │
+│  │  User Query ──► LLM Parse Intent ──► Detect DB Query Need ──►                 │   │
+│  │       │                                              │                         │   │
+│  │       │                                              ▼                         │   │
+│  │       │                                     ┌─────────────────┐               │   │
+│  │       │                                     │ RBAC Permission │               │   │
+│  │       │                                     │    Check        │               │   │
+│  │       │                                     └────────┬────────┘               │   │
+│  │       │                                              │                         │   │
+│  │       │                        ┌─────────────────────┼─────────────────────┐   │   │
+│  │       │                        │                     │                     │   │   │
+│  │       │                        ▼                     ▼                     ▼   │   │
+│  │       │                  ┌──────────┐       ┌──────────┐          ┌──────────┐│   │
+│  │       │                  │  ✅ Allow │       │ ❌ Deny   │          │ ⚠️ Limit │   │   │
+│  │       │                  │  Execute  │       │ No Access│          │  Scope   │   │   │
+│  │       │                  │  + Return │       │  Return  │          │ Return   │  │   │
+│  │       │                  │  Results  │       │  Error   │          │ Partial  │  │   │
+│  │       │                  └────┬──────┘       └──────────┘          └────┬─────┘   │
+│  │       │                       │                                          │        │
+│  │       ▼                       ▼                                          ▼        │
+│  │  LLM Generate Response ─────────────────────────────────────────────────────────►  │
+│  │       │                                                                               │
+│  │       ▼                                                                               │
+│  │  User receives: Answer + DB Results + Citations                                        │
+│  │                                                                               │   │
+│  └─────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 1.5. Tech Stack tổng quan
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -195,11 +272,175 @@ Hệ thống AI thông minh cho phép người dùng tìm kiếm và hỏi đáp
 | Layer | Mô tả | Các thành phần |
 |-------|-------|----------------|
 | **Client Layer** | Giao diện người dùng | Web (Next.js), PWA, Admin Dashboard |
-| **API Gateway** | Điều hướng request | FastAPI, Authentication, Rate Limiting |
-| **Service Layer** | Business logic | Auth, Document, Search, Chat, Embedding, LLM |
+| **API Gateway** | Điều hướng request, kiểm tra token, phân quyền | FastAPI, Authentication, Rate Limiting, RBAC Engine |
+| **Service Layer** | Business logic | Auth, Document, Search, Chat, Embedding, LLM, RAG-SQL Engine |
 | **Data Layer** | Lưu trữ dữ liệu | PostgreSQL, Redis, MinIO |
 
-### 2.3. Data Flow cho RAG
+### 2.3. Mô hình bảo mật hai lớp (Public + Authenticated)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                         SECURITY ARCHITECTURE: TWO-LAYER ACCESS                      │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│                              ┌─────────────────┐                                    │
+│                              │  HTTP Request   │                                    │
+│                              └────────┬────────┘                                    │
+│                                       │                                              │
+│                                       ▼                                              │
+│                        ┌─────────────────────────────┐                              │
+│                        │    API Gateway Layer         │                              │
+│                        │  ┌───────────────────────┐  │                              │
+│                        │  │  Token Validation      │  │                              │
+│                        │  │  (JWT / Bearer)       │  │                              │
+│                        │  └───────────┬───────────┘  │                              │
+│                        │              │               │                              │
+│                        │    ┌─────────┴─────────┐    │                              │
+│                        │    │                    │    │                              │
+│                        │    ▼                    ▼    │                              │
+│                        │  NO TOKEN           HAS TOKEN│                              │
+│                        │    │                    │    │                              │
+│                        │    ▼                    ▼    │                              │
+│                        │  Anonymous           Authenticated                          │
+│                        │  Context             + RBAC Context                        │
+│                        │    │                    │    │                              │
+│                        └────┼────────────────────┼────┘                              │
+│                             │                    │                                   │
+│                             ▼                    ▼                                   │
+│              ┌──────────────────────┐  ┌──────────────────────┐                    │
+│              │  PUBLIC ACCESS       │  │  PRIVATE ACCESS      │                    │
+│              │  (No Auth Required)  │  │  (Auth + RBAC)       │                    │
+│              ├──────────────────────┤  ├──────────────────────┤                    │
+│              │  ✅ /api/search     │  │  ✅ All public APIs  │                    │
+│              │  ✅ /api/chat        │  │  ✅ /api/documents/* │                    │
+│              │  ✅ /api/documents  │  │  ✅ /api/db/query   │                    │
+│              │     /public          │  │  ✅ /api/sessions/* │                    │
+│              │  ✅ /api/llm/chat    │  │  ✅ /api/admin/*    │                    │
+│              │  ✅ Public metadata  │  │  ✅ RBAC-controlled  │                    │
+│              │  ✅ Public DB tables │  │     DB tables       │                    │
+│              ├──────────────────────┤  ├──────────────────────┤                    │
+│              │  ❌ Private docs    │  │  ✅ Auto-DB Query    │                    │
+│              │  ❌ Chat history    │  │     (RAG-SQL)       │                    │
+│              │  ❌ RBAC tables     │  │                      │                    │
+│              │  ❌ User-specific   │  │                      │                    │
+│              │     resources       │  │                      │                    │
+│              └──────────────────────┘  └──────────────────────┘                    │
+│                                           │                                          │
+│                                           ▼                                          │
+│                              ┌─────────────────────────┐                            │
+│                              │   RBAC Permission Engine │                            │
+│                              ├─────────────────────────┤                            │
+│                              │  1. Extract role + dept │                            │
+│                              │  2. Check document scope │                            │
+│                              │  3. Check table access   │                            │
+│                              │  4. Check query limits   │                            │
+│                              │  5. Return decision      │                            │
+│                              └────────────┬────────────┘                            │
+│                                           │                                         │
+│                                           ▼                                         │
+│                              ┌─────────────────────────┐                            │
+│                              │   RAG-SQL Engine        │                            │
+│                              │  (Auto DB Query)        │                            │
+│                              ├─────────────────────────┤                            │
+│                              │  • LLM parses intent    │                            │
+│                              │  • Generate safe SQL    │                            │
+│                              │  • RBAC filter applied  │                            │
+│                              │  • Execute + return     │                            │
+│                              └─────────────────────────┘                            │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 2.4. Auto-DB Query (RAG-SQL) Flow
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                         RAG-SQL (AUTO DATABASE QUERY) FLOW                            │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  STEP 1: REQUEST NHẬN DIỆN                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐    │
+│  │  User Query: "Cho tôi xem doanh thu tháng 3 của phòng ban kỹ thuật"         │    │
+│  │                    │                                                            │    │
+│  │                    ▼                                                            │    │
+│  │  LLM Intent Detection                                                          │    │
+│  │  ├── Intent: DB_QUERY (cần truy vấn database)                                │    │
+│  │  ├── Detected Tables: revenue, departments                                   │    │
+│  │  ├── Required Role: Viewer+                                                   │    │
+│  │  └── Query Type: SELECT (read-only)                                          │    │
+│  └─────────────────────────────────────────────────────────────────────────────┘    │
+│                                          │                                            │
+│                                          ▼                                            │
+│  STEP 2: RBAC PERMISSION CHECK                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐    │
+│  │  Current User: user_001 (Role: Viewer, Dept: Engineering)                   │    │
+│  │                                                                               │    │
+│  │  Permission Matrix Check:                                                     │    │
+│  │  ┌────────────────┬────────────┬───────────┬────────────┐                    │    │
+│  │  │ Table          │ Permission │ Dept Scope│ Check Result│                   │    │
+│  │  ├────────────────┼────────────┼───────────┼────────────┤                    │    │
+│  │  │ revenue        │ SELECT     │ Engineering│ ✅ ALLOW    │                    │    │
+│  │  │ departments    │ SELECT     │ Engineering│ ✅ ALLOW    │                    │    │
+│  │  │ employees      │ SELECT     │ Engineering│ ✅ ALLOW    │                    │    │
+│  │  │ salaries       │ SELECT     │ ❌ Dept only│ ⚠️ LIMITED │                    │    │
+│  │  │ hr_records     │ SELECT     │ ❌ HR only  │ ❌ DENY    │                    │    │
+│  │  └────────────────┴────────────┴───────────┴────────────┘                    │    │
+│  │                                                                               │    │
+│  │  Decision: ALLOW (with dept filter applied)                                   │    │
+│  └─────────────────────────────────────────────────────────────────────────────┘    │
+│                                          │                                            │
+│                                          ▼                                            │
+│  STEP 3: SQL GENERATION & SAFETY                                                      │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐    │
+│  │  LLM generates SQL:                                                         │    │
+│  │  SELECT r.month, r.amount, d.name as dept                                  │    │
+│  │  FROM revenue r                                                             │    │
+│  │  JOIN departments d ON r.dept_id = d.id                                     │    │
+│  │  WHERE r.month = '2026-03'                                                 │    │
+│  │    AND d.name = 'Engineering'  -- RBAC auto-filter                        │    │
+│  │                                                                               │    │
+│  │  Safety Checks:                                                              │    │
+│  │  ├── ❌ DDL blocked (DROP, ALTER, CREATE)                                  │    │
+│  │  ├── ❌ DML blocked (INSERT, UPDATE, DELETE)                               │    │
+│  │  ├── ❌ PII fields masked (ssn, password_hash)                            │    │
+│  │  ├── ✅ SELECT only                                                         │    │
+│  │  └── ✅ Row-level security enforced                                         │    │
+│  └─────────────────────────────────────────────────────────────────────────────┘    │
+│                                          │                                            │
+│                                          ▼                                            │
+│  STEP 4: EXECUTION & RESULT                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐    │
+│  │  Query executed on PostgreSQL:                                              │    │
+│  │  ┌─────────────────────────────────────────────────────────────────────────┐ │    │
+│  │  │  month    │  amount    │ dept          │                              │ │    │
+│  │  ├───────────┼────────────┼───────────────┤                              │ │    │
+│  │  │ 2026-03   │ 150,000    │ Engineering   │                              │ │    │
+│  │  │ 2026-03   │ 120,000    │ Engineering   │                              │ │    │
+│  │  └─────────────────────────────────────────────────────────────────────────┘ │    │
+│  └─────────────────────────────────────────────────────────────────────────────┘    │
+│                                          │                                            │
+│                                          ▼                                            │
+│  STEP 5: LLM GENERATES RESPONSE                                                      │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐    │
+│  │  LLM synthesizes answer:                                                    │    │
+│  │                                                                               │    │
+│  │  "Doanh thu tháng 3 năm 2026 của phòng ban Kỹ thuật:                        │    │
+│  │                                                                               │    │
+│  │  • Module A: 150,000 VNĐ                                                    │    │
+│  │  • Module B: 120,000 VNĐ                                                    │    │
+│  │  • Tổng cộng: 270,000 VNĐ                                                   │    │
+│  │                                                                               │    │
+│  │  Nguồn: Bảng revenue (đã được lọc theo phòng ban của bạn)"                  │    │
+│  │                                                                               │    │
+│  │  Citations:                                                                  │    │
+│  │  • revenue.month = '2026-03'                                                │    │
+│  │  • departments.name = 'Engineering'                                         │    │
+│  └─────────────────────────────────────────────────────────────────────────────┘    │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 2.5. Data Flow cho RAG
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -226,23 +467,46 @@ Hệ thống AI thông minh cho phép người dùng tìm kiếm và hỏi đáp
 │       │  │  │ Query   │     │ Query   │     │ Search  │     │ Results │     │   │
 │       │  │  └─────────┘     └─────────┘     └─────────┘     └────┬────┘     │   │
 │       │  │                                                        │          │   │
-│       │  │                                                        ▼          │   │
-│       │  │  ┌─────────┐     ┌─────────┐     ┌─────────┐     ┌─────────┐     │   │
-│       │  │  │  LLM    │<────│ Augment │<────│  Build │<────│ Context │     │   │
-│       │  │  │Response │     │ Prompt  │     │ Context │     │ Retrieval│    │   │
-│       │  │  └────┬────┘     └─────────┘     └─────────┘     └─────────┘     │   │
-│       │  │       │                                                               │   │
-│       │  └───────┼───────────────────────────────────────────────────────────┘   │
+│       │  │                            ┌────────────────────────────┼─────┐   │   │
+│       │  │                            │                            │     │   │   │
+│       │  │                            ▼                            ▼     │   │   │
+│       │  │                     ┌────────────┐              ┌─────────────┐ │   │
+│       │  │                     │ Document   │              │ DB Query    │ │   │
+│       │  │                     │ Retrieval  │              │ (RAG-SQL)  │ │   │
+│       │  │                     │ (Vector)   │              │ (if token) │ │   │
+│       │  │                     └─────┬──────┘              └──────┬─────┘ │   │
+│       │  │                           │                            │       │   │
+│       │  │                           └──────────┬─────────────────┘       │   │
+│       │  │                                  ▼                           │   │
+│       │  │  ┌─────────┐     ┌─────────┐  ┌─────────┐  ┌─────────────┐  │   │
+│       │  │  │  LLM    │<────│ Augment │<─│  Build  │<─│   Context   │  │   │
+│       │  │  │Response │     │ Prompt  │  │ Context │  │  Retrieval  │  │   │
+│       │  │  └────┬────┘     └─────────┘  └─────────┘  └─────────────┘  │   │
+│       │  │       │                                                            │   │
+│       │  └───────┼────────────────────────────────────────────────────────┘   │
 │       │          ▼                                                                   │
 │       │  ┌────────────────────────────────────────────────────────────────────┐   │
 │       │  │                     USER RESPONSE                                   │   │
-│       │  │         Answer + Source Citations + References                      │   │
+│       │  │      Answer + Source Citations + DB Results (if applicable)        │   │
 │       │  └────────────────────────────────────────────────────────────────────┘   │
 │       │                                                                               │
 │       └───────────────────────────────────────────────────────────────────────────┘   │
 │                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+### 2.6. Mô hình truy cập Public/Private - Chi tiết từng API
+
+| API Endpoint | Không Token | Có Token (Role) | Ghi chú |
+|-------------|-------------|----------------|---------|
+| `GET /api/search` | ✅ Public docs only | ✅ Full search + RBAC | Lọc theo dept nếu có token |
+| `POST /api/chat` | ✅ RAG public docs | ✅ RAG + RAG-SQL + RBAC | Tự động phát hiện DB query |
+| `GET /api/documents/public` | ✅ Public docs | ✅ Public + assigned docs | |
+| `GET /api/documents/{id}` | ✅ Nếu public | ✅ Nếu được phép | Kiểm tra ownership/dept |
+| `GET /api/llm/chat` | ✅ Không định danh | ✅ Theo user context | |
+| `POST /api/db/query` | ❌ Forbidden | ✅ Viewer+ only | RAG-SQL endpoint |
+| `GET /api/sessions` | ❌ Forbidden | ✅ Own sessions only | |
+| `POST /api/admin/*` | ❌ Forbidden | ✅ Admin only | |
 
 ---
 
@@ -261,7 +525,8 @@ DoAnThacSI/
 │   │   └── 02.SYSTEM_ARCHITECTURE.md # 🏗️ Thiết kế kiến trúc hệ thống chi tiết
 │   │
 │   ├── modules/
-│   │   └── 03.MODULES.md            # 📦 Tài liệu 9 modules và dependencies
+│   │   ├── 03.MODULES.md            # 📦 Tài liệu 10 modules và dependencies
+│   │   └── 03b.RAG_SQL_MODULE.md   # 🗄️ Chi tiết module RAG-SQL Engine
 │   │
 │   ├── database/
 │   │   └── 04.DATABASE_DESIGN.md    # 🗄️ Thiết kế database (PostgreSQL + pgvector)
@@ -318,7 +583,8 @@ DoAnThacSI/
 |------|-------|-----------|
 | `01.PROBLEM_ANALYSIS.md` | Phân tích bài toán, bối cảnh, mục tiêu, yêu cầu | Supervisor, Committee |
 | `02.SYSTEM_ARCHITECTURE.md` | Kiến trúc chi tiết, sơ đồ, công nghệ | Developer, Architect |
-| `03.MODULES.md` | 9 modules với specifications và dependencies | Developer |
+| `03.MODULES.md` | 10 modules với specifications và dependencies | Developer |
+| `03b.RAG_SQL_MODULE.md` | Chi tiết module RAG-SQL Engine, RBAC integration | Developer |
 | `04.DATABASE_DESIGN.md` | Schema, ERD, pgvector strategy, indexing | DBA, Developer |
 | `05.API_DESIGN.md` | REST API endpoints, request/response models | Developer |
 | `06a.DOCUMENT_PIPELINE_FLOW.md` | Document processing pipeline | Developer |
@@ -416,7 +682,7 @@ JWT_SECRET_KEY=your-secret-key-here
 
 ## 5. Tổng quan các module
 
-### 5.1. Danh sách 9 modules
+### 5.1. Danh sách 10 modules
 
 | ID | Module | Mô tả | Priority |
 |----|--------|--------|----------|
@@ -429,6 +695,7 @@ JWT_SECRET_KEY=your-secret-key-here
 | **M07** | Chat History Module | Session management | P1 - Important |
 | **M08** | Admin Dashboard Module | User, document, analytics | P1 - Important |
 | **M09** | Search Analytics Module | Logging, metrics, feedback | P2 - Nice to have |
+| **M10** | RAG-SQL Engine Module | Auto database query, RBAC-filtered SQL generation, secure execution | P0 - Core |
 
 ### 5.2. Module Dependencies
 
@@ -468,10 +735,12 @@ JWT_SECRET_KEY=your-secret-key-here
 │  │           M05 Semantic Search           │                                        │
 │  └────────────────────┬────────────────────┘                                        │
 │                        │                                                              │
-│                        ▼                                                              │
-│  ┌─────────────────────────────────────────┐                                        │
-│  │         M09 Search Analytics            │                                        │
-│  └─────────────────────────────────────────┘                                        │
+│           ┌────────────┴────────────┐                                               │
+│           ▼                          ▼                                               │
+│  ┌─────────────────────┐   ┌─────────────────────┐                                 │
+│  │  M09 Search         │   │  M10 RAG-SQL Engine │                                 │
+│  │  Analytics          │   │  (Auto DB Query)    │                                 │
+│  └─────────────────────┘   └─────────────────────┘                                 │
 │                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -530,6 +799,28 @@ JWT_SECRET_KEY=your-secret-key-here
 - **Endpoints**: `/api/analytics/*`
 - **Dependencies**: M05 (Search)
 
+#### M10 - RAG-SQL Engine Module
+- **Chức năng**: Auto database query, RBAC-filtered SQL generation, secure SQL execution
+- **Chi tiết chức năng**:
+  - Phát hiện intent truy vấn database từ câu hỏi người dùng
+  - Sinh SQL an toàn từ LLM (SELECT only)
+  - RBAC permission check trước khi thực thi
+  - Row-level security filter theo phòng ban/vai trò
+  - PII field masking
+  - Execute và trả kết quả về cho LLM tổng hợp
+- **Entities**: RBAC Permission Matrix, Allowed Tables, Audit Logs
+- **Endpoints**: Internal (integrated with M06 Chatbot), `/api/db/query` (direct)
+- **Dependencies**: M01 (Auth), M05 (Search), M06 (Chatbot)
+- **Cấp quyền theo role**:
+
+  | Role | DB Query | Allowed Tables | Row Filter |
+  |------|----------|----------------|------------|
+  | Anonymous | ❌ | Public tables only | Dept scope |
+  | Viewer | ✅ | Read-only assigned tables | Dept scope |
+  | Editor | ✅ | Read/write assigned tables | Dept scope |
+  | Manager | ✅ | Full dept scope | Dept scope |
+  | Admin | ✅ | All tables | None |
+
 ---
 
 ## 6. Công nghệ chính
@@ -549,12 +840,14 @@ JWT_SECRET_KEY=your-secret-key-here
 | **Vector Extension** | pgvector | 0.5+ | Vector storage |
 | **Cache** | Redis | 7+ | Session, cache |
 | **Object Storage** | MinIO | latest | Document storage |
-| **LLM** | GPT-4o-mini | - | Chat generation |
-| **Embeddings** | text-embedding-3-small | - | Vectorization |
+| **LLM** | Ollama (llama3.2, mistral) | latest | **Local, offline, không cần API** |
+| **Embeddings** | Ollama (nomic-embed-text) | latest | **Local, offline, không cần API** |
 | **Container** | Docker | 24+ | Containerization |
 | **Orchestration** | Docker Compose | 2+ | Local dev |
 | **Monitoring** | Prometheus | 2+ | Metrics |
 | **Logging** | Serilog | 3+ | Structured logging |
+| **SQL Safety** | SQLGlot / RE2 | latest | SQL parsing, regex validation |
+| **RBAC Engine** | Casbin | 3+ | Policy enforcement |
 
 ### 6.2. Links đến tài liệu công nghệ
 
@@ -567,8 +860,10 @@ JWT_SECRET_KEY=your-secret-key-here
 | Redis | https://redis.io/docs |
 | MinIO | https://min.io/docs |
 | Docker | https://docs.docker.com |
-| GPT-4 | https://platform.openai.com/docs/models/gpt-4 |
+| Ollama | https://github.com/ollama/ollama |
 | TailwindCSS | https://tailwindcss.com/docs |
+| Casbin | https://casbin.org/ |
+| SQLGlot | https://github.com/tobymao/sqlglot |
 
 ---
 
@@ -595,7 +890,7 @@ JWT_SECRET_KEY=your-secret-key-here
 │        └─────────────────────────────────────────────────────────────────┘     │     │
 │                                                                                     │
 │   Branch naming convention:                                                          │
-│   - feature/M##-<description>  (vd: feature/M01-auth-jwt)                          │
+│   - feature/M##-<description>  (vd: feature/M01-auth-jwt, feature/M10-rag-sql)       │
 │   - bugfix/<description>                                                            │
 │   - hotfix/<description>                                                           │
 │                                                                                     │
@@ -728,7 +1023,198 @@ volumes:
   minio_data:
 ```
 
-### 8.2. Kubernetes-Ready Structure
+### 8.2. Danh sách Services và Images khi triển khai hoàn chỉnh
+
+Khi dự án được triển khai thành công, `docker ps` và `docker images` sẽ hiển thị các thành phần sau:
+
+#### 8.2.1. Kết quả `docker ps` - Tất cả Services đang chạy
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                              DOCKER PS - SERVICES ĐANG CHẠY                          │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  CONTAINER ID   IMAGE                        PORTS                    STATUS        │
+│  ─────────────  ───────────────────────────  ───────────────────────  ────────────  │
+│  a1b2c3d4e5f6   doanthacsi-api              0.0.0.0:8000->8000/tcp   Up (healthy)  │
+│  b2c3d4e5f6a7   doanthacsi-frontend         0.0.0.0:3000->3000/tcp   Up (healthy)  │
+│  c3d4e5f6a7b8   postgres:16                 0.0.0.0:5432->5432/tcp   Up (healthy)  │
+│  d4e5f6a7b8c9   redis:7-alpine             0.0.0.0:6379->6379/tcp   Up (healthy)  │
+│  e5f6a7b8c9d0   minio/minio                 0.0.0.0:9000->9000/tcp   Up (healthy)  │
+│                                                  0.0.0.0:9001->9001/tcp              │
+│  f6a7b8c9d0e1   minio/mc                    -                         Up           │
+│  g7h8i9j0k1l2   ollama/ollama               0.0.0.0:11434->11434/tcp Up (healthy)  │
+│  h8i9j0k1l2m3   redis:7-alpine             (minio-cache)             Up           │
+│  i9j0k1l2m3n4   postgres:16                (pgvector-init)            Up           │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 8.2.2. Chi tiết từng Service
+
+| # | Container Name | Image | Ports | Mô tả | Health Status |
+|---|--------------|-------|-------|--------|--------------|
+| 1 | **api** | `doanthacsi-api` | `8000:8000` | FastAPI Backend - Xử lý tất cả API requests | ✅ Healthy |
+| 2 | **frontend** | `doanthacsi-frontend` | `3000:3000` | Next.js Frontend - Giao diện người dùng | ✅ Healthy |
+| 3 | **db** | `postgres:16` | `5432:5432` | PostgreSQL + pgvector - Lưu trữ dữ liệu & vector embeddings | ✅ Healthy |
+| 4 | **redis** | `redis:7-alpine` | `6379:6379` | Redis - Cache & Session management | ✅ Healthy |
+| 5 | **minio** | `minio/minio` | `9000:9000`, `9001:9001` | MinIO S3-compatible - Object storage cho tài liệu | ✅ Healthy |
+| 6 | **minio-init** | `minio/mc` | - | MinIO Client - Khởi tạo bucket & cấu hình | ⏸️ Exited |
+| 7 | **ollama** | `ollama/ollama` | `11434:11434` | Ollama - Local LLM & Embedding models | ✅ Healthy |
+| 8 | **ollama-models** | (embedded) | - | Models: llama3.2, mistral, nomic-embed-text | ✅ Running |
+
+#### 8.2.3. Kết quả `docker images` - Tất cả Images
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                              DOCKER IMAGES - TẤT CẢ IMAGES                            │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  REPOSITORY              TAG         IMAGE ID       SIZE       CREATED              │
+│  ──────────────────────  ──────────  ────────────   ────────   ──────────────────  │
+│  doanthacsi-api          latest      a1b2c3d4e5f6   1.2GB      ...                  │
+│  doanthacsi-frontend     latest      b2c3d4e5f6a7   890MB      ...                  │
+│  postgres                16          c3d4e5f6a7b8    750MB      ...                  │
+│  redis                   7-alpine    d4e5f6a7b8c9    30MB       ...                  │
+│  minio/minio             latest      e5f6a7b8c9d0    230MB      ...                  │
+│  minio/mc                latest      f6a7b8c9d0e1    50MB       ...                  │
+│  ollama/ollama           latest      g7h8i9j0k1l2    2.1GB      ...                  │
+│  ubuntu                  22.04       h8i9j0k1l2m3    80MB       ...                  │
+│                                                                                     │
+│  OLLAMA MODELS (chạy trong container ollama):                                      │
+│  ────────────────────────────────────────────────────────────────────────────────   │
+│  llama3.2                latest       -               2.0GB      Pulled              │
+│  mistral                 latest       -               4.1GB      Pulled              │
+│  nomic-embed-text        latest       -               274MB      Pulled              │
+│  mxbai-embed-large       latest       -               1.1GB      Pulled              │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 8.2.4. Chi tiết Images
+
+| # | Repository | Tag | Size | Mô tả |
+|---|-----------|-----|------|--------|
+| 1 | **doanthacsi-api** | `latest` | ~1.2GB | Custom image - FastAPI backend với tất cả dependencies (Python 3.11, SQLAlchemy, FastAPI, Ollama client, pgvector) |
+| 2 | **doanthacsi-frontend** | `latest` | ~890MB | Custom image - Next.js 14 frontend với TypeScript, TailwindCSS, React |
+| 3 | **postgres** | `16` | ~750MB | Official PostgreSQL 16 image với pgvector extension |
+| 4 | **redis** | `7-alpine` | ~30MB | Official Redis 7 Alpine - Nhẹ, tối ưu cho cache |
+| 5 | **minio/minio** | `latest` | ~230MB | MinIO Server - S3-compatible object storage |
+| 6 | **minio/mc** | `latest` | ~50MB | MinIO Client - Utility để init buckets |
+| 7 | **ollama/ollama** | `latest` | ~2.1GB | Ollama Server - Local LLM inference engine |
+
+#### 8.2.5. Ollama Models (Pulled vào container)
+
+| Model | Size | Type | Mục đích |
+|-------|------|------|----------|
+| **llama3.2** | ~2.0GB | Chat | Chatbot RAG - Trả lời câu hỏi |
+| **mistral** | ~4.1GB | Chat | Chatbot RAG - Chatbot chính (nếu cần) |
+| **nomic-embed-text** | ~274MB | Embedding | Tạo vector embeddings cho tài liệu |
+| **mxbai-embed-large** | ~1.1GB | Embedding | Embedding model dự phòng (chất lượng cao) |
+
+#### 8.2.6. Networks được tạo tự động
+
+| Network Name | Driver | Mô tả |
+|-------------|--------|--------|
+| **doanthacsi_default** | bridge | Network mặc định của docker-compose, kết nối tất cả services |
+| **doanthacsi_ollama** | bridge | Network riêng cho Ollama (internal) |
+
+#### 8.2.7. Volumes được tạo tự động
+
+| Volume Name | Driver | Mount Point | Mô tả |
+|-------------|--------|------------|--------|
+| **doanthacsi_postgres_data** | local | `/var/lib/postgresql/data` | Lưu trữ database PostgreSQL |
+| **doanthacsi_minio_data** | local | `/data` | Lưu trữ object storage (tài liệu files) |
+| **doanthacsi_ollama_models** | local | `/root/.ollama` | Lưu trữ LLM models đã pull |
+
+#### 8.2.8. Ports Mapping tổng hợp
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                              PORTS MAPPING SUMMARY                                    │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Service       │ Internal Port │ External Port │ Protocol │ URL                    │
+│  ──────────────┼──────────────┼───────────────┼──────────┼─────────────────────   │
+│  Frontend      │ 3000         │ 3000          │ HTTP     │ http://localhost:3000   │
+│  API Gateway   │ 8000         │ 8000          │ HTTP     │ http://localhost:8000   │
+│  API Docs      │ 8000/docs    │ 8000/docs     │ HTTP     │ http://localhost:8000   │
+│  PostgreSQL    │ 5432         │ 5432          │ TCP      │ localhost:5432          │
+│  Redis         │ 6379         │ 6379          │ TCP      │ localhost:6379          │
+│  MinIO API     │ 9000         │ 9000          │ HTTP     │ http://localhost:9000   │
+│  MinIO Console │ 9001         │ 9001          │ HTTP     │ http://localhost:9001   │
+│  Ollama        │ 11434        │ 11434         │ HTTP     │ http://localhost:11434  │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 8.2.9. Kiểm tra trạng thái sau triển khai
+
+```bash
+# Kiểm tra tất cả services đang chạy
+docker ps
+
+# Kiểm tra health của từng service
+docker ps --format "table {{.Names}}\t{{.Status}}"
+
+# Kiểm tra logs của API
+docker logs doanthacsi-api --tail 50
+
+# Kiểm tra logs của Frontend
+docker logs doanthacsi-frontend --tail 50
+
+# Kiểm tra kết nối database
+docker exec -it doanthacsi-db psql -U postgres -d document_rag -c "\\dt"
+
+# Kiểm tra Ollama models
+curl http://localhost:11434/api/tags
+
+# Kiểm tra MinIO buckets
+docker exec -it doanthacsi-minio mc ls local/
+
+# Kiểm tra Redis
+docker exec -it doanthacsi-redis redis-cli ping
+
+# Kiểm tra API health
+curl http://localhost:8000/health
+
+# Kiểm tra API readiness
+curl http://localhost:8000/health/ready
+```
+
+#### 8.2.10. Lệnh quản lý sau triển khai
+
+```bash
+# Stop tất cả services
+docker-compose down
+
+# Stop và xóa volumes
+docker-compose down -v
+
+# Restart một service cụ thể
+docker-compose restart api
+
+# Rebuild một service cụ thể
+docker-compose up -d --build api
+
+# Xem resource usage
+docker stats
+
+# Clean up unused images
+docker image prune -a
+
+# Pull latest Ollama models
+docker exec doanthacsi-ollama ollama pull llama3.2
+docker exec doanthacsi-ollama ollama pull nomic-embed-text
+
+# Backup database
+docker exec doanthacsi-db pg_dump -U postgres document_rag > backup.sql
+
+# Restore database
+docker exec -i doanthacsi-db psql -U postgres document_rag < backup.sql
+```
+
+### 8.3. Kubernetes-Ready Structure
 
 ```
 kubernetes/
@@ -856,7 +1342,8 @@ active_connections = Gauge(
 │  Phase 3: Search & RAG (Month 3-4)                                                 │
 │  ├── Semantic search (M05)                                                         │
 │  ├── RAG chatbot (M06)                                                             │
-│  └── Chat history (M07)                                                             │
+│  ├── Chat history (M07)                                                             │
+│  └── RAG-SQL engine (M10)                                                          │
 │                                                                                     │
 │  Phase 4: Admin & Analytics (Month 4-5)                                             │
 │  ├── Admin dashboard (M08)                                                         │
@@ -902,14 +1389,25 @@ active_connections = Gauge(
 4. **"RAG vs Fine-tuning: Which is Right for Your LLM Application?"**
    - Anyscale, 2024
 
+5. **"Binder: Binding Language Model to Domain-Specific Language for SQL Question Answering"**
+   - Cheng et al., 2024
+   - Text-to-SQL with RBAC Integration
+
+6. **"A Survey on Large Language Models for Critical Societal Systems: Finance, Healthcare, and Law"**
+   - Anand et al., 2024
+   - Safe LLM Deployment in Enterprise
+
 ### 11.2. External Resources
 
 | Resource | Link |
 |----------|------|
 | pgvector GitHub | https://github.com/pgvector/pgvector |
 | RAG Best Practices | https://docs.anyscale.com/tutorials/rag |
-| OpenAI Embeddings | https://platform.openai.com/docs/guides/embeddings |
+| Ollama (Local LLM) | https://github.com/ollama/ollama |
 | Semantic Search Guide | https://www.pinecone.io/learn/semantic-search |
+| RAG-SQL: Text-to-SQL with RAG | https://arxiv.org/abs/2308.14739 |
+| Casbin RBAC | https://casbin.org/ |
+| SQLGlot SQL Parser | https://github.com/tobymao/sqlglot |
 
 ---
 
@@ -974,9 +1472,10 @@ docker-compose down
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: 2026-05-03  
+**Document Version**: 1.1
+**Last Updated**: 2026-05-03
 **Status**: Draft
+**Changes**: Added M10 RAG-SQL Engine Module with Public/Private Access Model
 
 ---
 
