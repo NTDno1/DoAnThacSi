@@ -10,7 +10,7 @@
 
 Đây là **dự án base/common** được thiết kế để **áp dụng cho tất cả các hệ thống** nếu muốn chuyển đổi thêm tính năng AI vào trong hệ thống. Framework này cung cấp nền tảng tích hợp AI 100% offline, có thể nhúng vào bất kỳ ứng dụng web, mobile, hoặc hệ thống doanh nghiệp nào.
 
-**Lưu ý quan trọng**: Dự án này **không phục vụ cho web HoaLienVien** đang có trong các tài liệu khác. Đây là một framework độc lập, có thể tái sử dụng cho bất kỳ hệ thống nào muốn tích hợp AI.
+**Lưu ý quan trọng**: Dự án này **không phục vụ cho web AIBaseFramework** đang có trong các tài liệu khác. Đây là một framework độc lập, có thể tái sử dụng cho bất kỳ hệ thống nào muốn tích hợp AI.
 
 ---
 

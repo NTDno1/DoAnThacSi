@@ -57,10 +57,10 @@ CMD ["serve"]
 #    docker build -t hlv-ollama:full --target models -f Dockerfile.ollama .
 #
 # 3. Run:
-#    docker run -d --name hlv_ollama --gpus all -p 11434:11434 hlv-ollama
+#    docker run -d --name aibf_ollama --gpus all -p 11434:11434 hlv-ollama
 #
 # 4. Download models manually after container started:
-#    docker exec hlv_ollama ollama pull llama3.2:3b
-#    docker exec hlv_ollama ollama pull nomic-embed-text
+#    docker exec aibf_ollama ollama pull llama3.2:3b
+#    docker exec aibf_ollama ollama pull nomic-embed-text
 #
 # ==============================================================================

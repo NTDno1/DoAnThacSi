@@ -96,6 +96,6 @@ Xem `.env.example` để biết các biến môi trường cần thiết.
 
 ### Models chưa có
 ```bash
-docker exec hlv_ollama ollama pull llama3.2:3b
-docker exec hlv_ollama ollama pull nomic-embed-text
+docker exec aibf_ollama ollama pull llama3.2:3b
+docker exec aibf_ollama ollama pull nomic-embed-text
 ```

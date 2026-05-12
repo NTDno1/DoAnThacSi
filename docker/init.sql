@@ -195,7 +195,7 @@ CREATE INDEX IF NOT EXISTS idx_search_created ON search_analytics(created_at DES
 -- Tạo admin user (password: admin123 - cần hash trong production)
 INSERT INTO users (email, password_hash, full_name, role, department)
 VALUES (
-    'admin@hoalienvien.edu.vn',
+    'admin@aibaseframework.local',
     '$2a$11$K3H8QxJ3qYXwPqZ0R7JQ8.UqXqY0J8VvP5bD9N5sL8wY2xE3R4U6',
     'Quản trị viên',
     'admin',
@@ -264,6 +264,6 @@ DO $$
 BEGIN
     RAISE NOTICE 'Database initialization completed successfully!';
     RAISE NOTICE 'Vector dimensions: 1536 (OpenAI text-embedding-3-small)';
-    RAISE NOTICE 'Admin user: admin@hoalienvien.edu.vn / admin123';
+    RAISE NOTICE 'Admin user: admin@aibaseframework.local / admin123';
 END;
 $$;

@@ -9,7 +9,7 @@ services:
   # ============================================
   nginx:
     image: nginx:alpine
-    container_name: hlv_nginx
+    container_name: aibf_nginx
     restart: unless-stopped
     ports:
       - "80:80"
@@ -26,14 +26,14 @@ services:
       timeout: 10s
       retries: 3
     networks:
-      - hlv_network
+      - aibf_network
 
   # ============================================
   # OLLAMA - Local LLM (Thay thế OpenAI)
   # ============================================
   ollama:
     image: ollama/ollama:latest
-    container_name: hlv_ollama
+    container_name: aibf_ollama
     restart: always
     ports:
       - "127.0.0.1:11434:11434"
@@ -59,14 +59,14 @@ services:
       retries: 3
       start_period: 120s
     networks:
-      - hlv_network
+      - aibf_network
 
   # ============================================
   # POSTGRESQL - Primary Database + pgvector
   # ============================================
   postgresql:
     image: pgvector/pgvector:pg16
-    container_name: hlv_postgresql
+    container_name: aibf_postgresql
     restart: always
     ports:
       - "127.0.0.1:5432:5432"
@@ -99,14 +99,14 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - hlv_network
+      - aibf_network
 
   # ============================================
   # REDIS - Cache và Session Store
   # ============================================
   redis:
     image: redis:7-alpine
-    container_name: hlv_redis
+    container_name: aibf_redis
     restart: always
     ports:
       - "127.0.0.1:6379:6379"
@@ -125,14 +125,14 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - hlv_network
+      - aibf_network
 
   # ============================================
   # MINIO - Object Storage (S3-compatible)
   # ============================================
   minio:
     image: minio/minio:latest
-    container_name: hlv_minio
+    container_name: aibf_minio
     restart: always
     ports:
       - "127.0.0.1:9000:9000"
@@ -149,14 +149,14 @@ services:
       timeout: 20s
       retries: 3
     networks:
-      - hlv_network
+      - aibf_network
 
   # ============================================
   # BACKEND - .NET 8 API (Production)
   # ============================================
   backend:
     image: ${DOCKER_REGISTRY:-}aibf-backend:${IMAGE_TAG:-latest}
-    container_name: hlv_backend
+    container_name: aibf_backend
     restart: always
     ports:
       - "127.0.0.1:5000:5000"
@@ -210,14 +210,14 @@ services:
           cpus: '0.5'
           memory: 512M
     networks:
-      - hlv_network
+      - aibf_network
 
   # ============================================
   # FRONTEND - Next.js 14 (Production - Static)
   # ============================================
   frontend:
     image: ${DOCKER_REGISTRY:-}aibf-frontend:${IMAGE_TAG:-latest}
-    container_name: hlv_frontend
+    container_name: aibf_frontend
     restart: always
     volumes:
       - ./nginx.frontend.conf:/etc/nginx/conf.d/default.conf:ro
@@ -229,14 +229,14 @@ services:
       timeout: 10s
       retries: 3
     networks:
-      - hlv_network
+      - aibf_network
 
   # ============================================
   # SEQ - Log Aggregation (Internal Only)
   # ============================================
   seq:
     image: datalust/seq:latest
-    container_name: hlv_seq
+    container_name: aibf_seq
     restart: always
     ports:
       - "127.0.0.1:5340:80"
@@ -254,13 +254,13 @@ services:
       timeout: 10s
       retries: 3
     networks:
-      - hlv_network
+      - aibf_network
 
 # ============================================
 # NETWORKS
 # ============================================
 networks:
-  hlv_network:
+  aibf_network:
     driver: bridge
     ipam:
       config:
@@ -271,12 +271,12 @@ networks:
 # ============================================
 volumes:
   ollama_data:
-    name: hlv_ollama_data_prod
+    name: aibf_ollama_data_prod
   postgres_data:
-    name: hlv_postgres_data_prod
+    name: aibf_postgres_data_prod
   redis_data:
-    name: hlv_redis_data_prod
+    name: aibf_redis_data_prod
   minio_data:
-    name: hlv_minio_data_prod
+    name: aibf_minio_data_prod
   seq_data:
-    name: hlv_seq_data_prod
+    name: aibf_seq_data_prod

@@ -12,21 +12,21 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy project files trước để tận dụng Docker layer caching
-COPY ["src/Be/HoaLienVien.API/HoaLienVien.API.csproj", "src/Be/HoaLienVien.API/"]
-COPY ["src/Be/HoaLienVien.Core/HoaLienVien.Core.csproj", "src/Be/HoaLienVien.Core/"]
-COPY ["src/Be/HoaLienVien.Infrastructure/HoaLienVien.Infrastructure.csproj", "src/Be/HoaLienVien.Infrastructure/"]
-COPY ["src/Be/HoaLienVien.Shared/HoaLienVien.Shared.csproj", "src/Be/HoaLienVien.Shared/"]
+COPY ["src/Be/AIBaseFramework.API/AIBaseFramework.API.csproj", "src/Be/AIBaseFramework.API/"]
+COPY ["src/Be/AIBaseFramework.Core/AIBaseFramework.Core.csproj", "src/Be/AIBaseFramework.Core/"]
+COPY ["src/Be/AIBaseFramework.Infrastructure/AIBaseFramework.Infrastructure.csproj", "src/Be/AIBaseFramework.Infrastructure/"]
+COPY ["src/Be/AIBaseFramework.Shared/AIBaseFramework.Shared.csproj", "src/Be/AIBaseFramework.Shared/"]
 
 # Restore dependencies
-RUN dotnet restore "src/Be/HoaLienVien.API/HoaLienVien.API.csproj"
+RUN dotnet restore "src/Be/AIBaseFramework.API/AIBaseFramework.API.csproj"
 
 # Copy source code
 COPY src/Be/ /src/src/Be/
 
 # Build và publish
-WORKDIR "/src/src/Be/HoaLienVien.API"
-RUN dotnet build "HoaLienVien.API.csproj" -c Release -o /app/build
-RUN dotnet publish "HoaLienVien.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+WORKDIR "/src/src/Be/AIBaseFramework.API"
+RUN dotnet build "AIBaseFramework.API.csproj" -c Release -o /app/build
+RUN dotnet publish "AIBaseFramework.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # ==============================================================================
 # STAGE 2: RUNTIME - Runtime image cho production
@@ -65,4 +65,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # ==============================================================================
 # STARTUP COMMAND
 # ==============================================================================
-ENTRYPOINT ["dotnet", "HoaLienVien.API.dll"]
+ENTRYPOINT ["dotnet", "AIBaseFramework.API.dll"]

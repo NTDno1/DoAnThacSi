@@ -68,7 +68,7 @@ CMD ["serve"]
 #
 # Run:
 #   docker run -d \
-#     --name hlv_ollama \
+#     --name aibf_ollama \
 #     --gpus all \
 #     -p 11434:11434 \
 #     -p 11436:11436 \
@@ -76,8 +76,8 @@ CMD ["serve"]
 #     hlv-ollama
 #
 # Download models manually after container starts:
-#   docker exec hlv_ollama ollama pull llama3.2:3b
-#   docker exec hlv_ollama ollama pull nomic-embed-text
+#   docker exec aibf_ollama ollama pull llama3.2:3b
+#   docker exec aibf_ollama ollama pull nomic-embed-text
 #
 # Check downloaded models:
-#   docker exec hlv_ollama ollama list
+#   docker exec aibf_ollama ollama list

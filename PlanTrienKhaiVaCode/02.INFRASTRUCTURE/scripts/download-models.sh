@@ -26,7 +26,7 @@ error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
 # Check if Ollama container is running
 check_ollama() {
-    if docker ps | grep -q hlv_ollama; then
+    if docker ps | grep -q aibf_ollama; then
         info "Ollama container đang chạy"
         return 0
     else
@@ -53,9 +53,9 @@ pull_model() {
     local size=$2
 
     info "Downloading $model ($size)..."
-    if docker exec hlv_ollama ollama pull "$model" 2>&1 | tee /dev/stderr | grep -q "success"; then
+    if docker exec aibf_ollama ollama pull "$model" 2>&1 | tee /dev/stderr | grep -q "success"; then
         success "Đã download $model"
-    elif docker exec hlv_ollama ollama pull "$model" &> /dev/null; then
+    elif docker exec aibf_ollama ollama pull "$model" &> /dev/null; then
         success "Đã download $model"
     else
         warning "Không thể download $model. Có thể cần GPU hoặc kết nối internet."
@@ -67,7 +67,7 @@ pull_model() {
 list_models() {
     info "Các models đã được cài đặt:"
     echo ""
-    docker exec hlv_ollama ollama list
+    docker exec aibf_ollama ollama list
     echo ""
 }
 
@@ -146,12 +146,12 @@ verify_installation() {
     # List models
     echo ""
     echo "=== Installed Models ==="
-    docker exec hlv_ollama ollama list
+    docker exec aibf_ollama ollama list
 
     # Check disk usage
     echo ""
     echo "=== Disk Usage ==="
-    docker exec hlv_ollama du -sh /root/.ollama/models 2>/dev/null || echo "Không thể đọc disk usage"
+    docker exec aibf_ollama du -sh /root/.ollama/models 2>/dev/null || echo "Không thể đọc disk usage"
 }
 
 # Print summary
@@ -162,7 +162,7 @@ print_summary() {
     echo "============================================"
     echo ""
     echo "Models đã download:"
-    docker exec hlv_ollama ollama list
+    docker exec aibf_ollama ollama list
     echo ""
     info "Để sử dụng models trong backend, cập nhật .env:"
     echo "  OLLAMA_CHAT_MODEL=llama3.2:3b"

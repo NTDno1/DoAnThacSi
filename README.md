@@ -515,7 +515,7 @@ Hệ thống hỗ trợ hai chế độ truy cập linh hoạt, cho phép ngư�
 ### 3.1. Tree structure
 
 ```
-DoAnThacSI/
+DoAnThacSi/
 ├── README.md                        # 📋 File tổng hợp chính (this file)
 │
 ├── docs/
@@ -615,7 +615,7 @@ DoAnThacSI/
 ```bash
 # Clone repository
 git clone <repository-url>
-cd DoAnThacSI
+cd DoAnThacSi
 
 # Copy environment file
 cp .env.example .env
@@ -1036,8 +1036,8 @@ Khi dự án được triển khai thành công, `docker ps` và `docker images`
 │                                                                                     │
 │  CONTAINER ID   IMAGE                        PORTS                    STATUS        │
 │  ─────────────  ───────────────────────────  ───────────────────────  ────────────  │
-│  a1b2c3d4e5f6   doanthacsi-api              0.0.0.0:8000->8000/tcp   Up (healthy)  │
-│  b2c3d4e5f6a7   doanthacsi-frontend         0.0.0.0:3000->3000/tcp   Up (healthy)  │
+│  a1b2c3d4e5f6   aibaseframework-api              0.0.0.0:8000->8000/tcp   Up (healthy)  │
+│  b2c3d4e5f6a7   aibaseframework-frontend         0.0.0.0:3000->3000/tcp   Up (healthy)  │
 │  c3d4e5f6a7b8   postgres:16                 0.0.0.0:5432->5432/tcp   Up (healthy)  │
 │  d4e5f6a7b8c9   redis:7-alpine             0.0.0.0:6379->6379/tcp   Up (healthy)  │
 │  e5f6a7b8c9d0   minio/minio                 0.0.0.0:9000->9000/tcp   Up (healthy)  │
@@ -1054,8 +1054,8 @@ Khi dự án được triển khai thành công, `docker ps` và `docker images`
 
 | # | Container Name | Image | Ports | Mô tả | Health Status |
 |---|--------------|-------|-------|--------|--------------|
-| 1 | **api** | `doanthacsi-api` | `8000:8000` | FastAPI Backend - Xử lý tất cả API requests | ✅ Healthy |
-| 2 | **frontend** | `doanthacsi-frontend` | `3000:3000` | Next.js Frontend - Giao diện người dùng | ✅ Healthy |
+| 1 | **api** | `aibaseframework-api` | `8000:8000` | FastAPI Backend - Xử lý tất cả API requests | ✅ Healthy |
+| 2 | **frontend** | `aibaseframework-frontend` | `3000:3000` | Next.js Frontend - Giao diện người dùng | ✅ Healthy |
 | 3 | **db** | `postgres:16` | `5432:5432` | PostgreSQL + pgvector - Lưu trữ dữ liệu & vector embeddings | ✅ Healthy |
 | 4 | **redis** | `redis:7-alpine` | `6379:6379` | Redis - Cache & Session management | ✅ Healthy |
 | 5 | **minio** | `minio/minio` | `9000:9000`, `9001:9001` | MinIO S3-compatible - Object storage cho tài liệu | ✅ Healthy |
@@ -1072,8 +1072,8 @@ Khi dự án được triển khai thành công, `docker ps` và `docker images`
 │                                                                                     │
 │  REPOSITORY              TAG         IMAGE ID       SIZE       CREATED              │
 │  ──────────────────────  ──────────  ────────────   ────────   ──────────────────  │
-│  doanthacsi-api          latest      a1b2c3d4e5f6   1.2GB      ...                  │
-│  doanthacsi-frontend     latest      b2c3d4e5f6a7   890MB      ...                  │
+│  aibaseframework-api          latest      a1b2c3d4e5f6   1.2GB      ...                  │
+│  aibaseframework-frontend     latest      b2c3d4e5f6a7   890MB      ...                  │
 │  postgres                16          c3d4e5f6a7b8    750MB      ...                  │
 │  redis                   7-alpine    d4e5f6a7b8c9    30MB       ...                  │
 │  minio/minio             latest      e5f6a7b8c9d0    230MB      ...                  │
@@ -1095,8 +1095,8 @@ Khi dự án được triển khai thành công, `docker ps` và `docker images`
 
 | # | Repository | Tag | Size | Mô tả |
 |---|-----------|-----|------|--------|
-| 1 | **doanthacsi-api** | `latest` | ~1.2GB | Custom image - FastAPI backend với tất cả dependencies (Python 3.11, SQLAlchemy, FastAPI, Ollama client, pgvector) |
-| 2 | **doanthacsi-frontend** | `latest` | ~890MB | Custom image - Next.js 14 frontend với TypeScript, TailwindCSS, React |
+| 1 | **aibaseframework-api** | `latest` | ~1.2GB | Custom image - FastAPI backend với tất cả dependencies (Python 3.11, SQLAlchemy, FastAPI, Ollama client, pgvector) |
+| 2 | **aibaseframework-frontend** | `latest` | ~890MB | Custom image - Next.js 14 frontend với TypeScript, TailwindCSS, React |
 | 3 | **postgres** | `16` | ~750MB | Official PostgreSQL 16 image với pgvector extension |
 | 4 | **redis** | `7-alpine` | ~30MB | Official Redis 7 Alpine - Nhẹ, tối ưu cho cache |
 | 5 | **minio/minio** | `latest` | ~230MB | MinIO Server - S3-compatible object storage |
@@ -1116,16 +1116,16 @@ Khi dự án được triển khai thành công, `docker ps` và `docker images`
 
 | Network Name | Driver | Mô tả |
 |-------------|--------|--------|
-| **doanthacsi_default** | bridge | Network mặc định của docker-compose, kết nối tất cả services |
-| **doanthacsi_ollama** | bridge | Network riêng cho Ollama (internal) |
+| **aibaseframework_default** | bridge | Network mặc định của docker-compose, kết nối tất cả services |
+| **aibaseframework_ollama** | bridge | Network riêng cho Ollama (internal) |
 
 #### 8.2.7. Volumes được tạo tự động
 
 | Volume Name | Driver | Mount Point | Mô tả |
 |-------------|--------|------------|--------|
-| **doanthacsi_postgres_data** | local | `/var/lib/postgresql/data` | Lưu trữ database PostgreSQL |
-| **doanthacsi_minio_data** | local | `/data` | Lưu trữ object storage (tài liệu files) |
-| **doanthacsi_ollama_models** | local | `/root/.ollama` | Lưu trữ LLM models đã pull |
+| **aibaseframework_postgres_data** | local | `/var/lib/postgresql/data` | Lưu trữ database PostgreSQL |
+| **aibaseframework_minio_data** | local | `/data` | Lưu trữ object storage (tài liệu files) |
+| **aibaseframework_ollama_models** | local | `/root/.ollama` | Lưu trữ LLM models đã pull |
 
 #### 8.2.8. Ports Mapping tổng hợp
 
@@ -1158,22 +1158,22 @@ docker ps
 docker ps --format "table {{.Names}}\t{{.Status}}"
 
 # Kiểm tra logs của API
-docker logs doanthacsi-api --tail 50
+docker logs aibaseframework-api --tail 50
 
 # Kiểm tra logs của Frontend
-docker logs doanthacsi-frontend --tail 50
+docker logs aibaseframework-frontend --tail 50
 
 # Kiểm tra kết nối database
-docker exec -it doanthacsi-db psql -U postgres -d document_rag -c "\\dt"
+docker exec -it aibaseframework-db psql -U postgres -d document_rag -c "\\dt"
 
 # Kiểm tra Ollama models
 curl http://localhost:11434/api/tags
 
 # Kiểm tra MinIO buckets
-docker exec -it doanthacsi-minio mc ls local/
+docker exec -it aibaseframework-minio mc ls local/
 
 # Kiểm tra Redis
-docker exec -it doanthacsi-redis redis-cli ping
+docker exec -it aibaseframework-redis redis-cli ping
 
 # Kiểm tra API health
 curl http://localhost:8000/health
@@ -1204,14 +1204,14 @@ docker stats
 docker image prune -a
 
 # Pull latest Ollama models
-docker exec doanthacsi-ollama ollama pull llama3.2
-docker exec doanthacsi-ollama ollama pull nomic-embed-text
+docker exec aibaseframework-ollama ollama pull llama3.2
+docker exec aibaseframework-ollama ollama pull nomic-embed-text
 
 # Backup database
-docker exec doanthacsi-db pg_dump -U postgres document_rag > backup.sql
+docker exec aibaseframework-db pg_dump -U postgres document_rag > backup.sql
 
 # Restore database
-docker exec -i doanthacsi-db psql -U postgres document_rag < backup.sql
+docker exec -i aibaseframework-db psql -U postgres document_rag < backup.sql
 ```
 
 ### 8.3. Kubernetes-Ready Structure

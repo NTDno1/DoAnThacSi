@@ -58,7 +58,7 @@
 ## Cấu trúc thư mục
 
 ```
-DoAnThacSI/docker/
+DoAnThacSi/docker/
 ├── docker-compose.yml          # Development compose (100% offline)
 ├── docker-compose.prod.yml    # Production compose
 ├── init.sql                   # Database initialization
@@ -138,7 +138,7 @@ DoAnThacSI/docker/
 **Bước 1: Copy file .env**
 
 ```powershell
-cd DoAnThacSI\docker
+cd DoAnThacSi\docker
 copy .env.example .env
 ```
 
@@ -175,8 +175,8 @@ docker-compose logs -f backend
 bash ./scripts/download-models.sh
 
 # Hoặc download manual từng model:
-docker exec hlv_ollama ollama pull llama3.2:3b
-docker exec hlv_ollama ollama pull nomic-embed-text
+docker exec aibf_ollama ollama pull llama3.2:3b
+docker exec aibf_ollama ollama pull nomic-embed-text
 ```
 
 **Bước 5: Khởi động services**
@@ -223,24 +223,24 @@ apt-get install docker-compose
 **Bước 2: Copy files lên server**
 
 ```bash
-scp -r DoAnThacSI/docker user@server:/opt/hoalienvien/
+scp -r DoAnThacSi/docker user@server:/opt/aibaseframework/
 ```
 
 **Bước 3: Configure SSL**
 
 ```bash
 # Tạo thư mục ssl
-mkdir -p /opt/hoalienvien/docker/ssl
+mkdir -p /opt/aibaseframework/docker/ssl
 
 # Copy certificates (hoặc sử dụng Let's Encrypt)
-cp your-cert.crt /opt/hoalienvien/docker/ssl/certificate.crt
-cp your-key.key /opt/hoalienvien/docker/ssl/private.key
+cp your-cert.crt /opt/aibaseframework/docker/ssl/certificate.crt
+cp your-key.key /opt/aibaseframework/docker/ssl/private.key
 ```
 
 **Bước 4: Khởi động Production**
 
 ```bash
-cd /opt/hoalienvien/docker
+cd /opt/aibaseframework/docker
 
 # Chỉnh sửa .env với production values
 nano .env
@@ -269,8 +269,8 @@ Healthcheck: pg_isready
 ```
 Host: postgresql
 Port: 5432
-Database: hoalienvien
-Username: hlvuser
+Database: aibaseframework
+Username: aibfuser
 Password: (từ .env)
 ```
 
@@ -391,9 +391,9 @@ URL: http://localhost:5340
 
 ### Database
 ```env
-POSTGRES_USER=hlvuser
+POSTGRES_USER=aibfuser
 POSTGRES_PASSWORD=secure_password_here
-POSTGRES_DB=hoalienvien
+POSTGRES_DB=aibaseframework
 ```
 
 ### Redis
@@ -434,8 +434,8 @@ CUDA_VISIBLE_DEVICES=0
 ### JWT
 ```env
 JWT_SECRET=your-256-bit-secret-minimum-32-characters
-JWT_ISSUER=HoaLienVienAPI
-JWT_AUDIENCE=HoaLienVienClient
+JWT_ISSUER=AIBaseFrameworkAPI
+JWT_AUDIENCE=AIBaseFrameworkClient
 JWT_EXPIRY_MINUTES=60
 ```
 
@@ -487,7 +487,7 @@ docker-compose up -d --build backend
 ```powershell
 # Shell vào container
 docker-compose exec backend sh
-docker-compose exec postgresql psql -U hlvuser -d hoalienvien
+docker-compose exec postgresql psql -U aibfuser -d aibaseframework
 docker-compose exec redis redis-cli -a your_password
 
 # Xem resource usage
@@ -501,13 +501,13 @@ docker-compose ps
 
 ```powershell
 # Backup database
-docker-compose exec postgresql pg_dump -U hlvuser hoalienvien > backup.sql
+docker-compose exec postgresql pg_dump -U aibfuser aibaseframework > backup.sql
 
 # Restore database
-docker-compose exec -T postgresql psql -U hlvuser -d hoalienvien < backup.sql
+docker-compose exec -T postgresql psql -U aibfuser -d aibaseframework < backup.sql
 
 # Connect to PostgreSQL
-docker-compose exec postgresql psql -U hlvuser -d hoalienvien
+docker-compose exec postgresql psql -U aibfuser -d aibaseframework
 ```
 
 ### Clean up
@@ -537,9 +537,9 @@ docker system prune -a --volumes
 docker-compose ps
 
 # Kiểm tra health status
-docker inspect --format='{{.State.Health.Status}}' hlv_backend
-docker inspect --format='{{.State.Health.Status}}' hlv_postgresql
-docker inspect --format='{{.State.Health.Status}}' hlv_ollama
+docker inspect --format='{{.State.Health.Status}}' aibf_backend
+docker inspect --format='{{.State.Health.Status}}' aibf_postgresql
+docker inspect --format='{{.State.Health.Status}}' aibf_ollama
 ```
 
 ### Ollama Issues
@@ -561,26 +561,26 @@ nvcc --version
 **2. Model chưa được download**
 ```powershell
 # Download model
-docker exec hlv_ollama ollama pull llama3.2:3b
-docker exec hlv_ollama ollama pull nomic-embed-text
+docker exec aibf_ollama ollama pull llama3.2:3b
+docker exec aibf_ollama ollama pull nomic-embed-text
 
 # List downloaded models
-docker exec hlv_ollama ollama list
+docker exec aibf_ollama ollama list
 ```
 
 **3. Slow inference (CPU mode)**
 ```powershell
 # Đây là bình thường khi chạy CPU-only
 # Khuyến nghị: Sử dụng model nhỏ hơn
-docker exec hlv_ollama ollama pull llama3.2:1b
+docker exec aibf_ollama ollama pull llama3.2:1b
 # Sau đó cập nhật OLLAMA_CHAT_MODEL=llama3.2:1b trong .env
 ```
 
 **4. Out of Memory (VRAM)**
 ```powershell
 # Sử dụng model nhỏ hơn
-docker exec hlv_ollama ollama pull llama3.2:1b
-docker exec hlv_ollama ollama rm llama3.2:3b
+docker exec aibf_ollama ollama pull llama3.2:1b
+docker exec aibf_ollama ollama rm llama3.2:3b
 
 # Cập nhật .env:
 # OLLAMA_CHAT_MODEL=llama3.2:1b
@@ -612,7 +612,7 @@ docker-compose logs postgresql
 
 # Reset database
 docker-compose down -v
-docker volume rm hlv_postgres_data
+docker volume rm aibf_postgres_data
 docker-compose up -d
 ```
 
@@ -679,7 +679,7 @@ BACKUP_DIR="/backups"
 DATE=$(date +%Y%m%d_%H%M%S)
 
 # Backup PostgreSQL
-docker-compose exec -T postgresql pg_dump -U hlvuser hoalienvien > $BACKUP_DIR/db_$DATE.sql
+docker-compose exec -T postgresql pg_dump -U aibfuser aibaseframework > $BACKUP_DIR/db_$DATE.sql
 
 # Backup MinIO data
 docker-compose exec minio mc mirror local/ $BACKUP_DIR/minio_$DATE/
@@ -698,7 +698,7 @@ find $BACKUP_DIR -mtime +7 -delete
 docker-compose down
 
 # Restore PostgreSQL
-gunzip < backup.sql.gz | docker-compose exec -T postgresql psql -U hlvuser -d hoalienvien
+gunzip < backup.sql.gz | docker-compose exec -T postgresql psql -U aibfuser -d aibaseframework
 
 # Restore MinIO
 docker-compose exec minio mc mirror backup/ local/

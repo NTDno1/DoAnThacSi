@@ -116,8 +116,8 @@ services:
   # ============================================
   backend:
     build:
-      context: ../03.BACKEND
-      dockerfile: ../../DoAnThacSI/PlanTrienKhaiVaCode/02.INFRASTRUCTURE/docker/Dockerfile.backend
+      context: ../../03.BACKEND
+      dockerfile: ../02.INFRASTRUCTURE/docker/Dockerfile.backend
     container_name: aibf_backend
     restart: unless-stopped
     ports:
@@ -174,8 +174,8 @@ services:
   # ============================================
   frontend:
     build:
-      context: ../04.FRONTEND
-      dockerfile: ../../DoAnThacSI/PlanTrienKhaiVaCode/02.INFRASTRUCTURE/docker/Dockerfile.frontend
+      context: ../../04.FRONTEND
+      dockerfile: ../02.INFRASTRUCTURE/docker/Dockerfile.frontend
     container_name: aibf_frontend
     restart: unless-stopped
     ports:
@@ -232,7 +232,7 @@ volumes:
   ollama_data:
     name: aibf_ollama_data
   postgres_data:
-    name: hlv_postgres_data
+    name: aibf_postgres_data
   redis_data:
     name: aibf_redis_data
   minio_data:

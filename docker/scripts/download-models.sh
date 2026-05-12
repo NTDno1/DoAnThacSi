@@ -25,7 +25,7 @@ NC='\033[0m' # No Color
 
 # Configuration
 OLLAMA_HOST="${OLLAMA_HOST:-http://localhost:11434}"
-OLLAMA_CONTAINER="${OLLAMA_CONTAINER:-hlv_ollama}"
+OLLAMA_CONTAINER="${OLLAMA_CONTAINER:-aibf_ollama}"
 
 echo "=========================================="
 echo "  OLLAMA MODELS DOWNLOADER"
