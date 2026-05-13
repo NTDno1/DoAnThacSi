@@ -17,7 +17,7 @@ interface AuthState {
   isLoading: boolean;
   
   // Actions
-  setUser: (user: User | null) => void;
+  setUser: (user: any) => void;
   setTokens: (accessToken: string, refreshToken: string) => void;
   logout: () => void;
   setLoading: (loading: boolean) => void;
@@ -31,10 +31,21 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: true,
 
-      setUser: (user) => set({ 
-        user, 
-        isAuthenticated: !!user 
-      }),
+      setUser: (user) => {
+        if (user) {
+          // Map backend response to User interface
+          const mappedUser: User = {
+            id: user.id,
+            email: user.email,
+            fullName: user.fullName || user.FullName || 'User',
+            department: user.department || user.Department,
+            role: user.role || user.Role || 'Student',
+          };
+          set({ user: mappedUser, isAuthenticated: true });
+        } else {
+          set({ user: null, isAuthenticated: false });
+        }
+      },
 
       setTokens: (accessToken, refreshToken) => {
         if (typeof window !== 'undefined') {

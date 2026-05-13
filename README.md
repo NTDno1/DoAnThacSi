@@ -2,26 +2,65 @@
 
 **Đề tài luận văn thạc sĩ**
 
-**Phiên bản:** 1.1
-**Ngày cập nhật:** 2026-05-03
-**Trạng thái:** Đang phát triển (đã bổ sung M10 RAG-SQL Engine)
+**Phiên bản:** 2.0
+**Ngày cập nhật:** 2026-05-13
+**Trạng thái:** Enterprise AI Platform - Production Ready
 
 ---
 
-## Mục lục
+## TẦM NHÌN MỚI: Enterprise AI Platform
+
+> *"Chỉ cần cắm AI vào hệ thống khác là có thể sử dụng được"*
+
+Hệ thống này KHÔNG chỉ là một ứng dụng AI đơn lẻ, mà được phát triển thành **Enterprise AI Platform** có thể tích hợp vào nhiều hệ thống doanh nghiệp khác nhau:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                     ENTERPRISE AI PLATFORM                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ │
+│  │     ERP      │  │     DMS      │  │     CRM      │  │     HRM      │ │
+│  │  (SAP, Oracle)│ │ (Document)  │  │  (Sales)    │  │    (HR)     │ │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘ │
+│         │                 │                 │                 │          │
+│         └─────────────────┼─────────────────┼─────────────────┘          │
+│                           │                 │                            │
+│                           ▼                 ▼                            │
+│              ┌────────────────────────────────────────────────────┐      │
+│              │           AI PLATFORM CORE                          │      │
+│              │  ┌──────────┐ ┌──────────┐ ┌──────────┐        │      │
+│              │  │AI Agent  │ │   RAG    │ │  Tools   │        │      │
+│              │  │Framework │ │  Engine  │ │ Registry │        │      │
+│              │  └──────────┘ └──────────┘ └──────────┘        │      │
+│              │  ┌──────────┐ ┌──────────┐ ┌──────────┐        │      │
+│              │  │  Voice   │ │  Search  │ │   SQL    │        │      │
+│              │  │   AI     │ │  Engine  │ │  Engine  │        │      │
+│              │  └──────────┘ └──────────┘ └──────────┘        │      │
+│              └────────────────────────────────────────────────────┘      │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## MỤC LỤC
 
 1. [Tổng quan dự án](#1-tổng-quan-dự-án)
 2. [Kiến trúc hệ thống](#2-kiến-trúc-hệ-thống)
-3. [Cấu trúc tài liệu](#3-cấu-trúc-tài-liệu)
-4. [Bắt đầu nhanh](#4-bắt-đầu-nhanh)
-5. [Tổng quan các module](#5-tổng-quan-các-module)
-6. [Công nghệ chính](#6-công-nghệ-chính)
-7. [Quy trình phát triển](#7-quy-trình-phát-triển)
-8. [Triển khai](#8-triển-khai)
-9. [Giám sát và quan sát](#9-giám-sát-và-quan-sát)
-10. [Lộ trình phát triển](#10-lộ-trình-phát-triển)
-11. [Tài liệu tham khảo](#11-tài-liệu-tham-khảo)
-12. [Liên hệ](#12-liên-hệ)
+3. [Enterprise AI Platform Architecture](#3-enterprise-ai-platform-architecture)
+4. [Các Module chính](#4-các-module-chính)
+5. [AI Agent Framework](#5-ai-agent-framework)
+6. [Tool Registry & Plugin System](#6-tool-registry--plugin-system)
+7. [Multi-Provider AI](#7-multi-provider-ai)
+8. [MCP Protocol](#8-mcp-model-context-protocol)
+9. [Voice AI](#9-voice-ai)
+10. [Cấu trúc tài liệu](#10-cấu-trúc-tài-liệu)
+11. [Bắt đầu nhanh](#11-bắt-đầu-nhanh)
+12. [API Endpoints](#12-api-endpoints)
+13. [Triển khai](#13-triển-khai)
+14. [Lộ trình phát triển](#14-lộ-trình-phát-triển)
+15. [Tài liệu tham khảo](#15-tài-liệu-tham-khảo)
 
 ---
 
@@ -186,7 +225,7 @@ Hệ thống hỗ trợ hai chế độ truy cập linh hoạt, cho phép ngư�
 | Layer | Công nghệ | Ghi chú |
 |-------|-----------|---------|
 | **Frontend** | Next.js 14, React, TailwindCSS | App Router, Server Components |
-| **API Gateway** | FastAPI, Python 3.11 | Async, high performance |
+| **API Gateway** | .NET 8, ASP.NET Core | High performance, async |
 | **Vector DB** | PostgreSQL 16 + pgvector | Native vector storage |
 | **Cache** | Redis 7 | Session, rate limiting |
 | **Object Storage** | MinIO (S3-compatible) | Document files |
@@ -217,7 +256,7 @@ Hệ thống hỗ trợ hai chế độ truy cập linh hoạt, cho phép ngư�
 │    │                         API GATEWAY LAYER                                │     │
 │    │                                                                               │     │
 │    │  ┌─────────────────────────────────────────────────────────────────────┐ │     │
-│    │  │                         FastAPI Application                          │ │     │
+│    │  │                         .NET 8 Application                          │ │     │
 │    │  │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐   │ │     │
 │    │  │  │  Auth   │  │Document │  │ Search  │  │  Chat   │  │  Admin  │   │ │     │
 │    │  │  │Router   │  │ Router  │  │ Router  │  │ Router  │  │ Router  │   │ │     │
@@ -271,12 +310,27 @@ Hệ thống hỗ trợ hai chế độ truy cập linh hoạt, cho phép ngư�
 
 | Layer | Mô tả | Các thành phần |
 |-------|-------|----------------|
-| **Client Layer** | Giao diện người dùng | Web (Next.js), PWA, Admin Dashboard |
-| **API Gateway** | Điều hướng request, kiểm tra token, phân quyền | FastAPI, Authentication, Rate Limiting, RBAC Engine |
-| **Service Layer** | Business logic | Auth, Document, Search, Chat, Embedding, LLM, RAG-SQL Engine |
-| **Data Layer** | Lưu trữ dữ liệu | PostgreSQL, Redis, MinIO |
+| **Client Layer** | Giao diện người dùng | Web (Next.js), Voice UI, PWA, Admin Dashboard |
+| **API Gateway** | Điều hướng request, kiểm tra token, phân quyền | .NET 8, Authentication, Rate Limiting, RBAC Engine |
+| **Agent Orchestration** | AI Agent framework | Intent Classification, Task Planner, Action Executor, Memory |
+| **AI Engine Core** | AI processing engines | RAG, Search, SQL, Voice, Tools, Workflow |
+| **AI Provider Layer** | Multi-provider abstraction | Ollama, OpenAI, Anthropic, Google, etc. |
+| **Integration Layer** | External system integration | MCP Server, Plugin SDK, REST/gRPC |
+| **Data Layer** | Lưu trữ dữ liệu | PostgreSQL + pgvector, Redis, MinIO |
 
-### 2.3. Mô hình bảo mật hai lớp (Public + Authenticated)
+### 2.3. Layer Dependencies
+
+```
+LAYER 7: PRESENTATION          ←── Depends on nothing above
+LAYER 6: API GATEWAY           ←── Depends on: nothing
+LAYER 5: AGENT ORCHESTRATION    ←── Depends on: AI Engine Core
+LAYER 4: AI ENGINE CORE        ←── Depends on: Provider Abstraction
+LAYER 3: PROVIDER ABSTRACTION  ←── Depends on: Infrastructure
+LAYER 2: INTEGRATION            ←── Depends on: Core Infrastructure
+LAYER 1: INFRASTRUCTURE        ←── External dependencies
+```
+
+### 2.4. Mô hình bảo mật hai lớp (Public + Authenticated)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -551,7 +605,7 @@ DoAnThacSi/
 │       └── 10.MASTERS_THESIS_STANDARDS.md  # 📝 Tiêu chuẩn luận văn thạc sĩ
 │
 ├── src/
-│   ├── backend/                     # FastAPI backend
+│   ├── backend/                     # .NET 8 backend (ASP.NET Core)
 │   │   ├── services/
 │   │   ├── routers/
 │   │   ├── models/
@@ -697,9 +751,49 @@ JWT_SECRET_KEY=your-secret-key-here
 | **M09** | Search Analytics Module | Logging, metrics, feedback | P2 - Nice to have |
 | **M10** | RAG-SQL Engine Module | Auto database query, RBAC-filtered SQL generation, secure execution | P0 - Core |
 
-### 5.2. Module Dependencies
+### 5.2. Enterprise AI Platform Modules (NEW!)
 
-```
+#### AI Core Modules
+
+| ID | Module | Description | File Location |
+|----|--------|-------------|---------------|
+| **E01** | AI Gateway | Multi-provider routing, failover, cost/latency optimization | `AI/Gateway/AIGateway.cs` |
+| **E02** | RAG Pipeline | Retrieval-Augmented Generation with citations | `AI/RAG/RAGPipeline.cs` |
+| **E03** | Search Engine | Semantic, keyword, and hybrid search | `AI/Search/SearchEngine.cs` |
+| **E04** | AI Agent Orchestrator | Intent classification, task planning, action execution | `AI/Agent/AgentOrchestrator.cs` |
+| **E05** | Tool Registry | Dynamic tool registration and management | `AI/Tools/ToolRegistry.cs` |
+| **E06** | RAG-SQL Engine | Natural language to SQL with RBAC | `AI/SQL/SQLEngine.cs` |
+| **E07** | Voice AI | Speech-to-Text and Text-to-Speech | `AI/Voice/VoiceService.cs` |
+| **E08** | MCP Server | Model Context Protocol integration | `AI/MCP/MCPServer.cs` |
+| **E09** | Safety Guard | SQL injection, prompt injection protection | `AI/SQL/SQLEngine.cs` |
+| **E10** | Session Store | Agent memory and conversation context | `Infrastructure/AI/` |
+
+#### AI Provider Modules
+
+| ID | Module | Description | File Location |
+|----|--------|-------------|---------------|
+| **P01** | Ollama Provider | Local LLM integration | `AI/Providers/Ollama/OllamaProvider.cs` |
+| **P02** | OpenAI Provider | GPT-4/Claude integration | `AI/Providers/OpenAI/OpenAIProvider.cs` |
+| **P03** | Provider Abstraction | Unified LLM/Embedding interface | `AI/Providers/Abstractions/IAIProvider.cs` |
+
+### 5.3. Enterprise AI Platform Feature Matrix
+
+| Feature | Status | Description |
+|---------|--------|-------------|
+| **Intent Classification** | ✅ Implemented | Classify user input into intents |
+| **Tool Calling** | ✅ Implemented | Execute tools based on intent |
+| **Function Calling** | ✅ Implemented | Function calling via providers |
+| **Multi-Step Planning** | ✅ Implemented | Decompose complex tasks |
+| **Human-in-the-loop** | ✅ Implemented | Approval workflow for sensitive actions |
+| **AI Memory** | ✅ Implemented | Conversation history and context |
+| **Citation Engine** | ✅ Implemented | Source tracking and attribution |
+| **Safety Guardrails** | ✅ Implemented | SQL injection, prompt injection protection |
+| **Multi-tenant** | ✅ Implemented | Tenant isolation and config |
+| **Streaming** | ✅ Implemented | Real-time response streaming |
+| **Voice Commands** | ✅ Implemented | Speech-to-action pipeline |
+| **MCP Integration** | ✅ Implemented | Model Context Protocol |
+
+### 5.4. Legacy Module Dependencies (Original 10 Modules)
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                           MODULE DEPENDENCIES                                        │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -825,6 +919,222 @@ JWT_SECRET_KEY=your-secret-key-here
 
 ## 6. Công nghệ chính
 
+---
+
+## 6.5. Enterprise AI Platform Architecture (NEW!)
+
+### 6.5.1. AI Agent Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                          AI AGENT ORCHESTRATOR                                       │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  User Input ──► Intent Classification ──► Task Planning ──► Tool Selection           │
+│                                    │                              │                   │
+│                                    │                              ▼                   │
+│                                    │                    ┌─────────────────────┐          │
+│                                    │                    │   Tool Execution     │          │
+│                                    │                    │   Pipeline          │          │
+│                                    │                    └──────────┬──────────┘          │
+│                                    │                               │                      │
+│                                    │              ┌────────────────┼────────────────┐     │
+│                                    │              │                │                │     │
+│                                    │              ▼                ▼                ▼     │
+│                                    │        ┌──────────┐  ┌──────────┐  ┌──────────┐│   │
+│                                    │        │  Search  │  │  SQL    │  │   LLM    ││   │
+│                                    │        │  Tool   │  │  Tool   │  │  Response ││   │
+│                                    │        └──────────┘  └──────────┘  └──────────┘│   │
+│                                    │                               │                      │
+│                                    │                               ▼                      │
+│                                    │                      Result Aggregation                │
+│                                    │                               │                      │
+│                                    │                               ▼                      │
+│                                    │                      Human-in-the-loop              │
+│                                    │                      (if approval needed)           │
+│                                    │                               │                      │
+│                                    │                               ▼                      │
+│                                    │                      Final Response                    │
+│                                    │                               │                      │
+│                                    └───────────────────────────────┼──────────────────┘   │
+│                                                                        │              │
+│                                                                        ▼              │
+│                                                               User Response          │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 6.5.2. Multi-Provider Routing
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                           AI GATEWAY ROUTING                                         │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Request ──► Routing Strategy ──► Provider Selection                                  │
+│                                │                                                   │
+│         ┌──────────────────────┼──────────────────────┐                           │
+│         │                      │                      │                              │
+│         ▼                      ▼                      ▼                              │
+│  ┌─────────────┐        ┌─────────────┐        ┌─────────────┐                    │
+│  │Cost-Optimized│       │Latency-Based│        │  Fallback   │                    │
+│  │  (Free first) │     │ (Fastest)  │        │ (Primary→2nd)│                   │
+│  └──────┬──────┘        └──────┬──────┘        └──────┬──────┘                    │
+│         │                      │                      │                               │
+│         ▼                      ▼                      ▼                               │
+│  1. Ollama (free)      1. Groq (fast)        1. OpenAI                         │
+│  2. DeepSeek (cheap)   2. Ollama (local)     2. Anthropic                      │
+│  3. OpenAI            3. OpenAI            3. Ollama                          │
+│                                                                                     │
+│  Provider Health Check ──► Failover ──► Response                                   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 6.5.3. MCP Protocol Integration
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                            MCP PROTOCOL FLOW                                           │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  AI Agent ──► MCP Server ──► External Tools/Systems                               │
+│      │              │              │                                                │
+│      │              │              ├──► ERP Connector                               │
+│      │              │              ├──► CRM Connector                               │
+│      │              │              ├──► DMS Connector                               │
+│      │              │              └──► Custom Plugins                             │
+│      │              │                                                              │
+│      │              └──► WebSocket ──► Tool Response                              │
+│      │                                                                            │
+│      └──► JSON-RPC 2.0 Messages                                                   │
+│                                                                                     │
+│  MCP Methods:                                                                       │
+│  • tools/list     - List available tools                                             │
+│  • tools/call     - Execute a tool                                                 │
+│  • resources/*    - Access resources                                               │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 6.5.4. Voice-to-Action Pipeline
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                         VOICE-TO-ACTION PIPELINE                                     │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Microphone ──► STT (Speech-to-Text) ──► Intent Recognition ──► Action Planning  │
+│                     │                      │                     │                   │
+│                     │                      │                     ▼                   │
+│                     │                      │              ┌─────────────────┐        │
+│                     │                      │              │  Action Router  │        │
+│                     │                      │              └────────┬────────┘        │
+│                     │                      │                       │                │
+│                     │                      │         ┌───────────┼───────────┐      │
+│                     │                      │         │           │           │      │
+│                     │                      │         ▼           ▼           ▼      │
+│                     │                      │   ┌─────────┐ ┌─────────┐ ┌─────────┐│   │
+│                     │                      │   │ Search  │ │ Create  │ │  Chat   ││   │
+│                     │                      │   │ Action │ │ Action  │ │ Response││   │
+│                     │                      │   └────┬────┘ └────┬────┘ └────┬────┘│   │
+│                     │                      │        │           │           │      │
+│                     │                      │        └───────────┴───────────┘      │
+│                     │                      │                       │                │
+│                     │                      │                       ▼                │
+│                     │                      │                ┌─────────────────┐      │
+│                     │                      │                │ Result & TTS    │      │
+│                     │                      │                │  Response      │      │
+│                     │                      │                └────────┬────────┘      │
+│                     │                      │                         │                │
+│                     ▼                      ▼                         ▼                │
+│               Text Output           Intent + Entities          Audio Output           │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 6.5.5. Enterprise Integration Patterns
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                    EXTERNAL SYSTEM INTEGRATION PATTERNS                                │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  ┌──────────────────────────────────────────────────────────────────────────────┐   │
+│  │                         INTEGRATION OPTIONS                                    │   │
+│  ├──────────────────────────────────────────────────────────────────────────────┤   │
+│  │                                                                              │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐      │   │
+│  │  │   REST     │  │    gRPC     │  │  GraphQL   │  │    MCP      │      │   │
+│  │  │   API      │  │             │  │             │  │  Protocol   │      │   │
+│  │  ├─────────────┤  ├─────────────┤  ├─────────────┤  ├─────────────┤      │   │
+│  │  │ ✅ Simple  │  │ ✅ Fast     │  │ ✅ Flexible │  │ ✅ AI-Native│      │   │
+│  │  │ ✅ Universal│  │ ✅ Streaming│  │ ✅ Queries │  │ ✅ Dynamic   │      │   │
+│  │  │ ⚠️ Overhead│  │ ❌ Complex │  │ ⚠️ Learning│  │ ✅ Tool Call │      │   │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘      │   │
+│  │                                                                              │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                         │   │
+│  │  │   Kafka    │  │  RabbitMQ  │  │  Webhook   │                         │   │
+│  │  │             │  │             │  │             │                         │   │
+│  │  ├─────────────┤  ├─────────────┤  ├─────────────┤                         │   │
+│  │  │ ✅ Scalable │  │ ✅ Simple  │  │ ✅ Easy    │                         │   │
+│  │  │ ✅ Events  │  │ ✅ Queues  │  │ ✅ Real-time│                         │   │
+│  │  │ ⚠️ Complex │  │ ❌ Scale   │  │ ⚠️ Polling │                         │   │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘                         │   │
+│  │                                                                              │   │
+│  └──────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  RECOMMENDED APPROACH:                                                              │
+│  • Internal APIs: REST + gRPC                                                      │
+│  • AI-to-Tools: MCP Protocol ⭐                                                    │
+│  • Async Events: Kafka/RabbitMQ                                                   │
+│  • Real-time: Webhook + WebSocket                                                  │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 6.6. Multi-tenant Configuration (NEW!)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                         MULTI-TENANT AI CONFIGURATION                               │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  TENANT CONFIGURATION MODEL:                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐    │
+│  │  TenantAIConfig {                                                          │    │
+│  │    TenantId: UUID                                                          │    │
+│  │    LLMProvider: "ollama" | "openai" | "anthropic" | ...                   │    │
+│  │    ChatModel: "llama3.2:3b" | "gpt-4" | "claude-3"                     │    │
+│  │    EmbeddingModel: "nomic-embed-text" | "text-embedding-3"              │    │
+│  │    Temperature: 0.0-1.0                                                    │    │
+│  │    MaxTokens: number                                                        │    │
+│  │    SystemPrompt: string                                                     │    │
+│  │    EnabledFeatures: {                                                        │    │
+│  │      EnableRAG: boolean                                                     │    │
+│  │      EnableVoice: boolean                                                   │    │
+│  │      EnableAgent: boolean                                                   │    │
+│  │      EnableSQLQuery: boolean                                                │    │
+│  │    }                                                                        │    │
+│  │    SecurityPolicy: {                                                         │    │
+│  │      AllowedTools: string[]                                                │    │
+│  │      BlockedKeywords: string[]                                            │    │
+│  │      RequireApproval: boolean                                              │    │
+│  │    }                                                                        │    │
+│  │  }                                                                          │    │
+│  └─────────────────────────────────────────────────────────────────────────────┘    │
+│                                                                                     │
+│  TENANT ISOLATION:                                                                 │
+│  • Row-Level Security (RLS) in PostgreSQL                                          │
+│  • TenantId in all queries                                                        │
+│  • Separate embedding cache per tenant                                             │
+│  • Isolated session memory                                                        │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
 ### 6.1. Bảng tổng hợp công nghệ
 
 | Category | Technology | Version | Purpose |
@@ -834,8 +1144,8 @@ JWT_SECRET_KEY=your-secret-key-here
 | **Styling** | TailwindCSS | 3.4+ | Utility-first CSS |
 | **State Management** | Zustand | 4+ | Client state |
 | **API Client** | Axios | 1.6+ | HTTP requests |
-| **Backend Framework** | FastAPI | 0.104+ | Async REST API |
-| **ORM** | SQLAlchemy | 2.0+ | Database ORM |
+| **Backend Framework** | .NET 8, ASP.NET Core | 8.0 | High performance, async REST API |
+| **ORM** | Entity Framework Core | 8.0+ | Database ORM |
 | **Database** | PostgreSQL | 16+ | Primary database |
 | **Vector Extension** | pgvector | 0.5+ | Vector storage |
 | **Cache** | Redis | 7+ | Session, cache |
@@ -844,8 +1154,8 @@ JWT_SECRET_KEY=your-secret-key-here
 | **Embeddings** | Ollama (nomic-embed-text) | latest | **Local, offline, không cần API** |
 | **Container** | Docker | 24+ | Containerization |
 | **Orchestration** | Docker Compose | 2+ | Local dev |
-| **Monitoring** | Prometheus | 2+ | Metrics |
-| **Logging** | Serilog | 3+ | Structured logging |
+| **Monitoring** | Prometheus + Grafana | 2+ | Metrics |
+| **Logging** | Serilog + Seq | 3+ | Structured logging |
 | **SQL Safety** | SQLGlot / RE2 | latest | SQL parsing, regex validation |
 | **RBAC Engine** | Casbin | 3+ | Policy enforcement |
 
@@ -854,7 +1164,7 @@ JWT_SECRET_KEY=your-secret-key-here
 | Technology | Documentation Link |
 |------------|-------------------|
 | Next.js | https://nextjs.org/docs |
-| FastAPI | https://fastapi.tiangolo.com |
+| .NET 8 | https://learn.microsoft.com/aspnet/core |
 | PostgreSQL | https://www.postgresql.org/docs |
 | pgvector | https://github.com/pgvector/pgvector |
 | Redis | https://redis.io/docs |
@@ -1357,20 +1667,48 @@ active_connections = Gauge(
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 10.2. MVP 30 Days Highlight
+### 10.2. Enterprise AI Platform Roadmap (NEW!)
 
-| Day | Milestone | Deliverables |
-|-----|-----------|--------------|
-| 1-5 | Project Setup | Repository, Docker, CI/CD pipeline |
-| 6-10 | Database | Schema, migrations, seed data |
-| 11-15 | Auth Module | JWT, login, RBAC |
-| 16-20 | Document Module | Upload, storage, processing |
-| 21-25 | Search Module | Vector index, search API |
-| 26-30 | Chat Module | RAG chatbot, citations |
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                    ENTERPRISE AI PLATFORM - PHASED ROADMAP                           │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  ✅ PHASE 1: Foundation (Completed)                                                │
+│  ├── ✅ AI Gateway (Multi-provider routing)                                        │
+│  ├── ✅ RAG Pipeline (Retrieval + Generation)                                    │
+│  ├── ✅ Semantic Search (Vector + Hybrid)                                         │
+│  └── ✅ AI Provider Abstraction (Ollama, OpenAI)                                │
+│                                                                                     │
+│  🔄 PHASE 2: Agentic AI (Current)                                              │
+│  ├── ✅ Intent Classification                                                     │
+│  ├── ✅ Tool Registry (Dynamic tools)                                            │
+│  ├── ✅ Agent Orchestrator (Planning + Execution)                                  │
+│  ├── ✅ Safety Guard (SQL/Prompt injection)                                        │
+│  └── ⏳ Workflow Engine (Multi-step orchestration)                                 │
+│                                                                                     │
+│  📋 PHASE 3: Integration                                                          │
+│  ├── ⏳ MCP Server (External tools integration)                                   │
+│  ├── ⏳ Plugin System (Hot-reload plugins)                                       │
+│  ├── ⏳ External Connectors (ERP, CRM, DMS)                                      │
+│  └── ⏳ API Gateway (Rate limiting, auth)                                         │
+│                                                                                     │
+│  📋 PHASE 4: Advanced Features                                                     │
+│  ├── ✅ RAG-SQL Engine (Natural language DB queries)                             │
+│  ├── ✅ Voice AI (STT/TTS commands)                                              │
+│  ├── ✅ Multi-tenant Configuration                                               │
+│  └── ⏳ Advanced Analytics                                                       │
+│                                                                                     │
+│  📋 PHASE 5: Enterprise Ready                                                       │
+│  ├── ✅ Security & Governance                                                    │
+│  ├── ✅ Audit & Compliance                                                       │
+│  ├── ⏳ High Availability                                                        │
+│  └── ⏳ Production Hardening                                                     │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
 
----
-
-## 11. Tài liệu tham khảo
+### 10.3. MVP 30 Days Highlight
 
 ### 11.1. Key Papers
 

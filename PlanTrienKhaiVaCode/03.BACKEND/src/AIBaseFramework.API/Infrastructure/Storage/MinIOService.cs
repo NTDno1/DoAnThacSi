@@ -1,7 +1,6 @@
 // MinIO Storage Service
 using Minio;
 using Minio.DataModel.Args;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace AIBaseFramework.API.Infrastructure.Storage;
@@ -9,10 +8,9 @@ namespace AIBaseFramework.API.Infrastructure.Storage;
 public interface IMinIOService
 {
     Task<string> UploadFileAsync(Stream stream, string fileName, string contentType);
-    Task<Stream> DownloadFileAsync(string objectName);
-    Task<void> DeleteFileAsync(string objectName);
+    Task<byte[]> DownloadFileAsync(string objectName);
+    Task DeleteFileAsync(string objectName);
     Task<string> GetPresignedUrlAsync(string objectName, int expiryMinutes = 60);
-    Task EnsureBucketExistsAsync(string bucketName);
 }
 
 public class MinIOService : IMinIOService
@@ -23,33 +21,12 @@ public class MinIOService : IMinIOService
 
     public MinIOService(
         IMinioClient minioClient,
-        IConfiguration configuration,
-        ILogger<MinIOService> logger)
+        ILogger<MinIOService> logger,
+        AIPlatformConfig config)
     {
         _minioClient = minioClient;
         _logger = logger;
-        _bucketName = configuration["MinIOConfig:BucketName"] ?? "documents";
-    }
-
-    public async Task EnsureBucketExistsAsync(string bucketName)
-    {
-        try
-        {
-            var bucketExistsArgs = new BucketExistsArgs().WithBucket(bucketName);
-            bool found = await _minioClient.BucketExistsAsync(bucketExistsArgs);
-            
-            if (!found)
-            {
-                var makeBucketArgs = new MakeBucketArgs().WithBucket(bucketName);
-                await _minioClient.MakeBucketAsync(makeBucketArgs);
-                _logger.LogInformation("Created bucket: {Bucket}", bucketName);
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to ensure bucket exists: {Bucket}", bucketName);
-            throw;
-        }
+        _bucketName = config.MinIO.BucketName;
     }
 
     public async Task<string> UploadFileAsync(Stream stream, string fileName, string contentType)
@@ -58,14 +35,12 @@ public class MinIOService : IMinIOService
         {
             var objectName = $"{DateTime.UtcNow:yyyy/MM/dd}/{Guid.NewGuid()}/{fileName}";
 
-            var putObjectArgs = new PutObjectArgs()
-                .WithBucket(_bucketName)
-                .WithObject(objectName)
-                .WithStreamData(stream)
-                .WithObjectSize(stream.Length)
-                .WithContentType(contentType);
-
-            await _minioClient.PutObjectAsync(putObjectArgs);
+            await _minioClient.PutObjectAsync(
+                _bucketName,
+                objectName,
+                stream,
+                stream.Length,
+                contentType);
 
             _logger.LogInformation("Uploaded file: {ObjectName}", objectName);
             return objectName;
@@ -77,24 +52,16 @@ public class MinIOService : IMinIOService
         }
     }
 
-    public async Task<Stream> DownloadFileAsync(string objectName)
+    public async Task<byte[]> DownloadFileAsync(string objectName)
     {
         try
         {
-            var memoryStream = new MemoryStream();
-
-            var getObjectArgs = new GetObjectArgs()
-                .WithBucket(_bucketName)
-                .WithObject(objectName)
-                .WithCallbackStream(stream => 
-                {
-                    stream.CopyTo(memoryStream);
-                    memoryStream.Position = 0;
-                });
-
-            await _minioClient.GetObjectAsync(getObjectArgs);
-
-            return memoryStream;
+            using var memoryStream = new MemoryStream();
+            await _minioClient.GetObjectAsync(_bucketName, objectName, stream =>
+            {
+                stream.CopyTo(memoryStream);
+            });
+            return memoryStream.ToArray();
         }
         catch (Exception ex)
         {
@@ -107,11 +74,7 @@ public class MinIOService : IMinIOService
     {
         try
         {
-            var removeObjectArgs = new RemoveObjectArgs()
-                .WithBucket(_bucketName)
-                .WithObject(objectName);
-
-            await _minioClient.RemoveObjectAsync(removeObjectArgs);
+            await _minioClient.RemoveObjectAsync(_bucketName, objectName);
             _logger.LogInformation("Deleted file: {ObjectName}", objectName);
         }
         catch (Exception ex)
@@ -125,12 +88,11 @@ public class MinIOService : IMinIOService
     {
         try
         {
-            var presignedGetObjectArgs = new PresignedGetObjectArgs()
-                .WithBucket(_bucketName)
-                .WithObject(objectName)
-                .WithExpiry(expiryMinutes * 60);
-
-            var url = await _minioClient.PresignedGetObjectAsync(presignedGetObjectArgs);
+            var url = await _minioClient.PresignedGetObjectAsync(
+                new PresignedGetObjectArgs()
+                    .WithBucket(_bucketName)
+                    .WithObject(objectName)
+                    .WithExpiry(expiryMinutes * 60));
             return url;
         }
         catch (Exception ex)

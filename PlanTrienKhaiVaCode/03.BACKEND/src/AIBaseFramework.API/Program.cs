@@ -1,242 +1,579 @@
-// Program.cs - Entry Point
-// AIBaseFramework - Semantic Search + RAG Chatbot
+// ============================================================
+// AI BASE FRAMEWORK - ENTERPRISE AI PLATFORM
+// Program.cs - Main Entry Point
+// ============================================================
 
-using System.Text;
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using AIBaseFramework.API.Common.Middleware;
-using AIBaseFramework.API.Common.Extensions;
-using AIBaseFramework.API.Domain.Entities;
-using AIBaseFramework.API.Infrastructure.Data;
-using AIBaseFramework.API.Infrastructure.AI;
-using AIBaseFramework.API.Infrastructure.Cache;
-using AIBaseFramework.API.Infrastructure.Storage;
-using AIBaseFramework.API.Services.Implementations;
-using AIBaseFramework.API.Services.Interfaces;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using Serilog;
+using Serilog.Events;
+using AIBaseFramework.AI.Gateway;
+using AIBaseFramework.AI.RAG;
+using AIBaseFramework.AI.Search;
+using AIBaseFramework.AI.Agent;
+using AIBaseFramework.AI.Tools;
+using AIBaseFramework.AI.SQL;
+using AIBaseFramework.AI.Voice;
+using AIBaseFramework.AI.MCP;
+using AIBaseFramework.AI.Providers.Ollama;
+using AIBaseFramework.AI.Providers.OpenAI;
+using AIBaseFramework.Infrastructure.Data;
+using AIBaseFramework.Infrastructure.AI;
+using AIBaseFramework.Infrastructure.Cache;
+using AIBaseFramework.Infrastructure.Storage;
+using AIBaseFramework.API.Services.Interfaces;
+using AIBaseFramework.API.Services.Implementations;
+using Minio;
 
-// Configure Serilog
+var builder = WebApplication.CreateBuilder(args);
+
+// ============================================================
+// LOGGING
+// ============================================================
+
 Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
     .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .WriteTo.Seq("http://localhost:5340")
+    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
     .CreateLogger();
 
-try
+builder.Host.UseSerilog();
+
+// ============================================================
+// CONFIGURATION
+// ============================================================
+
+var configPath = Path.Combine(builder.Environment.ContentRootPath, "config.json");
+AIPlatformConfig config;
+if (File.Exists(configPath))
 {
-    Log.Information("Starting AIBaseFramework API...");
+    config = System.Text.Json.JsonSerializer.Deserialize<AIPlatformConfig>(
+        await File.ReadAllTextAsync(configPath)) ?? new AIPlatformConfig();
+}
+else
+{
+    config = new AIPlatformConfig();
+}
 
-    var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton(config);
 
-    // Use Serilog
-    builder.Host.UseSerilog();
+// ============================================================
+// DATABASE
+// ============================================================
 
-    // =============================================
-    // DATABASE - PostgreSQL + pgvector
-    // =============================================
-    builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<AIDbContext>(options =>
+{
+    options.UseNpgsql(config.Database.ConnectionString, npgsqlOptions =>
     {
-        options.UseNpgsql(
-            builder.Configuration.GetConnectionString("DefaultConnection"),
-            npgsqlOptions =>
-            {
-                npgsqlOptions.EnableRetryOnFailure(3);
-                npgsqlOptions.CommandTimeout(30);
-            });
+        npgsqlOptions.EnableRetryOnFailure(3);
+        npgsqlOptions.CommandTimeout(30);
+    });
+});
+
+builder.Services.AddDbContextFactory<AIDbContext>(options =>
+{
+    options.UseNpgsql(config.Database.ConnectionString);
+});
+
+// ============================================================
+// CACHE (Redis)
+// ============================================================
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = config.Redis.ConnectionString;
+    options.InstanceName = "AIBF:";
+});
+
+builder.Services.AddSingleton<ICacheService, RedisCacheService>();
+
+// ============================================================
+// AI PROVIDERS
+// ============================================================
+
+// Ollama Provider (Local LLM)
+builder.Services.AddHttpClient<OllamaProvider>()
+    .ConfigureHttpClient(client =>
+    {
+        client.BaseAddress = new Uri(config.Ollama.BaseUrl);
+        client.Timeout = TimeSpan.FromSeconds(config.Ollama.TimeoutSeconds);
     });
 
-    // =============================================
-    // AUTHENTICATION - JWT Bearer
-    // =============================================
-    var jwtSecret = builder.Configuration["JwtConfig:Secret"] 
-        ?? throw new InvalidOperationException("JWT Secret not configured");
-    var jwtIssuer = builder.Configuration["JwtConfig:Issuer"] ?? "AIBaseFrameworkAPI";
-    var jwtAudience = builder.Configuration["JwtConfig:Audience"] ?? "AIBaseFrameworkClient";
+builder.Services.AddSingleton<OllamaProviderConfig>(sp => new OllamaProviderConfig
+{
+    BaseUrl = config.Ollama.BaseUrl,
+    DefaultChatModel = config.Ollama.DefaultChatModel,
+    DefaultEmbeddingModel = config.Ollama.DefaultEmbeddingModel,
+    TimeoutSeconds = config.Ollama.TimeoutSeconds
+});
 
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
+builder.Services.AddSingleton<ILLMProvider, OllamaProvider>();
+builder.Services.AddSingleton<IEmbeddingProvider, OllamaProvider>();
+
+// OpenAI Provider (Cloud)
+if (!string.IsNullOrEmpty(config.OpenAI.ApiKey))
+{
+    builder.Services.AddHttpClient<OpenAIProvider>()
+        .ConfigureHttpClient(client =>
         {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtIssuer,
-                ValidAudience = jwtAudience,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtSecret)),
-                ClockSkew = TimeSpan.Zero
-            };
+            client.BaseAddress = new Uri("https://api.openai.com/v1");
+            client.Timeout = TimeSpan.FromSeconds(config.OpenAI.TimeoutSeconds);
         });
 
-    builder.Services.AddAuthorization();
-
-    // =============================================
-    // MEDIATR - CQRS Pipeline
-    // =============================================
-    builder.Services.AddMediatR(cfg =>
+    builder.Services.AddSingleton<OpenAIProviderConfig>(sp => new OpenAIProviderConfig
     {
-        cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+        ApiKey = config.OpenAI.ApiKey,
+        OrganizationId = config.OpenAI.OrganizationId,
+        DefaultChatModel = config.OpenAI.DefaultChatModel,
+        DefaultEmbeddingModel = config.OpenAI.DefaultEmbeddingModel,
+        TimeoutSeconds = config.OpenAI.TimeoutSeconds
     });
 
-    // =============================================
-    // VALIDATION - FluentValidation
-    // =============================================
-    builder.Services.AddFluentValidationAutoValidation();
-    builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+    builder.Services.AddSingleton<ILLMProvider, OpenAIProvider>();
+    builder.Services.AddSingleton<IEmbeddingProvider, OpenAIProvider>();
+}
 
-    // =============================================
-    // CORS
-    // =============================================
-    var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins")
-        .Get<string[]>() ?? new[] { "http://localhost:3000" };
+// AI Gateway
+builder.Services.AddSingleton<AIGatewayConfig>(sp => new AIGatewayConfig
+{
+    DefaultRoutingStrategy = config.AI.DefaultRoutingStrategy,
+    FallbackProviderOrder = config.AI.FallbackProviderOrder,
+    EnableCostTracking = true,
+    EnableLatencyTracking = true
+});
 
-    builder.Services.AddCors(options =>
+builder.Services.AddSingleton<IAI Gateway, AIGateway>();
+
+// ============================================================
+// AI ENGINE CORE
+// ============================================================
+
+// Vector Store
+builder.Services.AddSingleton<IVectorStore, PostgreSQLVectorStore>();
+
+// RAG Pipeline
+builder.Services.AddSingleton<RAGPipelineConfig>(sp => new RAGPipelineConfig
+{
+    ModelId = config.RAG.DefaultModel,
+    Temperature = config.RAG.Temperature,
+    MaxTokens = config.RAG.MaxTokens,
+    MaxContextChunks = config.RAG.MaxContextChunks,
+    MinRelevanceScore = config.RAG.MinRelevanceScore,
+    EnableHybridSearch = config.RAG.EnableHybridSearch
+});
+
+builder.Services.AddSingleton<IRAGPipeline, RAGPipeline>();
+
+// Search Engine
+builder.Services.AddSingleton<SearchEngineConfig>(sp => new SearchEngineConfig
+{
+    EnableHybridSearch = config.Search.EnableHybridSearch,
+    VectorWeight = config.Search.VectorWeight,
+    KeywordWeight = config.Search.KeywordWeight
+});
+
+builder.Services.AddSingleton<ISearchEngine, SearchEngine>();
+builder.Services.AddSingleton<ISearchRepository, PostgreSQLSearchRepository>();
+
+// SQL Engine
+builder.Services.AddSingleton<SQLEngineConfig>(sp => new SQLEngineConfig
+{
+    AllowDML = false,
+    MaxResultRows = 100
+});
+
+builder.Services.AddSingleton<ISQLEngine, RAGSQLEngine>();
+builder.Services.AddSingleton<ISQLSchemaProvider, DefaultSQLSchemaProvider>();
+
+// ============================================================
+// AGENT FRAMEWORK
+// ============================================================
+
+builder.Services.AddSingleton<AgentConfig>(sp => new AgentConfig
+{
+    MaxSteps = config.Agent.MaxSteps,
+    MaxIterations = config.Agent.MaxIterations,
+    SessionTimeoutMinutes = config.Agent.SessionTimeoutMinutes,
+    EnableMemory = config.Agent.EnableMemory
+});
+
+builder.Services.AddSingleton<IToolRegistry, ToolRegistry>();
+builder.Services.AddSingleton<IAPIConnectorRegistry, APIConnectorRegistry>();
+
+// Built-in Tools
+builder.Services.AddSingleton<IAITool, SearchTool>();
+builder.Services.AddSingleton<IAITool, RAGQueryTool>();
+builder.Services.AddSingleton<IAITool, LLMResponseTool>();
+
+// Agent Memory
+builder.Services.AddSingleton<IAgentMemoryService, AgentMemoryService>();
+
+// Session Store
+builder.Services.AddSingleton<ISessionStore, RedisSessionStore>();
+
+// Safety Guard
+builder.Services.AddSingleton<SafetyGuardConfig>(sp => new SafetyGuardConfig
+{
+    EnablePromptInjectionDetection = true,
+    EnableSQLValidation = true,
+    EnableContentFiltering = true
+});
+
+builder.Services.AddSingleton<IAgentSafetyGuard, AgentSafetyGuard>();
+
+// Agent Orchestrator
+builder.Services.AddSingleton<IAgentOrchestrator, AgentOrchestrator>();
+
+// ============================================================
+// VOICE AI
+// ============================================================
+
+builder.Services.AddSingleton<VoiceConfig>(sp => new VoiceConfig
+{
+    STTProvider = config.Voice.STTProvider,
+    TTSProvider = config.Voice.TTSProvider,
+    Language = config.Voice.Language
+});
+
+// STT Providers
+builder.Services.AddHttpClient<OllamaWhisperSTTProvider>()
+    .ConfigureHttpClient(client =>
     {
-        options.AddDefaultPolicy(policy =>
-        {
-            policy.WithOrigins(allowedOrigins)
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials()
-                .WithExposedHeaders("Content-Disposition");
-        });
+        client.BaseAddress = new Uri(config.Ollama.BaseUrl);
     });
 
-    // =============================================
-    // SERVICES - Dependency Injection
-    // =============================================
+builder.Services.AddSingleton<ISTTProvider, OllamaWhisperSTTProvider>();
 
-    // Infrastructure Services
-    builder.Services.AddScoped<IOllamaService, OllamaService>();
-    builder.Services.AddScoped<IEmbeddingService, EmbeddingService>();
-    builder.Services.AddScoped<IRedisCacheService, RedisCacheService>();
-    builder.Services.AddScoped<IMinIOService, MinIOService>();
-    builder.Services.AddScoped<IRAGPipeline, RAGPipeline>();
+// TTS Providers
+builder.Services.AddSingleton<ITTSProvider, LocalTTSProvider>();
 
-    // Business Services
-    builder.Services.AddScoped<IAuthService, AuthService>();
-    builder.Services.AddScoped<IDocumentService, DocumentService>();
-    builder.Services.AddScoped<ISearchService, SearchService>();
-    builder.Services.AddScoped<IChatService, ChatService>();
+// Voice Service
+builder.Services.AddSingleton<IVoiceService, VoiceService>();
 
-    // =============================================
-    // API DOCUMENTATION - Swagger
-    // =============================================
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen(c =>
+// ============================================================
+// MCP SERVER
+// ============================================================
+
+builder.Services.AddSingleton<IMCPServer, MCPServer>();
+builder.Services.AddSingleton<IMCPClient, MCPClient>();
+
+// ============================================================
+// AUTHENTICATION
+// ============================================================
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
-        c.SwaggerDoc("v1", new OpenApiInfo
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            Title = "AIBaseFramework API",
-            Version = "v1",
-            Description = "AI Base Framework - Semantic Search + RAG Chatbot API - 100% Offline Local"
-        });
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = config.Auth.JwtIssuer,
+            ValidAudience = config.Auth.JwtAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(config.Auth.JwtSecret))
+        };
+    });
 
-        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-        {
-            Description = "JWT Authorization header using the Bearer scheme",
-            Name = "Authorization",
-            In = ParameterLocation.Header,
-            Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer"
-        });
+builder.Services.AddAuthorization();
 
-        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+// ============================================================
+// CORS
+// ============================================================
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+// ============================================================
+// SWAGGER
+// ============================================================
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "AI Base Framework API",
+        Version = "v1",
+        Description = "Enterprise AI Platform API - Semantic Search, RAG, Agentic AI"
+    });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
         {
+            new OpenApiSecurityScheme
             {
-                new OpenApiSecurityScheme
+                Reference = new OpenApiReference
                 {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                Array.Empty<string>()
-            }
-        });
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
     });
+});
 
-    // =============================================
-    // BACKGROUND JOBS - Hangfire
-    // =============================================
-    builder.Services.AddHangfire(config =>
+// ============================================================
+// CONTROLLERS
+// ============================================================
+
+builder.Services.AddControllers();
+
+// ============================================================
+// BACKGROUND SERVICES
+// ============================================================
+
+builder.Services.AddHostedService<OllamaHealthCheckService>();
+
+// ============================================================
+// APPLICATION SERVICES
+// ============================================================
+
+// MinIO Service
+builder.Services.AddSingleton<MinioClient>(sp =>
+{
+    var config = sp.GetRequiredService<AIPlatformConfig>();
+    return new MinioClient()
+        .WithEndpoint(config.MinIO.Endpoint)
+        .WithCredentials(config.MinIO.AccessKey, config.MinIO.SecretKey)
+        .WithSSL(config.MinIO.UseSSL)
+        .Build();
+});
+
+builder.Services.AddSingleton<IMinIOService, MinIOService>();
+
+// Application Services
+builder.Services.AddScoped<IDocumentService, DocumentService>();
+builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddScoped<ISearchService, SearchService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+
+// ============================================================
+// BUILD APP
+// ============================================================
+
+var app = builder.Build();
+
+// ============================================================
+// MIDDLEWARE
+// ============================================================
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
     {
-        config.UsePostgreSqlStorage(
-            builder.Configuration.GetConnectionString("DefaultConnection"));
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "AI Base Framework API v1");
     });
-    builder.Services.AddHangfireServer();
+}
 
-    // =============================================
-    // API CONTROLLERS
-    // =============================================
-    builder.Services.AddControllers();
-    builder.Services.AddHealthChecks();
+app.UseCors();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
-    // =============================================
-    // BUILD APP
-    // =============================================
-    var app = builder.Build();
+// Health check endpoint
+app.MapGet("/health", () => Results.Ok(new
+{
+    status = "healthy",
+    timestamp = DateTime.UtcNow,
+    version = "1.0.0"
+}));
 
-    // =============================================
-    // PIPELINE - Middleware
-    // =============================================
+// ============================================================
+// INITIALIZATION
+// ============================================================
 
-    // Global Exception Handler
-    app.UseMiddleware<ExceptionHandlingMiddleware>();
+// Register tools on startup
+using (var scope = app.Services.CreateScope())
+{
+    var toolRegistry = scope.ServiceProvider.GetRequiredService<IToolRegistry>();
+    var tools = scope.ServiceProvider.GetRequiredService<IEnumerable<IAITool>>();
+    toolRegistry.RegisterTools(tools);
 
-    // Swagger (Development)
-    if (app.Environment.IsDevelopment())
+    Log.Information("Registered {Count} AI tools", tools.Count());
+}
+
+// Start MCP server
+var mcpServer = app.Services.GetRequiredService<IMCPServer>();
+await mcpServer.StartAsync();
+
+Log.Information("AI Base Framework started on port {Port}", config.App.Port);
+
+app.Run($"http://0.0.0.0:{config.App.Port}");
+
+// ============================================================
+// BACKGROUND SERVICES
+// ============================================================
+
+public class OllamaHealthCheckService : BackgroundService
+{
+    private readonly IServiceProvider _serviceProvider;
+    private readonly ILogger<OllamaHealthCheckService> _logger;
+
+    public OllamaHealthCheckService(IServiceProvider serviceProvider, ILogger<OllamaHealthCheckService> logger)
     {
-        app.UseSwagger();
-        app.UseSwaggerUI(c =>
+        _serviceProvider = serviceProvider;
+        _logger = logger;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "AIBaseFramework API v1");
-        });
+            try
+            {
+                using var scope = _serviceProvider.CreateScope();
+                var ollama = scope.ServiceProvider.GetService<ILLMProvider>();
+
+                if (ollama != null)
+                {
+                    var health = await ollama.GetHealthStatusAsync(stoppingToken);
+                    if (!health.IsHealthy)
+                    {
+                        _logger.LogWarning("Ollama health check failed: {Message}", health.ErrorMessage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ollama health check error");
+            }
+
+            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+        }
     }
-
-    app.UseHttpsRedirection();
-    app.UseCors();
-    app.UseAuthentication();
-    app.UseAuthorization();
-
-    // Hangfire Dashboard
-    app.UseHangfireDashboard("/hangfire", new DashboardOptions
-    {
-        Authorization = new[] { new HangfireAuthorizationFilter() }
-    });
-
-    app.MapControllers();
-    app.MapHealthChecks("/health");
-
-    // =============================================
-    // STARTUP - Run migrations & Start
-    // =============================================
-
-    // Apply migrations automatically in Development
-    if (app.Environment.IsDevelopment())
-    {
-        using var scope = app.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        dbContext.Database.EnsureCreated();
-    }
-
-    Log.Information("AIBaseFramework API started successfully");
-    app.Run();
 }
-catch (Exception ex)
+
+// ============================================================
+// CONFIG CLASSES
+// ============================================================
+
+public class AIPlatformConfig
 {
-    Log.Fatal(ex, "Application terminated unexpectedly");
+    public AppConfig App { get; set; } = new();
+    public DatabaseConfig Database { get; set; } = new();
+    public RedisConfig Redis { get; set; } = new();
+    public OllamaConfig Ollama { get; set; } = new();
+    public OpenAIConfig OpenAI { get; set; } = new();
+    public AIConfig AI { get; set; } = new();
+    public RAGConfig RAG { get; set; } = new();
+    public SearchConfig Search { get; set; } = new();
+    public AgentConfig Agent { get; set; } = new();
+    public VoiceConfig2 Voice { get; set; } = new();
+    public AuthConfig Auth { get; set; } = new();
+    public MinIOConfig MinIO { get; set; } = new();
 }
-finally
+
+public class AppConfig
 {
-    Log.CloseAndFlush();
+    public int Port { get; set; } = 5000;
+    public string Environment { get; set; } = "Development";
+}
+
+public class DatabaseConfig
+{
+    public string ConnectionString { get; set; } = "Host=localhost;Database=aibaseframework;Username=aibfuser;Password=aibfpass123";
+}
+
+public class RedisConfig
+{
+    public string ConnectionString { get; set; } = "localhost:6379,password=redis123";
+}
+
+public class OllamaConfig
+{
+    public string BaseUrl { get; set; } = "http://localhost:11434";
+    public string DefaultChatModel { get; set; } = "llama3.2:3b";
+    public string DefaultEmbeddingModel { get; set; } = "nomic-embed-text";
+    public int TimeoutSeconds { get; set; } = 120;
+}
+
+public class OpenAIConfig
+{
+    public string ApiKey { get; set; } = "";
+    public string OrganizationId { get; set; } = "";
+    public string DefaultChatModel { get; set; } = "gpt-4o-mini";
+    public string DefaultEmbeddingModel { get; set; } = "text-embedding-3-small";
+    public int TimeoutSeconds { get; set; } = 60;
+}
+
+public class AIConfig
+{
+    public RoutingStrategy DefaultRoutingStrategy { get; set; } = RoutingStrategy.Fallback;
+    public List<string> FallbackProviderOrder { get; set; } = new() { "ollama", "openai" };
+}
+
+public class RAGConfig
+{
+    public string DefaultModel { get; set; } = "llama3.2:3b";
+    public double Temperature { get; set; } = 0.3;
+    public int MaxTokens { get; set; } = 2048;
+    public int MaxContextChunks { get; set; } = 10;
+    public double MinRelevanceScore { get; set; } = 0.5;
+    public bool EnableHybridSearch { get; set; } = true;
+}
+
+public class SearchConfig
+{
+    public bool EnableHybridSearch { get; set; } = true;
+    public double VectorWeight { get; set; } = 0.7;
+    public double KeywordWeight { get; set; } = 0.3;
+}
+
+public class AgentConfig
+{
+    public int MaxSteps { get; set; } = 10;
+    public int MaxIterations { get; set; } = 5;
+    public int SessionTimeoutMinutes { get; set; } = 60;
+    public bool EnableMemory { get; set; } = true;
+}
+
+public class VoiceConfig2
+{
+    public string STTProvider { get; set; } = "whisper";
+    public string TTSProvider { get; set; } = "local";
+    public string Language { get; set; } = "vi";
+}
+
+public class AuthConfig
+{
+    public string JwtSecret { get; set; } = "your-super-secret-key-minimum-32-characters";
+    public string JwtIssuer { get; set; } = "AIBaseFramework";
+    public string JwtAudience { get; set; } = "AIBaseFramework";
+    public int AccessTokenExpiryMinutes { get; set; } = 60;
+    public int RefreshTokenExpiryDays { get; set; } = 7;
+}
+
+public class MinIOConfig
+{
+    public string Endpoint { get; set; } = "localhost:9000";
+    public string AccessKey { get; set; } = "minioadmin";
+    public string SecretKey { get; set; } = "minioadmin";
+    public string BucketName { get; set; } = "documents";
+    public bool UseSSL { get; set; } = false;
 }

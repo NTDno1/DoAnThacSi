@@ -1,4 +1,9 @@
-// RAG Pipeline Service
+// ============================================================
+// AI BASE FRAMEWORK - ENTERPRISE AI PLATFORM
+// RAG Pipeline Service - Retrieval Augmented Generation
+// ============================================================
+
+using AIBaseFramework.API.Domain.Entities;
 using AIBaseFramework.API.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -104,14 +109,11 @@ QUY TẮC NGHIÊM NGẶT:
         float[] queryEmbedding, 
         int topK)
     {
-        // Convert to PostgreSQL vector format
-        var embeddingStr = "[" + string.Join(",", queryEmbedding) + "]";
-
         // Use pgvector for similarity search
         var chunks = await _dbContext.DocumentChunks
             .Include(c => c.Document)
             .Where(c => c.IsActive && c.Document!.Status == DocumentStatus.Indexed)
-            .OrderByDescending(c => c.Embedding.CosineDistance(embeddingStr))
+            .OrderByDescending(c => 1 - c.Embedding.CosineDistanceLessThan(queryEmbedding))
             .Take(topK)
             .Select(c => new RetrievedChunk
             {
@@ -119,7 +121,7 @@ QUY TẮC NGHIÊM NGẶT:
                 DocumentId = c.DocumentId,
                 Content = c.Content,
                 PageNumber = c.PageNumber,
-                Similarity = 1 - c.Embedding.CosineDistance(embeddingStr),
+                Similarity = 1 - c.Embedding.CosineDistanceLessThan(queryEmbedding),
                 Document = c.Document!
             })
             .ToListAsync();
@@ -154,7 +156,7 @@ QUY TẮC NGHIÊM NGẶT:
         
         if (!string.IsNullOrEmpty(conversationHistory))
         {
-            prompt.AppendLine("LỊCH SỬ CUỘC HỘI THOẠI:");
+            prompt.AppendLine("LỊCH SỬ CUỘC HỘI THOẠT:");
             prompt.AppendLine(conversationHistory);
             prompt.AppendLine();
         }
@@ -181,21 +183,4 @@ public class RetrievedChunk
     public int? PageNumber { get; set; }
     public float? Similarity { get; set; }
     public Document Document { get; set; } = null!;
-}
-
-// Need to include Document entity
-public class Document
-{
-    public Guid Id { get; set; }
-    public string Title { get; set; } = string.Empty;
-    public DocumentStatus Status { get; set; }
-}
-
-public enum DocumentStatus
-{
-    Pending,
-    Processing,
-    Indexed,
-    Failed,
-    Deleted
 }
