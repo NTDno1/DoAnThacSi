@@ -724,12 +724,12 @@ Phần này trả lời câu hỏi: **"Cần bao nhiêu máy chủ, bao nhiêu R
 │                     TỔNG QUAN HẠ TẦNG MODULE AI                              │
 │                                                                              │
 │   60.000 users ─┐                                                           │
-│                 ▼                                                            │
+│                 ▼                                                           │
 │        ┌───────────────────┐         ┌───────────────────────────────┐       │
-│        │ API Gateway Pool  │  ───►   │  Microservice Pool (CPU)      │       │
-│        │ 3 node × 16 vCPU  │         │  12 node × 32 vCPU × 64 GB    │       │
-│        │ 3 node × 32 GB    │         │  AI Gateway + Engine + Agent  │       │
-│        └───────────────────┘         │  + Auth + Audit + Admin       │       │
+│        │ API Gateway Pool  │  ───►   │  Microservice Pool (K8s CPU)  │       │
+│        │ 3 node × 8 vCPU   │         │  26 node, ~340 vCPU, ~656 GB  │       │
+│        │ 3 node × 16 GB    │         │  AI GW + Engine + Agent + KB  │       │
+│        └───────────────────┘         │  + Auth + Audit + Admin + OCR │       │
 │                                       └────────┬──────────────────────┘       │
 │                                                │                              │
 │         ┌──────────────────────────────────────┼──────────────────────┐       │
@@ -737,13 +737,14 @@ Phần này trả lời câu hỏi: **"Cần bao nhiêu máy chủ, bao nhiêu R
 │         ▼                                      ▼                      ▼       │
 │  ┌─────────────────┐              ┌──────────────────────┐    ┌────────────┐  │
 │  │ Vector DB       │              │  GPU Cluster         │    │ Embed/OCR  │  │
-│  │ 3 node pgvector │              │  3 node x A10 24GB   │    │ 3 node CPU │  │
-│  │ 1 TB SSD / node │              │  chạy qwen2.5:14b    │    │ 16 vCPU    │  │
+│  │ 3 node pgvector │              │  3 node × A10 24GB   │    │ 4 node GPU │  │
+│  │ 1 TB SSD / node │              │  chạy qwen2.5:14b    │    │ T4 16GB    │  │
+│  │ ~60 GB vector   │              │  3 node OCR (T4)     │    │            │  │
 │  └─────────────────┘              └──────────────────────┘    └────────────┘  │
 │                                                                              │
 │  ┌─────────────────┐    ┌─────────────────┐    ┌────────────────────────┐   │
 │  │ PostgreSQL HA   │    │ Kafka Cluster   │    │ Redis Cluster          │   │
-│  │ Patroni 1+1+1   │    │ 3 broker × 1 TB │    │ 3 node × 32 GB RAM     │   │
+│  │ Patroni 1+2     │    │ 3 broker × 1 TB │    │ 3 node × 32 GB RAM     │   │
 │  │ chứa ai_platform│    │ events + jobs   │    │ cache + rate-limit     │   │
 │  └─────────────────┘    └─────────────────┘    └────────────────────────┘   │
 │                                                                              │
@@ -753,92 +754,60 @@ Phần này trả lời câu hỏi: **"Cần bao nhiêu máy chủ, bao nhiêu R
 │  │ PDF/DOCX scan   │    │ SSL termination │    │ IPS/IDS + WAF           │   │
 │  └─────────────────┘    └─────────────────┘    └────────────────────────┘   │
 │                                                                              │
+│  TỔNG: ~60 server + 8 thiết bị | ~620 vCPU | ~1,7 TB RAM | ~37 TB lưu trữ   │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-#### II.4.8.3. Định lượng từng thành phần
+#### II.4.8.3. Tổng hợp định lượng & chi phí toàn bộ hạ tầng
 
-##### A. Cụm Kubernetes (CPU) — xử lý microservice nghiệp vụ và AI
+Để dễ theo dõi và phê duyệt ngân sách, toàn bộ **hạ tầng vật lý + công suất + chi phí** được gộp vào **3 bảng duy nhất** dưới đây (thay vì tách thành nhiều bảng nhỏ).
 
-| Thành phần | Số node | Cấu hình / node | Tổng | Lý do |
-|---|---|---|---|---|
-| **Control Plane (Master)** | 3 node | 8 vCPU, 16 GB RAM, 100 GB SSD | 24 vCPU, 48 GB | HA cho K8s |
-| **AI Gateway** | 3 node | 8 vCPU, 16 GB | 24 vCPU, 48 GB | Stateless, chịu tải gateway |
-| **AI Engine Core** | 4 node | 16 vCPU, 32 GB | 64 vCPU, 128 GB | Xử lý RAG + LLM streaming |
-| **Agent Orchestration** | 3 node | 16 vCPU, 32 GB | 48 vCPU, 96 GB | Multi-step Agent |
-| **Knowledge Worker / Embedding Worker** | 3 node | 16 vCPU, 32 GB | 48 vCPU, 96 GB | Ingestion + vector hóa |
-| **OCR Worker** | 2 node | 16 vCPU, 32 GB + GPU T4 | 32 vCPU, 64 GB | OCR văn bản scan |
-| **Audit Service** | 2 node | 8 vCPU, 16 GB | 16 vCPU, 32 GB | Log + metric |
-| **Admin API** | 2 node | 8 vCPU, 16 GB | 16 vCPU, 32 GB | UI Backend |
-| **AI Admin Console (Web)** | 2 node | 4 vCPU, 8 GB | 8 vCPU, 16 GB | SPA React |
-| **Buffer (dự phòng + mở rộng)** | 3 node | 16 vCPU, 32 GB | 48 vCPU, 96 GB | Scale-out theo tải |
+##### Bảng 1 — Tổng hợp tài nguyên hạ tầng (đã gộp A + B + C + D + E)
 
-**Tổng cụm K8s CPU**: **~26 node, ~340 vCPU, ~656 GB RAM**, dung lượng lưu trữ khoảng **~10 TB SSD** (cho container images, logs ngắn hạn).
+| Cụm / Thành phần | Thành phần chi tiết | Số node | Cấu hình / node | Tổng vCPU | Tổng RAM | Lưu trữ | Mục đích |
+|---|---|---|---|---|---|---|---|
+| **K8s Control Plane** | Master nodes | 3 | 8 vCPU, 16 GB | 24 | 48 GB | 300 GB SSD | HA cho K8s |
+| **K8s Worker — Microservice AI** | AI Gateway | 3 | 8 vCPU, 16 GB | 24 | 48 GB | 100 GB SSD/node | Cổng tiếp nhận duy nhất |
+| | AI Engine Core | 4 | 16 vCPU, 32 GB | 64 | 128 GB | 100 GB SSD/node | RAG + LLM streaming |
+| | Agent Orchestration | 3 | 16 vCPU, 32 GB | 48 | 96 GB | 100 GB SSD/node | Multi-step Agent |
+| | Knowledge/Embedding Worker | 3 | 16 vCPU, 32 GB | 48 | 96 GB | 500 GB SSD/node (cache vector tạm) | Ingestion + vector hóa |
+| | OCR Worker (có GPU T4) | 2 | 16 vCPU, 32 GB | 32 | 64 GB | 200 GB SSD/node | OCR văn bản scan |
+| | Audit Service | 2 | 8 vCPU, 16 GB | 16 | 32 GB | 500 GB SSD/node (log ngắn hạn 7 ngày) | Log + metric |
+| | Admin API | 2 | 8 vCPU, 16 GB | 16 | 32 GB | 100 GB SSD/node | UI Backend |
+| | AI Admin Console (Web) | 2 | 4 vCPU, 8 GB | 8 | 16 GB | 50 GB SSD/node | SPA React |
+| | Buffer (dự phòng + scale-out) | 3 | 16 vCPU, 32 GB | 48 | 96 GB | 100 GB SSD/node | Dự phòng |
+| | *Phụ cụm K8s* | **26** | – | **~340** | **~656 GB** | **~5 TB SSD** | Container image + log ngắn hạn (5 TB là đủ, không cần 10 TB) |
+| **GPU Cluster** | Ollama LLM (3 GPU A10 24GB) | 3 | 16 vCPU, 64 GB + A10 | 48 | 192 GB | 200 GB SSD/node | Chạy qwen2.5:14b (văn bản mật) |
+| | OCR Engine (2 GPU T4 16GB) | 2 | 8 vCPU, 32 GB + T4 | 16 | 64 GB | 200 GB SSD/node | PaddleOCR-VL + VietOCR |
+| | Embedding Server (2 GPU T4 16GB) | 2 | 8 vCPU, 32 GB + T4 | 16 | 64 GB | 200 GB SSD/node | BGE-M3 multilingual |
+| | *Phụ cụm GPU* | **7** | – | **~80** | **~336 GB** | **~1,4 TB SSD** | AI inference (model weights + cache) |
+| **PostgreSQL + Vector DB** | PostgreSQL HA (Patroni 1+2) | 3 | 16 vCPU, 64 GB | 48 | 192 GB | 2 TB NVMe/node | Nghiệp vụ + `ai_platform` |
+| | Vector DB (pgvector) | 3 | 16 vCPU, 64 GB | 48 | 192 GB | 1 TB NVMe/node | 10M vector (~60 GB), HNSW |
+| | *Phụ DB* | **6** | – | **~96** | **~384 GB** | **~12 TB** | Dữ liệu chính |
+| **Cache + Queue + Storage** | Redis Cluster | 3 | 8 vCPU, 32 GB | 24 | 96 GB | 256 GB SSD | Cache + rate-limit + session |
+| | Kafka Cluster | 3 | 8 vCPU, 32 GB | 24 | 96 GB | 1 TB SSD/broker | Events + Job Queue |
+| | MinIO Object Storage | 4 | 8 vCPU, 16 GB | 32 | 64 GB | 4 TB HDD/node | PDF/DOCX scan gốc |
+| | *Phụ Cache/Queue* | **10** | – | **~80** | **~256 GB** | **~18 TB** | Hỗ trợ |
+| **Mạng & Bảo mật** | Firewall biên (FortiGate 100F/PA-3220) | 2 (HA) | – | – | – | – | Chống DDoS, lọc tấn công |
+| | Load Balancer (F5/HAProxy) | 2 (HA) | – | – | – | – | Phân tải SSL, định tuyến |
+| | WAF (ModSecurity/Cloudflare) | 1 cụm | – | – | – | – | Chống SQL injection, XSS |
+| | DB Firewall (Imperva) | 1 cụm | – | – | – | – | Bảo vệ PostgreSQL |
+| | Switch Core 10G | 2 (stack) | 48 port | – | – | – | Kết nối giữa các vùng |
+| | Switch Access 1G | 4-6 | 48 port | – | – | – | Kết nối rack |
+| | *Phụ Mạng/BMS* | **~8 thiết bị** | – | – | – | – | – |
+| **TỔNG TOÀN BỘ** | | **~60 server + 8 thiết bị** | – | **~620 vCPU** | **~1,7 TB RAM** | **~37 TB lưu trữ** | |
 
-##### B. Cụm GPU — xử lý mô hình AI nội bộ
+**Băng thông mạng yêu cầu**:
 
-| Thành phần | Số node GPU | Cấu hình / node | Mô hình AI chạy | Lý do |
-|---|---|---|---|---|
-| **Ollama LLM Server** | 3 node | 1 × GPU NVIDIA A10 24 GB, 16 vCPU, 64 GB RAM | qwen2.5:14b-instruct-q4_K_M | Chạy mô hình cho văn bản mật |
-| **OCR Engine** | 2 node | 1 × GPU NVIDIA T4 16 GB, 8 vCPU, 32 GB | PaddleOCR-VL + VietOCR | Nhận dạng tiếng Việt |
-| **Embedding Server** | 2 node | 1 × GPU NVIDIA T4 16 GB, 8 vCPU, 32 GB | BGE-M3 (multilingual) | Vector hóa hàng loạt |
-
-**Tổng cụm GPU**: **~7 node GPU**, trong đó **3 GPU A10 24 GB** + **4 GPU T4 16 GB**.
-
-**Tại sao cần GPU A10?** Mô hình `qwen2.5:14b-instruct-q4_K_M` (~9 GB VRAM) yêu cầu GPU riêng để có thời gian phản hồi < 8 giây. Chạy trên CPU sẽ mất 30-60 giây/câu, không đáp ứng SLA.
-
-**Công suất xử lý của cluster Ollama**:
-- Mỗi node A10 chạy được **~10-15 yêu cầu/giây** với qwen2.5:14b.
-- 3 node = **~30-45 yêu cầu/giây**, vượt yêu cầu 12 yêu cầu/giây (40% dành cho nội bộ = ~5 yêu cầu/giây).
-
-##### C. Cụm cơ sở dữ liệu
-
-| Thành phần | Số node | Cấu hình / node | Tổng | Lưu trữ | Lý do |
-|---|---|---|---|---|---|
-| **PostgreSQL (HA)** | 3 node (Patroni 1 Primary + 2 Replica) | 16 vCPU, 64 GB RAM | 48 vCPU, 192 GB | 2 TB NVMe SSD / node | Lưu dữ liệu nghiệp vụ + schema `ai_platform` |
-| **Vector DB (pgvector)** | 3 node | 16 vCPU, 64 GB RAM | 48 vCPU, 192 GB | 1 TB NVMe SSD / node | Lưu ~60 GB vector (10 triệu đoạn); index HNSW |
-| **Redis Cluster** | 3 node (cluster mode) | 8 vCPU, 32 GB RAM | 24 vCPU, 96 GB | 256 GB SSD | Semantic cache + rate-limit + session |
-| **Kafka Cluster** | 3 broker | 8 vCPU, 32 GB RAM | 24 vCPU, 96 GB | 1 TB SSD / broker | Sự kiện + Job Queue |
-| **MinIO (Object Storage)** | 4 node | 8 vCPU, 16 GB RAM | 32 vCPU, 64 GB | 4 TB HDD / node (16 TB tổng) | Lưu file PDF/DOCX scan gốc |
-
-**Tổng DB/Storage**: **~16 node, ~176 vCPU, ~640 GB RAM, ~22 TB lưu trữ**.
-
-##### D. Thiết bị mạng & bảo mật
-
-| Thiết bị | Số lượng | Cấu hình | Lý do |
-|---|---|---|---|
-| **Tường lửa biên (Firewall)** | 2 (HA pair) | Thiết bị chuyên dụng Fortinet/FortiGate 100F hoặc Palo Alto PA-3220 | Chặn tấn công, chống DDoS |
-| **Load Balancer** | 2 (HA pair) | F5 BIG-IP / HAProxy / NGINX Plus | Phân tải SSL, định tuyến |
-| **WAF (Web App Firewall)** | 1 cụm | ModSecurity / Cloudflare | Chống SQL injection, XSS |
-| **Database Firewall (DBFW)** | 1 cụm | Imperva / FortiDB | Bảo vệ PostgreSQL |
-| **Switch lớp 2/3 (Core Switch)** | 2 (stack) | 48 port 10 Gbps | Kết nối giữa các vùng |
-| **Switch lớp 2 (Access Switch)** | 4-6 switch | 48 port 1 Gbps | Kết nối rack |
-
-##### E. Tổng hợp toàn bộ hạ tầng
-
-| Loại | Số node/thiết bị | Tổng vCPU | Tổng RAM | Tổng lưu trữ |
-|---|---|---|---|---|
-| K8s Control Plane | 3 node | 24 | 48 GB | 300 GB |
-| K8s Worker (microservice AI) | ~26 node | ~340 | ~656 GB | ~10 TB |
-| GPU Cluster | 7 node | ~80 | ~336 GB | ~7 TB |
-| PostgreSQL + Vector DB | 6 node | ~96 | ~384 GB | ~12 TB |
-| Redis + Kafka + MinIO | 10 node | ~80 | ~256 GB | ~18 TB |
-| Network/Security | 8 thiết bị | – | – | – |
-| **TỔNG** | **~60 server/thiết bị** | **~620 vCPU** | **~1,7 TB RAM** | **~47 TB lưu trữ** |
-
-#### II.4.8.4. Định lượng băng thông mạng
-
-| Loại traffic | Lưu lượng ước tính | Giải thích |
+| Loại traffic | Lưu lượng ước tính | Ghi chú |
 |---|---|---|
-| **Traffic API AI Gateway** (đỉnh) | ~50 Mbps | 12 req/s × ~500 KB/request (streaming response) |
-| **Traffic embedding ingestion** | ~200 Mbps (off-peak) | Vector hóa 100 văn bản/giờ đêm |
-| **Traffic tới OpenAI Cloud** | ~100 Mbps | 60% yêu cầu chạy cloud |
-| **Backup dữ liệu** | ~500 Mbps | Tối đa 2 giờ/ngày |
-| **Yêu cầu mạng** | ≥ 10 Gbps uplink giữa các vùng; ≥ 1 Gbps mỗi rack | Đảm bảo không nghẽn |
+| API AI Gateway (peak) | ~50 Mbps | 12 req/s × ~500 KB (streaming) |
+| Embedding ingestion (off-peak) | ~200 Mbps | Vector hóa 100 văn bản/giờ đêm |
+| Tới OpenAI Cloud | ~100 Mbps | 60% yêu cầu chạy cloud |
+| Backup dữ liệu | ~500 Mbps | Tối đa 2 giờ/ngày |
+| **Yêu cầu tối thiểu** | **≥ 10 Gbps uplink giữa các vùng; ≥ 1 Gbps mỗi rack** | Đảm bảo không nghẽn |
 
-#### II.4.8.5. Chi phí hạ tầng ước tính
-
-Phần này giúp Lãnh đạo phê duyệt ngân sách:
+##### Bảng 2 — Chi phí đầu tư CAPEX (Hạ tầng vật lý)
 
 | Hạng mục | Số lượng | Đơn giá (VNĐ) | Thành tiền (VNĐ) |
 |---|---|---|---|
@@ -846,67 +815,71 @@ Phần này giúp Lãnh đạo phê duyệt ngân sách:
 | Server GPU A10 (Dell R750xa + GPU) | 3 | 800.000.000 | 2.400.000.000 |
 | Server GPU T4 (Dell R750 + GPU) | 4 | 400.000.000 | 1.600.000.000 |
 | SSD NVMe (7,68 TB) | ~30 | 50.000.000 | 1.500.000.000 |
-| Firewall HA pair | 1 | 600.000.000 | 600.000.000 |
-| Load Balancer HA pair | 1 | 500.000.000 | 500.000.000 |
+| Firewall HA pair (FortiGate 100F) | 1 | 600.000.000 | 600.000.000 |
+| Load Balancer HA pair (F5/HAProxy) | 1 | 500.000.000 | 500.000.000 |
 | Switch Core 10G | 2 | 200.000.000 | 400.000.000 |
-| Switch Access | 6 | 50.000.000 | 300.000.000 |
+| Switch Access 1G | 6 | 50.000.000 | 300.000.000 |
 | UPS + tủ rack + cáp quang | 1 lô | – | 800.000.000 |
-| **Tổng hạ tầng vật lý (CAPEX)** | | | **~18,1 tỷ VNĐ** |
-| **Chi phí vận hành / năm (OPEX)** | | | **~3,5 tỷ VNĐ** |
-| Điện năng (1 MW liên tục × 2.500đ/kWh × 8.760h) | – | – | ~22 tỷ/năm (đã gộp ở trên) |
-| Bảo trì, nhân sự vận hành | – | – | ~1,5 tỷ/năm |
+| **Tổng CAPEX** | | | **~18,1 tỷ VNĐ** |
 
-> **Ghi chú**: Số liệu trên là **ước tính định lượng**, cần khảo sát giá thị trường Việt Nam và chào giá từ 3-5 nhà cung cấp trước khi phê duyệt ngân sách chính thức.
+##### Bảng 3 — Tổng hợp OPEX / năm (Vận hành + AI Cloud)
 
-#### II.4.8.6. Chi phí sử dụng AI hàng năm (OPEX)
+| Hạng mục OPEX | Chi phí / năm (VNĐ) | Ghi chú |
+|---|---|---|
+| Điện năng (1 MW liên tục) | ~2,0 tỷ | 1 MW × 2.500đ/kWh × 8.760h |
+| Bảo trì, nhân sự vận hành | ~1,5 tỷ | 2-3 kỹ sư DevOps/AI |
+| AI cloud (GPT-4o-mini) | ~0,3 - 0,5 tỷ | 60% yêu cầu × 36 tỷ token input/năm |
+| Internet leased line | ~0,2 tỷ | ≥ 1 Gbps + backup |
+| **Tổng OPEX / năm** | **~4,0 tỷ VNĐ** | (chưa kể phát triển PM) |
 
-Chi phí sử dụng mô hình AI trên cloud (OpenAI/Anthropic):
+**Cách tính chi phí AI cloud** (chi tiết cho Lãnh đạo):
 
 | Tham số | Giá trị |
 |---|---|
-| Trung bình token / yêu cầu (input) | 2.000 token |
-| Trung bình token / yêu cầu (output) | 500 token |
-| Tỷ lệ dùng cloud | 60% yêu cầu |
-| Yêu cầu / ngày | 100.000 |
-| Token input / ngày (cho cloud) | 100.000 × 60% × 2.000 = **120 triệu token input/ngày** |
-| Token output / ngày (cho cloud) | 100.000 × 60% × 500 = **30 triệu token output/ngày** |
-| Token input / năm (cho cloud) | ~36 tỷ token |
-| Token output / năm (cho cloud) | ~9 tỷ token |
+| Yêu cầu / ngày × 60% (cloud) | 100.000 × 60% = 60.000 yêu cầu cloud/ngày |
+| Token input / ngày | 60.000 × 2.000 = 120 triệu token |
+| Token output / ngày | 60.000 × 500 = 30 triệu token |
+| Token input / năm | ~36 tỷ token |
+| Token output / năm | ~9 tỷ token |
+| GPT-4o-mini ($0,15 + $0,60 / 1M token) | ~$10.800 / năm ≈ **~270 triệu VNĐ** |
+| GPT-4o ($2,50 + $10,00) | ~$180.000 / năm ≈ ~4,5 tỷ VNĐ |
+| Claude Sonnet 3.5 ($3,00 + $15,00) | ~$243.000 / năm ≈ ~6 tỷ VNĐ |
+| **Khuyến nghị** | **GPT-4o-mini** (mặc định cloud) + **Ollama nội bộ** (văn bản mật) |
 
-| Nhà cung cấp | Input (USD/1M token) | Output (USD/1M token) | Chi phí / năm (USD) | Chi phí / năm (VNĐ) |
-|---|---|---|---|---|
-| GPT-4o-mini | 0,15 | 0,60 | 5.400 + 5.400 = **~10.800** | ~270 triệu |
-| GPT-4o | 2,50 | 10,00 | 90.000 + 90.000 = **~180.000** | ~4,5 tỷ |
-| Claude Sonnet 3.5 | 3,00 | 15,00 | 108.000 + 135.000 = **~243.000** | ~6 tỷ |
-| Ollama nội bộ (miễn phí, chỉ tốn điện) | 0 | 0 | 0 | ~300 triệu (điện cho GPU) |
+**Tổng ngân sách ước tính**:
 
-> **Khuyến nghị**: Dùng **GPT-4o-mini** làm mặc định cho cloud (chất lượng tốt, chi phí thấp), dùng **Ollama nội bộ** cho văn bản mật.
-> **Tổng OPEX dự kiến cho AI cloud / năm**: **~300 - 500 triệu VNĐ**.
-
-#### II.4.8.7. Cách tính công suất hệ thống (cuốn chiếu cho lãnh đạo)
-
-Để Lãnh đạo hiểu được khả năng đáp ứng, sau đây là cách tính ngược:
-
-| Mục tiêu | Giá trị |
+| Mục | Số tiền |
 |---|---|
-| **Số user hoạt động đồng thời (peak)** | 15.000 × 25% = ~3.750 user |
-| **Yêu cầu trung bình / user / giờ** | 100.000 yêu cầu / 15.000 DAU / 8 giờ = 0,8 yêu cầu |
-| **Yêu cầu đồng thời (peak)** | 3.750 × 0,8 = **~3.000 yêu cầu đồng thời** |
-| **Yêu cầu / giây (peak)** | ~12 yêu cầu/giây |
-| **Yêu cầu cache hit (30%)** | Còn ~8 yêu cầu thực sự đi tới LLM/giây |
-| **Yêu cầu LLM cloud (60%)** | ~5 yêu cầu/giây đi tới OpenAI |
-| **Yêu cầu LLM nội bộ (40%)** | ~3 yêu cầu/giây đi tới Ollama |
+| **CAPEX — Hạ tầng vật lý** | **~18,1 tỷ VNĐ** |
+| **CAPEX — Phần mềm (license nếu có)** | **~1,5 tỷ VNĐ** |
+| **OPEX / năm — Vận hành + AI cloud** | **~4,0 tỷ VNĐ** |
+| **TỔNG 5 NĂM (CAPEX + 5×OPEX)** | **~38 - 40 tỷ VNĐ** |
 
-| Khả năng phục vụ của cụm Ollama (3 node A10) | ~30-45 yêu cầu/giây (gấp 10 lần peak) |
-| **Khả năng phục vụ của OpenAI cloud** | Hầu như không giới hạn (khả năng mở rộng tự động) |
+> **Ghi chú**: Số liệu trên là **ước tính định lượng** cho module AI, cần khảo sát giá thị trường Việt Nam và chào giá từ 3-5 nhà cung cấp trước khi phê duyệt ngân sách chính thức. Chi phí của toàn bộ Phần mềm Văn phòng số Bộ Tài Chính sẽ lớn hơn nhiều, bao gồm cả chi phí phát triển, đào tạo, vận hành toàn hệ thống.
 
-**Kết luận**: Hạ tầng được đề xuất có **khả năng dư thừa gấp 10 lần** so với yêu cầu peak, đảm bảo:
+#### II.4.8.4. Khả năng đáp ứng (cuốn chiếu cho Lãnh đạo)
+
+Để Lãnh đạo hiểu nhanh khả năng đáp ứng của hạ tầng đề xuất, dưới đây là bảng tính ngược từ yêu cầu → hạ tầng:
+
+| Bước tính | Kết quả |
+|---|---|
+| Tổng user hoạt động đồng thời (peak) | 15.000 DAU × 25% = **~3.750 user** |
+| Yêu cầu trung bình / user / giờ | 100.000 / 15.000 / 8h = 0,8 yêu cầu |
+| Yêu cầu đồng thời (peak) | 3.750 × 0,8 = **~3.000 yêu cầu** |
+| **Yêu cầu / giây (peak)** | **~12 yêu cầu/giây** |
+| Sau cache hit 30% | Còn ~8 yêu cầu thực đi tới LLM/giây |
+| → LLM cloud (60%) | ~5 yêu cầu/giây đi tới OpenAI |
+| → LLM nội bộ (40%) | ~3 yêu cầu/giây đi tới Ollama |
+| Khả năng cụm Ollama (3 node A10) | **~30-45 yêu cầu/giây** (gấp 10 lần peak) |
+| Khả năng OpenAI cloud | Không giới hạn (mở rộng tự động) |
+
+**Kết luận**: Hạ tầng đề xuất có **khả năng dư thừa gấp 10 lần** so với yêu cầu peak, đảm bảo:
 - ✅ Phục vụ 60.000 user và 100.000 yêu cầu/ngày.
 - ✅ Thời gian phản hồi trung bình ≤ 8 giây với cache hit 30%.
 - ✅ SLA 99,9% uptime.
 - ✅ Có dư thừa để tăng trưởng 5-10 lần trong tương lai.
 
-#### II.4.8.8. Kế hoạch mở rộng (Scale-out)
+#### II.4.8.5. Kế hoạch mở rộng (Scale-out)
 
 Khi hệ thống tăng trưởng, có thể mở rộng từng thành phần mà **không cần thay đổi kiến trúc**:
 
@@ -919,7 +892,7 @@ Khi hệ thống tăng trưởng, có thể mở rộng từng thành phần mà
 | **Thêm nhà cung cấp AI** | Cấu hình trong Admin Console — không cần thêm server |
 | **Nâng cấp mô hình AI** (vd: từ qwen2.5:14b lên qwen2.5:32b) | Cần GPU A100 40GB hoặc H100 thay cho A10; thêm 1-2 node |
 
-#### II.4.8.9. Yêu cầu môi trường vật lý (phòng máy chủ)
+#### II.4.8.6. Yêu cầu môi trường vật lý (phòng máy chủ)
 
 | Yêu cầu | Giá trị |
 |---|---|
@@ -932,13 +905,13 @@ Khi hệ thống tăng trưởng, có thể mở rộng từng thành phần mà
 | Giám sát môi trường | Cảm biến nhiệt độ, độ ẩm, rò rỉ nước |
 | Kết nối Internet | ≥ 1 Gbps leased line, dự phòng ≥ 200 Mbps 4G/5G |
 
-#### II.4.8.10. Tổng ngân sách ước tính
+#### II.4.8.7. Tổng ngân sách 5 năm
 
 | Hạng mục | Số tiền (VNĐ) |
 |---|---|
 | **CAPEX — Hạ tầng vật lý (mua server, switch, firewall)** | **~18,1 tỷ** |
 | CAPEX — Phần mềm (license Windows Server, SQL Server nếu dùng, ...) | ~1,5 tỷ |
-| **OPEX / năm — Điện, mát, bảo trì, nhân sự** | **~3,5 tỷ** |
+| **OPEX / năm — Điện, mát, bảo trì, nhân sự** | **~2,0 tỷ (điện) + 1,5 tỷ (bảo trì) = ~3,5 tỷ** |
 | **OPEX / năm — AI cloud (GPT-4o-mini + buffer)** | **~300-500 triệu** |
 | OPEX / năm — Internet leased line | ~200 triệu |
 | **TỔNG 5 NĂM (CAPEX + 5×OPEX)** | **~38 - 40 tỷ VNĐ** |

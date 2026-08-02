@@ -1,161 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2026-08-02T09:55:00.000Z" agent="Cursor" version="24.0.0" type="device">
-  <diagram id="luong-yeu-cau-ai" name="03 - Luồng 1 yêu cầu AI (Sequence)">
-    <mxGraphModel dx="2400" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2026-08-02T10:30:00.000Z" agent="Cursor" version="24.0.0" type="device">
+  <diagram id="luong-yeu-cau-ai" name="03 - Luong 1 yeu cau AI (Sequence)">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2680" pageHeight="1360" math="0" shadow="0">
       <root>
-        <mxCell id="title" value="LUỒNG 1 YÊU CẦU AI — TỪ LÚC USER GỬI CÂU HỎI ĐẾN LÚC NHẬN CÂU TRẢ LỜI" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#0F2A50;" vertex="1" parent="1">
-          <mxGeometry x="40" y="20" width="1840" height="40" as="geometry" />
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="LUONG 1 YEU CAU AI - 11 BUOC (User -&gt; Gateway -&gt; Engine -&gt; Knowledge -&gt; LLM)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#0F2A50" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="2600" height="50" as="geometry"/>
         </mxCell>
-
-        <!-- ====== LIFELINES (5 parties) ====== -->
-        <mxCell id="user" value="Người dùng&#10;(Web/Mobile)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="80" y="100" width="120" height="900" as="geometry" />
+        <mxCell id="user" value="Nguoi dung
+(Web/Mobile)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="120" width="380" height="100" as="geometry"/>
         </mxCell>
-        <mxCell id="kong" value="Tầng 1-2&#10;(Kong Gateway)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="100" width="120" height="900" as="geometry" />
+        <mxCell id="kong" value="Tang 1-2
+(Kong Gateway)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="480" y="120" width="380" height="100" as="geometry"/>
         </mxCell>
-        <mxCell id="ai_gateway" value="AI Gateway&#10;(Phân hệ ①)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="580" y="100" width="120" height="900" as="geometry" />
+        <mxCell id="ai_gw" value="AI Gateway
+[1]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="860" y="120" width="380" height="100" as="geometry"/>
         </mxCell>
-        <mxCell id="ai_engine" value="AI Engine Core&#10;(Phân hệ ②)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="860" y="100" width="120" height="900" as="geometry" />
+        <mxCell id="ai_eng" value="AI Engine
+[2]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1240" y="120" width="380" height="100" as="geometry"/>
         </mxCell>
-        <mxCell id="knowledge" value="Knowledge Base&#10;(Phân hệ ④)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="100" width="120" height="900" as="geometry" />
+        <mxCell id="kw" value="Knowledge
+[4]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1620" y="120" width="380" height="100" as="geometry"/>
         </mxCell>
-        <mxCell id="provider" value="Provider LLM&#10;(⑥ → OpenAI/Ollama)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1340" y="100" width="120" height="900" as="geometry" />
+        <mxCell id="provider" value="Provider LLM
+[6] -&gt; OpenAI/Ollama" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="2000" y="120" width="380" height="100" as="geometry"/>
         </mxCell>
-
-        <!-- ====== STEPS ====== -->
-        <!-- Step 1: User → Kong -->
-        <mxCell id="step1" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.05;exitDx=0;exitDy=0;entryX=0;entryY=0.05;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="user" target="kong">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="step_0" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2" edge="1" parent="1" source="user" target="kong">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_0_label" value="1. Dat cau hoi" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_0">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="step1_lbl" value="1. Đặt câu hỏi" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step1">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
+        <mxCell id="step_1" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2" edge="1" parent="1" source="kong" target="ai_gw">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_1_label" value="2. Xac thuc JWT - Kiem tra quyen" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_1">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-
-        <!-- Step 2: Kong → AI Gateway -->
-        <mxCell id="step2" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.1;exitDx=0;exitDy=0;entryX=0;entryY=0.1;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="kong" target="ai_gateway">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="step_2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2" edge="1" parent="1" source="ai_gw" target="ai_eng">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_2_label" value="3-4. Chong injection - Che PII - Cache -&gt; Goi AI Engine" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_2">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="step2_lbl" value="2. Xác thực JWT · Kiểm tra quyền" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step2">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
+        <mxCell id="step_3" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2" edge="1" parent="1" source="ai_eng" target="kw">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_3_label" value="5. Tim kiem lai: TU KHOA + NGU NGHIA" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_3">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-
-        <!-- Step 3: AI Gateway internal -->
-        <mxCell id="step3" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.18;exitDx=0;exitDy=0;entryX=0;entryY=0.18;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;dashed=1;" edge="1" parent="1" source="ai_gateway" target="ai_gateway">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="780" y="262" />
-              <mxPoint x="780" y="282" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="step_4" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2" edge="1" parent="1" source="kw" target="ai_eng">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_4_label" value="6. Tra ve 8 van ban lien quan nhat" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_4">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="step3_lbl" value="3. Chống injection · Che PII · Kiểm tra cache" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step3">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
+        <mxCell id="step_5" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2;dashed=1" edge="1" parent="1" source="ai_eng" target="ai_eng">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_5_label" value="7. Xep hang lai (BGE) - Tong hop ngu canh" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_5">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-
-        <!-- Step 4: AI Gateway → AI Engine -->
-        <mxCell id="step4" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="ai_gateway" target="ai_engine">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="step_6" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2" edge="1" parent="1" source="ai_eng" target="provider">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_6_label" value="8. Goi LLM - Streaming response" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_6">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="step4_lbl" value="4. Gọi AI Engine (đơn giản) hoặc Agent (phức tạp)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step4">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
+        <mxCell id="step_7" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2" edge="1" parent="1" source="provider" target="ai_eng">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_7_label" value="9. Tra ve cau tra loi tung phan" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_7">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-
-        <!-- Step 5: AI Engine → Knowledge -->
-        <mxCell id="step5" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="ai_engine" target="knowledge">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="step_8" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2;dashed=1" edge="1" parent="1" source="ai_eng" target="ai_eng">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_8_label" value="10. Kiem tra chat luong - Trich dan nguon" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_8">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="step5_lbl" value="5. Tìm kiếm lai: TỪ KHÓA + NGỮ NGHĨA" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step5">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
+        <mxCell id="step_9" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2" edge="1" parent="1" source="ai_gw" target="user">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="step_9_label" value="11. Tra cau tra loi + Ghi log + Cap nhat chi phi" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="step_9">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-
-        <!-- Step 6: Knowledge → AI Engine -->
-        <mxCell id="step6" style="edgeStyle=none;rounded=0;html=1;exitX=0;exitY=0.45;exitDx=0;exitDy=0;entryX=1;entryY=0.45;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;dashed=1;" edge="1" parent="1" source="knowledge" target="ai_engine">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="step6_lbl" value="6. Trả về 8 văn bản liên quan nhất" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step6">
-          <mxGeometry x="0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Step 7: AI Engine internal - rerank + context -->
-        <mxCell id="step7" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.55;exitDx=0;exitDy=0;entryX=0;entryY=0.55;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;dashed=1;" edge="1" parent="1" source="ai_engine" target="ai_engine">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1060" y="595" />
-              <mxPoint x="1060" y="615" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step7_lbl" value="7. Xếp hạng lại (BGE) · Tổng hợp ngữ cảnh ≤2048 token" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step7">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Step 8: AI Engine → Provider -->
-        <mxCell id="step8" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.62;exitDx=0;exitDy=0;entryX=0;entryY=0.62;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;" edge="1" parent="1" source="ai_engine" target="provider">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="step8_lbl" value="8. Gọi LLM (GPT-4o-mini hoặc Ollama) · Streaming response" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step8">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Step 9: Provider → AI Engine -->
-        <mxCell id="step9" style="edgeStyle=none;rounded=0;html=1;exitX=0;exitY=0.72;exitDx=0;exitDy=0;entryX=1;entryY=0.72;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;dashed=1;" edge="1" parent="1" source="provider" target="ai_engine">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="step9_lbl" value="9. Trả về câu trả lời từng phần" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step9">
-          <mxGeometry x="0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Step 10: AI Engine internal -->
-        <mxCell id="step10" style="edgeStyle=none;rounded=0;html=1;exitX=1;exitY=0.82;exitDx=0;exitDy=0;entryX=0;entryY=0.82;entryDx=0;entryDy=0;strokeColor=#000000;strokeWidth=1;dashed=1;" edge="1" parent="1" source="ai_engine" target="ai_engine">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1060" y="838" />
-              <mxPoint x="1060" y="858" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step10_lbl" value="10. Kiểm tra chất lượng · Trích dẫn nguồn · Đánh giá" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="step10">
-          <mxGeometry x="-0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Step 11: AI Engine → User (final response) -->
-        <mxCell id="step11" style="edgeStyle=none;rounded=0;html=1;exitX=0;exitY=0.9;exitDx=0;exitDy=0;entryX=1;entryY=0.9;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="ai_gateway" target="user">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="40" y="910" />
-              <mxPoint x="40" y="910" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step11_lbl" value="11. Trả câu trả lời kèm trích dẫn + Ghi log audit + Cập nhật chi phí" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;fontColor=#b85450;" vertex="1" connectable="0" parent="step11">
-          <mxGeometry x="0.1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
+        <mxCell id="legend" value="GIAI THICH: MUI TEN DO = BUOC CUOI (tra ket qua user); MUI TEN DEN = CAC BUOC TRUNG GIAN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="100" y="1230" width="2400" height="80" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>

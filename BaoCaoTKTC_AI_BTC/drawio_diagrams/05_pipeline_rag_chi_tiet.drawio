@@ -1,119 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2026-08-02T09:55:00.000Z" agent="Cursor" version="24.0.0" type="device">
-  <diagram id="pipeline-rag" name="05 - Pipeline RAG chi tiết">
-    <mxGraphModel dx="2400" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2339" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2026-08-02T10:30:00.000Z" agent="Cursor" version="24.0.0" type="device">
+  <diagram id="pipeline-rag" name="05 - Pipeline RAG chi tiet">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2880" pageHeight="1000" math="0" shadow="0">
       <root>
-        <mxCell id="title" value="PIPELINE RAG (Truy xuất tăng cường) — CHI TIẾT 5 BƯỚC" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#0F2A50;" vertex="1" parent="1">
-          <mxGeometry x="40" y="20" width="2259" height="40" as="geometry" />
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="PIPELINE RAG (Truy xuat tang cuong) - CHI TIET 5 BUOC" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#0F2A50" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="2800" height="50" as="geometry"/>
         </mxCell>
-
-        <!-- ========== STEP 1: EMBED ========== -->
-        <mxCell id="step1_box" value="BƯỚC 1&#10;EMBED&#10;(Vector hóa)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="80" y="100" width="280" height="240" as="geometry" />
+        <mxCell id="step1" value="BUOC 1
+EMBED
+(Vector hoa)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="120" width="540" height="200" as="geometry"/>
         </mxCell>
-        <mxCell id="embed_input" value="INPUT:&#10;Câu hỏi của user&#10;&#10;(tiếng Việt, 1-3 câu)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="40" y="380" width="360" height="60" as="geometry" />
+        <mxCell id="step1_0" value="INPUT: Cau hoi user (tieng Viet, 1-3 cau)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="100" y="350" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="embed_proc" value="Xử lý:&#10;• Encode câu hỏi&#10;• BGE-M3 / OpenAI Embedding&#10;• Output: vector 1536 chiều" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="40" y="460" width="360" height="100" as="geometry" />
+        <mxCell id="step1_1" value="Xu ly: BGE-M3 / OpenAI Embed -&gt; Vector 1536 chieu" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="100" y="480" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="embed_output" value="OUTPUT:&#10;Dãy số 1536 chiều&#10;(vector đặc trưng của câu hỏi)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="580" width="360" height="80" as="geometry" />
+        <mxCell id="step1_2" value="OUTPUT: Day so 1536 chieu" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="100" y="610" width="540" height="120" as="geometry"/>
         </mxCell>
-
-        <!-- ========== STEP 2: HYBRID SEARCH ========== -->
-        <mxCell id="step2_box" value="BƯỚC 2&#10;HYBRID SEARCH&#10;(Tìm kiếm lai)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="490" y="100" width="320" height="240" as="geometry" />
+        <mxCell id="step2" value="BUOC 2
+HYBRID SEARCH
+(Tim kiem lai)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="540" height="200" as="geometry"/>
         </mxCell>
-        <mxCell id="hs_bm25" value="BM25&#10;(Tìm theo TỪ KHÓA)&#10;→ Top 50 văn bản có từ khóa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="510" y="380" width="280" height="80" as="geometry" />
+        <mxCell id="step2_0" value="BM25: Tim theo TU KHOA -&gt; Top 50" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="640" y="350" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="hs_cos" value="COSINE SIMILARITY&#10;(Tìm theo NGỮ NGHĨA)&#10;→ Top 50 văn bản có ý nghĩa tương tự" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="510" y="480" width="280" height="100" as="geometry" />
+        <mxCell id="step2_1" value="Cosine: Tim theo NGU NGHIA -&gt; Top 50" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="640" y="480" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="hs_rrf" value="RRF (Reciprocal Rank Fusion)&#10;Hợp nhất 2 danh sách → 50 ứng viên" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="510" y="600" width="280" height="60" as="geometry" />
+        <mxCell id="step2_2" value="RRF: Hop nhat 2 list -&gt; 50 ung vien" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="640" y="610" width="540" height="120" as="geometry"/>
         </mxCell>
-
-        <!-- ========== STEP 3: RERANK ========== -->
-        <mxCell id="step3_box" value="BƯỚC 3&#10;RERANK&#10;(Xếp hạng lại)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="900" y="100" width="320" height="240" as="geometry" />
+        <mxCell id="step3" value="BUOC 3
+RERANK
+(Xep hang lai)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1180" y="120" width="540" height="200" as="geometry"/>
         </mxCell>
-        <mxCell id="rerank_model" value="Mô hình: BGE-reranker-v2-m3&#10;(multilingual)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=12;align=center;" vertex="1" parent="1">
-          <mxGeometry x="920" y="380" width="280" height="60" as="geometry" />
+        <mxCell id="step3_0" value="Mo hinh: BGE-reranker-v2-m3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="1180" y="350" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="rerank_proc" value="Đánh giá lại độ liên quan giữa&#10;câu hỏi và từng đoạn văn bản&#10;→ Chọn Top 8 văn bản tốt nhất" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="920" y="460" width="280" height="120" as="geometry" />
+        <mxCell id="step3_1" value="Danh gia lai do lien quan -&gt; Chon Top 8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="1180" y="480" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="rerank_out" value="OUTPUT: Top 8 văn bản&#10;(được chấm điểm lại)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="920" y="600" width="280" height="60" as="geometry" />
+        <mxCell id="step3_2" value="OUTPUT: Top 8 van ban (da cham diem)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="1180" y="610" width="540" height="120" as="geometry"/>
         </mxCell>
-
-        <!-- ========== STEP 4: LLM ========== -->
-        <mxCell id="step4_box" value="BƯỚC 4&#10;LLM&#10;(Gọi mô hình AI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1320" y="100" width="320" height="240" as="geometry" />
+        <mxCell id="step4" value="BUOC 4
+LLM
+(Goi mo hinh AI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1720" y="120" width="540" height="200" as="geometry"/>
         </mxCell>
-        <mxCell id="llm_prompt" value="Prompt đầy đủ:&#10;[System prompt] + [Top 8 văn bản] + [Câu hỏi]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="1340" y="380" width="280" height="80" as="geometry" />
+        <mxCell id="step4_0" value="Prompt: [System] + [Top 8] + [Cau hoi]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="1720" y="350" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="llm_choice" value="Chọn mô hình:&#10;• Văn bản mật → Ollama (qwen2.5:14b)&#10;• Văn bản thường → OpenAI (gpt-4o-mini)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="1340" y="480" width="280" height="100" as="geometry" />
+        <mxCell id="step4_1" value="Mat -&gt; Ollama, Thuong -&gt; GPT-4o-mini" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="1720" y="480" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="llm_resp" value="Streaming response" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;align=center;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1340" y="600" width="280" height="60" as="geometry" />
+        <mxCell id="step4_2" value="OUTPUT: Streaming response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="1720" y="610" width="540" height="120" as="geometry"/>
         </mxCell>
-
-        <!-- ========== STEP 5: CITE + QUALITY ========== -->
-        <mxCell id="step5_box" value="BƯỚC 5&#10;CITE + QUALITY&#10;(Trích dẫn + Đánh giá)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1730" y="100" width="540" height="240" as="geometry" />
+        <mxCell id="step5" value="BUOC 5
+CITE + QUALITY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="2260" y="120" width="540" height="200" as="geometry"/>
         </mxCell>
-        <mxCell id="cite_proc" value="Trích dẫn:&#10;Xác định câu trả lời dựa trên văn bản nào (file, trang, khoảng)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="1750" y="380" width="500" height="80" as="geometry" />
+        <mxCell id="step5_0" value="Trich dan: File, trang, khoang" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="2260" y="350" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="qa_proc" value="Đánh giá chất lượng (Faithfulness):&#10;Câu trả lời có trung thực với văn bản gốc không?&#10;(chống AI 'bịa' thông tin)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="1750" y="480" width="500" height="100" as="geometry" />
+        <mxCell id="step5_1" value="Faithfulness: Cau tra li co trung thuc voi van ban goc?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="2260" y="480" width="540" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="qa_final" value="OUTPUT CUỐI:&#10;• Câu trả lời (đã stream)&#10;• Trích dẫn nguồn (3-5 văn bản)&#10;• Điểm tin cậy (0.0 - 1.0)&#10;• Thông tin token đã dùng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;align=left;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1750" y="600" width="500" height="100" as="geometry" />
+        <mxCell id="step5_2" value="OUTPUT: Cau tra loi + trich dan + diem tin cay 0-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="2260" y="610" width="540" height="120" as="geometry"/>
         </mxCell>
-
-        <!-- ========== ARROWS ========== -->
-        <mxCell id="a1" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3;" edge="1" parent="1" source="step1_box" target="step2_box">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="arrow_0" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3" edge="1" parent="1" source="step1" target="step2">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="arrow_0_label" value="buoc 1 -&gt; buoc 2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="arrow_0">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="a2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3;" edge="1" parent="1" source="step2_box" target="step3_box">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="arrow_1" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3" edge="1" parent="1" source="step2" target="step3">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="arrow_1_label" value="buoc 2 -&gt; buoc 3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="arrow_1">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="a3" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3;" edge="1" parent="1" source="step3_box" target="step4_box">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="arrow_2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3" edge="1" parent="1" source="step3" target="step4">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="arrow_2_label" value="buoc 3 -&gt; buoc 4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="arrow_2">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="a4" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3;" edge="1" parent="1" source="step4_box" target="step5_box">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="arrow_3" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=3" edge="1" parent="1" source="step4" target="step5">
+          <mxGeometry relative="1" as="geometry"/>
+          <mxCell id="arrow_3_label" value="buoc 4 -&gt; buoc 5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="arrow_3">
+            <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+          </mxCell>
         </mxCell>
-        <mxCell id="a1_lbl" value="vector 1536 chiều" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=2;" vertex="1" connectable="0" parent="a1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-15" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="a2_lbl" value="50 ứng viên" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=2;" vertex="1" connectable="0" parent="a2">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-15" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="a3_lbl" value="8 văn bản tốt nhất" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=2;" vertex="1" connectable="0" parent="a3">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-15" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="a4_lbl" value="streaming" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=2;" vertex="1" connectable="0" parent="a4">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-15" as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <!-- ========== LEGEND ========== -->
-        <mxCell id="legend" value="GIẢI THÍCH CÁC THÀNH PHẦN:&#10;• BGE-M3 = Mô hình embedding đa ngôn ngữ (1024-1536 chiều) — chạy trên GPU nội bộ&#10;• BM25 = Thuật toán tìm theo từ khóa truyền thống, bổ trợ cho tìm ngữ nghĩa&#10;• RRF (Reciprocal Rank Fusion) = Cách hợp nhất 2 danh sách từ 2 phương pháp tìm kiếm&#10;• BGE-reranker-v2-m3 = Mô hình xếp hạng lại, đánh giá độ liên quan chính xác hơn vector similarity&#10;• Faifthfulness = Đánh giá xem câu trả lời có trung thực với văn bản gốc không (chống hallucination)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="80" y="780" width="2200" height="180" as="geometry" />
+        <mxCell id="legend" value="GIAI THICH:  • BGE-M3 = Embedding da ngon ngu  • BM25 = Tim theo tu khoa truyen thong  • RRF = Hop nhat 2 danh sach  • BGE-reranker = Xep hang lai chinh xac hon vector similarity  • Faithfulness = Chong hallucination" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="100" y="750" width="2600" height="200" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
