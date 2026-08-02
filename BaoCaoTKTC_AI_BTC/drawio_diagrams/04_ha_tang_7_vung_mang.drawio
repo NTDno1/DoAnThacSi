@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-08-02T09:55:00.000Z" agent="Cursor" version="24.0.0" type="device">
+  <diagram id="ha-tang-7-vung" name="04 - Hạ tầng 7 vùng mạng">
+    <mxGraphModel dx="2400" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2339" math="0" shadow="0">
+      <root>
+        <mxCell id="title" value="SƠ ĐỒ HẠ TẦNG TRIỂN KHAI — 7 VÙNG MẠNG" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#0F2A50;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1574" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ========== INTERNET ========== -->
+        <mxCell id="internet" value="INTERNET / INTRANET Bộ TC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="80" width="450" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== VÙNG BIÊN ========== -->
+        <mxCell id="v1_box" value="VÙNG BIÊN" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="180" width="1574" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="v1_fw" value="Firewall #1 (HA)&#10;Chống DDoS, lọc tấn công" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="100" y="240" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="v1_waf" value="WAF (HA)&#10;Chống SQL injection, XSS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="240" width="380" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ========== VÙNG LOAD BALANCER ========== -->
+        <mxCell id="v2_box" value="VÙNG LOAD BALANCER" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="370" width="1574" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="v2_lb1" value="Load Balancer #1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="425" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="v2_lb2" value="Load Balancer #2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="425" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="v2_ssl" value="SSL/TLS Termination" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="640" y="430" width="280" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ========== VÙNG PROXY ========== -->
+        <mxCell id="v3_box" value="VÙNG PROXY / API GATEWAY" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="540" width="1574" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="v3_nginx" value="NGINX&#10;Reverse proxy, SSL termination" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="595" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="v3_kong" value="Kong Gateway&#10;Routing, rate-limit, JWT verify" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="595" width="380" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== VÙNG FIREWALL CORE ========== -->
+        <mxCell id="v4_box" value="VÙNG FIREWALL CORE (IDS/IPS)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="710" width="1574" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== VÙNG ỨNG DỤNG & XỬ LÝ ========== -->
+        <mxCell id="v5_box" value="VÙNG ỨNG DỤNG &amp; XỬ LÝ (Compute Zone)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="800" width="1574" height="460" as="geometry" />
+        </mxCell>
+
+        <!-- K8s CPU -->
+        <mxCell id="k8s_box" value="K8s Cluster (CPU) — 26 node" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="860" width="800" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_gw" value="AI GW × 3 node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="120" y="900" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_eng" value="AI Engine × 4 node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="320" y="900" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" value="Agent Orch × 3 node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="520" y="900" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_api" value="Admin API × 2 node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="720" y="900" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mcp" value="MCP Server × 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="120" y="960" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="kw" value="Knowledge Worker × 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="320" y="960" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" value="Auth × 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="520" y="960" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" value="Audit × 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="720" y="960" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ocr_w" value="OCR Worker × 2 (GPU T4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1020" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="job_workers" value="Job Workers (tóm tắt, ingestion)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1020" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="buffer" value="Buffer (dự phòng + scale-out) × 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="1020" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k8s_master" value="K8s Master (3 node control plane)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1100" width="380" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k8s_note" value="Tổng: ~340 vCPU, ~656 GB RAM, ~10 TB SSD" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1170" width="740" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- GPU Cluster -->
+        <mxCell id="gpu_box" value="GPU Cluster (7 node, 3× A10 24GB + 4× T4 16GB)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;verticalAlign=top;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="860" width="680" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu_ollama" value="Ollama LLM × 3 node&#10;(A10 24GB) · qwen2.5:14b" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="900" width="620" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu_ocr" value="OCR Engine × 2 (T4)&#10;PaddleOCR-VL + VietOCR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="940" y="1000" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu_embed" value="Embedding Server × 2 (T4)&#10;BGE-M3 multilingual" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b46504;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="1000" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu_note" value="Công suất: 3 A10 = ~30-45 yêu cầu LLM/giây (gấp 10 lần peak)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="1130" width="620" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ========== VÙNG SỰ KIỆN & BỘ ĐỆM ========== -->
+        <mxCell id="v6_box" value="VÙNG SỰ KIỆN &amp; BỘ ĐỆM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1290" width="1574" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="kafka" value="Kafka Cluster × 3 broker&#10;(8 broker đề xuất) · events + Job Queue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1340" width="450" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="redis_c" value="Redis Cluster × 3 node&#10;32 GB RAM · cache + rate-limit + session" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="1340" width="450" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ========== VÙNG DỮ LIỆU ========== -->
+        <mxCell id="v7_box" value="VÙNG DỮ LIỆU (bảo vệ bởi DB Firewall)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1500" width="1574" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="pg" value="PostgreSQL HA × 3&#10;(Patroni 1+2)· chứa ai_platform + nghiệp vụ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1550" width="380" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="vector" value="Vector DB × 3 (pgvector)&#10;10M vector · 60 GB&#10;Index HNSW" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="600" y="1550" width="380" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="minio" value="MinIO Object Storage × 4&#10;16 TB tổng · PDF/DOCX scan gốc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="1550" width="450" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- ========== TỔNG KẾT ========== -->
+        <mxCell id="summary_box" value="TỔNG KẾT TOÀN BỘ HẠ TẦNG" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0F2A50;strokeColor=#0F2A50;fontColor=white;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1780" width="1574" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="summary_txt" value="• ~60 server (CPU + GPU) + 8 thiết bị mạng/bảo mật&#10;• ~620 vCPU · ~1,7 TB RAM · ~47 TB lưu trữ&#10;• Tổng đầu tư CAPEX: ~18,1 tỷ VNĐ&#10;• Tổng OPEX / năm: ~4,0 tỷ VNĐ (vận hành + AI cloud)&#10;• Tổng 5 năm: ~38-40 tỷ VNĐ" style="text;html=1;align=left;verticalAlign=top;fontSize=13;fontColor=white;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1830" width="800" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- ========== ARROWS: Internet → FireWall → LB → Proxy → FW Core → Compute ========== -->
+        <mxCell id="e_i" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="1" source="internet" target="v1_fw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="1" source="v1_fw" target="v2_lb1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="1" source="v2_lb1" target="v3_nginx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="1" source="v3_kong" target="v4_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="v4_box" target="ai_gw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="1" source="k8s_box" target="kafka">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="1" source="kafka" target="pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

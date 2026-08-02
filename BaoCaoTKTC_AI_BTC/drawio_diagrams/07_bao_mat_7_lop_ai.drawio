@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-08-02T09:55:00.000Z" agent="Cursor" version="24.0.0" type="device">
+  <diagram id="security-7-layers" name="07 - Bảo mật 7 lớp cho AI">
+    <mxGraphModel dx="2400" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="title" value="MÔ HÌNH BẢO MẬT 7 LỚP CHO MODULE AI" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#0F2A50;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1574" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="subtitle" value="(Giống như 1 tòa nhà có 7 lớp cửa bảo vệ)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="1574" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 7 - outermost: Audit log -->
+        <mxCell id="l7" value="LỚP 7 — NHẬT KÝ KIỂM TRA (Audit Log)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="120" width="1100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l7_d" value="&quot;Sổ ghi chép&quot; mọi hoạt động AI để truy vết khi cần&#10;Phân hệ phụ trách: ⑨ Audit &amp; Observability" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="140" width="1020" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 6: detect attacks -->
+        <mxCell id="l6" value="LỚP 6 — PHÁT HIỆN TẤN CÔNG (IDS/IPS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="240" width="1100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l6_d" value="&quot;Camera an ninh&quot; tự động phát hiện hành vi bất thường&#10;Chống prompt injection · Phát hiện jailbreak attempt" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="1020" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 5: data sensitivity -->
+        <mxCell id="l5" value="LỚP 5 — PHÂN LOẠI ĐỘ MẬT (Data Classification)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="360" width="1100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l5_d" value="Văn bản mật → chỉ dùng AI nội bộ (Ollama)&#10;Văn bản thường → có thể dùng AI cloud&#10;Phân hệ phụ trách: ① AI Gateway (chọn provider theo độ nhạy)" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="380" width="1020" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 4: encryption -->
+        <mxCell id="l4" value="LỚP 4 — MÃ HÓA DỮ LIỆU (Encryption)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="480" width="1100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l4_d" value="&quot;Hộp kín&quot; bảo vệ dữ liệu khi truyền (TLS 1.3) và lưu trữ (AES-256)&#10;Che giấu PII (CCCD, SĐT, email) trước khi gửi AI" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="500" width="1020" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 3: JWT + RBAC -->
+        <mxCell id="l3" value="LỚP 3 — JWT + PHÂN QUYỀN (Authorization)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="600" width="1100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l3_d" value="&quot;Thẻ nhân viên&quot; gắn với từng vai trò (Admin, Operator, User, Auditor)&#10;Phân hệ phụ trách: ⑪ Auth &amp; Tenant + ① AI Gateway" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="620" width="1020" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 2: API gateway -->
+        <mxCell id="l2" value="LỚP 2 — API GATEWAY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="720" width="1100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l2_d" value="&quot;Lễ tân&quot; kiểm tra JWT, giới hạn tốc độ (100 câu/phút/user)&#10;Phân hệ phụ trách: ① AI Gateway" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="740" width="1020" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 1: firewall -->
+        <mxCell id="l1" value="LỚP 1 — TƯỜNG LỬA BIÊN (Firewall + WAF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="840" width="1100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l1_d" value="&quot;Hàng rào&quot; ngoài cùng, chặn tin tặc, chống DDoS, lọc SQL injection&#10;Tường lửa biên + WAF" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="860" width="1020" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Labels outer / inner -->
+        <mxCell id="lbl_outer" value="NGOÀI" style="text;html=1;align=center;fontSize=12;fontStyle=1;fontColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_inner" value="TRONG" style="text;html=1;align=center;fontSize=12;fontStyle=1;fontColor=#0F2A50;" vertex="1" parent="1">
+          <mxGeometry x="40" y="840" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="ĐẶC BIỆT CHO AI:&#10;• Chống prompt injection: AI Gateway tự động phát hiện các câu hỏi cố gắng &quot;lừa&quot; AI làm việc sai (bypass, jailbreak)&#10;• Che giấu PII: regex phát hiện CCCD (12 số), SĐT (10 số), email; tự động thay bằng [REDACTED] trước khi gửi AI&#10;• Giới hạn sử dụng: 100 câu/phút/user, 5.000 câu/giờ/user, 50.000 câu/tháng/đơn vị&#10;• Vòng xoay khóa API: tự động thay đổi khóa kết nối OpenAI/Anthropic mỗi tháng&#10;• Hạn chế công cụ Agent: trợ lý AI chỉ được gọi những công cụ trong whitelist; thao tác nguy hiểm phải HITL duyệt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="970" width="1480" height="180" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

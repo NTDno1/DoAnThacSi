@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-08-02T09:55:00.000Z" agent="Cursor" version="24.0.0" type="device">
+  <diagram id="ai-platform-tong-the" name="01 - Kiến trúc tổng thể 7 tầng">
+    <mxGraphModel dx="2400" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2339" math="0" shadow="0">
+      <root>
+        <mxCell id="title" value="PHẦN MỀM VĂN PHÒNG SỐ BỘ TÀI CHÍNH — KIẾN TRÚC TỔNG THỂ (7 TẦNG)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#0F2A50;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1574" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ============ TẦNG 1 ============ -->
+        <mxCell id="tang1_box" value="TẦNG 1 — TRÌNH BÀY&#10;(Người dùng nhìn thấy)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="1574" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="tang1_web" value="Web Portal&#10;(Lãnh đạo, văn thư)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tang1_mobile" value="Mobile App&#10;(Chuyên viên, văn thư)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="120" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tang1_chatops" value="ChatOps UI&#10;(Hỏi-đáp AI bằng tiếng Việt)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tang1_admin" value="AI Admin Console&#10;(Quản trị AI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="120" width="240" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ============ TẦNG 2 ============ -->
+        <mxCell id="tang2_box" value="TẦNG 2 — API GATEWAY (Kong Gateway)&#10;Xác thực JWT · Giới hạn tốc độ · Chống DDoS · Định tuyến API" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="280" width="1574" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ============ TẦNG 3 ============ -->
+        <mxCell id="tang3_box" value="TẦNG 3 — BFF (Backend For Frontend) — .NET 10&#10;Điều phối yêu cầu · Gom dữ liệu từ nhiều microservice" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="1574" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ============ TẦNG 4 ============ -->
+        <mxCell id="tang4_box" value="TẦNG 4 — MICROSERVICE NGHIỆP VỤ (Hiện hữu)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="480" width="1574" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="tang4_dms" value="DMS&#10;Văn bản" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="540" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tang4_wf" value="Workflow&#10;Công việc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="290" y="540" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tang4_files" value="Files&#10;Đính kèm" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="500" y="540" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tang4_id" value="Identity&#10;User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="710" y="540" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tang4_hrm" value="HRM&#10;Nhân sự" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="920" y="540" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tang4_notif" value="Notification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="540" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tang4_erp" value="ERP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="540" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============ TẦNG 5 - MODULE AI (TÂM ĐIỂM) ============ -->
+        <mxCell id="tang5_box" value="★ TẦNG 5 — MICROSERVICE AI (MỚI — MODULE AI CỦA ĐỀ ÁN) ★" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=14;fontStyle=1;fontColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="1574" height="630" as="geometry" />
+        </mxCell>
+
+        <!-- AI Gateway -->
+        <mxCell id="ai1" value="① AI GATEWAY&#10;(Cổng tiếp nhận duy nhất)&#10;&#10;Xác thực · Giới hạn tốc độ&#10;Chống injection · Che PII · Chọn provider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="730" width="520" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Engine Core + Agent -->
+        <mxCell id="ai2" value="② AI ENGINE CORE&#10;(Tóm tắt · Hỏi-đáp · Phân loại)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="860" width="320" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ai3" value="③ AGENT ORCHESTRATION&#10;(Trợ lý đa bước · Human-in-the-Loop)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="860" width="320" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Provider + 3 LLMs -->
+        <mxCell id="ai6" value="⑥ PROVIDER ABSTRACTION (LLM)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="970" width="520" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ai6_openai" value="OpenAI Cloud&#10;(gpt-4o-mini)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="320" y="1040" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ai6_claude" value="Anthropic&#10;(Claude)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="1040" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ai6_ollama" value="Ollama Local&#10;(qwen2.5:14b)&#10;VĂN BẢN MẬT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="1040" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Knowledge + OCR -->
+        <mxCell id="ai4" value="④ KNOWLEDGE BASE &amp; RAG&#10;(Kho tri thức, tìm ngữ nghĩa, ingestion)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1140" width="350" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ai5" value="⑤ OCR &amp; DOC EXTRACTION&#10;(OCR tiếng Việt, trích bảng biểu)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1140" width="350" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Job Queue -->
+        <mxCell id="ai7" value="⑦ AI JOB &amp; TASK QUEUE (Kafka)&#10;Hàng đợi xử lý tác vụ nặng (tóm tắt hàng loạt, OCR quy mô lớn)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="1180" width="520" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- MCP + Audit -->
+        <mxCell id="ai8" value="⑧ MCP SERVER&#10;(Kho công cụ cho Agent)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1260" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ai9" value="⑨ AUDIT &amp; OBSERVABILITY&#10;(Log · Metric · Trace)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1260" width="350" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ============ TẦNG 6 ============ -->
+        <mxCell id="tang6_box" value="TẦNG 6 — SỰ KIỆN &amp; BỘ ĐỆM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1340" width="1574" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="tang6_kafka" value="Kafka Cluster&#10;(Sự kiện AI, Job Queue)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="1380" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tang6_redis" value="Redis Cluster&#10;(Cache, semantic cache, rate-limit)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="1380" width="380" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ============ TẦNG 7 ============ -->
+        <mxCell id="tang7_box" value="TẦNG 7 — DỮ LIỆU (bảo vệ bởi DB Firewall)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1480" width="1574" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tang7_pg" value="PostgreSQL&#10;(Nghiệp vụ + ai_platform)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1520" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="tang7_pgvector" value="pgvector / Qdrant&#10;(Vector tri thức)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="500" y="1520" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="tang7_minio" value="File Server&#10;(MinIO/S3 — PDF/DOCX scan)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="920" y="1520" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="tang7_redis" value="Knowledge Chunk&#10;(Redis cache)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="1520" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ============ HẠ TẦNG VẬT LÝ ============ -->
+        <mxCell id="ha_tang" value="HẠ TẦNG VẬT LÝ (đặt dưới tầng 7)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1640" width="1574" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ha_tang_k8s" value="K8s Cluster (CPU)&#10;Chạy 11 microservice AI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="1690" width="500" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ha_tang_gpu" value="GPU Cluster (3 node A10 24GB)&#10;Chạy Ollama LLM + OCR Worker nặng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="1690" width="500" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============ MŨI TÊN CHÍNH ============ -->
+        <!-- Gateway → Engine + Agent -->
+        <mxCell id="e1" style="edgeStyle=none;rounded=0;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="ai1" target="ai2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1_label" value="đơn giản" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="e1">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=none;rounded=0;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="ai1" target="ai3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_label" value="phức tạp" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" vertex="1" connectable="0" parent="e2">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Engine+Agent → Provider -->
+        <mxCell id="e3" style="edgeStyle=none;rounded=0;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai2" target="ai6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=none;rounded=0;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai3" target="ai6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Provider → 3 LLMs -->
+        <mxCell id="e5" style="edgeStyle=none;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai6" target="ai6_openai">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai6" target="ai6_claude">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=none;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai6" target="ai6_ollama">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Engine → Knowledge, OCR -->
+        <mxCell id="e8" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai2" target="ai4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai3" target="ai5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Knowledge/OCR → Job Queue -->
+        <mxCell id="e10" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai4" target="ai7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ai5" target="ai7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Top down: User flows into Gateway -->
+        <mxCell id="e_top1" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" parent="1" source="tang1_chatops" target="ai1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_top2" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" parent="1" source="tang1_admin" target="ai1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="CHÚ THÍCH MÀU:&#10;• Xanh dương (Tầng 1) = Trình bày&#10;• Xanh lá (Tầng 2,3,4) = Nghiệp vụ&#10;• Cam (Tầng 5) = Module AI — TÂM ĐIỂM&#10;• Xám (Tầng 6,7) = Hạ tầng dữ liệu&#10;• Tím (Hạ tầng vật lý) = Server thật" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cccccc;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1820" width="600" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
