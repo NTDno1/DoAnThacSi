@@ -1,0 +1,1973 @@
+Total pages: 74
+
+
+===== PAGE 1 =====
+HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG
+------------------------------------
+Trần Quang Ninh
+ỨNG DỤNG LLM VÀ RAG TRONG XÂY DỰNG NỀN
+TẢNG GỢI Ý DU LỊCH CÁ NHÂN HÓA TẠI VIỆT NAM
+CHUYÊN NGÀNH : HỆ THỐNG THÔNG TIN
+MÃ SỐ : 8.48.01.04
+BÁO CÁO THỰC TẬP TỐT NGHIỆP
+(Theo định hướng ứng dụng)
+NGƯỜI HƯỚNG DẪN KHOA HỌC: PGS.TS. TRẦN ĐÌNH QUẾ
+HÀ NỘI – 2026
+
+===== PAGE 2 =====
+1
+MỤC LỤC
+DANH MỤC BẢNG......................................................................................................4
+DANH MỤC HÌNH......................................................................................................5
+DANH MỤC CHỮ CÁI VIẾT TẮT............................................................................6
+MỞ ĐẦU........................................................................................................................8
+1. Lý do chọn đề tài...................................................................................................8
+2. Tổng quan về vấn đề nghiên cứu.......................................................................... 9
+2.1. Giới thiệu lĩnh vực nghiên cứu.....................................................................9
+2.2. Các hướng tiếp cận chính.............................................................................9
+2.3. Khoảng trống nghiên cứu và vấn đề đặt ra...................................................9
+3. Mục đích nghiên cứu...........................................................................................10
+3.1. Mục tiêu tổng quát......................................................................................10
+3.2. Mục tiêu cụ thể...........................................................................................10
+4. Đối tượng và phạm vi nghiên cứu.......................................................................11
+4.1. Đối tượng nghiên cứu.................................................................................11
+4.2. Phạm vi nghiên cứu....................................................................................11
+5. Phương pháp nghiên cứu.....................................................................................12
+NỘI DUNG..................................................................................................................14
+Chương 1: CƠ SỞ LÝ LUẬN.................................................................................14
+1.1. Tổng quan về hệ thống gợi ý......................................................................14
+1.2. Cá nhân hóa trong lĩnh vực du lịch.............................................................14
+1.3. Mô hình ngôn ngữ lớn (LLM)....................................................................15
+1.3.1. Khái niệm...........................................................................................15
+1.3.2. Các mô hình tiêu biểu........................................................................ 15
+1.3.3. Hạn chế...............................................................................................17
+1.4. Retrieval-Augmented Generation (RAG)...................................................17
+1.4.1. Khái niệm...........................................................................................17
+1.4.2. Kiến trúc và quy trình hoạt động........................................................18
+1.4.3. Vai trò của RAG trong hệ thống ứng dụng LLM...............................19
+1.4.4. Ưu điểm và hạn chế............................................................................20
+1.5. Hybrid Search và Reranking.......................................................................21
+1.5.1. Hybrid Search.....................................................................................21
+1.5.2. Reranking...........................................................................................22
+1.6. Các nghiên cứu và hệ thống liên quan........................................................22
+1.6.1. Các nền tảng du lịch truyền thống......................................................22
+1.6.2. Các hệ thống tích hợp LLM...............................................................23
+1.6.3. Khoảng trống nghiên cứu...................................................................24
+1.7. Kết luận chương 1.......................................................................................25
+
+===== PAGE 3 =====
+2
+Chương 2: PHÂN TÍCH BÀI TOÁN VÀ THIẾT KẾ NỀN TẢNG.......................26
+2.1. Phân tích bài toán........................................................................................26
+2.1.1. Mô tả bài toán và người dùng............................................................26
+2.1.2. Yêu cầu chức năng.............................................................................27
+2.1.3. Yêu cầu phi chức năng.......................................................................28
+2.2. Kiến trúc hệ thống...................................................................................... 30
+2.2.1. Kiến trúc tổng thể...............................................................................30
+2.2.2. Luồng xử lý........................................................................................32
+2.2.3. Công nghệ sử dụng.............................................................................35
+2.3. Thiết kế dữ liệu và kho tri thức...................................................................37
+2.3.1. Cơ sở dữ liệu quan hệ.........................................................................37
+2.3.2. Cơ sở dữ liệu vector (pgvector)..........................................................41
+2.3.3. Kho tri thức........................................................................................42
+2.3.4. Quy trình xử lý dữ liệu.......................................................................43
+2.4. Thiết kế hệ thống RAG...............................................................................44
+2.4.1. RAG cơ bản và RAG nâng cao..........................................................44
+2.4.2. Phân tích truy vấn và quản lý ngữ cảnh.............................................46
+2.4.3. Truy xuất tri thức................................................................................47
+2.4.4. Tối ưu ngữ cảnh.................................................................................49
+2.4.5. Sinh phản hồi và cá nhân hóa.............................................................50
+2.4.6. Hậu xử lý............................................................................................52
+2.5. Kết luận chương 2.......................................................................................53
+Chương 3: THỰC NGHIỆM VÀ ĐÁNH GIÁ KẾT QUẢ.....................................55
+3.1. Thiết lập thực nghiệm.................................................................................55
+3.1.1. Mục tiêu và phương pháp...................................................................55
+3.1.2. Môi trường thực nghiệm và cấu hình đánh giá..................................56
+3.1.3. Bộ dữ liệu thực nghiệm......................................................................57
+3.1.4. Kịch bản thực nghiệm..............................................................................58
+3.2. Xây dựng hệ thống thực nghiệm.................................................................59
+3.2.1. Tổng quan các thành phần triển khai.................................................59
+3.2.2. Một số điểm triển khai đáng chú ý.....................................................60
+3.2.3. Kết quả đầu ra của hệ thống...............................................................61
+3.3. Kết quả và đánh giá....................................................................................62
+3.3.1. Đánh giá phân tích truy vấn người dùng............................................62
+3.3.2. Đánh giá chất lượng lộ trình end-to-end............................................63
+3.3.3. So sánh các cấu hình RAG.................................................................66
+3.3.4. Đánh giá khả năng cá nhân hóa..........................................................67
+3.3.5. Tổng hợp kết quả đánh giá.................................................................68
+
+===== PAGE 4 =====
+3
+3.4. Kết luận chương 3.......................................................................................69
+KẾT LUẬN..................................................................................................................71
+DANH MỤC CÁC TÀI LIỆU THAM KHẢO.........................................................72
+
+===== PAGE 5 =====
+4
+DANH MỤC BẢNG
+Bảng 1.1. Ưu điểm và hạn chế của RAG......................................................................20
+Bảng 1.2. Một số nền tảng du lịch thương mại tiêu biểu..............................................22
+Bảng 1.3. Một số nghiên cứu ứng dụng LLM trong gợi ý và lập kế hoạch..................23
+Bảng 2.1. Yêu cầu chức năng của hệ thống..................................................................27
+Bảng 2.2. Yêu cầu phi chức năng của hệ thống............................................................29
+Bảng 2.4. Các bảng dữ liệu chính trong hệ thống.........................................................40
+Bảng 2.5. Cấu trúc dữ liệu vector embedding..............................................................41
+Bảng 2.6. So sánh RAG cơ bản và RAG nâng cao trong hệ thống..............................45
+Bảng 2.7. Chiến lược truy xuất của RAG Planner........................................................47
+Bảng 2.8. Cấu trúc đầu ra của hệ thống........................................................................51
+Bảng 2.9. Các tiêu chí đánh giá chất lượng..................................................................52
+Bảng 3.2. Môi trường phần cứng và phần mềm...........................................................56
+Bảng 3.3. Cấu hình mô hình và hệ thống RAG............................................................57
+Bảng 3.4. Thống kê dữ liệu kho tri thức.......................................................................57
+Bảng 3.5. Kịch bản thực nghiệm..................................................................................58
+Bảng 3.6. Thành phần triển khai trong hệ thống thực nghiệm.....................................59
+Bảng 3.7. Thành phần kết quả đầu ra...........................................................................61
+Bảng 3.8. Kết quả đánh giá phân tích truy vấn.............................................................63
+Bảng 3.9. Kết quả đánh giá lịch trình theo ràng buộc đầu vào.....................................64
+Bảng 3.10. Kết quả so sánh các cấu hình RAG............................................................66
+Bảng 3.11. So sánh kết quả có và không có cá nhân hóa............................................. 67
+Bảng 3.12. Tổng hợp kết quả theo bốn kịch bản thực nghiệm.....................................68
+Bảng 3.13. Tổng hợp thời gian phản hồi của hệ thống.................................................68
+
+===== PAGE 6 =====
+5
+DANH MỤC HÌNH
+Hình 1.1. Kiến trúc tổng quát của hệ thống RAG.........................................................18
+Hình 2.1. Kiến trúc tổng quát của hệ thống..................................................................30
+Hình 2.2. Luồng xử lý chính của hệ thống...................................................................32
+Hình 2.3a. Sơ đồ ERD nhóm bảng người dùng, hội thoại và lộ trình.......................... 37
+Hình 2.3b. Sơ đồ ERD nhóm bảng dữ liệu du lịch.......................................................38
+Hình 2.4. Quy trình xử lý dữ liệu..................................................................................44
+Hình 2.5. Kiến trúc Query Understanding & Memory.................................................46
+Hình 2.6. Kiến trúc giai đoạn Retrieval........................................................................48
+Hình 2.7. Quy trình tối ưu ngữ cảnh.............................................................................49
+Hình 2.8. Giai đoạn Generation & Personalization......................................................50
+Hình 2.9. Quy trình hậu xử lý kết quả..........................................................................52
+Hình 3.1. Giao diện hội thoại........................................................................................62
+
+===== PAGE 7 =====
+6
+DANH MỤC CHỮ CÁI VIẾT TẮT
+Từ viết tắt Tiếng Anh Nghĩa tiếng Việt
+AI Artificial Intelligence Trí tuệ nhân tạo
+API Application Programming Interface Giao diện lập trình ứng dụng
+BERT Bidirectional Encoder Mô hình biểu diễn mã hóa hai
+Representations from Transformers chiều dựa trên Transformer
+BM25 Best Matching 25 Thuật toán xếp hạng tìm kiếm từ
+khóa
+CPU Central Processing Unit Bộ xử lý trung tâm
+ERD Entity-Relationship Diagram Sơ đồ thực thể – mối quan hệ
+GPT Generative Pre-trained Transformer Mô hình Transformer tiền huấn
+luyện sinh văn bản
+GPU Graphics Processing Unit Bộ xử lý đồ họa
+LLM Large Language Model Mô hình ngôn ngữ lớn
+LSTM Long Short-Term Memory Bộ nhớ dài-ngắn hạn
+MLM Masked Language Modeling Mô hình hóa ngôn ngữ che giấu
+NLI Natural Language Inference Suy luận ngôn ngữ tự nhiên
+NLP Natural Language Processing Xử lý ngôn ngữ tự nhiên
+NLU Natural Language Understanding Hiểu ngôn ngữ tự nhiên
+NSP Next Sentence Prediction Dự đoán câu tiếp theo
+OSRM Open Source Routing Machine Máy định tuyến mã nguồn mở
+POI Point of Interest Điểm quan tâm
+
+===== PAGE 8 =====
+7
+RAG Retrieval-Augmented Generation Sinh nội dung tăng cường bằng
+truy xuất
+RAGAS Retrieval-Augmented Generation Khung đánh giá hệ thống RAG
+Assessment
+RAM Random Access Memory Bộ nhớ truy cập ngẫu nhiên
+REST Representational State Transfer Kiến trúc truyền trạng thái đại
+diện
+RNN Recurrent Neural Network Mạng nơ-ron hồi quy
+RRF Reciprocal Rank Fusion Hợp nhất xếp hạng nghịch đảo
+SQL Structured Query Language Ngôn ngữ truy vấn có cấu trúc
+SSE Server-Sent Events Sự kiện gửi từ máy chủ
+TPU Tensor Processing Unit Bộ xử lý tensor
+UI User Interface Giao diện người dùng
+
+===== PAGE 9 =====
+8
+MỞ ĐẦU
+1. Lý do chọn đề tài
+Trong những năm gần đây, ngành du lịch Việt Nam phát triển mạnh mẽ với sự
+đa dạng về điểm đến, loại hình dịch vụ và nhu cầu trải nghiệm của du khách. Quá
+trình chuyển đổi số đã thúc đẩy mạnh mẽ sự ra đời của các nền tảng trực tuyến hỗ trợ
+người dùng tìm kiếm thông tin du lịch, đặt phòng khách sạn, vé máy bay và xây dựng
+kế hoạch chuyến đi. Tuy nhiên, phần lớn các hệ thống hiện nay mới chỉ cung cấp
+thông tin theo dạng tra cứu hoặc gợi ý dựa trên các tiêu chí đơn giản, chưa thực sự đáp
+ứng được nhu cầu cá nhân hóa ngày càng cao của người dùng.
+Việc xây dựng một lịch trình du lịch cá nhân đòi hỏi du khách phải tự thu thập
+và xử lý khối lượng thông tin từ các nguồn dữ liệu khác nhau. Quá trình thủ công này
+tiêu tốn rất nhiều thời gian mà còn chưa thực sự hiệu quả, do kết quả thu được thường
+khó có thể đáp ứng được đồng thời về sở thích, ngân sách và quỹ thời gian của từng cá
+nhân.
+Sự phát triển mạnh mẽ của các mô hình ngôn ngữ lớn (Large Language Models
+- LLM) đã mở ra khả năng tạo nội dung và tương tác tự nhiên giữa hệ thống với người
+dùng. Tuy nhiên, các mô hình này vẫn còn tồn tại rất nhiều hạn chế về tính cập nhật và
+độ chính xác của dữ liệu. Trong khi đó, kỹ thuật Retrieval-Augmented Generation
+(RAG) cho phép kết hợp khả năng suy luận của LLM với nguồn tri thức bên ngoài,
+giúp nâng cao chất lượng và độ tin cậy của câu trả lời.
+Xuất phát từ những vấn đề trên, việc nghiên cứu và xây dựng hệ thống gợi ý lộ
+trình du lịch cá nhân hóa tại Việt Nam dựa trên sự kết hợp giữa RAG và LLM có ý
+nghĩa cả về mặt khoa học lẫn thực tiễn. Đề tài không chỉ góp phần ứng dụng các công
+nghệ trí tuệ nhân tạo hiện đại vào lĩnh vực du lịch mà còn tạo nền tảng cho các hệ
+thống hỗ trợ ra quyết định thông minh trong tương lai.
+
+===== PAGE 10 =====
+9
+2. Tổng quan về vấn đề nghiên cứu
+2.1. Giới thiệu lĩnh vực nghiên cứu
+Hệ thống gợi ý (Recommendation System) là một trong những lĩnh vực nghiên
+cứu quan trọng của trí tuệ nhân tạo và khoa học dữ liệu, được ứng dụng rộng rãi trong
+đa dạng lĩnh vực như thương mại điện tử, giải trí, giáo dục và du lịch. Trong lĩnh vực
+du lịch, hệ thống gợi ý đóng vai trò hỗ trợ người dùng lựa chọn điểm đến, địa điểm
+tham quan, cơ sở lưu trú hoặc xây dựng lịch trình phù hợp với nhu cầu cá nhân.
+Cùng với sự phát triển của các LLM và các kỹ thuật RAG hiện đại, xu hướng
+xây dựng các hệ thống gợi ý có khả năng tương tác bằng ngôn ngữ tự nhiên đang ngày
+càng được quan tâm. Điều này mở ra khả năng phát triển các nền tảng du lịch thông
+minh có thể hiểu nhu cầu của người dùng, khai thác tri thức từ nhiều nguồn dữ liệu
+khác nhau và đưa ra các gợi ý mang tính cá nhân hóa cao.
+2.2. Các hướng tiếp cận chính
+Phương pháp gợi ý truyền thống: các phương pháp khai thác thông tin về địa
+điểm hoặc lịch sử tương tác của người dùng để đưa ra đề xuất phù hợp như lọc cộng
+tác (Collaborative Filtering), lọc dựa trên nội dung (Content-Based Filtering).
+Phương pháp học máy và học sâu: khai thác khả năng tự học đặc trưng từ dữ
+liệu người dùng và dữ liệu du lịch.
+Nghiên cứu ứng dụng LLM kết hợp với RAG: tập trung khai thác khả năng
+hiểu ngôn ngữ tự nhiên của LLM và khả năng truy xuất thông tin từ cơ sở tri thức
+thông qua kiến trúc RAG.
+2.3. Khoảng trống nghiên cứu và vấn đề đặt ra
+Mặc dù đã có nhiều nghiên cứu về hệ thống gợi ý du lịch cũng như các giải
+pháp ứng dụng LLM và RAG, phần lớn các công trình hiện nay chỉ tập trung vào từng
+thành phần riêng lẻ của bài toán. Các hệ thống gợi ý truyền thống còn hạn chế trong
+việc xử lý các yêu cầu được diễn đạt bằng ngôn ngữ tự nhiên, trong khi các hệ thống
+sử dụng LLM đơn thuần chưa đảm bảo tốt tính chính xác và khả năng cập nhật thông
+tin.
+
+===== PAGE 11 =====
+10
+Bên cạnh đó, các nghiên cứu ứng dụng RAG chủ yếu được triển khai trong các
+hệ thống hỏi đáp hoặc truy xuất tri thức tổng quát mà chưa tập trung nhiều vào bài
+toán gợi ý du lịch mang tính cá nhân hóa. Đối với dữ liệu du lịch tại Việt Nam, số
+lượng nghiên cứu kết hợp đồng thời LLM, RAG và các kỹ thuật cá nhân hóa vẫn còn
+hạn chế. Do đó, việc nghiên cứu và xây dựng một nền tảng gợi ý du lịch mang tính cá
+nhân hóa dựa trên sự kết hợp giữa LLM và kiến trúc RAG là cần thiết, góp phần nâng
+cao chất lượng tư vấn và khả năng đáp ứng nhu cầu đa dạng của du khách trong bối
+cảnh du lịch số hiện nay.
+3. Mục đích nghiên cứu
+3.1. Mục tiêu tổng quát
+Mục tiêu tổng quát của đề tài là nghiên cứu và ứng dụng LLM kết hợp với kiến
+trúc RAG nhằm xây dựng nền tảng gợi ý du lịch cá nhân hóa tại Việt Nam. Hệ thống
+được đề xuất hướng tới khả năng tiếp nhận và phân tích nhu cầu của người dùng dưới
+dạng ngôn ngữ tự nhiên, khai thác tri thức từ cơ sở dữ liệu du lịch và cung cấp các gợi
+ý phù hợp với đặc điểm, sở thích và nhu cầu riêng của từng cá nhân.
+3.2. Mục tiêu cụ thể
+- Nghiên cứu cơ sở lý thuyết về hệ thống gợi ý, LLM, kiến trúc RAG và các
+phương pháp cá nhân hóa trong hệ thống gợi ý nhằm xây dựng nền tảng khoa
+học cho bài toán nghiên cứu.
+- Khảo sát và xây dựng cơ sở tri thức về du lịch Việt Nam từ các nguồn dữ liệu
+phù hợp, phục vụ cho quá trình truy xuất thông tin và hỗ trợ tạo phản hồi của
+hệ thống.
+- Đề xuất kiến trúc nền tảng gợi ý du lịch cá nhân hóa dựa trên sự kết hợp giữa
+LLM và cơ chế RAG, cho phép hệ thống hiểu yêu cầu của người dùng, truy
+xuất thông tin liên quan và đưa ra các gợi ý phù hợp.
+- Xây dựng và triển khai thử nghiệm hệ thống nhằm đánh giá khả năng ứng dụng
+của giải pháp đề xuất trong việc tư vấn điểm đến, đề xuất hoạt động du lịch và
+hỗ trợ xây dựng lịch trình theo nhu cầu cá nhân.
+
+===== PAGE 12 =====
+11
+- Đánh giá hiệu quả của hệ thống thông qua các tiêu chí liên quan đến chất lượng
+truy xuất thông tin, độ phù hợp của kết quả gợi ý và khả năng đáp ứng nhu cầu
+của người dùng.
+4. Đối tượng và phạm vi nghiên cứu
+4.1. Đối tượng nghiên cứu
+Đối tượng nghiên cứu của luận văn là các phương pháp truy xuất và khai thác
+tri thức phục vụ bài toán gợi ý, các LLM trong xử lý ngôn ngữ tự nhiên, cùng các kỹ
+thuật cá nhân hóa dựa trên đặc trưng và nhu cầu của người dùng. Bên cạnh đó, nghiên
+cứu cũng xem xét việc tổ chức và biểu diễn dữ liệu du lịch dưới dạng cơ sở tri thức
+nhằm phục vụ quá trình tìm kiếm và cung cấp thông tin.
+4.2. Phạm vi nghiên cứu
+Luận văn tập trung nghiên cứu cơ chế kết hợp giữa mô hình ngôn ngữ và hệ
+thống truy xuất tri thức trong bài toán hỗ trợ ra quyết định du lịch. Nội dung nghiên
+cứu hướng đến việc khai thác dữ liệu du lịch để cung cấp thông tin và đề xuất phù hợp
+với từng nhóm người dùng. Các hoạt động liên quan đến giao dịch thương mại điện
+tử, quản trị doanh nghiệp du lịch hoặc vận hành dịch vụ không thuộc phạm vi của đề
+tài.
+Nguồn dữ liệu được sử dụng trong nghiên cứu bao gồm các thông tin về điểm
+đến, địa danh du lịch, cơ sở lưu trú, dịch vụ ăn uống, hoạt động trải nghiệm và các nội
+dung liên quan đến du lịch Việt Nam được thu thập từ các nguồn công khai. Dữ liệu
+được lựa chọn và xử lý nhằm phục vụ mục đích nghiên cứu, thử nghiệm và đánh giá
+giải pháp đề xuất.
+Nghiên cứu được thực hiện trên tập dữ liệu phản ánh các địa điểm và dịch vụ
+du lịch trong lãnh thổ Việt Nam. Các kết quả thực nghiệm được xây dựng và đánh giá
+trong bối cảnh du lịch nội địa nhằm đảm bảo tính phù hợp với mục tiêu nghiên cứu.
+Các nội dung nghiên cứu, xây dựng và đánh giá được thực hiện trong thời gian
+triển khai luận văn. Dữ liệu sử dụng cho thực nghiệm được thu thập trong giai đoạn
+nghiên cứu và không xem xét yếu tố biến động theo thời gian thực.
+
+===== PAGE 13 =====
+12
+5. Phương pháp nghiên cứu
+Luận văn được thực hiện theo phương pháp nghiên cứu kết hợp giữa nghiên
+cứu lý thuyết và thực nghiệm nhằm xây dựng và đánh giá giải pháp hỗ trợ gợi ý du
+lịch cá nhân hóa dựa trên mô hình ngôn ngữ lớn và kỹ thuật truy xuất tri thức.
+- Nghiên cứu cơ sở lý thuyết
++ Thu thập, tổng hợp và phân tích các tài liệu khoa học liên quan đến hệ
+thống gợi ý, LLM, RAG, cơ sở dữ liệu vector và các phương pháp cá
+nhân hóa.
++ Khảo sát các công trình nghiên cứu trong và ngoài nước nhằm xác định
+các hướng tiếp cận hiện có, những hạn chế còn tồn tại và khoảng trống
+nghiên cứu cần giải quyết.
+- Thu thập và xây dựng dữ liệu
++ Thu thập dữ liệu du lịch từ các nguồn công khai như cổng thông tin du
+lịch, website giới thiệu điểm đến, dữ liệu địa danh, cơ sở lưu trú, nhà
+hàng và các hoạt động trải nghiệm.
++ Chuẩn hóa và làm sạch dữ liệu nhằm loại bỏ thông tin trùng lặp, thiếu
+nhất quán hoặc không còn giá trị sử dụng.
++ Tổ chức dữ liệu dưới dạng cơ sở tri thức phục vụ quá trình lưu trữ, truy
+xuất và khai thác thông tin.
+- Xây dựng hệ thống truy xuất tri thức
++ Chuyển đổi dữ liệu văn bản sang biểu diễn vector thông qua các mô
+hình embedding phù hợp.
++ Lưu trữ dữ liệu trên cơ sở dữ liệu vector để hỗ trợ tìm kiếm ngữ nghĩa.
++ Thiết kế cơ chế truy xuất thông tin dựa trên mức độ liên quan giữa câu
+truy vấn và dữ liệu trong cơ sở tri thức.
+- Xây dựng mô hình thực nghiệm
++ Tích hợp mô hình ngôn ngữ lớn với hệ thống truy xuất tri thức theo kiến
+trúc RAG.
++ Xây dựng cơ chế tiếp nhận và phân tích yêu cầu của người dùng dưới
+dạng ngôn ngữ tự nhiên.
+
+===== PAGE 14 =====
+13
++ Thiết kế quy trình sinh gợi ý dựa trên thông tin truy xuất được và đặc
+điểm của người dùng.
++ Triển khai hệ thống trên môi trường thử nghiệm phục vụ đánh giá.
+- Đánh giá hệ thống
++ Thực hiện các kịch bản thử nghiệm với nhiều nhóm yêu cầu du lịch khác
+nhau.
++ Đánh giá chất lượng truy xuất thông tin thông qua các chỉ số RAGAS
+gồm: Context Relevance, Faithfulness, và Answer Relevancy.
++ Đánh giá chất lượng phản hồi của hệ thống dựa trên mức độ liên quan,
+tính chính xác và khả năng đáp ứng nhu cầu người dùng.
++ So sánh kết quả giữa mô hình có sử dụng cơ chế truy xuất tri thức và mô
+hình chỉ sử dụng LLM nhằm xác định hiệu quả của giải pháp đề xuất.
+- Công cụ và môi trường nghiên cứu
++ Ngôn ngữ lập trình: Python.
++ Mô hình ngôn ngữ lớn: lựa chọn một trong các mô hình mã nguồn mở
+hoặc dịch vụ LLM phù hợp với yêu cầu nghiên cứu.
++ Mô hình embedding phục vụ biểu diễn dữ liệu ngữ nghĩa.
++ Cơ sở dữ liệu vector phục vụ lưu trữ và truy xuất tri thức.
++ Môi trường phát triển và thực nghiệm: Visual Studio Code hoặc các nền
+tảng tương đương.
+
+===== PAGE 15 =====
+14
+NỘI DUNG
+Chương 1: CƠ SỞ LÝ LUẬN
+1.1. Tổng quan về hệ thống gợi ý
+Ngày nay, trong bối cảnh lượng thông tin trên Internet tăng nhanh, người dùng
+thường gặp khó khăn khi lựa chọn nội dung phù hợp. Hệ thống gợi ý được phát triển
+nhằm hỗ trợ ra quyết định, giúp lọc thông tin và đưa ra đề xuất cá nhân hóa dựa trên
+dữ liệu tương tác, hành vi và đặc điểm người dùng [16].
+Hiện nay, hệ thống gợi ý được ứng dụng rộng rãi trong thương mại điện tử, giải
+trí, mạng xã hội và du lịch. Các phương pháp phổ biến gồm lọc cộng tác
+(Collaborative Filtering), lọc dựa trên nội dung (Content-Based Filtering) và mô hình
+lai (Hybrid) [16]. Ngoài ra, học sâu cũng được áp dụng để cải thiện khả năng biểu
+diễn và dự đoán. Tuy nhiên, các phương pháp truyền thống vẫn gặp hạn chế như dữ
+liệu thưa, vấn đề người dùng mới, thiếu khả năng giải thích và khó thích ứng với thay
+đổi nhu cầu [16].
+Sự phát triển của LLM mở ra hướng tiếp cận mới cho hệ thống gợi ý, đặc biệt
+trong các bài toán yêu cầu phân tích yêu cầu bằng ngôn ngữ tự nhiên và tạo phản hồi
+linh hoạt theo ngữ cảnh [2]. Việc tích hợp LLM vào hệ thống gợi ý giúp tăng khả năng
+tương tác, giải thích và cá nhân hóa đề xuất [6]. Tuy nhiên, để giảm phụ thuộc vào tri
+thức nội tại của mô hình và hỗ trợ khai thác thông tin từ các nguồn dữ liệu bên ngoài,
+LLM thường được kết hợp với các kỹ thuật như RAG [7]. Trong lĩnh vực du lịch,
+hướng tiếp cận này đặc biệt phù hợp do nhu cầu của người dùng rất đa dạng, phụ
+thuộc nhiều vào ngữ cảnh cá nhân và thông tin du lịch thường phân tán trên nhiều
+nguồn khác nhau.
+1.2. Cá nhân hóa trong lĩnh vực du lịch
+Tại Việt Nam, du lịch được xác định là lĩnh vực quan trọng trong định hướng
+phát triển đến năm 2030, với yêu cầu nâng cao chất lượng dịch vụ và khả năng đáp
+ứng nhu cầu ngày càng đa dạng của du khách [1]. Trong bối cảnh đó, cá nhân hóa trở
+thành một yêu cầu quan trọng đối với các hệ thống hỗ trợ tìm kiếm, lựa chọn và lập kế
+hoạch du lịch.
+
+===== PAGE 16 =====
+15
+Khác với nhiều lĩnh vực khác, nhu cầu du lịch phụ thuộc đồng thời vào nhiều
+yếu tố như sở thích cá nhân, ngân sách, thời gian, số lượng thành viên, mục đích
+chuyến đi và điều kiện di chuyển. Dưới góc độ hệ thống gợi ý, các yếu tố này có thể
+được sử dụng để mô hình hóa nhu cầu người dùng và đưa ra đề xuất phù hợp hơn [16].
+Vì vậy, cá nhân hóa trong du lịch không chỉ là gợi ý địa điểm, mà còn cần hỗ trợ xây
+dựng lịch trình có tính khả thi, phù hợp với thời gian, chi phí và ngữ cảnh của từng
+người dùng [19].
+Bên cạnh đó, thông tin du lịch thường phân tán trên nhiều nguồn như website,
+blog, diễn đàn, bản đồ số và nền tảng đánh giá. Người dùng phải tự tổng hợp và so
+sánh thông tin trước khi ra quyết định, dẫn đến mất nhiều thời gian và dễ bị quá tải.
+Do đó, một hệ thống gợi ý du lịch hiệu quả cần có khả năng hiểu nhu cầu người dùng,
+khai thác thông tin từ nhiều nguồn và tạo ra đề xuất cá nhân hóa phù hợp với bối cảnh
+du lịch Việt Nam.
+1.3. Mô hình ngôn ngữ lớn (LLM)
+1.3.1. Khái niệm
+LLM là nhóm mô hình học sâu được thiết kế để hiểu và sinh ngôn ngữ tự nhiên
+thông qua quá trình huấn luyện trên khối lượng dữ liệu văn bản lớn [2]. Kiến trúc nền
+tảng của hầu hết LLM hiện đại dựa trên Transformer [18], cho phép mô hình đánh giá
+mức độ liên quan giữa các token trong toàn bộ chuỗi đầu vào thông qua cơ chế
+attention, thay vì xử lý tuần tự như RNN hay LSTM. Điều này giúp cải thiện khả năng
+nắm bắt ngữ cảnh dài và tăng hiệu quả tính toán.
+Quá trình phát triển LLM thường gồm hai giai đoạn chính:
+– Pretraining: mô hình học các đặc trưng ngôn ngữ tổng quát từ khối
+lượng lớn dữ liệu, thường là dữ liệu không gán nhãn.
+– Fine-tuning: mô hình được điều chỉnh trên các bộ dữ liệu hoặc nhiệm vụ
+cụ thể như hỏi đáp, tóm tắt, phân loại văn bản hoặc sinh nội dung.
+1.3.2. Các mô hình tiêu biểu
+1.3.2.1. BERT
+
+===== PAGE 17 =====
+16
+BERT là mô hình dựa trên phần Encoder của Transformer, có khả năng tạo biểu
+diễn ngữ nghĩa hai chiều bằng cách khai thác đồng thời ngữ cảnh trước và sau mỗi
+token [4]. Mô hình được huấn luyện thông qua hai cơ chế chính:
+– Masked Language Modeling (MLM): che giấu một số token trong câu và
+yêu cầu mô hình dự đoán lại các token bị che.
+– Next Sentence Prediction (NSP): dự đoán mối quan hệ giữa hai câu liên
+tiếp.
+Nhờ cách tiếp cận này, BERT đạt hiệu quả cao trong các nhiệm vụ hiểu văn bản
+như phân loại, trích xuất thông tin và hỏi đáp. Tuy nhiên, do được xây dựng theo
+hướng hiểu ngữ cảnh hai chiều, BERT không được tối ưu cho các bài toán sinh văn
+bản dài.
+1.3.2.2. GPT
+GPT là mô hình dựa trên phần Decoder của Transformer, sinh văn bản theo cơ
+chế tự hồi quy bằng cách dự đoán token tiếp theo dựa trên các token đã xuất hiện
+trước đó [18]. Các phiên bản GPT quy mô lớn cho thấy khả năng thực hiện nhiều
+nhiệm vụ xử lý ngôn ngữ tự nhiên thông qua cách thiết kế đầu vào phù hợp, đặc biệt
+trong bối cảnh few-shot learning [2].
+Một số đặc điểm chính của GPT gồm:
+– Được huấn luyện trên khối lượng lớn dữ liệu văn bản.
+– Có khả năng sinh văn bản mạch lạc theo ngữ cảnh.
+– Có thể thực hiện nhiều nhiệm vụ như hỏi đáp, tóm tắt, viết lại nội dung
+hoặc sinh văn bản thông qua prompt.
+1.3.2.3. Gemini
+Gemini là mô hình ngôn ngữ lớn đa phương thức do Google DeepMind phát
+triển, có khả năng xử lý nhiều dạng dữ liệu như văn bản, hình ảnh, âm thanh và thông
+tin phi cấu trúc trong cùng một kiến trúc [8]. So với các mô hình chỉ xử lý văn bản,
+Gemini phù hợp hơn với các bài toán yêu cầu phân tích và suy luận trên nhiều loại dữ
+liệu khác nhau.
+Một số đặc điểm chính của Gemini gồm:
+– Tích hợp nhiều dạng đầu vào trong cùng một mô hình thống nhất.
+
+===== PAGE 18 =====
+17
+– Cải thiện khả năng suy luận khi bài toán liên quan đến nhiều loại thông
+tin khác nhau.
+– Hỗ trợ các bài toán kết hợp ngôn ngữ tự nhiên với dữ liệu phi văn bản.
+1.3.3. Hạn chế
+Mặc dù LLM mang lại nhiều bước tiến quan trọng trong xử lý ngôn ngữ tự
+nhiên, các mô hình này vẫn tồn tại một số hạn chế khi áp dụng vào hệ thống thực tế
+[7]:
+– Hiện tượng ảo giác (hallucination): mô hình có thể tạo ra thông tin nghe
+có vẻ hợp lý nhưng không chính xác hoặc không có căn cứ.
+– Phụ thuộc vào dữ liệu huấn luyện: chất lượng, phạm vi và thời điểm thu
+thập dữ liệu ảnh hưởng trực tiếp đến độ chính xác của phản hồi.
+– Chi phí tính toán cao: việc huấn luyện và triển khai LLM đòi hỏi tài
+nguyên phần cứng lớn, đặc biệt với các mô hình có quy mô tham số cao.
+– Hạn chế khi xử lý ngữ cảnh dài: mô hình có thể gặp khó khăn khi đầu
+vào chứa nhiều tài liệu hoặc thông tin cần liên kết qua nhiều đoạn văn
+bản [9].
+– Không tự cập nhật tri thức: LLM không tự động nắm bắt các thông tin
+mới phát sinh sau thời điểm huấn luyện nếu không có cơ chế bổ sung dữ
+liệu bên ngoài.
+Do đó, trong các hệ thống ứng dụng thực tế, LLM thường được kết hợp với
+Retrieval-Augmented Generation nhằm bổ sung khả năng truy xuất thông tin từ nguồn
+dữ liệu bên ngoài, giảm phụ thuộc vào tri thức nội tại của mô hình và cải thiện độ tin
+cậy của phản hồi [7].
+1.4. Retrieval-Augmented Generation (RAG)
+1.4.1. Khái niệm
+Retrieval-Augmented Generation (RAG) là phương pháp kết hợp mô hình ngôn
+ngữ lớn với cơ chế truy xuất thông tin từ nguồn dữ liệu bên ngoài [11]. Thay vì phụ
+thuộc hoàn toàn vào tri thức được học trong quá trình huấn luyện, mô hình có thể
+tham chiếu thêm các tài liệu liên quan tại thời điểm xử lý truy vấn để hỗ trợ tạo câu trả
+lời.
+
+===== PAGE 19 =====
+18
+Về bản chất, RAG tách biệt tương đối giữa khả năng sinh ngôn ngữ của LLM
+và nguồn tri thức được sử dụng. Tri thức có thể được lưu trữ, cập nhật và truy xuất từ
+bên ngoài mô hình, qua đó giúp hệ thống linh hoạt hơn trong các bài toán yêu cầu
+thông tin mới, thông tin chuyên ngành hoặc dữ liệu thay đổi theo thời gian [7].
+1.4.2. Kiến trúc và quy trình hoạt động
+Kiến trúc của RAG được xây dựng dựa trên sự kết hợp giữa cơ chế truy xuất
+thông tin và mô hình sinh ngôn ngữ. Trong đó, tri thức không chỉ nằm trong tham số
+của mô hình mà còn được lưu trữ ở kho dữ liệu bên ngoài và được truy xuất khi có
+truy vấn từ người dùng.
+Về tổng thể, một hệ thống RAG thường bao gồm ba thành phần chính: kho tri
+thức (Knowledge Base), bộ truy xuất thông tin (Retriever) và mô hình sinh ngôn ngữ
+(Generator) [7], [11].
+Hình 1.1. Kiến trúc tổng quát của hệ thống RAG
+Quy trình hoạt động của hệ thống RAG có thể được mô tả qua bốn bước chính:
+– Tiếp nhận truy vấn
+﹢ Người dùng gửi câu hỏi hoặc yêu cầu đến hệ thống.
+
+===== PAGE 20 =====
+19
+﹢ Truy vấn đầu vào được chuẩn hóa và chuyển sang dạng phù hợp để
+phục vụ quá trình tìm kiếm.
+– Truy xuất tài liệu liên quan
+﹢ Retriever thực hiện tìm kiếm trong kho tri thức dựa trên nội dung
+truy vấn.
+﹢ Hệ thống lựa chọn các tài liệu hoặc đoạn văn bản có mức độ liên
+quan cao nhất.
+﹢ Kết quả truy xuất thường là một tập các đoạn thông tin ngắn phục vụ
+cho bước sinh câu trả lời.
+– Xây dựng ngữ cảnh
+﹢ Các tài liệu được truy xuất được ghép với truy vấn ban đầu.
+﹢ Tập thông tin này tạo thành ngữ cảnh mở rộng (augmented context)
+cho mô hình ngôn ngữ.
+﹢ Ngữ cảnh mở rộng giúp mô hình có thêm dữ liệu tham chiếu khi
+sinh phản hồi.
+– Sinh câu trả lời
+﹢ Generator hoặc LLM sử dụng truy vấn cùng với các tài liệu liên
+quan để tạo ra câu trả lời.
+﹢ Câu trả lời được xây dựng dựa trên cả kiến thức nội tại của mô hình
+và thông tin được truy xuất từ kho tri thức.
+﹢ Nhờ đó, đầu ra thường có độ chính xác và tính cập nhật cao hơn so
+với cách tiếp cận chỉ sử dụng mô hình ngôn ngữ độc lập.
+Nhờ cơ chế này, RAG giúp mô hình khai thác được thông tin từ nguồn dữ liệu
+bên ngoài, qua đó giảm phụ thuộc vào tri thức nội tại của LLM, hỗ trợ cập nhật thông
+tin linh hoạt hơn và cải thiện độ tin cậy của phản hồi [7].
+1.4.3. Vai trò của RAG trong hệ thống ứng dụng LLM
+Trong các hệ thống ứng dụng thực tế, RAG đóng vai trò quan trọng trong việc
+mở rộng khả năng của LLM vượt ra ngoài giới hạn tri thức nội tại của mô hình [7],
+[11]. Cụ thể, RAG mang lại một số lợi ích chính:
+
+===== PAGE 21 =====
+20
+– Cho phép bổ sung và cập nhật tri thức thông qua kho dữ liệu bên ngoài
+mà không cần huấn luyện lại toàn bộ mô hình.
+– Tăng khả năng kiểm soát và truy vết nguồn gốc thông tin được sử dụng
+trong quá trình sinh phản hồi.
+– Hỗ trợ tốt hơn cho các bài toán theo miền chuyên biệt nhờ khả năng tích
+hợp dữ liệu riêng của từng hệ thống.
+Trong bài toán du lịch, vai trò này đặc biệt quan trọng vì thông tin về điểm đến,
+dịch vụ, chi phí, thời gian mở cửa hoặc điều kiện tham quan có thể thay đổi theo thời
+gian. Khi kho tri thức được cập nhật phù hợp, cơ chế truy xuất giúp hệ thống đối chiếu
+yêu cầu của người dùng với các nguồn dữ liệu liên quan trước khi sinh phản hồi. Nhờ
+đó, kết quả gợi ý có khả năng phù hợp hơn với ngữ cảnh thực tế tại thời điểm truy vấn.
+1.4.4. Ưu điểm và hạn chế
+Trong quá trình triển khai thực tế, RAG thể hiện cả ưu điểm lẫn hạn chế khi xét
+trên khía cạnh chất lượng phản hồi, khả năng cập nhật tri thức và mức độ phức tạp của
+hệ thống. Bảng 1.1 tổng hợp các đặc điểm chính của RAG [7], [11].
+Bảng 1.1. Ưu điểm và hạn chế của RAG
+Ưu điểm Hạn chế
+Mở rộng khả năng sử dụng tri thức Phụ thuộc đáng kể vào chất lượng, độ
+ngoài mô hình, giảm phụ thuộc vào chính xác và mức độ cập nhật của nguồn
+tham số đã huấn luyện dữ liệu truy xuất
+Cho phép cập nhật thông tin thông qua Hiệu quả đầu ra bị ảnh hưởng nếu bộ
+kho dữ liệu bên ngoài mà không cần truy xuất chọn sai, thiếu hoặc nhiễu
+huấn luyện lại mô hình thông tin liên quan
+Hỗ trợ tốt các bài toán theo miền nhờ Làm tăng độ phức tạp trong thiết kế, triển
+khả năng tích hợp dữ liệu chuyên biệt khai và vận hành hệ thống so với LLM
+thuần túy
+
+===== PAGE 22 =====
+21
+Giúp phản hồi bám sát hơn vào yêu cầu Tăng thời gian xử lý do phát sinh thêm
+người dùng và tài liệu được truy xuất bước truy xuất trước khi sinh kết quả
+Tăng khả năng kiểm soát và truy vết Cần thiết kế tốt cơ chế thu thập, tổ chức,
+nguồn thông tin đầu ra chia đoạn và biểu diễn dữ liệu để đạt hiệu
+quả cao
+1.5. Hybrid Search và Reranking
+Trong hệ thống RAG, chất lượng ngữ cảnh truy xuất ảnh hưởng trực tiếp đến
+kết quả sinh câu trả lời. Khi tài liệu đầu vào thiếu liên quan, không đầy đủ hoặc chứa
+nhiễu, mô hình ngôn ngữ có thể tạo ra phản hồi sai lệch. Vì vậy, bên cạnh việc xây
+dựng kho tri thức, cải thiện giai đoạn truy xuất là một yêu cầu quan trọng. Hai kỹ
+thuật thường được áp dụng để nâng cao chất lượng tài liệu đầu vào là Hybrid Search
+và Reranking.
+1.5.1. Hybrid Search
+Hybrid Search kết hợp đồng thời nhiều phương pháp truy xuất nhằm tận dụng
+ưu điểm bổ trợ của từng phương pháp [12]. Trong các hệ thống RAG, kỹ thuật này
+thường kết hợp hai hướng truy xuất chính:
+– Dense Retrieval: sử dụng mô hình embedding để ánh xạ truy vấn và tài
+liệu vào cùng một không gian vector [10]. Mức độ liên quan được đo
+bằng độ tương đồng giữa các vector, giúp hệ thống nắm bắt quan hệ ngữ
+nghĩa ngay cả khi truy vấn và tài liệu không chia sẻ nhiều từ khóa giống
+nhau.
+– Sparse Retrieval: điển hình là BM25 [17], đánh giá mức độ liên quan
+dựa trên tần suất và mức độ phân biệt của từ khóa trong tài liệu [16].
+Phương pháp này phù hợp với các truy vấn chứa thực thể, tên địa danh
+hoặc thuật ngữ cụ thể, nhưng có thể hạn chế khi người dùng diễn đạt lại
+ý bằng các từ ngữ khác.
+Việc kết hợp cả thông tin ngữ nghĩa và từ khóa giúp hệ thống mở rộng khả
+năng tìm kiếm tài liệu liên quan, đồng thời giảm nguy cơ bỏ sót nội dung quan trọng
+trong kho tri thức.
+
+===== PAGE 23 =====
+22
+1.5.2. Reranking
+Reranking là bước đánh giá lại và sắp xếp lại thứ tự các tài liệu sau giai đoạn
+truy xuất ban đầu, nhằm ưu tiên những tài liệu có mức độ liên quan cao hơn với truy
+vấn của người dùng [14]. Khác với truy xuất ban đầu thường ưu tiên tốc độ và phạm
+vi bao phủ, Reranking sử dụng mô hình học sâu để xem xét đồng thời nội dung truy
+vấn và văn bản, từ đó xác định mức độ phù hợp chi tiết hơn.
+Trong kiến trúc RAG, Reranking đóng vai trò tinh chỉnh tập tài liệu trước khi
+xây dựng ngữ cảnh đầu vào cho LLM. Bước này giúp giảm nhiễu thông tin, ưu tiên
+các đoạn nội dung quan trọng và cải thiện khả năng sinh câu trả lời chính xác.
+1.6. Các nghiên cứu và hệ thống liên quan
+Các công trình và hệ thống liên quan có thể chia thành hai nhóm chính: nền
+tảng du lịch thương mại và nghiên cứu ứng dụng LLM trong lĩnh vực gợi ý, lập kế
+hoạch du lịch.
+1.6.1. Các nền tảng du lịch truyền thống
+Các nền tảng du lịch trực tuyến hiện nay hỗ trợ người dùng trong quá trình tìm
+kiếm thông tin, tham khảo đánh giá, lựa chọn điểm đến và đặt dịch vụ. Một số hệ
+thống tiêu biểu có thể kể đến như TripAdvisor, Google Travel và Booking.com. Bảng
+1.2 trình bày khái quát đặc điểm và hạn chế của các nền tảng này.
+Bảng 1.2. Một số nền tảng du lịch thương mại tiêu biểu
+Hệ thống Đặc điểm Hạn chế
+TripAdviso Cung cấp thông tin về điểm đến, Người dùng vẫn cần tự chọn lọc
+r khách sạn, nhà hàng, hoạt động du thông tin và xây dựng lịch trình
+lịch và đánh giá từ cộng đồng phù hợp với nhu cầu cá nhân
+người dùng
+Google Hỗ trợ tìm kiếm thông tin du lịch, Khả năng lập lịch trình chi tiết và
+Travel chuyến bay, khách sạn và gợi ý cá nhân hóa sâu theo nhiều ràng
+buộc cụ thể còn hạn chế
+
+===== PAGE 24 =====
+23
+điểm đến dựa trên hệ sinh thái dữ
+liệu của Google
+Booking.co Tập trung vào tìm kiếm, so sánh Chủ yếu phục vụ bài toán lưu trú,
+m và đặt dịch vụ lưu trú, đồng thời chưa bao quát đầy đủ quá trình
+cung cấp đánh giá từ khách hàng gợi ý điểm đến và xây dựng lịch
+trình tổng thể
+Nhìn chung, các nền tảng thương mại hiện nay sở hữu nguồn dữ liệu phong
+phú và khả năng tìm kiếm thuận tiện. Tuy nhiên, phần lớn vẫn yêu cầu người dùng tự
+tổng hợp, so sánh và điều chỉnh thông tin từ nhiều nguồn khác nhau trước khi đưa ra
+quyết định cuối cùng. Đây là khoảng trống để các hệ thống gợi ý cá nhân hóa dựa trên
+LLM và RAG có thể hỗ trợ tốt hơn trong việc hiểu nhu cầu, khai thác tri thức đa
+nguồn và tạo lịch trình phù hợp với từng người dùng.
+1.6.2. Các hệ thống tích hợp LLM
+Sự xuất hiện của các mô hình ngôn ngữ lớn đã mở ra hướng tiếp cận mới cho
+bài toán gợi ý và lập kế hoạch. Thay vì chỉ trả về danh sách kết quả tìm kiếm, hệ
+thống có thể tương tác bằng ngôn ngữ tự nhiên, phân tích nhu cầu của người dùng và
+tạo ra các đề xuất có tính tổng hợp hơn.
+Bảng 1.3. Một số nghiên cứu ứng dụng LLM trong gợi ý và lập kế hoạch
+Nghiên cứu Hướng tiếp cận Hạn chế
+Chat-Rec [6] Sử dụng LLM để tăng khả năng Chưa tập trung vào bài toán du
+tương tác và giải thích trong hệ lịch và lập lịch trình theo nhiều
+thống gợi ý ràng buộc thực tế
+TravelPlanne Xây dựng bài toán lập kế hoạch Chưa tập trung vào bối cảnh du
+r [19] du lịch bằng language agents, lịch Việt Nam và chưa giải quyết
+nhấn mạnh đến các ràng buộc sâu bài toán cá nhân hóa theo dữ
+liệu người dùng địa phương
+
+===== PAGE 25 =====
+24
+thực tế trong quá trình lên lịch
+trình
+Các nghiên cứu trên cho thấy tiềm năng của LLM trong việc nâng cao trải
+nghiệm người dùng thông qua giao tiếp tự nhiên, khả năng tổng hợp thông tin và hỗ
+trợ lập kế hoạch. Tuy nhiên, việc đảm bảo tính chính xác, khả năng cập nhật tri thức
+và mức độ cá nhân hóa theo bối cảnh cụ thể vẫn là những thách thức quan trọng. Bên
+cạnh đó, các nghiên cứu tổng quan về RAG cho thấy việc kết hợp LLM với cơ chế
+truy xuất tri thức bên ngoài là một hướng phù hợp để giảm phụ thuộc vào tri thức nội
+tại của mô hình và cải thiện độ tin cậy của phản hồi [7]. Đây là cơ sở để luận văn đề
+xuất hướng kết hợp LLM với RAG cho bài toán gợi ý du lịch cá nhân hóa tại Việt
+Nam.
+1.6.3. Khoảng trống nghiên cứu
+Qua khảo sát các nền tảng thương mại và công trình nghiên cứu liên quan, có
+thể nhận thấy một số khoảng trống chính:
+– Phần lớn hệ thống hiện nay mới tập trung vào từng khía cạnh riêng lẻ
+như tìm kiếm thông tin, gợi ý địa điểm hoặc lập lịch trình, trong khi việc
+kết hợp giữa truy xuất tri thức, sinh phản hồi và cá nhân hóa theo nhu
+cầu người dùng vẫn còn hạn chế.
+– Nhiều nghiên cứu và bộ dữ liệu được xây dựng trong bối cảnh quốc tế
+hoặc tiếng Anh, nên khi áp dụng vào du lịch Việt Nam có thể gặp khó
+khăn do đặc thù về địa danh, ngôn ngữ, văn hóa, chi phí và hành vi du
+lịch địa phương.
+– Trong các hướng triển khai RAG cơ bản, chất lượng kết quả vẫn phụ
+thuộc lớn vào giai đoạn truy xuất. Nếu chỉ dựa vào một phương pháp
+tìm kiếm hoặc chưa có bước reranking phù hợp, hệ thống có thể bỏ sót
+thông tin quan trọng hoặc đưa vào ngữ cảnh các tài liệu chưa thật sự liên
+quan.
+Những khoảng trống trên là cơ sở để luận văn đề xuất hướng tiếp cận kết hợp
+LLM, RAG, Hybrid Search và Reranking cho bài toán gợi ý du lịch cá nhân hóa tại
+Việt Nam.
+
+===== PAGE 26 =====
+25
+1.7. Kết luận chương 1
+Chương 1 đã trình bày nền tảng lý thuyết của luận văn, bao gồm:
+– Hệ thống gợi ý và bài toán cá nhân hóa trong lĩnh vực du lịch.
+– Mô hình ngôn ngữ lớn (LLM): kiến trúc Transformer, các mô hình tiêu
+biểu và hạn chế.
+– Kỹ thuật Retrieval-Augmented Generation (RAG): khái niệm, kiến trúc
+và vai trò.
+– Hybrid Search và Reranking: các phương pháp nâng cao chất lượng truy
+xuất.
+– Khảo sát các công trình liên quan và xác định khoảng trống nghiên cứu.
+Trên cơ sở đó, việc kết hợp LLM với RAG, Hybrid Search và Reranking là
+hướng tiếp cận phù hợp để giải quyết bài toán gợi ý du lịch cá nhân hóa tại Việt Nam.
+Chương tiếp theo sẽ tập trung vào phân tích bài toán và đề xuất kiến trúc hệ thống.
+
+===== PAGE 27 =====
+26
+Chương 2: PHÂN TÍCH BÀI TOÁN VÀ THIẾT KẾ NỀN TẢNG
+2.1. Phân tích bài toán
+2.1.1. Mô tả bài toán và người dùng
+Mục tiêu của bài toán là phát triển một hệ thống có khả năng hỗ trợ người dùng
+xây dựng lịch trình du lịch mang tính cá nhân hóa tại Việt Nam. Thay vì phải tự tìm
+kiếm và tổng hợp thông tin từ nhiều nguồn khác nhau, người dùng chỉ cần mô tả nhu
+cầu của mình bằng ngôn ngữ tự nhiên. Hệ thống sẽ tiếp nhận, phân tích nội dung yêu
+cầu, sau đó khai thác dữ liệu liên quan để đề xuất một lịch trình phù hợp.
+Chẳng hạn, người dùng có thể đưa ra yêu cầu như: “Tôi muốn đi Đà Nẵng 3
+ngày 2 đêm vào tháng 8, ngân sách khoảng 8 triệu đồng, ưu tiên nghỉ dưỡng và ẩm
+thực địa phương.” Từ thông tin này, hệ thống cần nhận diện các yếu tố chính như địa
+điểm, thời gian, ngân sách, sở thích và mục tiêu chuyến đi, rồi sử dụng dữ liệu trong
+kho tri thức để xây dựng kế hoạch tương ứng.
+Thông tin đầu vào của hệ thống bao gồm:
+– Các chi tiết về chuyến đi như điểm đến, thời gian bắt đầu và số ngày lưu
+trú.
+– Mức chi tiêu dự kiến của người dùng.
+– Sở thích cá nhân, nhu cầu trải nghiệm và các điều kiện ràng buộc.
+– Dữ liệu hội thoại trước đó hoặc hồ sơ người dùng (nếu có).
+Kết quả đầu ra là một lịch trình du lịch được sắp xếp theo từng ngày, bao gồm:
+– Danh sách các địa điểm và hoạt động đề xuất, có thể kèm theo tọa độ địa
+lý.
+– Thời gian dự kiến cho từng hoạt động hoặc điểm tham quan.
+– Chi phí ước lượng cho từng phần hoặc toàn bộ chuyến đi.
+– Mô tả chi tiết giúp người dùng dễ hiểu và có thể điều chỉnh khi cần.
+Lịch trình được tạo ra cần đảm bảo sự hợp lý về mặt thời gian, khoảng cách di
+chuyển giữa các địa điểm cũng như phù hợp với ngân sách đã đề ra. Bên cạnh đó, các
+thông tin quan trọng nên được lấy từ hoặc kiểm chứng với kho tri thức của hệ thống
+nhằm đảm bảo độ chính xác và độ tin cậy.
+Phạm vi nghiên cứu tập trung vào du lịch nội địa tại Việt Nam, chủ yếu phục
+vụ việc tư vấn, gợi ý điểm đến và xây dựng lịch trình cá nhân hóa. Hệ thống không hỗ
+
+===== PAGE 28 =====
+27
+trợ các chức năng như đặt vé, đặt phòng hay thanh toán. Dữ liệu sử dụng được thu
+thập từ các nguồn mở và được xử lý, chuẩn hóa trong quá trình xây dựng kho tri thức.
+2.1.2. Yêu cầu chức năng
+Từ bài toán đã xác định, hệ thống cần đáp ứng các yêu cầu chức năng chính
+được trình bày trong Bảng 2.1.
+Bảng 2.1. Yêu cầu chức năng của hệ thống
+STT Yêu cầu chức năng Mô tả
+1 Tương tác hội thoại Cho phép người dùng trao đổi với hệ thống bằng
+ngôn ngữ tự nhiên tiếng Việt để yêu cầu gợi ý lịch
+trình, hỏi thông tin du lịch hoặc điều chỉnh yêu cầu
+qua nhiều lượt hội thoại.
+2 Phân tích yêu cầu Nhận diện ý định và trích xuất các thông tin quan
+người dùng trọng từ truy vấn như điểm đến, thời gian, số ngày,
+ngân sách, sở thích, nhóm đi và các ràng buộc cá
+nhân.
+3 Truy xuất tri thức du Tìm kiếm và truy xuất thông tin liên quan từ kho tri
+lịch thức du lịch Việt Nam để hỗ trợ quá trình tạo gợi ý
+và lịch trình.
+4 Tích hợp thông tin Truy xuất thông tin thời tiết tại điểm đến trong
+thời tiết khoảng thời gian dự kiến và đưa vào ngữ cảnh đầu
+vào cho LLM, giúp hệ thống điều chỉnh gợi ý hoạt
+động và lịch trình phù hợp hơn.
+5 Gợi ý địa điểm Đề xuất điểm tham quan, nhà hàng, hoạt động hoặc
+khu vực lưu trú phù hợp với nhu cầu người dùng khi
+chưa cần xây dựng lịch trình hoàn chỉnh.
+
+===== PAGE 29 =====
+28
+6 Sinh lịch trình tự Tạo lịch trình du lịch theo từng ngày, bao gồm địa
+động điểm, hoạt động, thời gian dự kiến, chi phí ước
+lượng và thông tin mô tả cần thiết.
+7 Cá nhân hóa đề xuất Điều chỉnh kết quả gợi ý dựa trên hồ sơ sở thích,
+lịch sử hội thoại, ngân sách, nhóm đi, thông tin thời
+tiết và phản hồi của người dùng.
+8 Quản lý lịch trình Cho phép người dùng lưu, chỉnh sửa, sắp xếp lại
+hoạt động, thay đổi thứ tự điểm đến hoặc điều chỉnh
+lịch trình theo nhu cầu.
+9 Hiển thị bản đồ Trực quan hóa các địa điểm trong lịch trình trên bản
+đồ, hỗ trợ người dùng quan sát vị trí và khoảng cách
+giữa các điểm đến.
+10 Quản lý tài khoản và Hỗ trợ đăng ký, đăng nhập, quản lý thông tin cá
+hồ sơ nhân và cài đặt sở thích du lịch phục vụ cá nhân hóa.
+11 Chia sẻ lịch trình Cho phép tạo liên kết chia sẻ lịch trình cho người
+khác xem mà không cần chỉnh sửa trực tiếp dữ liệu
+gốc.
+2.1.3. Yêu cầu phi chức năng
+Bên cạnh các chức năng chính, hệ thống cần đáp ứng một số yêu cầu phi chức
+năng nhằm đảm bảo khả năng vận hành ổn định, an toàn và phù hợp với bài toán gợi ý
+du lịch cá nhân hóa. Các yêu cầu này được trình bày trong Bảng 2.2.
+
+===== PAGE 30 =====
+29
+Bảng 2.2. Yêu cầu phi chức năng của hệ thống
+STT Yêu cầu Mô tả
+1 Hiệu năng Hệ thống cần phản hồi trong thời gian hợp lý đối với các truy
+xử lý vấn gợi ý, truy xuất tri thức và sinh lịch trình, đảm bảo trải
+nghiệm hội thoại không bị gián đoạn.
+2 Khả năng Kiến trúc hệ thống cần hỗ trợ mở rộng khi số lượng người dùng,
+mở rộng dữ liệu du lịch và khối lượng truy vấn tăng lên, đặc biệt ở các
+thành phần kho tri thức, truy xuất và xử lý LLM.
+3 Độ tin cậy Kết quả sinh ra cần bám sát dữ liệu được truy xuất từ kho tri
+thức, hạn chế thông tin sai lệch và đảm bảo tính nhất quán trong
+các phản hồi quan trọng.
+4 Tính sẵn Hệ thống cần duy trì khả năng hoạt động ổn định, hạn chế thời
+sàng gian gián đoạn dịch vụ trong quá trình người dùng tương tác và
+xây dựng lịch trình.
+5 Bảo mật Thông tin tài khoản, hồ sơ sở thích, lịch sử hội thoại và lịch
+dữ liệu trình cá nhân của người dùng cần được lưu trữ, truyền tải và xử
+lý an toàn, tránh truy cập trái phép.
+6 Khả năng Giao diện hệ thống cần hiển thị phù hợp trên nhiều thiết bị, đặc
+tương thích biệt là trình duyệt web trên máy tính và thiết bị di động.
+7 Khả năng Hệ thống cần được thiết kế theo hướng module hóa, tách biệt
+bảo trì các thành phần như giao diện, API, truy xuất dữ liệu, xử lý
+LLM và quản lý người dùng để thuận tiện cho nâng cấp và mở
+rộng.
+8 Tính nhất Dữ liệu giữa cơ sở dữ liệu quan hệ, kho vector, kho tri thức và
+quán dữ lịch sử hội thoại cần được đồng bộ hợp lý nhằm tránh sai lệch
+liệu trong quá trình truy xuất và cá nhân hóa.
+
+===== PAGE 31 =====
+30
+2.2. Kiến trúc hệ thống
+2.2.1. Kiến trúc tổng thể
+Hệ thống được thiết kế theo kiến trúc ba tầng, trong đó tầng xử lý nghiệp vụ
+được triển khai theo hướng module hóa nhằm tăng tính linh hoạt và khả năng mở
+rộng. Ba tầng chính bao gồm: tầng giao diện, tầng xử lý nghiệp vụ và tầng dữ liệu.
+Hình 2.1. Kiến trúc tổng quát của hệ thống
+Tầng giao diện được xây dựng trên nền tảng Next.js, đảm nhiệm việc hiển thị
+giao diện hội thoại, trực quan hóa lộ trình trên bản đồ Leaflet và cung cấp chức năng
+quản lý lộ trình. Xác thực phía client được xử lý thông qua NextAuth. Tầng này giao
+tiếp với tầng xử lý nghiệp vụ thông qua REST API và cơ chế SSE Streaming nhằm hỗ
+trợ cập nhật kết quả theo thời gian thực.
+Tầng xử lý nghiệp vụ được xây dựng trên framework FastAPI, bao gồm các
+module được phân chia theo chức năng và được điều phối bởi một pipeline xử lý hội
+thoại (Chat Pipeline). Đây là thành phần trung tâm của hệ thống, chịu trách nhiệm tiếp
+nhận yêu cầu từ người dùng, điều phối luồng xử lý giữa các module và tổng hợp kết
+quả đầu ra.
+
+===== PAGE 32 =====
+31
+Các module trong tầng này được tổ chức thành bốn nhóm chính:
+– Nhóm xử lý ngôn ngữ
+﹢ NLU Service: phân tích ý định và trích xuất thực thể từ câu tiếng
+Việt.
+﹢ Memory Service: quản lý ngữ cảnh hội thoại.
+﹢ LLM Service: tương tác với mô hình Gemini.
+﹢ Context Compressor: nén ngữ cảnh trích xuất.
+﹢ NLI Service: kiểm tra tính trung thực của kết quả.
+– Nhóm gợi ý và tối ưu lộ trình
+﹢ RAG Pipeline: thực hiện truy xuất, xếp hạng lại tài liệu, xây dựng
+ngữ cảnh và sinh phản hồi.
+﹢ Recommendation Service: gợi ý địa điểm theo sở thích.
+﹢ Route Optimizer: hậu xử lý lộ trình.
+﹢ Location Service: trích xuất vị trí, tính khoảng cách OSRM.
+– Nhóm phân tích và cải tiến
+﹢ Preference Learning: học sở thích từ phản hồi người dùng.
+﹢ RAG Evaluator: đánh giá chất lượng kết quả.
+﹢ Metrics Service: thu thập độ đo hệ thống.
+﹢ Debug Logger: ghi log chi tiết toàn pipeline phục vụ giám sát và
+tối ưu.
+– Nhóm hỗ trợ hệ thống:
+﹢ Auth Service: xác thực và phân quyền người dùng.
+﹢ Weather Service: truy vấn dữ liệu thời tiết.
+Ngoài ra, hệ thống có tích hợp một số dịch vụ bên ngoài nhằm hỗ trợ quá trình
+xử lý và nâng cao chất lượng kết quả, bao gồm:
+- Gemini API: sinh nội dung.
+- OSRM API: tính khoảng cách thực tế.
+- Weather API: dự báo thời tiết.
+Tầng dữ liệu sử dụng PostgreSQL tích hợp pgvector, lưu trữ cả dữ liệu quan hệ
+như người dùng, lịch trình, điểm đến và dữ liệu vector phục vụ truy xuất ngữ nghĩa.
+
+===== PAGE 33 =====
+32
+Kho tri thức được xây dựng từ các nguồn như OpenStreetMap, Wikipedia song ngữ
+Việt – Anh và dữ liệu đã được tổng hợp, chuẩn hóa trong quá trình xây dựng hệ thống.
+Sau khi xử lý, các đoạn văn bản được chuyển đổi thành embedding và lưu trữ trong cơ
+sở dữ liệu.
+2.2.2. Luồng xử lý
+Hệ thống xử lý yêu cầu của người dùng thông qua một chuỗi các bước liên tiếp,
+bắt đầu từ việc tiếp nhận yêu cầu, phân tích ngữ cảnh, truy xuất tri thức và kết thúc
+bằng việc sinh lộ trình hoàn chỉnh. Luồng xử lý tổng quát của hệ thống được mô tả
+trong hình:
+Hình 2.2. Luồng xử lý chính của hệ thống
+
+===== PAGE 34 =====
+33
+Bước 1: Quản lý ngữ cảnh hội thoại
+Khi người dùng gửi yêu cầu, hệ thống trước tiên xử lý ngữ cảnh hội thoại hiện
+tại. Các thông tin từ những lượt trao đổi trước được tổng hợp nhằm duy trì tính liên
+tục của cuộc hội thoại và hỗ trợ việc hiểu đúng nội dung yêu cầu.
+Trong bước này, hệ thống thực hiện:
+– Tổng hợp các thông tin liên quan từ lịch sử hội thoại.
+– Phân giải các tham chiếu ngữ cảnh như địa điểm hoặc đối tượng đã được
+đề cập trước đó.
+– Xây dựng ngữ cảnh đầu vào cho các bước xử lý tiếp theo.
+Bước 2: Phân tích yêu cầu người dùng
+Sau khi xác định được ngữ cảnh, hệ thống tiến hành phân tích nội dung yêu cầu
+nhằm nhận diện ý định và trích xuất các thông tin cần thiết. Đồng thời, hệ thống thực
+hiện truy vấn tìm kiếm sơ bộ trên kho tri thức để tối ưu hóa thời gian phản hồi.
+Các thông tin được xác định bao gồm:
+– Điểm đến mong muốn
+– Thời gian hoặc số ngày du lịch
+– Ngân sách dự kiến
+– Sở thích và nhu cầu trải nghiệm
+– Nhóm người tham gia
+Bước 3: Kiểm tra tính đầy đủ của thông tin
+Hệ thống đánh giá mức độ đầy đủ của dữ liệu đã thu thập được. Nếu còn thiếu
+các thông tin quan trọng ảnh hưởng đến việc xây dựng lộ trình, hệ thống sẽ chủ động
+yêu cầu người dùng bổ sung trước khi tiếp tục xử lý.
+Bên cạnh đó, hệ thống cũng nhận diện các câu trả lời tiếp nối từ người dùng để
+tự động cập nhật và điều chỉnh ý định xử lý cho phù hợp. Việc kiểm tra này giúp hạn
+chế các trường hợp tạo ra kết quả không phù hợp do thiếu dữ liệu đầu vào.
+Bước 4: Định tuyến yêu cầu
+Tùy thuộc vào loại yêu cầu được nhận diện, hệ thống lựa chọn quy trình xử lý
+phù hợp:
+
+===== PAGE 35 =====
+34
+– Yêu cầu lập kế hoạch hoặc gợi ý du lịch sẽ kích hoạt toàn bộ quy trình
+truy xuất và sinh nội dung.
+– Yêu cầu tra cứu thông tin sử dụng quy trình truy xuất rút gọn.
+– Các câu hội thoại thông thường được xử lý theo cơ chế hội thoại cơ bản.
+– Cơ chế dự phòng (fallback) tự động chuyển đổi phương thức xử lý khi
+có lỗi từ dịch vụ bên ngoài.
+Bước 5: Truy xuất tri thức và sinh kết quả
+Đây là giai đoạn trung tâm của hệ thống. Trên cơ sở yêu cầu đã được chuẩn
+hóa, hệ thống thực hiện truy xuất các thông tin liên quan từ kho tri thức và các nguồn
+dữ liệu hỗ trợ.
+Quá trình này bao gồm:
+– Tìm kiếm các tài liệu liên quan trong kho tri thức.
+– Kết hợp dữ liệu từ cơ sở dữ liệu hệ thống.
+– Lựa chọn các thông tin phù hợp với ngữ cảnh người dùng.
+– Xây dựng ngữ cảnh đầu vào cho mô hình ngôn ngữ.
+– Sinh lộ trình hoặc câu trả lời tương ứng.
+Bước 6: Hậu xử lý kết quả
+Kết quả sinh ra từ mô hình tiếp tục được kiểm tra và hiệu chỉnh trước khi gửi
+tới người dùng. Một số tác vụ trong bước này được thực thi song song để rút ngắn thời
+gian xử lý.
+Các bước xử lý bao gồm:
+– Chuẩn hóa thông tin địa điểm và tọa độ.
+– Tính toán và tối ưu hóa khoảng cách giữa các điểm trong lộ trình.
+– Đối chiếu chi phí và kiểm tra mức độ tuân thủ ngân sách của người dùng
+để đưa ra lời khuyên phù hợp.
+– Kiểm tra tính trung thực của thông tin nhằm hạn chế nội dung không có
+cơ sở từ kho tri thức (hallucination).
+Bước 7: Trả kết quả và cập nhật hồ sơ người dùng
+
+===== PAGE 36 =====
+35
+Sau khi hoàn tất xử lý, hệ thống thực hiện:
+– Tự động đánh giá chất lượng kết quả phục vụ giám sát.
+– Truyền lộ trình hoặc câu trả lời về giao diện theo thời gian thực (SSE
+Streaming).
+– Lưu kết quả vào bộ nhớ đệm (Cache) nhằm tối ưu hiệu suất cho các truy
+vấn tương tự.
+– Ghi nhận sở thích và hành vi tương tác để cập nhật hồ sơ cá nhân, phục
+vụ cá nhân hóa ở các lần sử dụng tiếp theo.
+2.2.3. Công nghệ sử dụng
+Trong quá trình xây dựng hệ thống, các công nghệ được lựa chọn nhằm đáp
+ứng yêu cầu về hiệu năng, khả năng mở rộng, mức độ phù hợp với bài toán và khả
+năng tích hợp với các thành phần LLM/RAG. Bảng 2.3 trình bày tổng hợp các công
+nghệ chính được sử dụng.
+Bảng 2.3. Công nghệ sử dụng trong hệ thống
+Vai trò Công nghệ Ghi chú
+Ứng dụng web Next.js 16 + React 19 Xây dựng giao diện người dùng
+API Server FastAPI Xử lý nghiệp vụ và cung cấp API
+Cơ sở dữ liệu PostgreSQL 16 + Lưu trữ dữ liệu quan hệ và dữ liệu vector
+pgvector
+Mô hình ngôn Google Gemini 2.5 Phân tích yêu cầu và sinh nội dung
+ngữ lớn Flash
+Framework LangChain Điều phối quy trình truy xuất và sinh
+RAG phản hồi
+Embedding Gemini Embedding Sinh vector biểu diễn ngữ nghĩa cho tài
+liệu và truy vấn
+
+===== PAGE 37 =====
+36
+Xếp hạng lại tài Cross-Encoder Reranking kết quả truy xuất
+liệu
+Đối chiếu kết Natural Language Kiểm tra mức độ nhất quán giữa nội
+quả sinh Inference dung sinh ra và dữ liệu tham chiếu
+Tính khoảng OSRM Tính toán khoảng cách và thời gian di
+cách chuyển thực tế
+Dữ liệu thời tiết Open-Meteo Cung cấp thông tin thời tiết cho điểm đến
+Dữ liệu địa lý Overpass API Thu thập dữ liệu địa lý và thông tin điểm
+(OpenStreetMap) đến
+Lý do lựa chọn công nghệ:
+– PostgreSQL 16 + pgvector: cho phép quản lý đồng thời dữ liệu quan hệ và dữ
+liệu vector trên cùng một nền tảng, giúp đơn giản hóa kiến trúc lưu trữ và thuận
+lợi cho việc triển khai hệ thống RAG.
+– Google Gemini 2.5 Flash: được lựa chọn làm mô hình ngôn ngữ trung tâm nhờ
+khả năng xử lý tiếng Việt, hỗ trợ phân tích yêu cầu người dùng và sinh nội
+dung với chi phí phù hợp cho hệ thống thực nghiệm.
+– LangChain: được sử dụng để điều phối các thành phần trong pipeline RAG, hỗ
+trợ kết nối giữa mô hình ngôn ngữ, kho tri thức, bộ truy xuất và các nguồn dữ
+liệu bên ngoài.
+– Gemini Embedding: đảm nhiệm việc chuyển đổi dữ liệu văn bản thành vector
+biểu diễn ngữ nghĩa, phục vụ quá trình tìm kiếm và truy xuất thông tin liên
+quan.
+– Cross-Encoder: được sử dụng ở bước xếp hạng lại kết quả truy xuất nhằm nâng
+cao độ chính xác của các tài liệu được đưa vào ngữ cảnh cho mô hình ngôn
+ngữ.
+
+===== PAGE 38 =====
+37
+– Natural Language Inference (NLI): hỗ trợ đối chiếu mức độ nhất quán giữa nội
+dung sinh ra và dữ liệu tham chiếu, góp phần hạn chế các phản hồi không phù
+hợp hoặc thiếu căn cứ.
+– OSRM, Open-Meteo và Overpass API: được tích hợp nhằm bổ sung dữ liệu về
+khoảng cách di chuyển, thời tiết và thông tin địa lý, qua đó nâng cao tính khả
+thi của lịch trình được đề xuất.
+2.3. Thiết kế dữ liệu và kho tri thức
+2.3.1. Cơ sở dữ liệu quan hệ
+Hệ thống sử dụng PostgreSQL làm cơ sở dữ liệu quan hệ chính. Lược đồ dữ
+liệu được thiết kế theo bốn nhóm chức năng, nhằm đảm bảo tính toàn vẹn dữ liệu và
+thuận lợi cho việc mở rộng hệ thống.
+Hình 2.3a. Sơ đồ ERD nhóm bảng người dùng, hội thoại và lộ trình
+
+===== PAGE 39 =====
+38
+Hình 2.3b. Sơ đồ ERD nhóm bảng dữ liệu du lịch
+
+===== PAGE 40 =====
+39
+Dựa trên chức năng nghiệp vụ, các bảng dữ liệu được chia thành bốn nhóm
+chính:
+Nhóm dữ liệu người dùng: quản lý thông tin tài khoản và hồ sơ cá nhân phục vụ quá
+trình cá nhân hóa.
+– users: lưu trữ thông tin tài khoản người dùng như tên, email, mật khẩu đã mã
+hóa và trạng thái hoạt động.
+– user_preferences: lưu trữ hồ sơ sở thích du lịch, bao gồm phong cách du lịch,
+sở thích trải nghiệm, ưu tiên ẩm thực và các thông tin được hệ thống học hỏi
+trong quá trình sử dụng.
+Hai bảng được liên kết theo quan hệ một-một (1:1), trong đó mỗi người dùng tương
+ứng với một hồ sơ sở thích.
+Nhóm dữ liệu hội thoại: hỗ trợ duy trì ngữ cảnh và lưu vết lịch sử tương tác giữa
+người dùng và hệ thống.
+– conversations: quản lý các phiên hội thoại.
+– messages: lưu trữ nội dung trao đổi trong từng phiên hội thoại.
+Một phiên hội thoại có thể chứa nhiều tin nhắn, hình thành quan hệ một-nhiều (1) giữa
+hai bảng.
+Nhóm dữ liệu lộ trình: dữ liệu trung tâm, phục vụ việc lưu trữ và quản lý các kế
+hoạch du lịch được sinh ra bởi hệ thống.
+– itineraries: lưu thông tin tổng thể của lộ trình.
+– itinerary_days: lưu kế hoạch theo từng ngày.
+– itinerary_activities: lưu chi tiết các hoạt động trong từng ngày.
+Cấu trúc phân cấp này cho phép biểu diễn đầy đủ một lộ trình du lịch, từ mức tổng
+quan đến từng hoạt động cụ thể. Mỗi hoạt động được lưu kèm các thông tin như thời
+gian, địa điểm, tọa độ địa lý, thời lượng và chi phí dự kiến.
+Nhóm dữ liệu du lịch: đóng vai trò là nguồn tri thức có cấu trúc phục vụ quá trình
+gợi ý và xây dựng lộ trình.
+
+===== PAGE 41 =====
+40
+– regions: lưu thông tin vùng miền (Miền Bắc, Miền Trung, Miền Nam) và đặc
+điểm khí hậu.
+– provinces: lưu thông tin 34 tỉnh/thành phố trực thuộc Trung ương, bao gồm tọa
+độ, tháng tham quan lý tưởng và các nhãn phân loại.
+– destinations: lưu thông tin các điểm tham quan du lịch (POI) thuộc từng tỉnh,
+bao gồm tọa độ, giờ mở cửa, giá vé, đánh giá và thời lượng tham quan.
+– restaurants: lưu thông tin nhà hàng và địa điểm ẩm thực thuộc từng tỉnh.
+– accommodations: lưu thông tin cơ sở lưu trú thuộc từng tỉnh.
+– transport_routes: lưu thông tin tuyến di chuyển liên tỉnh, bao gồm phương tiện,
+thời gian và chi phí.
+Bảng 2.4. Các bảng dữ liệu chính trong hệ thống
+Bảng Số trường Mô tả Quan hệ chính
+users 10 Thông tin tài khoản 1:N conversations, 1:N
+người dùng itineraries
+user_preferences 8 Hồ sơ sở thích du lịch 1:1 users
+conversations 5 Phiên hội thoại N:1 users, 1:N messages
+messages 5 Nội dung trao đổi trong N:1 conversations
+hội thoại
+itineraries 14 Thông tin tổng thể lộ N:1 users, 1:1
+trình conversations
+itinerary_days 5 Kế hoạch theo ngày N:1 itineraries
+itinerary_activities 14 Hoạt động trong lộ N:1 itinerary_days
+trình
+regions 6 Thông tin vùng miền 1:N destinations
+
+===== PAGE 42 =====
+41
+provinces 14 Tỉnh/thành phố (34 đơn N:1 regions
+vị)
+destinations 16 Điểm tham quan du lịch N:1 destinations
+restaurants 13 Nhà hàng và địa điểm N:1 destinations
+ẩm thực
+accommodations 12 Cơ sở lưu trú N:1 destinations
+transport_routes 12 Tuyến di chuyển giữa N:1 destinations
+các điểm đến
+Thiết kế dữ liệu theo mô hình quan hệ giúp đảm bảo tính nhất quán giữa các
+thành phần của hệ thống, đồng thời tạo nền tảng cho các chức năng quản lý người
+dùng, duy trì hội thoại và xây dựng lộ trình du lịch cá nhân hóa. Bên cạnh dữ liệu
+quan hệ, hệ thống còn sử dụng dữ liệu vector phục vụ truy xuất ngữ nghĩa.
+2.3.2. Cơ sở dữ liệu vector (pgvector)
+Bên cạnh dữ liệu quan hệ, hệ thống sử dụng extension pgvector trên
+PostgreSQL để lưu trữ vector embedding phục vụ truy xuất ngữ nghĩa trong pipeline
+RAG. Việc sử dụng chung PostgreSQL cho cả dữ liệu quan hệ và dữ liệu vector giúp
+đơn giản hóa kiến trúc triển khai, đồng thời thuận lợi hơn trong việc quản lý và đồng
+bộ dữ liệu.
+Các tài liệu trong kho tri thức sau khi được thu thập và chuẩn hóa sẽ được chia
+thành các đoạn nội dung nhỏ hơn (chunk). Mỗi đoạn văn bản được chuyển đổi thành
+vector embedding thông qua mô hình nhúng và được lưu trữ cùng với nội dung gốc
+cũng như các thông tin mô tả liên quan.
+Bảng 2.5. Cấu trúc dữ liệu vector embedding
+Trường Kiểu dữ liệu Mô tả
+id uuid Khóa định danh của bản ghi vector
+content text Nội dung văn bản gốc
+
+===== PAGE 43 =====
+42
+embedding vector(3072) Vector biểu diễn ngữ nghĩa của văn bản
+metadata jsonb Thông tin mô tả phục vụ lọc và truy xuất
+Mô hình nhúng được sử dụng là Gemini Embedding, có nhiệm vụ chuyển đổi
+nội dung văn bản thành vector biểu diễn ngữ nghĩa. Các vector này cho phép hệ thống
+tìm kiếm những đoạn thông tin có ý nghĩa tương đồng với truy vấn của người dùng,
+ngay cả khi truy vấn và tài liệu không sử dụng hoàn toàn cùng từ khóa.
+Trong quá trình truy xuất, câu hỏi của người dùng cũng được chuyển đổi thành
+vector embedding và so sánh với các vector trong kho tri thức bằng độ đo cosine
+similarity, trong đó pgvector sử dụng chỉ mục HNSW [13] để tăng tốc tìm kiếm láng
+giềng gần đúng. Những tài liệu có độ tương đồng cao nhất sẽ được lựa chọn làm ứng
+viên để xây dựng ngữ cảnh đầu vào cho mô hình ngôn ngữ lớn.
+Ngoài tìm kiếm theo ngữ nghĩa, hệ thống còn kết hợp lọc theo metadata như
+loại nguồn dữ liệu, địa điểm, danh mục hoặc ngôn ngữ. Cách tiếp cận này giúp thu
+hẹp phạm vi tìm kiếm, nâng cao độ chính xác của kết quả truy xuất và giảm lượng ngữ
+cảnh không liên quan.
+2.3.3. Kho tri thức
+Kho tri thức là nguồn dữ liệu đầu vào của pipeline RAG, cung cấp thông tin để
+hệ thống truy xuất và sinh lịch trình du lịch. Dữ liệu trong kho tri thức được xây dựng
+từ nhiều nguồn khác nhau nhằm đảm bảo tính đa dạng, độ bao phủ và khả năng bổ
+sung thông tin cho bài toán du lịch tại Việt Nam.
+Các nguồn dữ liệu chính được sử dụng trong hệ thống bao gồm:
+– Dữ liệu biên soạn thủ công: bao gồm thông tin tổng quan về vùng miền,
+điểm đến tiêu biểu, tuyến vận chuyển, đặc điểm mùa vụ và các nội dung
+du lịch đã được kiểm duyệt. Nguồn dữ liệu này đóng vai trò làm tập tri
+thức nền tảng, giúp hệ thống duy trì khả năng tư vấn ngay cả khi các
+nguồn dữ liệu bên ngoài không khả dụng.
+
+===== PAGE 44 =====
+43
+– OpenStreetMap (Overpass API): cung cấp dữ liệu địa lý và các điểm
+quan tâm (Point of Interest – POI) như điểm tham quan, nhà hàng, khách
+sạn và cơ sở lưu trú. Dữ liệu thu thập bao gồm tên địa điểm, tọa độ địa
+lý, loại hình dịch vụ và các thông tin mô tả liên quan. Đây là nguồn dữ
+liệu quan trọng phục vụ việc xây dựng lịch trình và hiển thị trên bản đồ.
+– Wikipedia tiếng Việt và tiếng Anh: cung cấp thông tin mô tả về các địa
+danh, điểm đến và giá trị văn hóa – lịch sử. Việc sử dụng dữ liệu song
+ngữ giúp tăng độ bao phủ nội dung, đồng thời hỗ trợ truy xuất thông tin
+đối với các địa điểm có lượng dữ liệu tiếng Việt còn hạn chế.
+– Foursquare Places API: bổ sung dữ liệu POI như nhà hàng, điểm tham
+quan và địa điểm dịch vụ cho các điểm đến cần làm giàu thêm thông tin.
+Nguồn này được sử dụng như kênh thu thập bổ sung bên cạnh
+OpenStreetMap, đặc biệt hữu ích với các địa điểm ẩm thực hoặc dịch vụ
+mà OpenStreetMap chưa có dữ liệu đầy đủ.
+Sau khi thu thập, dữ liệu được chuẩn hóa và xử lý theo quy trình trình bày tại
+Mục 2.3.4.
+2.3.4. Quy trình xử lý dữ liệu
+Kho tri thức của hệ thống được xây dựng thông qua một quy trình xử lý dữ liệu
+thống nhất, từ khâu thu thập dữ liệu đến khi tạo vector embedding phục vụ truy xuất
+ngữ nghĩa. Quy trình này giúp đảm bảo dữ liệu từ nhiều nguồn khác nhau được chuẩn
+hóa về cấu trúc, loại bỏ các thông tin không phù hợp và duy trì tính nhất quán trước
+khi đưa vào sử dụng.
+
+===== PAGE 45 =====
+44
+Hình 2.4. Quy trình xử lý dữ liệu
+Dữ liệu từ các nguồn đã trình bày ở Mục 2.3.3 được xử lý qua các bước: thu
+thập, làm sạch, chuẩn hóa, chia đoạn (chunking), sinh embedding và lưu trữ vào cơ sở
+dữ liệu.
+2.4. Thiết kế hệ thống RAG
+Hệ thống RAG là thành phần trung tâm, chịu trách nhiệm kết nối kho tri thức
+với mô hình ngôn ngữ lớn để sinh ra các đề xuất lịch trình có căn cứ dữ liệu. Kiến trúc
+được xây dựng theo hướng RAG nâng cao (Advanced RAG), trong đó bổ sung nhiều
+giai đoạn tối ưu nhằm cải thiện chất lượng ngữ cảnh truy xuất và kết quả đầu ra.
+2.4.1. RAG cơ bản và RAG nâng cao
+Trong kiến trúc RAG cơ bản, quy trình xử lý thường gồm ba bước chính: tiếp
+nhận truy vấn, truy xuất tài liệu từ kho tri thức và sinh kết quả dựa trên các tài liệu
+được truy xuất [11]. Cách tiếp cận này có ưu điểm là đơn giản, dễ triển khai, nhưng
+vẫn tồn tại một số hạn chế khi áp dụng cho bài toán gợi ý du lịch cá nhân hóa:
+– Nếu chỉ dựa trên tìm kiếm vector, hệ thống có thể bỏ sót các tài liệu
+chứa từ khóa đặc thù như tên địa danh, món ăn, loại hình dịch vụ hoặc
+tuyến di chuyển.
+
+===== PAGE 46 =====
+45
+– Thiếu cơ chế đánh giá lại chất lượng tài liệu truy xuất, khiến ngữ cảnh
+đầu vào có thể chứa thông tin nhiễu hoặc chưa thật sự liên quan.
+– Ngữ cảnh đưa vào LLM có thể quá dài hoặc chứa nhiều thông tin không
+cần thiết, ảnh hưởng đến chất lượng sinh phản hồi.
+– Trong triển khai cơ bản, dữ liệu có cấu trúc như giá cả, đánh giá, tọa độ
+hoặc thời gian di chuyển thường chưa được khai thác đầy đủ.
+Để nâng cao chất lượng kết quả, hệ thống áp dụng kiến trúc RAG nâng cao.
+Thay vì chỉ thực hiện truy xuất và sinh phản hồi, kiến trúc này bổ sung các bước như
+phân tích truy vấn, kết hợp nhiều phương pháp truy xuất, xếp hạng lại tài liệu, xây
+dựng ngữ cảnh từ nhiều nguồn dữ liệu và hậu xử lý kết quả đầu ra [7]. Nhờ đó, hệ
+thống có thể tạo ra các đề xuất phù hợp hơn với nhu cầu người dùng, đồng thời giảm
+nguy cơ sinh thông tin không chính xác hoặc không có căn cứ.
+Bảng 2.6. So sánh RAG cơ bản và RAG nâng cao trong hệ thống
+Giai đoạn RAG cơ bản RAG nâng cao
+Trước truy Sử dụng trực tiếp truy Phân tích yêu cầu, trích xuất thực thể và
+xuất vấn gốc tối ưu truy vấn
+Truy xuất Truy xuất tài liệu bằng Hybrid Search kết hợp tìm kiếm ngữ nghĩa
+một phương pháp chính và tìm kiếm từ khóa
+Sau truy Ít hoặc không có xử lý bổ Xếp hạng lại, lọc nhiễu và lựa chọn tài
+xuất sung liệu phù hợp
+Xây dựng Chủ yếu sử dụng tài liệu Kết hợp tài liệu truy xuất, dữ liệu hệ
+ngữ cảnh truy xuất thống, thông tin thời tiết và hồ sơ người
+dùng
+Sinh kết Prompt đơn giản với ngữ Prompt có ngữ cảnh mở rộng và ràng buộc
+quả cảnh giới hạn theo yêu cầu người dùng
+Hậu xử lý Ít hoặc không có hậu xử Kiểm tra, chuẩn hóa và tối ưu lịch trình
+lý đầu ra
+
+===== PAGE 47 =====
+46
+Từ các phân tích trên, hệ thống lựa chọn kiến trúc RAG nâng cao để phù hợp
+với bài toán gợi ý du lịch cá nhân hóa. Các thành phần cụ thể của pipeline RAG được
+trình bày trong các mục tiếp theo.
+2.4.2. Phân tích truy vấn và quản lý ngữ cảnh
+Giai đoạn tiền truy xuất có nhiệm vụ phân tích và chuẩn hóa yêu cầu của người
+dùng trước khi thực hiện truy xuất tri thức. Mục tiêu của giai đoạn này là xây dựng
+một biểu diễn truy vấn đầy đủ, có ngữ cảnh và phù hợp với đặc thù của bài toán du
+lịch. Hệ thống sử dụng ba thành phần chính gồm: quản lý ngữ cảnh hội thoại
+(Memory), NLU và bộ lập kế hoạch truy xuất (RAG Planner).
+Hình 2.5. Kiến trúc Query Understanding & Memory
+Memory chịu trách nhiệm duy trì ngữ cảnh giữa các lượt tương tác. Thành
+phần này lưu trữ lịch sử hội thoại gần nhất, theo dõi các thực thể quan trọng như điểm
+đến, thời gian du lịch, ngân sách và sở thích, đồng thời hỗ trợ phân giải các tham
+chiếu ngữ cảnh xuất hiện trong hội thoại. Ví dụ, khi người dùng sử dụng các cụm từ
+như “ở đó” hoặc “chỗ này”, hệ thống có thể dựa trên lịch sử hội thoại để xác định địa
+điểm tương ứng đã được đề cập trước đó.
+NLU xác định ý định của người dùng và trích xuất các thông tin cần thiết cho
+quá trình truy xuất. Kết quả đầu ra bao gồm ý định, các thực thể liên quan đến chuyến
+đi và truy vấn tìm kiếm đã được chuẩn hóa. Ngoài ra, thành phần này còn hỗ trợ nhận
+
+===== PAGE 48 =====
+47
+diện các trường hợp thiếu thông tin quan trọng để hệ thống chủ động yêu cầu người
+dùng bổ sung trước khi sinh lịch trình.
+RAG Planner lựa chọn chiến lược truy xuất phù hợp dựa trên độ phức tạp của
+yêu cầu. Đối với các truy vấn đơn giản, hệ thống có thể thực hiện truy xuất trực tiếp
+trên kho tri thức. Với các yêu cầu xây dựng lịch trình nhiều ngày hoặc liên quan đến
+nhiều điểm đến, phạm vi truy xuất được mở rộng và tổ chức theo nhiều bước nhằm
+tăng độ bao phủ thông tin.
+Bảng 2.7. Chiến lược truy xuất của RAG Planner
+Chiến lược Điều kiện áp dụng Đặc điểm
+Single Retrieval Truy vấn đơn giản Truy xuất trực tiếp trên kho tri thức với
+phạm vi tìm kiếm tương đối hẹp
+Multi-step Yêu cầu lập lịch Mở rộng truy xuất theo nhiều khía cạnh như
+Retrieval trình nhiều ngày điểm đến, hoạt động, chi phí, thời gian và
+sở thích
+Multi-destinatio Yêu cầu liên quan Truy xuất riêng cho từng điểm đến trước khi
+n Retrieval đến nhiều điểm tổng hợp kết quả và xây dựng ngữ cảnh
+đến chung
+Đầu ra của giai đoạn này là truy vấn đã được chuẩn hóa, ngữ cảnh hội thoại và
+chiến lược truy xuất tương ứng. Các thông tin này được sử dụng làm đầu vào cho giai
+đoạn truy xuất tri thức ở bước tiếp theo.
+2.4.3. Truy xuất tri thức
+Giai đoạn truy xuất có nhiệm vụ tìm kiếm và lựa chọn các tài liệu liên quan từ
+kho tri thức để phục vụ quá trình sinh câu trả lời. Trong hệ thống đề xuất, quá trình
+truy xuất được thực hiện theo hai bước chính: Hybrid Search và Cross-Encoder
+Reranking.
+
+===== PAGE 49 =====
+48
+Hình 2.6. Kiến trúc giai đoạn Retrieval
+Hybrid Search kết hợp đồng thời hai phương pháp tìm kiếm:
+– Dense Retrieval: sử dụng vector embedding để tìm các tài liệu có nội
+dung tương đồng về ngữ nghĩa với truy vấn.
+– Sparse Retrieval: sử dụng tìm kiếm từ khóa nhằm tăng khả năng nhận
+diện tên riêng, địa danh và các thuật ngữ đặc thù.
+Kết quả từ hai phương pháp được hợp nhất bằng thuật toán RRF [3]. Điểm số
+của mỗi tài liệu được tính theo công thức:
+1
+𝑅𝑅𝐹(𝑑) = ∑
+𝑘 + 𝑟𝑎𝑛𝑘 (𝑑)
+𝑟∈𝑅 𝑟
+Trong đó 𝑅 là tập các danh sách kết quả truy xuất, 𝑟𝑎𝑛𝑘 (𝑑) là thứ hạng của tài
+𝑟
+liệu 𝑑 trong danh sách 𝑟, còn 𝑘 là hằng số điều hòa.
+Sau khi hợp nhất kết quả, hệ thống thực hiện Cross-Encoder Reranking nhằm
+đánh giá lại mức độ liên quan giữa truy vấn và từng tài liệu. Hệ thống sử dụng một mô
+hình cross-encoder đa ngôn ngữ có hỗ trợ tiếng Việt. Khác với bi-encoder [15] chỉ so
+sánh các vector biểu diễn độc lập, cross-encoder xử lý trực tiếp cặp truy vấn và tài liệu
+để tính toán mức độ liên quan. Các tài liệu có điểm số cao nhất được lựa chọn làm đầu
+vào cho giai đoạn xây dựng ngữ cảnh.
+
+===== PAGE 50 =====
+49
+Đầu ra của giai đoạn truy xuất là tập tài liệu đã được sàng lọc và xếp hạng theo
+mức độ liên quan, phục vụ cho quá trình xây dựng ngữ cảnh và sinh phản hồi ở các
+bước tiếp theo.
+2.4.4. Tối ưu ngữ cảnh
+Giai đoạn tối ưu ngữ cảnh có nhiệm vụ xây dựng và tinh gọn ngữ cảnh đầu vào
+cho mô hình ngôn ngữ từ các dữ liệu đã được truy xuất. Giai đoạn này gồm hai bước
+chính: tổng hợp ngữ cảnh đa nguồn (Context Aggregation) và nén ngữ cảnh (Context
+Compression).
+Hình 2.7. Quy trình tối ưu ngữ cảnh
+Tổng hợp ngữ cảnh đa nguồn (Context Aggregation). Để xây dựng lịch trình du
+lịch phù hợp, hệ thống không chỉ sử dụng các tài liệu truy xuất từ kho tri thức mà còn
+kết hợp thêm dữ liệu có cấu trúc và thông tin cá nhân hóa. Việc tổng hợp nhiều nguồn
+dữ liệu giúp mô hình ngôn ngữ có đầy đủ thông tin hơn về điểm đến, người dùng và
+điều kiện thực tế tại thời điểm lập kế hoạch.
+Các nguồn dữ liệu được sử dụng gồm:
+– Tài liệu truy xuất (Retrieved Documents): các tài liệu đã được truy xuất
+và xếp hạng từ giai đoạn truy xuất.
+– Dữ liệu có cấu trúc (Structured DB): dữ liệu có cấu trúc về điểm tham
+quan, nhà hàng, cơ sở lưu trú và tuyến vận chuyển.
+
+===== PAGE 51 =====
+50
+– Hồ sơ người dùng (User Profile): hồ sơ sở thích và lịch sử tương tác của
+người dùng.
+– Gợi ý cá nhân hóa (Recommendations): danh sách địa điểm được gợi ý
+theo mức độ phù hợp với người dùng.
+– Thông tin thời tiết (Weather): thông tin thời tiết tại điểm đến trong
+khoảng thời gian dự kiến.
+Nén ngữ cảnh (Context Compression). Sau khi tổng hợp, ngữ cảnh đầu vào có
+thể chứa thông tin trùng lặp, dư thừa hoặc ít liên quan đến truy vấn. Hệ thống áp dụng
+kỹ thuật nén ngữ cảnh theo hướng trích xuất, chỉ giữ lại các đoạn thông tin có mức độ
+liên quan cao với yêu cầu của người dùng [9]. Quá trình này giúp giảm kích thước ngữ
+cảnh, hạn chế chi phí xử lý và đảm bảo dữ liệu đầu vào phù hợp với giới hạn ngữ cảnh
+của mô hình ngôn ngữ.
+Kết quả của giai đoạn tối ưu ngữ cảnh là một tập ngữ cảnh đã được tổng hợp và
+rút gọn, được sử dụng cho quá trình sinh phản hồi ở giai đoạn tiếp theo.
+2.4.5. Sinh phản hồi và cá nhân hóa
+Giai đoạn này thực hiện việc sinh lịch trình hoặc câu trả lời dựa trên ngữ cảnh
+đã được xây dựng từ các bước trước. Mô hình Gemini 2.5 Flash nhận ngữ cảnh đã
+được tổng hợp và tối ưu hóa, sau đó sinh phản hồi phù hợp với từng loại yêu cầu.
+Hình 2.8. Giai đoạn Generation & Personalization
+Sinh phản hồi (Generation): Sau khi nhận ngữ cảnh đầu vào, mô hình ngôn ngữ
+tiến hành tạo nội dung tương ứng với từng loại yêu cầu. Đối với các truy vấn lập kế
+hoạch du lịch, hệ thống sinh lịch trình theo từng ngày kèm thông tin về địa điểm, thời
+
+===== PAGE 52 =====
+51
+gian và chi phí dự kiến. Với các truy vấn tra cứu hoặc gợi ý địa điểm, hệ thống trả về
+danh sách đề xuất hoặc thông tin mô tả phù hợp.
+Cá nhân hóa (Personalization): Để hỗ trợ cá nhân hóa kết quả, hồ sơ người
+dùng được tích hợp vào quá trình sinh phản hồi cùng với dữ liệu truy xuất từ kho tri
+thức. Các thông tin này không thay thế dữ liệu truy xuất, mà đóng vai trò như các ràng
+buộc và tiêu chí ưu tiên trong quá trình tạo đề xuất. Dữ liệu phục vụ cá nhân hóa bao
+gồm:
+– Phong cách du lịch.
+– Sở thích cá nhân.
+– Ưu tiên ẩm thực.
+– Lịch sử các điểm đến đã ghé thăm.
+– Điểm ưu tiên theo từng danh mục, được cập nhật từ phản hồi và hành vi
+tương tác của người dùng.
+Việc tích hợp các thông tin này giúp hệ thống ưu tiên những địa điểm và hoạt
+động phù hợp hơn với từng người dùng, từ đó nâng cao mức độ cá nhân hóa của kết
+quả gợi ý.
+Đầu ra có cấu trúc (Structured Output). Để thuận lợi cho việc lưu trữ, hậu xử lý
+và hiển thị trên giao diện, kết quả được sinh theo một cấu trúc dữ liệu thống nhất.
+Bảng 2.8. Cấu trúc đầu ra của hệ thống
+Cấp dữ liệu Nội dung
+Lộ trình Tiêu đề, tổng chi phí, số ngày
+Ngày Thông tin từng ngày trong lộ trình
+Hoạt động Thời gian, địa điểm, mô tả, danh mục, chi phí, tọa độ
+Cấu trúc này tương ứng với mô hình dữ liệu lịch trình được trình bày tại Mục
+2.3.1 và hỗ trợ các bước hậu xử lý cũng như hiển thị trên giao diện người dùng.
+Đầu ra của giai đoạn này là lịch trình hoặc câu trả lời đã được cá nhân hóa, làm
+đầu vào cho giai đoạn hậu xử lý và đánh giá chất lượng kết quả.
+
+===== PAGE 53 =====
+52
+2.4.6. Hậu xử lý
+Giai đoạn hậu xử lý được thực hiện sau khi mô hình ngôn ngữ sinh ra kết quả
+nhằm chuẩn hóa dữ liệu, kiểm tra tính hợp lý của lịch trình và đánh giá chất lượng đầu
+ra trước khi trả về cho người dùng. Giai đoạn này bao gồm ba bước xử lý chính: tối ưu
+lịch trình, đánh giá chất lượng và ghi nhận tín hiệu sở thích người dùng.
+Hình 2.9. Quy trình hậu xử lý kết quả
+Tối ưu lịch trình: Kết quả sinh ra từ mô hình ngôn ngữ có thể chứa các địa
+điểm chưa được chuẩn hóa hoặc cần được kiểm tra lại về khoảng cách và trình tự di
+chuyển. Vì vậy, hệ thống thực hiện đối chiếu địa điểm với cơ sở dữ liệu, chuẩn hóa
+thông tin liên quan và tính toán khoảng cách giữa các điểm trong lịch trình. Các tác vụ
+chính bao gồm:
+– Chuẩn hóa tên địa điểm, danh mục và tọa độ địa lý.
+– Tính khoảng cách giữa các điểm trong lịch trình.
+– Kiểm tra tính hợp lý của thứ tự di chuyển.
+– Hiệu chỉnh thông tin chi phí dự kiến khi cần thiết.
+Đánh giá chất lượng kết quả (Quality Evaluation): Sau khi tối ưu lịch trình, hệ
+thống sử dụng bộ tiêu chí đánh giá để kiểm tra chất lượng kết quả sinh ra. Việc đánh
+giá được thực hiện dựa trên nhiều tiêu chí khác nhau nhằm phục vụ quá trình giám sát,
+phân tích và cải thiện hệ thống. Đối với các tiêu chí liên quan đến chất lượng RAG, hệ
+thống có thể tham khảo cách tiếp cận đánh giá tự động như RAGAS [5].
+Bảng 2.9. Các tiêu chí đánh giá chất lượng
+Tiêu chí Mô tả
+Mức độ liên Kết quả phù hợp với yêu cầu ban đầu của người dùng
+quan
+
+===== PAGE 54 =====
+53
+Mức độ đầy đủ Lịch trình có đủ số ngày và các hoạt động cần thiết
+Độ bao phủ Kết quả khai thác được thông tin từ nhiều nguồn dữ liệu liên
+thông tin quan
+Phù hợp ngân Các hoạt động có thông tin chi phí hợp lý so với ngân sách người
+sách dùng
+Đa dạng hoạt Lịch trình có sự phân bổ giữa nhiều loại hình như tham quan, ẩm
+động thực, nghỉ dưỡng
+Nhất quán nội Thời gian, thứ tự hoạt động và thông tin mô tả không mâu thuẫn
+dung với nhau
+Chất lượng ngữ Ngữ cảnh truy xuất có mức độ liên quan phù hợp với truy vấn và
+cảnh điểm đến
+Ghi nhận sở thích người dùng: Bên cạnh việc trả kết quả, hệ thống ghi nhận và
+cập nhật hồ sơ người dùng dựa trên các tín hiệu thu được trong quá trình tương tác.
+Những thông tin này được sử dụng cho các lần truy vấn tiếp theo nhằm nâng cao mức
+độ cá nhân hóa của kết quả gợi ý. Các nguồn dữ liệu cập nhật bao gồm:
+– Các sở thích được người dùng đề cập trực tiếp.
+– Các địa điểm và hoạt động được người dùng lựa chọn.
+– Phản hồi đánh giá đối với lịch trình.
+– Lịch sử tương tác trong hội thoại.
+Kết quả của giai đoạn hậu xử lý là lịch trình hoặc câu trả lời đã được chuẩn
+hóa, kiểm tra chất lượng và bổ sung các tín hiệu cá nhân hóa cần thiết trước khi trả về
+giao diện người dùng.
+2.5. Kết luận chương 2
+Chương 2 đã trình bày quá trình phân tích bài toán và thiết kế hệ thống gợi ý
+lịch trình du lịch cá nhân hóa. Nội dung chính của chương bao gồm:
+– Xác định bài toán, đối tượng người dùng, phạm vi nghiên cứu và các
+yêu cầu chức năng, phi chức năng của hệ thống.
+
+===== PAGE 55 =====
+54
+– Thiết kế kiến trúc tổng thể theo mô hình ba tầng gồm tầng giao diện,
+tầng xử lý nghiệp vụ và tầng dữ liệu, đồng thời tổ chức các thành phần
+xử lý theo hướng module hóa nhằm tăng tính linh hoạt và khả năng mở
+rộng.
+– Xây dựng cơ sở dữ liệu và kho tri thức, bao gồm quy trình thu thập,
+chuẩn hóa, chia đoạn và chuyển đổi dữ liệu từ các nguồn như
+OpenStreetMap, Wikipedia và dữ liệu biên soạn thủ công thành vector
+embedding phục vụ truy xuất ngữ nghĩa.
+– Đề xuất hệ thống RAG nâng cao với các bước: phân tích truy vấn, truy
+xuất tri thức, tối ưu ngữ cảnh, sinh phản hồi có cá nhân hóa và hậu xử lý
+kết quả.
+– Tích hợp các kỹ thuật như Hybrid Search, Cross-Encoder Reranking,
+Context Compression, Structured Output và ghi nhận sở thích người
+dùng nhằm cải thiện chất lượng truy xuất, độ tin cậy của phản hồi và
+mức độ phù hợp của lịch trình.
+Các nội dung đã trình bày trong Chương 2 là cơ sở để triển khai hệ thống thực
+nghiệm, tiến hành đánh giá và phân tích kết quả trong Chương 3, qua đó kiểm chứng
+tính khả thi của phương pháp đề xuất.
+
+===== PAGE 56 =====
+55
+Chương 3: THỰC NGHIỆM VÀ ĐÁNH GIÁ KẾT QUẢ
+3.1. Thiết lập thực nghiệm
+3.1.1. Mục tiêu và phương pháp
+Mục tiêu của phần thực nghiệm là kiểm tra tính khả thi và đánh giá hiệu quả
+của hệ thống gợi ý lịch trình du lịch cá nhân hóa dựa trên LLM và RAG đã được thiết
+kế ở Chương 2. Cụ thể, thực nghiệm tập trung làm rõ khả năng truy xuất tri thức, chất
+lượng phản hồi sinh ra, mức độ phù hợp của lịch trình với nhu cầu người dùng, hiệu
+quả của thành phần cá nhân hóa và thời gian xử lý của toàn bộ quy trình.
+Luận văn kết hợp hai hướng đánh giá chính:
+– Đánh giá định lượng: đo lường chất lượng truy xuất và sinh phản hồi
+thông qua các chỉ số RAGAS, đồng thời ghi nhận thời gian xử lý ở từng
+bước trong quy trình.
+– Đánh giá định tính: xem xét tính hợp lý, khả thi và mức độ phù hợp của
+lộ trình du lịch trong các tình huống sử dụng cụ thể.
+Các nội dung đánh giá chính được tổng hợp trong Bảng 3.1.
+Bảng 3.1. Mục tiêu và phương pháp đánh giá thực nghiệm
+Nội dung Mục tiêu Phương pháp thực hiện
+đánh giá
+Hệ thống Đánh giá chất lượng truy Sử dụng các chỉ số RAGAS và so sánh
+RAG xuất tri thức và sinh phản hồi giữa các cấu hình RAG
+Lịch trình Kiểm tra tính đầy đủ, hợp lý Sử dụng bộ tiêu chí đánh giá chất
+du lịch và khả thi của lịch trình lượng lịch trình
+Cá nhân Xác định ảnh hưởng của hồ So sánh kết quả khi có và không có
+hóa sơ người dùng đến kết quả thông tin cá nhân hóa
+gợi ý
+
+===== PAGE 57 =====
+56
+Hiệu năng Đo thời gian xử lý và khả Ghi nhận thời gian xử lý theo từng
+hệ thống năng phản hồi của hệ thống bước trong quy trình và tổng thời gian
+phản hồi
+Bên cạnh cấu hình đầy đủ, luận văn cũng so sánh với các cấu hình rút gọn
+nhằm làm rõ mức độ đóng góp của từng thành phần trong hệ thống. Các cấu hình
+RAG, bộ tiêu chí đánh giá lịch trình, thí nghiệm cá nhân hóa, bộ dữ liệu thực nghiệm
+và kịch bản đánh giá cụ thể được trình bày trong các phần tiếp theo.
+3.1.2. Môi trường thực nghiệm và cấu hình đánh giá
+Hệ thống thực nghiệm được triển khai trên môi trường phát triển cục bộ. Cấu
+hình phần cứng, phần mềm và các thành phần chính được trình bày trong Bảng 3.2.
+Bảng 3.2. Môi trường phần cứng và phần mềm
+Thành phần Cấu hình
+Hệ điều hành macOS 26.5
+CPU Apple M3 Pro
+RAM 18 GB
+Backend Python 3.13
+Frontend Node.js 22.17
+Cơ sở dữ liệu PostgreSQL 16 + pgvector (Docker)
+Bộ nhớ đệm Redis 7 (Docker)
+Bên cạnh môi trường triển khai, hệ thống sử dụng các mô hình và cấu hình
+RAG như trong Bảng 3.3.
+
+===== PAGE 58 =====
+57
+Bảng 3.3. Cấu hình mô hình và hệ thống RAG
+Thành phần Cấu hình
+Mô hình ngôn ngữ lớn Gemini 2.5 Flash
+Mô hình embedding Gemini Embedding
+Mô hình reranking BAAI/bge-reranker-v2-m3
+Tham số sinh phản hồi temperature = 0.3
+Truy xuất Dense Search, Hybrid Search, Reranking tùy cấu hình thử
+nghiệm
+Nén ngữ cảnh Extractive Compression
+Thời gian phản hồi được ghi nhận từ thời điểm hệ thống tiếp nhận truy vấn đến
+khi trả về kết quả hoàn chỉnh cho người dùng. Các cấu hình thử nghiệm được thực
+hiện trên cùng một môi trường nhằm đảm bảo tính so sánh giữa các kết quả.
+3.1.3. Bộ dữ liệu thực nghiệm
+Dữ liệu nền được sử dụng làm nguồn tri thức cho hệ thống RAG, bao gồm
+thông tin về các điểm đến du lịch tại Việt Nam. Dữ liệu được thu thập từ
+OpenStreetMap, Wikipedia song ngữ Việt – Anh và dữ liệu biên soạn thủ công, sau đó
+được chuẩn hóa và lưu trữ trong PostgreSQL kết hợp pgvector.
+Bảng 3.4. Thống kê dữ liệu kho tri thức
+Loại dữ liệu Số lượng Ghi chú
+Tỉnh/thành phố 34 100% có tọa độ, tháng tham quan lý tưởng và
+nhãn phân loại
+Điểm tham quan 4.401 100% có tọa độ, giờ mở cửa, giá vé và đánh
+giá
+Nhà hàng 15.878 99,9% có tọa độ
+
+===== PAGE 59 =====
+58
+Chỗ ở 6.774 99,7% có tọa độ
+Tuyến giao thông 104 100% có chi phí ước tính và thời gian di
+chuyển
+Tổng POI 27.053 Điểm tham quan, nhà hàng và chỗ ở
+Tổng bản ghi du lịch 27.194 Bao gồm POI và tuyến giao thông
+Tập truy vấn thực nghiệm gồm 50 câu hỏi được xây dựng thủ công, bao phủ
+bốn nhóm yêu cầu: lập lịch trình, gợi ý điểm đến, tra cứu thông tin và hội thoại chung.
+Chi tiết các nhóm truy vấn và kịch bản đánh giá được trình bày ở phần tiếp theo.
+3.1.4. Kịch bản thực nghiệm
+Thực nghiệm được tổ chức thành bốn kịch bản, mỗi kịch bản tập trung vào một
+khía cạnh chất lượng khác nhau của hệ thống. Chi tiết phương pháp đánh giá và kết
+quả của từng kịch bản được trình bày tại Mục 3.3.
+Bảng 3.5. Kịch bản thực nghiệm
+Kịch bản Nội dung Chỉ số đo lường chính
+Hiểu ngôn Đánh giá thành phần NLU Độ chính xác phân loại ý định, trích
+ngữ tự nhiên trên 50 truy vấn thực nghiệm xuất điểm đến và trích xuất thời
+lượng chuyến đi
+Hệ thống Chạy toàn bộ hệ thống trên tập Tính đầy đủ, độ đa dạng, tính hợp lý
+RAG truy vấn đại diện về thời gian, bao phủ chi phí, chất
+end-to-end lượng tọa độ và thời gian phản hồi
+So sánh các So sánh kết quả giữa RAG Điểm chất lượng tổng hợp, độ chính
+cấu hình đầy đủ và các cấu hình rút gọn xác POI, chi phí, tọa độ và thời gian
+như LLM thuần, Basic RAG phản hồi
+
+===== PAGE 60 =====
+59
+Cá nhân hóa So sánh kết quả khi có và Mức độ phù hợp với sở thích, khả
+không có hồ sơ người dùng năng đáp ứng ràng buộc ngân sách
+và tính hợp lý của lịch trình
+3.2. Xây dựng hệ thống thực nghiệm
+Hệ thống thực nghiệm được triển khai dựa trên thiết kế đã trình bày ở Chương
+2, bao gồm các thành phần xử lý truy vấn, truy xuất dữ liệu, sinh lịch trình, cá nhân
+hóa và hiển thị kết quả đầu ra.
+3.2.1. Tổng quan các thành phần triển khai
+Các chức năng chính của hệ thống được triển khai nhằm hỗ trợ toàn bộ quá
+trình từ tiếp nhận truy vấn ngôn ngữ tự nhiên đến trả về kết quả gợi ý du lịch cho
+người dùng.
+Bảng 3.6. Thành phần triển khai trong hệ thống thực nghiệm
+Thành phần Nội dung triển khai
+Giao diện hội Cho phép người dùng nhập yêu cầu du lịch bằng ngôn ngữ tự nhiên
+thoại và nhận kết quả gợi ý
+Xử lý truy vấn Trích xuất ý định, điểm đến, thời lượng chuyến đi, ngân sách và sở
+thích từ câu truy vấn
+Truy xuất dữ Tìm kiếm thông tin liên quan từ kho tri thức du lịch bằng dense
+liệu search, hybrid search và reranking tùy theo cấu hình thử nghiệm
+Sinh lịch trình Tạo lịch trình theo ngày, bao gồm địa điểm, hoạt động, thời gian và
+chi phí ước tính
+Cá nhân hóa Sử dụng hồ sơ người dùng và phản hồi trước đó để điều chỉnh kết
+quả gợi ý
+Hiển thị bản Trực quan hóa tọa độ các điểm đến, nhà hàng và cơ sở lưu trú trên
+đồ giao diện
+
+===== PAGE 61 =====
+60
+Bộ nhớ đệm Lưu tạm một số kết quả truy vấn nhằm giảm thời gian xử lý ở các
+lần truy cập sau
+3.2.2. Một số điểm triển khai đáng chú ý
+Trong quá trình xây dựng hệ thống thực nghiệm, một số kỹ thuật được áp dụng
+nhằm cải thiện tốc độ xử lý, khả năng mở rộng và chất lượng phản hồi. Các điểm triển
+khai đáng chú ý gồm:
+– Tổ chức backend theo nhóm dịch vụ: backend được tách thành các
+nhóm chức năng chính, bao gồm:
+﹢ Xác thực người dùng.
+﹢ Quản lý hội thoại.
+﹢ Xử lý ngôn ngữ tự nhiên.
+﹢ Truy xuất tri thức.
+﹢ Sinh lịch trình.
+﹢ Quản lý hồ sơ người dùng.
+﹢ Thu thập phản hồi.
+– Xử lý song song trong giai đoạn truy xuất: hệ thống sử dụng
+asyncio.gather() để thực hiện đồng thời các tác vụ:
+﹢ Tìm kiếm vector.
+﹢ Truy vấn cơ sở dữ liệu.
+﹢ Tra cứu thông tin thời tiết.
+﹢ Lấy các gợi ý liên quan.
+– Tái sử dụng mô hình reranking: mô hình BAAI/bge-reranker-v2-m3
+được khởi tạo một lần khi hệ thống bắt đầu hoạt động và tái sử dụng cho
+các truy vấn tiếp theo, giúp giảm chi phí tải lại mô hình.
+– Sinh lịch trình theo hai giai đoạn: với các yêu cầu lập lịch trình dài hơn
+3 ngày, hệ thống sinh kết quả theo hai bước:
+﹢ Giai đoạn 1: xây dựng khung lịch trình tổng quát.
+﹢ Giai đoạn 2: bổ sung chi tiết cho từng ngày.
+– Chuẩn hóa và bổ sung kết quả đầu ra: trước khi trả về giao diện, hệ
+thống đối chiếu và bổ sung các thông tin cần thiết, bao gồm:
+
+===== PAGE 62 =====
+61
+﹢ Tọa độ địa lý.
+﹢ Chi phí ước tính.
+﹢ Thông tin thời tiết.
+﹢ Dữ liệu di chuyển giữa các điểm.
+3.2.3. Kết quả đầu ra của hệ thống
+Kết quả trả về cho người dùng được tổ chức theo một cấu trúc thống nhất nhằm
+đảm bảo tính nhất quán giữa các lần thử nghiệm và thuận tiện cho việc lưu trữ, hiển
+thị cũng như đánh giá kết quả.
+Bảng 3.7. Thành phần kết quả đầu ra
+Thành phần Nội dung
+Lịch trình theo ngày Danh sách hoạt động, địa điểm, thời gian và chi phí ước tính
+Địa điểm gợi ý Danh sách điểm tham quan, nhà hàng hoặc cơ sở lưu trú phù
+hợp với truy vấn
+Bản đồ Tọa độ các địa điểm được đề xuất
+Thông tin bổ sung Thời tiết, phương tiện di chuyển và ghi chú cần thiết
+Phản hồi hội thoại Câu trả lời tự nhiên, có giải thích ngắn gọn theo yêu cầu
+người dùng
+
+===== PAGE 63 =====
+62
+Hình 3.1. Giao diện hội thoại
+3.3. Kết quả và đánh giá
+Kết quả thực nghiệm được tổng hợp theo bốn kịch bản: phân tích truy vấn
+người dùng, đánh giá chất lượng lịch trình end-to-end, so sánh các cấu hình RAG và
+đánh giá khả năng cá nhân hóa.
+3.3.1. Đánh giá phân tích truy vấn người dùng
+Đánh giá khả năng phân loại ý định và trích xuất thực thể được thực hiện trên
+tập 50 truy vấn mẫu. Do đặc thù của ngôn ngữ tự nhiên, không phải truy vấn nào cũng
+chứa đầy đủ mọi thông tin. Tập dữ liệu đánh giá thực tế bao gồm:
+– Phân loại ý định: 50/50 truy vấn.
+– Trích xuất điểm đến: 36 truy vấn có chứa thông tin địa danh.
+– Trích xuất thời lượng: 26 truy vấn có đề cập thời gian (vd: "3 ngày",
+"cuối tuần").
+– Trích xuất ngân sách: 6 truy vấn có yếu tố chi phí (vd: "5 triệu").
+
+===== PAGE 64 =====
+63
+Bảng 3.8. Kết quả đánh giá phân tích truy vấn
+Chỉ số Kết quả Nhận xét
+Độ chính xác phân 94,0% Hệ thống nhận diện tốt các nhóm truy vấn phổ
+loại ý định biến; 3 lỗi xảy ra khi truy vấn chứa đồng thời
+keyword thuộc nhiều nhóm ý định
+Độ chính xác trích 100% Toàn bộ 36 truy vấn có nêu điểm đến đều được
+xuất điểm đến nhận diện chính xác
+Độ chính xác trích 100% Các biểu thức như “3 ngày”, “4 ngày 3 đêm”, “2
+xuất thời lượng ngày 1 đêm” được xử lý chính xác
+chuyến đi
+Độ chính xác trích 100% Các ràng buộc ngân sách dạng “X triệu” được
+xuất ngân sách trích xuất chính xác
+Kết quả cho thấy thành phần phân tích truy vấn đáp ứng được yêu cầu đầu vào
+của hệ thống. Các thông tin như ý định, điểm đến, thời lượng chuyến đi và ngân sách
+được chuyển thành cấu trúc dữ liệu rõ ràng, phục vụ cho các bước truy xuất tri thức và
+sinh lịch trình ở phía sau.
+3.3.2. Đánh giá chất lượng lộ trình end-to-end
+Chất lượng lịch trình được đánh giá theo hướng kiểm tra mức độ thỏa mãn ràng
+buộc đầu vào. Với mỗi truy vấn, hệ thống cần sinh ra lịch trình đáp ứng các yêu cầu
+mà người dùng đã nêu. Năm truy vấn đại diện được lựa chọn, bao phủ các kịch bản
+phổ biến như du lịch biển, gia đình có trẻ em, du lịch tiết kiệm, văn hóa – lịch sử và
+nghỉ dưỡng cao cấp.
+Các ràng buộc được kiểm tra bao gồm:
+– Số ngày: lịch trình sinh ra có đúng thời lượng chuyến đi được yêu cầu
+hay không.
+– Ngân sách: tổng chi phí có nằm trong giới hạn ngân sách hay không, với
+mức sai lệch chấp nhận không vượt quá 20%.
+
+===== PAGE 65 =====
+64
+– Sở thích: các hoạt động có phản ánh đúng sở thích đã nêu hay không,
+được kiểm tra thông qua đối chiếu từ khóa.
+– Điểm đến: các POI có thuộc đúng tỉnh/thành phố được yêu cầu hay
+không.
+– Đối tượng: lịch trình có phù hợp với nhóm du lịch được nêu trong truy
+vấn hay không, chẳng hạn như gia đình, trẻ em hoặc cặp đôi.
+Bảng 3.9. Kết quả đánh giá lịch trình theo ràng buộc đầu vào
+STT Truy Số Ngân Sở Điểm Đối tượng Hoạt Thời
+vấn ngày sách thích đến động gian
+1 Đà 3/3 3,77tr/ Biển, Đà — 24 90,0s
+Nẵng 5tr ẩm thực Nẵng (8,0/ngà
+3N2Đ, y)
+5tr,
+biển +
+ẩm
+thực
+2 Phú 4/4 — — Phú VinWonders 34 131,4
+Quốc Quốc , bãi biển, (8,5/ngà s
+4N, công viên y)
+gia
+đình,
+trẻ em
+3 Nha 3/3 2,02tr/ — Nha — 22 92,8s
+Trang 3tr Trang (7,3/ngà
+3N, y)
+tiết
+kiệm,
+<3tr
+
+===== PAGE 66 =====
+65
+4 Hà 3/3 — Lịch sử, Hà Bảo tàng, 24 91,0s
+Nội ẩm thực Nội hồ, công (8,0/ngà
+3N, viên y)
+gia
+đình,
+lịch sử
++ ẩm
+thực
+5 Phú 5/5 19,66tr Nghỉ Phú Sunset, 35 131,6
+Quốc /20tr dưỡng Quốc dinner lãng (7,0/ngà s
+5N, cao cấp mạn y)
+luxury,
+cặp
+đôi,
+20tr
+Tổng 5/5 3/3 3/3 5/5 3/3 TB
+kết 107,4
+s
+Từ kết quả Bảng 3.9, có thể rút ra một số nhận xét:
+– Số ngày: 5/5 lịch trình sinh đúng số ngày yêu cầu.
+– Ngân sách: 3/3 truy vấn có ràng buộc ngân sách đều cho tổng chi phí
+nằm trong giới hạn cho phép.
+– Sở thích và đối tượng: các hoạt động phản ánh đúng sở thích và nhóm
+du lịch đã nêu trong truy vấn.
+– Điểm đến: 5/5 lịch trình tập trung đúng tỉnh/thành phố được yêu cầu.
+– Hoạt động: hệ thống sinh tổng cộng 139 hoạt động, trung bình từ 7,0
+đến 8,5 hoạt động/ngày.
+
+===== PAGE 67 =====
+66
+– Thời gian phản hồi: thời gian trung bình đạt 107,4 giây; lịch trình 5 ngày
+cao cấp mất nhiều thời gian nhất, đạt 131,6 giây do kích hoạt cơ chế
+sinh hai giai đoạn đã trình bày tại Mục 3.2.2.
+3.3.3. So sánh các cấu hình RAG
+Để xác định mức độ đóng góp của từng thành phần, luận văn so sánh cấu hình
+đầy đủ với các cấu hình rút gọn. Các cấu hình được đánh giá dựa trên một số chỉ số
+RAGAS và thời gian phản hồi trung bình.
+Bảng 3.10. Kết quả so sánh các cấu hình RAG
+Cấu hình Context Context Faithfulness Answer Thời gian
+Precision Recall Relevancy TB
+LLM N/A N/A 0,00 1,00 40,4s
+RAG cơ bản 0,50 1,00 1,00 1,00 95,5s
+RAG nâng cao 0,32 0,62 1,00 1,00 83,9s
+Từ kết quả Bảng 3.10, có thể rút ra một số nhận xét:
+– Faithfulness: LLM đạt 0,00 do một số POI được sinh ra không khớp với
+kho tri thức. Khi bổ sung RAG, chỉ số này tăng lên 1,00, cho thấy truy
+xuất tri thức giúp phản hồi bám sát dữ liệu hơn.
+– Context Precision và Context Recall: RAG nâng cao có giá trị thấp hơn
+RAG cơ bản do quá trình reranking và nén ngữ cảnh làm giảm số lượng
+tài liệu đầu vào. Điều này cho thấy ngữ cảnh được rút gọn hơn, nhưng
+mức độ bao phủ theo thước đo RAGAS chưa cao bằng RAG cơ bản.
+– Thời gian phản hồi: LLM có thời gian xử lý thấp nhất, đạt 40,4 giây, do
+không thực hiện truy xuất dữ liệu. RAG nâng cao đạt 83,9 giây, thấp hơn
+RAG cơ bản 95,5 giây nhờ nén ngữ cảnh giúp giảm kích thước prompt
+đầu vào.
+– Answer Relevancy: Cả ba cấu hình đều đạt 1,00, cho thấy các lịch trình
+sinh ra vẫn phù hợp với điểm đến, thời lượng chuyến đi và loại hình yêu
+cầu trong truy vấn.
+
+===== PAGE 68 =====
+67
+3.3.4. Đánh giá khả năng cá nhân hóa
+Để đánh giá ảnh hưởng của thành phần cá nhân hóa, luận văn tiến hành thực
+nghiệm với hai người dùng gửi cùng một truy vấn trung lập, tức là truy vấn chỉ nêu
+điểm đến và thời gian, không nêu sở thích hay ngân sách cụ thể. Sự khác biệt trong kết
+quả chủ yếu đến từ hồ sơ người dùng được lưu trong cơ sở dữ liệu:
+– Người dùng A: tài khoản mới, chưa có hồ sơ sở thích.
+– Người dùng B: có hồ sơ gồm phong cách du lịch tiết kiệm, sở thích ẩm
+thực, biển và văn hóa địa phương.
+Bảng 3.11. So sánh kết quả có và không có cá nhân hóa
+Truy vấn Người Ngân sách % Ẩm % Tham Ghi chú
+dùng ước tính thực quan
+Đà Nẵng A 5.980.000₫ 47,1% 29,4% Mức chi phí trung bình
+3 ngày
+Đà Nẵng B 2.430.000₫ 47,1% 23,5% Gợi ý ghi “phù hợp
+3 ngày phong cách tiết kiệm”
+Hà Nội 3 A 4.070.000₫ 52,4% 28,6% Lịch trình tổng quát
+ngày
+Hà Nội 3 B 2.950.000₫ 45,0% 35,0% Bổ sung Bảo tàng Dân
+ngày tộc học
+Từ kết quả Bảng 3.11, có thể rút ra một số nhận xét:
+– Không có hồ sơ: Người dùng A nhận lịch trình phân bổ tương đối đều
+giữa các loại hình, với gợi ý nhà hàng mang tính chung.
+– Có hồ sơ: Người dùng B được ưu tiên trải nghiệm ẩm thực và văn hóa;
+tỷ lệ tham quan tăng và có bổ sung điểm đến phù hợp như Bảo tàng Dân
+tộc học.
+– Ngân sách phản ánh phong cách: Chi phí của người dùng B thấp hơn rõ
+rệt (Đà Nẵng: 5,98 → 2,43 triệu; Hà Nội: 4,07 → 2,95 triệu), cho thấy
+ảnh hưởng của hồ sơ “du lịch tiết kiệm”.
+
+===== PAGE 69 =====
+68
+3.3.5. Tổng hợp kết quả đánh giá
+Sau khi đánh giá từng kịch bản thực nghiệm, kết quả được tổng hợp nhằm làm
+rõ hiệu quả của hệ thống trên các khía cạnh chính: phân tích truy vấn, chất lượng lịch
+trình, cấu hình RAG và cá nhân hóa.
+Bảng 3.12. Tổng hợp kết quả theo bốn kịch bản thực nghiệm
+Kịch bản Kết quả chính Hạn chế
+Phân tích Nhận diện được ý định, điểm đến, số Còn phụ thuộc vào từ khóa
+truy vấn ngày, sở thích và đối tượng du lịch và biểu thức chính quy, xử lý
+trong các truy vấn rõ ràng chưa tốt các truy vấn mơ hồ
+Chất Lịch trình có cấu trúc đầy đủ gồm thời Truy vấn có nhiều ràng buộc
+lượng lịch gian, địa điểm, chi phí và tọa độ; các đồng thời có thể làm giảm
+trình ràng buộc đầu vào được đáp ứng trong tính hợp lý của lịch trình
+5 truy vấn đại diện
+So sánh RAG nâng cao giữ Faithfulness ở mức Context Precision và Context
+cấu hình 1,00 và giảm khoảng 12% thời gian so Recall thấp hơn do reranking
+RAG với RAG cơ bản nhờ nén ngữ cảnh và nén ngữ cảnh làm giảm số
+lượng tài liệu đầu vào
+Cá nhân Lịch trình phản ánh hồ sơ người dùng Hiệu quả phụ thuộc vào mức
+hóa rõ hơn, đặc biệt ở lựa chọn nhà hàng, độ đầy đủ của hồ sơ người
+loại hình trải nghiệm và ngân sách dùng
+Bảng 3.13. Tổng hợp thời gian phản hồi của hệ thống
+Nội dung đo lường Giá trị Nhận xét
+Thời gian phản hồi trung 83,9 Trung bình trên 3 truy vấn trong thí nghiệm
+bình của RAG nâng cao giây so sánh cấu hình
+Thời gian phản hồi thấp nhất 29,5 Giá trị nhỏ nhất trong 3 lần chạy LLM
+giây thuần với truy vấn đơn giản
+
+===== PAGE 70 =====
+69
+Thời gian phản hồi cao nhất 131,6 Lịch trình 5 ngày kích hoạt cơ chế sinh hai
+giây giai đoạn
+LLM thuần 40,4 Nhanh nhất nhưng không đảm bảo dữ liệu
+giây sinh ra khớp với kho tri thức
+RAG cơ bản 95,5 Giữ nhiều tài liệu truy xuất hơn, làm tăng
+giây kích thước đầu vào cho mô hình
+RAG nâng cao 83,9 Nén ngữ cảnh giúp giảm kích thước đầu
+giây vào và rút ngắn thời gian xử lý
+Kết quả tổng hợp cho thấy hệ thống đạt kết quả khả quan trong bài toán gợi ý
+lịch trình du lịch cá nhân hóa. So với LLM thuần, cấu hình RAG nâng cao giúp phản
+hồi bám sát kho tri thức hơn. So với RAG cơ bản, cấu hình này có thời gian xử lý thấp
+hơn nhờ cơ chế nén ngữ cảnh. Tuy nhiên, thời gian phản hồi vẫn còn tương đối cao
+đối với các truy vấn lập lịch trình dài hoặc có nhiều ràng buộc, do đó cần tiếp tục được
+tối ưu trong các phiên bản sau.
+3.4. Kết luận chương 3
+Chương 3 đã trình bày quá trình thực nghiệm và đánh giá hệ thống gợi ý lịch
+trình du lịch cá nhân hóa theo bốn kịch bản: phân tích truy vấn, đánh giá chất lượng
+lịch trình end-to-end, so sánh các cấu hình RAG và đánh giá khả năng cá nhân hóa.
+Các kết quả chính đạt được gồm:
+– Hệ thống nhận diện được ý định, điểm đến, số ngày và sở thích từ các
+truy vấn tự nhiên trong các trường hợp rõ ràng.
+– Lịch trình sinh ra có cấu trúc đầy đủ, bao gồm thời gian, địa điểm, chi
+phí và tọa độ; khi sử dụng RAG, chỉ số Faithfulness đạt 1,00 trong thí
+nghiệm so sánh cấu hình.
+– Cấu hình RAG nâng cao, bao gồm Hybrid Search, Reranking và nén
+ngữ cảnh, giữ được chất lượng phản hồi ổn định, đồng thời giảm khoảng
+12% thời gian xử lý so với RAG cơ bản.
+
+===== PAGE 71 =====
+70
+– Thành phần cá nhân hóa giúp lịch trình phản ánh rõ hơn hồ sơ người
+dùng, thể hiện qua việc gợi ý nhà hàng cụ thể hơn và điều chỉnh ngân
+sách theo phong cách du lịch tiết kiệm.
+Bên cạnh các kết quả đạt được, hệ thống vẫn còn một số hạn chế:
+– Thời gian phản hồi còn tương đối cao, đặc biệt với các truy vấn lập lịch
+trình dài hoặc có nhiều ràng buộc.
+– Thành phần phân tích truy vấn vẫn phụ thuộc vào từ khóa và biểu thức
+chính quy, nên chưa xử lý tốt các truy vấn mơ hồ hoặc diễn đạt phức tạp.
+– Hiệu quả cá nhân hóa phụ thuộc vào mức độ đầy đủ của hồ sơ người
+dùng.
+Tổng thể, kết quả thực nghiệm cho thấy hướng tiếp cận kết hợp LLM và RAG
+có tính khả thi đối với bài toán gợi ý lịch trình du lịch cá nhân hóa tại Việt Nam. Các
+hạn chế đã chỉ ra cũng là cơ sở cho việc đề xuất hướng phát triển trong phần kết luận
+của luận văn.
+
+===== PAGE 72 =====
+71
+KẾT LUẬN
+Qua quá trình nghiên cứu và thực nghiệm, luận văn đã tiếp cận bài toán gợi ý
+lịch trình du lịch cá nhân hóa tại Việt Nam bằng cách kết hợp mô hình ngôn ngữ lớn
+với kỹ thuật Retrieval-Augmented Generation. Từ những khoảng trống còn tồn tại
+trong các hệ thống hiện có, nghiên cứu đã đề xuất một kiến trúc RAG nâng cao với
+quy trình xử lý gồm phân tích ý định, truy xuất tri thức, tối ưu ngữ cảnh, sinh lịch
+trình có cấu trúc và áp dụng cá nhân hóa theo hồ sơ người dùng.
+Kết quả thực nghiệm cho thấy phương pháp đề xuất đạt được những kết quả
+khả quan. Các lịch trình được tạo ra có cấu trúc tương đối đầy đủ, bao gồm thời gian,
+địa điểm, chi phí và tọa độ, đồng thời bám sát dữ liệu từ kho tri thức khi sử dụng
+RAG. Việc áp dụng RAG nâng cao kết hợp với cơ chế nén ngữ cảnh giúp hệ thống
+cân bằng tốt hơn giữa chất lượng phản hồi và thời gian xử lý. Bên cạnh đó, thành phần
+cá nhân hóa cho thấy tác dụng trong việc điều chỉnh kết quả theo hồ sơ người dùng,
+thể hiện qua sự khác biệt về lựa chọn điểm đến, nhà hàng, hoạt động và mức ngân
+sách giữa các nhóm người dùng khác nhau.
+Tuy nhiên, hệ thống vẫn còn một số hạn chế cần tiếp tục cải thiện. Thời gian
+phản hồi còn tương đối cao do phụ thuộc vào API bên ngoài và quy trình xử lý gồm
+nhiều bước. Hướng khắc phục có thể là tối ưu quy trình, áp dụng cơ chế streaming để
+cải thiện trải nghiệm người dùng hoặc sử dụng các mô hình nhỏ hơn cho một số tác vụ
+phù hợp. Ngoài ra, thành phần phân tích truy vấn hiện vẫn phụ thuộc một phần vào từ
+khóa và biểu thức chính quy, nên chưa xử lý tốt các yêu cầu mơ hồ hoặc diễn đạt phức
+tạp. Trong tương lai, hệ thống cần được mở rộng kho tri thức, bổ sung dữ liệu cập nhật
+hơn và thử nghiệm với người dùng thực tế để cải thiện chất lượng gợi ý cũng như khả
+năng cá nhân hóa.
+
+===== PAGE 73 =====
+72
+DANH MỤC CÁC TÀI LIỆU THAM KHẢO
+❖ Tài liệu tiếng Việt
+[1]. Thủ tướng Chính phủ (2020), “Quyết định số 147/QĐ-TTg ngày
+22/01/2020 phê duyệt Chiến lược phát triển du lịch Việt Nam đến năm
+2030”, Hà Nội, Việt Nam.
+❖ Tài liệu tiếng Anh
+[2]. Brown T. et al. (2020), “Language Models are Few-Shot Learners”,
+Advances in Neural Information Processing Systems, 33, pp. 1877–1901.
+[3]. Cormack G. V., Clarke C. L. A. and Buettcher S. (2009), "Reciprocal
+Rank Fusion Outperforms Condorcet and Individual Rank Learning
+Methods", Proceedings of the 32nd International ACM SIGIR Conference
+on Research and Development in Information Retrieval, pp. 758–759.
+[4]. Devlin J. et al. (2019), “BERT: Pre-training of Deep Bidirectional
+Transformers for Language Understanding”, Proceedings of NAACL-HLT,
+pp. 4171–4186.
+[5]. Es S. et al. (2024), “RAGAs: Automated Evaluation of Retrieval
+Augmented Generation”, Proceedings of the 18th Conference of the
+European Chapter of the Association for Computational Linguistics:
+System Demonstrations, pp. 150–158.
+[6]. Gao Y. et al. (2023), “Chat-Rec: Towards Interactive and Explainable
+LLMs-Augmented Recommender System”, arXiv preprint
+arXiv:2303.14524.
+[7]. Gao Y. et al. (2023), “Retrieval-Augmented Generation for Large
+Language Models: A Survey”, arXiv preprint arXiv:2312.10997, revised
+2024.
+[8]. Gemini Team et al. (2023), “Gemini: A Family of Highly Capable
+Multimodal Models”, arXiv preprint arXiv:2312.11805.
+[9]. Jiang H. et al. (2024), “LongLLMLingua: Accelerating and Enhancing
+LLMs in Long Context Scenarios via Prompt Compression”, Proceedings
+of the 62nd Annual Meeting of the Association for Computational
+Linguistics, pp. 1658–1677.
+
+===== PAGE 74 =====
+73
+[10]. Karpukhin V. et al. (2020), “Dense Passage Retrieval for Open-Domain
+Question Answering”, Proceedings of EMNLP, pp. 6769–6781.
+[11]. Lewis P. et al. (2020), “Retrieval-Augmented Generation for
+Knowledge-Intensive NLP Tasks”, Advances in Neural Information
+Processing Systems, 33, pp. 9459–9474.
+[12]. Luan Y., Eisenstein J., Toutanova K. and Collins M. (2021), "Sparse,
+Dense, and Attentional Representations for Text Retrieval", Transactions
+of the Association for Computational Linguistics, 9, pp. 329–345.
+[13]. Malkov Y. A. and Yashunin D. A. (2020), “Efficient and Robust
+Approximate Nearest Neighbor Search Using Hierarchical Navigable
+Small World Graphs”, IEEE Transactions on Pattern Analysis and
+Machine Intelligence, 42(4), pp. 824–836.
+[14]. Nogueira R. and Cho K. (2019), “Passage Re-ranking with BERT”, arXiv
+preprint arXiv:1901.04085.
+[15]. Reimers N. and Gurevych I. (2019), “Sentence-BERT: Sentence
+Embeddings using Siamese BERT-Networks”, Proceedings of
+EMNLP-IJCNLP, pp. 3982–3992.
+[16]. Ricci F., Rokach L. and Shapira B., Eds. (2015), Recommender Systems
+Handbook, 2nd ed., Springer, New York, United States.
+[17]. Robertson S. and Zaragoza H. (2009), “The Probabilistic Relevance
+Framework: BM25 and Beyond”, Foundations and Trends in Information
+Retrieval, 3(4), pp. 333–389.
+[18]. Vaswani A. et al. (2017), “Attention Is All You Need”, Advances in
+Neural Information Processing Systems, 30.
+[19]. Xie J. et al. (2024), “TravelPlanner: A Benchmark for Real-World
+Planning with Language Agents”, Proceedings of the 41st International
+Conference on Machine Learning, pp. 54590–54613.

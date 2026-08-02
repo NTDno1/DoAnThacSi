@@ -1,0 +1,3379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Báo Cáo Đồ Án Thạc Sĩ - Trần Quang Ninh</title>
+<style>
+@page {
+    size: A4;
+    margin: 2.5cm 2.5cm 2.5cm 3cm;
+}
+@page :first {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, 'Times New Roman', sans-serif;
+    font-size: 14pt;
+    line-height: 1.8;
+    text-align: justify;
+    color: #000;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 18pt;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0.8cm 0 0.4cm 0;
+}
+
+h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 0.6cm;
+    margin-bottom: 0.25cm;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-top: 0.5cm;
+    margin-bottom: 0.2cm;
+    page-break-after: avoid;
+}
+
+h4 {
+    font-size: 12pt;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 0.4cm;
+    margin-bottom: 0.2cm;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 0.2cm 0;
+    text-indent: 1cm;
+    line-height: 1.8;
+}
+
+ul, ol {
+    margin: 0.2cm 0;
+    padding-left: 1.2cm;
+}
+
+li {
+    margin: 0.1cm 0;
+    line-height: 1.7;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.4cm 0;
+    font-size: 11pt;
+    page-break-inside: avoid;
+}
+
+th {
+    background-color: #e8e8e8;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 8px;
+    border: 1px solid #666;
+}
+
+td {
+    padding: 4px 8px;
+    border: 1px solid #666;
+    vertical-align: top;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    line-height: 1.35;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    margin: 0.3cm 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10.5pt;
+    background-color: #f5f5f5;
+    padding: 1px 3px;
+}
+
+blockquote {
+    margin: 0.3cm 1cm;
+    padding: 0.2cm 0.5cm;
+    border-left: 3px solid #ccc;
+    font-style: italic;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 0.3cm 0;
+}
+
+strong { font-weight: bold; }
+em { font-style: italic; }
+
+/* === COVER PAGE === */
+.cover-page {
+    text-align: center;
+    padding-top: 1.5cm;
+    page-break-after: always;
+}
+
+.cover-page .school-name {
+    font-size: 13pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1.5cm;
+}
+
+.cover-page .doc-type {
+    font-size: 15pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.3cm;
+}
+
+.cover-page .doc-subtitle {
+    font-size: 12pt;
+    font-style: italic;
+    margin-bottom: 1.5cm;
+}
+
+.cover-page .main-title {
+    font-size: 15pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.6;
+    margin-bottom: 0.3cm;
+}
+
+.cover-page .main-title-en {
+    font-size: 12pt;
+    font-style: italic;
+    margin-bottom: 1.5cm;
+}
+
+.cover-page .info-section {
+    display: inline-block;
+    text-align: left;
+    font-size: 13pt;
+    line-height: 2;
+}
+
+.cover-page .info-label {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 3cm;
+}
+
+.cover-page .location {
+    margin-top: 3cm;
+    font-size: 13pt;
+}
+
+.ref-entry {
+    text-align: left;
+    font-size: 12pt;
+    margin: 0.15cm 0;
+    text-indent: -1cm;
+    padding-left: 1cm;
+    line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<div class="cover-page">
+    <div class="school-name">HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG</div>
+    <div class="doc-type">BÁO CÁO ĐỒ ÁN THẠC SĨ</div>
+    <div class="doc-subtitle">(Theo định hướng ứng dụng)</div>
+    <div class="main-title">NGHIÊN CỨU VÀ XÂY DỰNG<br>NỀN TẢNG AI DOANH NGHIỆP<br>HƯỚNG TÍCH HỢP ĐA HỆ THỐNG</div>
+    <div class="main-title-en">(Enterprise AI Platform for Cross-System Integration)</div>
+    <div class="info-section">
+        <div class="info-row"><span class="info-label">Học viên:</span><span class="info-value">Trần Quang Ninh</span></div>
+        <div class="info-row"><span class="info-label">Chuyên ngành:</span><span class="info-value">Hệ thống Thông tin</span></div>
+        <div class="info-row"><span class="info-label">Mã số:</span><span class="info-value">8.48.01.04</span></div>
+        <div class="info-row"><span class="info-label">Người hướng dẫn:</span><span class="info-value">PGS.TS. Trần Đình Quế</span></div>
+    </div>
+    <div class="location">HÀ NỘI – 2026</div>
+</div>
+
+<h1>BÁO CÁO ĐỒ ÁN THẠC SĨ</h1>
+<h2>NGHIÊN CỨU VÀ XÂY DỰNG NỀN TẢNG AI DOANH NGHIỆP HƯỚNG TÍCH HỢP ĐA HỆ THỐNG (ENTERPRISE AI PLATFORM FOR CROSS-SYSTEM INTEGRATION)</h2>
+<hr />
+<p><strong>HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG</strong></p>
+<p><strong>Học viên:</strong> Trần Quang Ninh</p>
+<p><strong>Chuyên ngành:</strong> Hệ thống Thông tin</p>
+<p><strong>Mã số:</strong> 8.48.01.04</p>
+<p><strong>BÁO CÁO ĐỒ ÁN THẠC SĨ</strong></p>
+<p><strong>(Theo định hướng ứng dụng)</strong></p>
+<p><strong>NGƯỜI HƯỚNG DẪN KHOA HỌC: PGS.TS. TRẦN ĐÌNH QUẾ</strong></p>
+<p><strong>HÀ NỘI – 2026</strong></p>
+<h1>MỤC LỤC</h1>
+<p>DANH MỤC BẢNG......................................................................................................5</p>
+<p>DANH MỤC HÌNH......................................................................................................7</p>
+<p>DANH MỤC CHỮ CÁI VIẾT TẮT............................................................................9</p>
+<p>MỞ ĐẦU......................................................................................................................12
+1. Lý do chọn đề tài.................................................................................................12
+2. Tổng quan về vấn đề nghiên cứu..........................................................................14
+2.1. Giới thiệu lĩnh vực nghiên cứu......................................................................14
+2.2. Các hướng tiếp cận chính..............................................................................14
+2.3. Khoảng trống nghiên cứu và vấn đề đặt ra...................................................15
+3. Mục đích nghiên cứu...........................................................................................16
+3.1. Mục tiêu tổng quát........................................................................................16
+3.2. Mục tiêu cụ thể.............................................................................................16
+4. Đối tượng và phạm vi nghiên cứu.......................................................................17
+4.1. Đối tượng nghiên cứu..................................................................................17
+4.2. Phạm vi nghiên cứu.....................................................................................17
+5. Phương pháp nghiên cứu.....................................................................................18</p>
+<p>NỘI DUNG..................................................................................................................22</p>
+<p>Chương 1: CƠ SỞ LÝ LUẬN VÀ TỔNG QUAN NGHIÊN CỨU............................22
+1.1. Tổng quan về trí tuệ nhân tạo và mô hình ngôn ngữ lớn..............................22
+1.1.1. Khái quát về trí tuệ nhân tạo.....................................................................22
+1.1.2. Mô hình ngôn ngữ lớn (LLM)....................................................................23
+1.1.3. Các mô hình LLM tiêu biểu.......................................................................26
+1.1.4. Hạn chế của LLM trong bài toán doanh nghiệp........................................29
+1.2. Retrieval-Augmented Generation (RAG).....................................................30
+1.2.1. Khái niệm và nguyên lý hoạt động...........................................................30
+1.2.2. Kiến trúc tổng quát của hệ thống RAG....................................................31
+1.2.3. Vai trò của RAG trong hệ thống doanh nghiệp..........................................33
+1.2.4. Ưu điểm và hạn chế của RAG..................................................................34
+1.3. AI Agent và cơ chế phối hợp đa tác nhân (Multi-Agent)...........................35
+1.3.1. Khái niệm AI Agent.................................................................................35
+1.3.2. Kiến trúc tác nhân và cơ chế lập kế hoạch..............................................36
+1.3.3. Multi-Agent Orchestration......................................................................37
+1.3.4. Ưu điểm và thách thức khi áp dụng Multi-Agent...................................38
+1.4. Giao thức Model Context Protocol (MCP)....................................................39
+1.4.1. Bối cảnh ra đời của MCP.......................................................................39
+1.4.2. Kiến trúc và cách thức hoạt động...........................................................40
+1.4.3. MCP trong bài toán tích hợp hệ thống doanh nghiệp..............................41
+1.5. Tích hợp hệ thống doanh nghiệp (Enterprise System Integration).................42
+1.5.1. Tổng quan về ERP, CRM, DMS, HRM...................................................42
+1.5.2. Các phương pháp tích hợp truyền thống..................................................44
+1.5.3. Thách thức khi tích hợp AI vào hệ thống doanh nghiệp........................46
+1.6. Các nghiên cứu và hệ thống liên quan........................................................47
+1.6.1. Các nền tảng AI doanh nghiệp hiện có...................................................47
+1.6.2. Các nghiên cứu về AI Agent và Multi-Agent.........................................49
+1.6.3. Khoảng trống nghiên cứu.........................................................................51
+1.7. Kết luận chương 1..........................................................................................52</p>
+<p>Chương 2: PHÂN TÍCH BÀI TOÁN VÀ THIẾT KẾ NỀN TẢNG.......................54
+2.1. Phân tích bài toán..........................................................................................54
+2.1.1. Mô tả bài toán và bối cảnh doanh nghiệp...............................................54
+2.1.2. Yêu cầu chức năng..................................................................................55
+2.1.3. Yêu cầu phi chức năng.............................................................................57
+2.2. Kiến trúc tổng thể.........................................................................................59
+2.2.1. Nguyên tắc thiết kế và triết lý kiến trúc..................................................59
+2.2.2. Kiến trúc 7 tầng (Layered Architecture)..................................................61
+2.2.3. So sánh các phong cách kiến trúc (Monolith, Modular, Microservice).........63
+2.3. Thiết kế các module cốt lõi............................................................................65
+2.3.1. AI Provider Abstraction Layer.................................................................65
+2.3.2. AI Engine Core – RAG Engine và Hybrid Search..................................67
+2.3.3. Agent Orchestration Layer.......................................................................69
+2.3.4. AI Gateway Layer....................................................................................71
+2.3.5. Integration Layer – MCP và Plugin SDK...............................................72
+2.4. Thiết kế dữ liệu và cơ sở tri thức.................................................................74
+2.4.1. Mô hình dữ liệu quan hệ (PostgreSQL)..................................................74
+2.4.2. Cơ sở dữ liệu vector (pgvector)..............................................................76
+2.4.3. Cơ sở dữ liệu đa tenant và bảo mật......................................................77
+2.4.4. Kho tri thức doanh nghiệp (Enterprise Knowledge Base)........................78
+2.5. Thiết kế giao thức tích hợp và bảo mật.......................................................79
+2.5.1. Giao thức MCP Server và Client...........................................................79
+2.5.2. Cơ chế Plugin và Hot-reload.................................................................81
+2.5.3. Xác thực, phân quyền và Audit log........................................................82
+2.6. Quy trình triển khai theo Phase.....................................................................84
+2.6.1. Tổng quan 5 Phase..................................................................................84
+2.6.2. Chiến lược Walking Skeleton và Vertical Slice.....................................85
+2.6.3. Quản lý Interface giữa các Phase...........................................................86
+2.7. Kết luận chương 2.........................................................................................88</p>
+<p>Chương 3: THỰC NGHIỆM VÀ ĐÁNH GIÁ KẾT QUẢ........................................89
+3.1. Thiết lập thực nghiệm....................................................................................89
+3.1.1. Mục tiêu và phương pháp đánh giá.........................................................89
+3.1.2. Môi trường thực nghiệm và cấu hình hệ thống.......................................90
+3.1.3. Bộ dữ liệu thực nghiệm và kịch bản kiểm thử........................................92
+3.2. Xây dựng hệ thống thực nghiệm....................................................................93
+3.2.1. Tổng quan các thành phần triển khai.......................................................93
+3.2.2. Triển khai Phase 1 – Foundation (Walking Skeleton)............................95
+3.2.3. Triển khai Phase 2 – AI Engine và RAG...............................................97
+3.2.4. Triển khai Phase 3 – Agent và Integration............................................98
+3.2.5. Kết quả đầu ra của hệ thống và minh chứng..........................................100
+3.3. Kết quả và đánh giá......................................................................................101
+3.3.1. Đánh giá khả năng tích hợp đa hệ thống.............................................101
+3.3.2. Đánh giá chất lượng truy xuất tri thức (RAGAS)..................................103
+3.3.3. Đánh giá khả năng phối hợp đa tác nhân (Multi-Agent)......................105
+3.3.4. Đánh giá hiệu năng và khả năng mở rộng.............................................106
+3.3.5. So sánh với các phương pháp truyền thống...........................................108
+3.3.6. Tổng hợp kết quả đánh giá.....................................................................110
+3.4. Kết luận chương 3........................................................................................112</p>
+<p>KẾT LUẬN................................................................................................................113</p>
+<p>DANH MỤC CÁC TÀI LIỆU THAM KHẢO.........................................................118</p>
+<h1>DANH MỤC BẢNG</h1>
+<p><strong>Chương 1</strong></p>
+<p>Bảng 1.1. Ưu điểm và hạn chế của RAG..................................................................34
+Bảng 1.2. So sánh một số nền tảng AI doanh nghiệp hiện có..................................48
+Bảng 1.3. Một số nghiên cứu ứng dụng AI Agent trong doanh nghiệp.....................50</p>
+<p><strong>Chương 2</strong></p>
+<p>Bảng 2.1. Yêu cầu chức năng của hệ thống..........................................................56
+Bảng 2.2. Yêu cầu phi chức năng của hệ thống......................................................58
+Bảng 2.3. So sánh các phong cách kiến trúc..........................................................63
+Bảng 2.4. Mô tả chi tiết 7 Layer trong kiến trúc..................................................64
+Bảng 2.5. Bảng so sánh các communication pattern.............................................72
+Bảng 2.6. Các module chính của Platform Core......................................................83
+Bảng 2.7. Phân bố module theo 5 Phase triển khai...............................................84
+Bảng 2.8. Interfaces được chốt qua từng Phase.....................................................87</p>
+<p><strong>Chương 3</strong></p>
+<p>Bảng 3.1. Mục tiêu và phương pháp đánh giá thực nghiệm...................................89
+Bảng 3.2. Môi trường phần cứng và phần mềm.....................................................91
+Bảng 3.3. Cấu hình LLM và Embedding sử dụng trong thực nghiệm.....................91
+Bảng 3.4. Thống kê bộ dữ liệu thực nghiệm..........................................................92
+Bảng 3.5. Kịch bản thực nghiệm.............................................................................93
+Bảng 3.6. Thành phần triển khai trong hệ thống thực nghiệm...............................94
+Bảng 3.7. Kết quả triển khai các module theo Phase............................................95
+Bảng 3.8. Kết quả đánh giá khả năng tích hợp đa hệ thống................................101
+Bảng 3.9. Kết quả đánh giá chất lượng RAGAS..................................................103
+Bảng 3.10. Kết quả đánh giá Multi-Agent............................................................105
+Bảng 3.11. Kết quả đánh giá hiệu năng hệ thống...............................................106
+Bảng 3.12. So sánh chi phí giữa các cấu hình LLM............................................108
+Bảng 3.13. Tổng hợp kết quả theo các kịch bản thực nghiệm............................110</p>
+<h1>DANH MỤC HÌNH</h1>
+<p><strong>Chương 1</strong></p>
+<p>Hình 1.1. Lịch sử phát triển của Trí tuệ nhân tạo.................................................22
+Hình 1.2. Kiến trúc Transformer – nền tảng của các LLM hiện đại.......................24
+Hình 1.3. So sánh các mô hình LLM phổ biến về quy mô và khả năng.................28
+Hình 1.4. Kiến trúc tổng quát của hệ thống RAG...................................................31
+Hình 1.5. Kiến trúc RAG nâng cao với Hybrid Search và Reranking....................32
+Hình 1.6. Vòng lặp ReAct của AI Agent...............................................................36
+Hình 1.7. Kiến trúc Multi-Agent với Supervisor Pattern........................................38
+Hình 1.8. Kiến trúc Model Context Protocol (MCP).............................................40
+Hình 1.9. Mô hình tích hợp AI – ERP/CRM/DMS qua MCP..................................41
+Hình 1.10. Tổng quan các hệ thống doanh nghiệp và thách thức tích hợp.............45</p>
+<p><strong>Chương 2</strong></p>
+<p>Hình 2.1. Tám nguyên tắc thiết kế của Enterprise AI Platform............................60
+Hình 2.2. So sánh triết lý Monolith – Modular Monolith – Microservice.............63
+Hình 2.3. Kiến trúc 7 Layer tổng quan của nền tảng.............................................61
+Hình 2.4. Kiến trúc chi tiết AI Provider Abstraction Layer....................................66
+Hình 2.5. Kiến trúc AI Engine Core (RAG Engine và Hybrid Search)..................68
+Hình 2.6. Kiến trúc Agent Orchestration Layer.....................................................70
+Hình 2.7. Kiến trúc AI Gateway với các middleware bảo mật..............................71
+Hình 2.8. Kiến trúc Integration Layer với MCP và Plugin SDK............................73
+Hình 2.9. Sơ đồ ERD cơ sở dữ liệu PostgreSQL...................................................75
+Hình 2.10. Cấu trúc bảng vector embedding trong pgvector..................................76
+Hình 2.11. Cơ chế Multi-tenant với Row-Level Security (RLS)............................77
+Hình 2.12. Kiến trúc Enterprise Knowledge Base.................................................78
+Hình 2.13. Mô hình triển khai MCP Server và Client trong doanh nghiệp...........80
+Hình 2.14. Cơ chế Plugin với Hot-reload.............................................................82
+Hình 2.15. Lộ trình triển khai 5 Phase.................................................................85
+Hình 2.16. Nguyên tắc Walking Skeleton và Vertical Slice....................................86</p>
+<p><strong>Chương 3</strong></p>
+<p>Hình 3.1. Giao diện chính của hệ thống thực nghiệm.........................................96
+Hình 3.2. Giao diện chat với Ollama local (Phase 1)..........................................96
+Hình 3.3. Giao diện upload tài liệu và hỏi đáp RAG (Phase 2)...........................98
+Hình 3.4. Giao diện Agent với tool calling (Phase 3)...........................................99
+Hình 3.5. Minh chứng tích hợp ERP/CRM/DMS qua MCP................................100
+Hình 3.6. Biểu đồ so sánh kết quả RAGAS theo provider...................................104
+Hình 3.7. Biểu đồ latency theo từng phase của pipeline......................................107
+Hình 3.8. Biểu đồ so sánh chi phí giữa các LLM provider.................................108
+Hình 3.9. Biểu đồ tăng trưởng throughput khi scale............................................109</p>
+<h1>DANH MỤC CHỮ CÁI VIẾT TẮT</h1>
+<table>
+<thead>
+<tr>
+<th>Từ viết tắt</th>
+<th>Tiếng Anh</th>
+<th>Nghĩa tiếng Việt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI</td>
+<td>Artificial Intelligence</td>
+<td>Trí tuệ nhân tạo</td>
+</tr>
+<tr>
+<td>ABAC</td>
+<td>Attribute-Based Access Control</td>
+<td>Kiểm soát truy cập dựa trên thuộc tính</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Application Programming Interface</td>
+<td>Giao diện lập trình ứng dụng</td>
+</tr>
+<tr>
+<td>BPM</td>
+<td>Business Process Management</td>
+<td>Quản lý quy trình nghiệp vụ</td>
+</tr>
+<tr>
+<td>BERT</td>
+<td>Bidirectional Encoder Representations from Transformers</td>
+<td>Mô hình biểu diễn mã hóa hai chiều dựa trên Transformer</td>
+</tr>
+<tr>
+<td>BM25</td>
+<td>Best Matching 25</td>
+<td>Thuật toán xếp hạng tìm kiếm từ khóa</td>
+</tr>
+<tr>
+<td>BPMN</td>
+<td>Business Process Model and Notation</td>
+<td>Chuẩn mô hình hóa quy trình nghiệp vụ</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td>Continuous Integration / Continuous Deployment</td>
+<td>Tích hợp liên tục / Triển khai liên tục</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Central Processing Unit</td>
+<td>Bộ xử lý trung tâm</td>
+</tr>
+<tr>
+<td>CRM</td>
+<td>Customer Relationship Management</td>
+<td>Quản lý quan hệ khách hàng</td>
+</tr>
+<tr>
+<td>DDD</td>
+<td>Domain-Driven Design</td>
+<td>Thiết kế hướng miền</td>
+</tr>
+<tr>
+<td>DI</td>
+<td>Dependency Injection</td>
+<td>Tiêm phụ thuộc</td>
+</tr>
+<tr>
+<td>DMS</td>
+<td>Document Management System</td>
+<td>Hệ thống quản lý tài liệu</td>
+</tr>
+<tr>
+<td>ESB</td>
+<td>Enterprise Service Bus</td>
+<td>Bus dịch vụ doanh nghiệp</td>
+</tr>
+<tr>
+<td>ERP</td>
+<td>Enterprise Resource Planning</td>
+<td>Hoạch định nguồn lực doanh nghiệp</td>
+</tr>
+<tr>
+<td>GDPR</td>
+<td>General Data Protection Regulation</td>
+<td>Quy định bảo vệ dữ liệu chung (EU)</td>
+</tr>
+<tr>
+<td>GPT</td>
+<td>Generative Pre-trained Transformer</td>
+<td>Mô hình Transformer tiền huấn luyện sinh văn bản</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>Graphics Processing Unit</td>
+<td>Bộ xử lý đồ họa</td>
+</tr>
+<tr>
+<td>gRPC</td>
+<td>gRPC Remote Procedure Call</td>
+<td>Giao thức gọi hàm từ xa hiệu năng cao</td>
+</tr>
+<tr>
+<td>HITL</td>
+<td>Human-in-the-Loop</td>
+<td>Con người trong vòng lặp</td>
+</tr>
+<tr>
+<td>HRM</td>
+<td>Human Resource Management</td>
+<td>Quản lý nguồn nhân lực</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>HyperText Transfer Protocol</td>
+<td>Giao thức truyền tải siêu văn bản</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>HyperText Transfer Protocol Secure</td>
+<td>HTTP có mã hóa</td>
+</tr>
+<tr>
+<td>JWT</td>
+<td>JSON Web Token</td>
+<td>Token xác thực dạng JSON</td>
+</tr>
+<tr>
+<td>K8s</td>
+<td>Kubernetes</td>
+<td>Hệ thống điều phối container</td>
+</tr>
+<tr>
+<td>LLM</td>
+<td>Large Language Model</td>
+<td>Mô hình ngôn ngữ lớn</td>
+</tr>
+<tr>
+<td>LSP</td>
+<td>Language Server Protocol</td>
+<td>Giao thức server ngôn ngữ</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>Model Context Protocol</td>
+<td>Giao thức ngữ cảnh mô hình</td>
+</tr>
+<tr>
+<td>MoE</td>
+<td>Mixture of Experts</td>
+<td>Hỗn hợp chuyên gia</td>
+</tr>
+<tr>
+<td>NLG</td>
+<td>Natural Language Generation</td>
+<td>Sinh ngôn ngữ tự nhiên</td>
+</tr>
+<tr>
+<td>NLP</td>
+<td>Natural Language Processing</td>
+<td>Xử lý ngôn ngữ tự nhiên</td>
+</tr>
+<tr>
+<td>NLU</td>
+<td>Natural Language Understanding</td>
+<td>Hiểu ngôn ngữ tự nhiên</td>
+</tr>
+<tr>
+<td>OLLM</td>
+<td>Open-source Large Language Model</td>
+<td>Mô hình ngôn ngữ lớn mã nguồn mở</td>
+</tr>
+<tr>
+<td>ORM</td>
+<td>Object-Relational Mapping</td>
+<td>Ánh xạ đối tượng - quan hệ</td>
+</tr>
+<tr>
+<td>POC</td>
+<td>Proof of Concept</td>
+<td>Bằng chứng khái niệm</td>
+</tr>
+<tr>
+<td>RBAC</td>
+<td>Role-Based Access Control</td>
+<td>Kiểm soát truy cập dựa trên vai trò</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>Retrieval-Augmented Generation</td>
+<td>Sinh nội dung tăng cường bằng truy xuất</td>
+</tr>
+<tr>
+<td>RAGAS</td>
+<td>Retrieval-Augmented Generation Assessment</td>
+<td>Khung đánh giá hệ thống RAG</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>Random Access Memory</td>
+<td>Bộ nhớ truy cập ngẫu nhiên</td>
+</tr>
+<tr>
+<td>ReAct</td>
+<td>Reason + Act</td>
+<td>Lý luận + Hành động</td>
+</tr>
+<tr>
+<td>REST</td>
+<td>Representational State Transfer</td>
+<td>Kiến trúc truyền trạng thái đại diện</td>
+</tr>
+<tr>
+<td>RLHF</td>
+<td>Reinforcement Learning from Human Feedback</td>
+<td>Học tăng cường từ phản hồi con người</td>
+</tr>
+<tr>
+<td>RLS</td>
+<td>Row-Level Security</td>
+<td>Bảo mật cấp hàng (PostgreSQL)</td>
+</tr>
+<tr>
+<td>RRF</td>
+<td>Reciprocal Rank Fusion</td>
+<td>Hợp nhất xếp hạng nghịch đảo</td>
+</tr>
+<tr>
+<td>SDK</td>
+<td>Software Development Kit</td>
+<td>Bộ công cụ phát triển phần mềm</td>
+</tr>
+<tr>
+<td>SLA</td>
+<td>Service Level Agreement</td>
+<td>Thỏa thuận cấp độ dịch vụ</td>
+</tr>
+<tr>
+<td>SQL</td>
+<td>Structured Query Language</td>
+<td>Ngôn ngữ truy vấn có cấu trúc</td>
+</tr>
+<tr>
+<td>SSE</td>
+<td>Server-Sent Events</td>
+<td>Sự kiện gửi từ máy chủ</td>
+</tr>
+<tr>
+<td>SSO</td>
+<td>Single Sign-On</td>
+<td>Đăng nhập một lần</td>
+</tr>
+<tr>
+<td>STT</td>
+<td>Speech-to-Text</td>
+<td>Chuyển giọng nói thành văn bản</td>
+</tr>
+<tr>
+<td>TF-IDF</td>
+<td>Term Frequency – Inverse Document Frequency</td>
+<td>Tần suất thuật ngữ – tần suất nghịch tài liệu</td>
+</tr>
+<tr>
+<td>TPU</td>
+<td>Tensor Processing Unit</td>
+<td>Bộ xử lý tensor</td>
+</tr>
+<tr>
+<td>TTS</td>
+<td>Text-to-Speech</td>
+<td>Chuyển văn bản thành giọng nói</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>User Interface</td>
+<td>Giao diện người dùng</td>
+</tr>
+<tr>
+<td>URI</td>
+<td>Uniform Resource Identifier</td>
+<td>Định danh tài nguyên thống nhất</td>
+</tr>
+<tr>
+<td>UUID</td>
+<td>Universally Unique Identifier</td>
+<td>Định danh duy nhất toàn cục</td>
+</tr>
+<tr>
+<td>VDB</td>
+<td>Vector Database</td>
+<td>Cơ sở dữ liệu vector</td>
+</tr>
+<tr>
+<td>WAF</td>
+<td>Web Application Firewall</td>
+<td>Tường lửa ứng dụng web</td>
+</tr>
+<tr>
+<td>YAML</td>
+<td>YAML Ain't Markup Language</td>
+<td>Định dạng dữ liệu YAML</td>
+</tr>
+</tbody>
+</table>
+<h1>MỞ ĐẦU</h1>
+<h2>1. Lý do chọn đề tài</h2>
+<p>Trong những năm gần đây, sự bùng nổ của trí tuệ nhân tạo (Artificial Intelligence - AI), đặc biệt là các mô hình ngôn ngữ lớn (Large Language Models - LLM), đã tạo ra một cuộc cách mạng trong cách thức con người tương tác với hệ thống thông tin. Các mô hình như GPT-4, Claude, Gemini hay các mô hình mã nguồn mở như Llama, Mistral, DeepSeek không chỉ dừng lại ở khả năng sinh văn bản mà còn có thể lập luận, phân tích, lập kế hoạch và gọi các công cụ (function calling) để thực hiện tác vụ phức tạp. Điều này mở ra cơ hội ứng dụng AI vào hầu hết các ngành nghề, từ y tế, giáo dục, tài chính đến đặc biệt là trong lĩnh vực doanh nghiệp.</p>
+<p>Tuy nhiên, việc ứng dụng AI vào các hệ thống doanh nghiệp hiện hữu (ERP, CRM, DMS, HRM, Workflow…) vẫn còn gặp nhiều rào cản. Theo khảo sát của các tổ chức nghiên cứu, phần lớn các doanh nghiệp khi muốn tích hợp AI vào hệ thống thường phải đối mặt với bốn vấn đề lớn: <strong>chi phí tích hợp cao</strong>, <strong>thời gian triển khai lâu</strong>, <strong>yêu cầu chuyên môn sâu về cả AI lẫn hệ thống</strong> và <strong>khó mở rộng khi muốn áp dụng cho nhiều hệ thống khác nhau</strong>. Một doanh nghiệp có hệ thống ERP muốn bổ sung chatbot hỗ trợ tra cứu thông tin phải xây dựng từ đầu; khi muốn tích hợp thêm với CRM lại phải làm lại; các giải pháp AI cho từng hệ thống thường không liên thông với nhau, dẫn đến dữ liệu và tri thức bị phân mảnh.</p>
+<p>Bên cạnh đó, một thách thức cốt lõi khác là sự <strong>phụ thuộc vào AI provider</strong>. Mỗi nhà cung cấp (OpenAI, Anthropic, Google, các mô hình mã nguồn mở…) có API riêng, cách tính phí riêng, giới hạn ngữ cảnh khác nhau và hành vi khác nhau. Việc chuyển đổi giữa các provider, hoặc sử dụng đồng thời nhiều provider, đòi hỏi phải thay đổi mã nguồn tích hợp. Điều này khiến doanh nghiệp bị khóa vào một nhà cung cấp cụ thể (vendor lock-in), đặc biệt nguy hiểm khi giá cả hoặc chính sách thay đổi.</p>
+<p>Đồng thời, sự ra đời của <strong>giao thức Model Context Protocol (MCP)</strong> vào năm 2024 bởi Anthropic đã chuẩn hóa cách thức AI Agent tương tác với các hệ thống và công cụ bên ngoài, mở ra một hướng tiếp cận mới: AI có thể trở thành "cầu nối thông minh" giữa người dùng và hệ thống mà không cần phải sửa đổi hệ thống gốc.</p>
+<p>Xuất phát từ những vấn đề trên, việc <strong>nghiên cứu và xây dựng một nền tảng AI doanh nghiệp (Enterprise AI Platform)</strong> hướng tới tích hợp đa hệ thống là cần thiết và có ý nghĩa cả về mặt khoa học lẫn thực tiễn. Mục tiêu là tạo ra một <strong>sứ mệnh rõ ràng</strong>: <em>"Chỉ cần cắm AI vào hệ thống khác là có thể sử dụng được"</em> — nghĩa là doanh nghiệp có thể tích hợp AI vào ERP, CRM, DMS, HRM chỉ trong thời gian ngắn nhất, chi phí thấp nhất, độc lập với AI provider cụ thể và có khả năng mở rộng cao.</p>
+<p>Đề tài không chỉ đóng góp vào việc ứng dụng các công nghệ AI hiện đại (LLM, RAG, AI Agent, MCP) vào thực tế doanh nghiệp mà còn xây dựng một mô hình kiến trúc có thể tham chiếu cho các dự án AI doanh nghiệp tại Việt Nam và khu vực.</p>
+<h2>2. Tổng quan về vấn đề nghiên cứu</h2>
+<h3>2.1. Giới thiệu lĩnh vực nghiên cứu</h3>
+<p>Tích hợp AI vào hệ thống doanh nghiệp là một lĩnh vực nghiên cứu đang phát triển rất nhanh, nằm ở giao điểm của nhiều ngành: trí tuệ nhân tạo, hệ thống phân tán, tích hợp hệ thống, kiến trúc phần mềm và quản trị doanh nghiệp. Lĩnh vực này có thể được phân thành các hướng nghiên cứu chính:</p>
+<ul>
+<li><strong>Hệ thống gợi ý và trợ lý thông minh (Intelligent Assistant)</strong>: sử dụng LLM kết hợp RAG để hỗ trợ tra cứu thông tin, hỏi đáp và đưa ra gợi ý dựa trên dữ liệu nội bộ doanh nghiệp.</li>
+<li><strong>AI Agent tự động hóa quy trình (Process Automation)</strong>: sử dụng AI Agent có khả năng lập kế hoạch và gọi tool để tự động hóa các quy trình nghiệp vụ như phê duyệt đơn, tạo báo cáo, đồng bộ dữ liệu giữa các hệ thống.</li>
+<li><strong>Nền tảng AI đa thuê (Multi-tenant AI Platform)</strong>: kiến trúc cho phép nhiều doanh nghiệp cùng sử dụng chung một nền tảng với cấu hình và bảo mật riêng biệt.</li>
+<li><strong>Chuẩn giao tiếp AI – Hệ thống</strong>: như MCP, Agent-to-Agent Protocol, các chuẩn mở nhằm chuẩn hóa cách AI tương tác với hệ thống ngoài.</li>
+</ul>
+<h3>2.2. Các hướng tiếp cận chính</h3>
+<p>Trong nghiên cứu và triển khai thực tế hiện nay, có ba hướng tiếp cận chính cho bài toán tích hợp AI vào doanh nghiệp:</p>
+<p><strong>Hướng 1: Tích hợp trực tiếp vào hệ thống hiện hữu (Embedded AI)</strong>
+Mỗi hệ thống (ERP, CRM…) tự tích hợp AI bằng cách gọi trực tiếp API của LLM provider. Ưu điểm là đơn giản cho từng hệ thống riêng lẻ, nhưng nhược điểm là chi phí nhân bản, khó chia sẻ tri thức giữa các hệ thống và dễ bị khóa vào provider.</p>
+<p><strong>Hướng 2: Xây dựng nền tảng trung gian (Middleware / Integration Platform)</strong>
+Một nền tảng trung gian đặt giữa các hệ thống doanh nghiệp và các AI provider, cung cấp các khả năng như: chuẩn hóa giao tiếp (provider abstraction), truy xuất tri thức chung (RAG), điều phối nhiều agent (multi-agent orchestration). Đây là hướng tiếp cận của đề tài.</p>
+<p><strong>Hướng 3: Sử dụng nền tảng AI thương mại SaaS</strong>
+Sử dụng các dịch vụ như Microsoft Copilot, Google Workspace AI, Salesforce Einstein. Ưu điểm là triển khai nhanh nhưng chi phí cao, khó tùy biến, phụ thuộc hoàn toàn vào nhà cung cấp và không phù hợp với các hệ thống tự xây dựng.</p>
+<h3>2.3. Khoảng trống nghiên cứu và vấn đề đặt ra</h3>
+<p>Mặc dù cả ba hướng trên đều có nghiên cứu và sản phẩm thương mại, vẫn còn những khoảng trống quan trọng:</p>
+<ul>
+<li><strong>Thiếu một kiến trúc tổng thể</strong> kết hợp đồng thời LLM, RAG, AI Agent, MCP trong cùng một nền tảng có khả năng tích hợp với nhiều hệ thống doanh nghiệp khác nhau mà không phải viết lại từ đầu cho mỗi hệ thống.</li>
+<li><strong>Thiếu cơ chế "Plug and Play" thực sự</strong>: hầu hết các giải pháp hiện nay vẫn yêu cầu can thiệp sâu vào hệ thống đích hoặc cấu hình phức tạp. Chưa có giải pháp nào đạt được mức "cắm vào là chạy" (zero config) ở mức tổng quát.</li>
+<li><strong>Vendor lock-in chưa được giải quyết triệt để</strong>: các giải pháp thường gắn liền với một provider cụ thể hoặc một bộ công nghệ cụ thể. Khi muốn chuyển đổi, doanh nghiệp thường phải làm lại.</li>
+<li><strong>Thiếu chiến lược triển khai tiết kiệm tài nguyên AI trong khi vẫn phải đáp ứng yêu cầu doanh nghiệp</strong>: nhiều công trình xây dựng kiến trúc lý thuyết đầy đủ nhưng thiếu hướng dẫn triển khai từng bước (Phase) để có thể áp dụng vào đội ngũ từ 20-100 lập trình viên.</li>
+<li><strong>Ứng dụng cho bối cảnh doanh nghiệp Việt Nam</strong>: các nghiên cứu hiện có chủ yếu ở thị trường quốc tế. Cần một kiến trúc tham chiếu phù hợp với đặc thù hệ thống doanh nghiệp Việt Nam (quy mô vừa và nhỏ, hạ tầng tự xây, yêu cầu chạy cả offline lẫn hybrid).</li>
+</ul>
+<p>Do đó, đề tài đặt ra vấn đề nghiên cứu: <strong>Làm thế nào để xây dựng một nền tảng AI doanh nghiệp có khả năng tích hợp nhanh chóng vào nhiều hệ thống khác nhau, độc lập với AI provider, có khả năng mở rộng và đạt chuẩn doanh nghiệp về bảo mật, kiểm toán?</strong></p>
+<h2>3. Mục đích nghiên cứu</h2>
+<h3>3.1. Mục tiêu tổng quát</h3>
+<p>Mục tiêu tổng quát của đề tài là nghiên cứu và xây dựng một nền tảng AI doanh nghiệp (Enterprise AI Platform) hướng tới tích hợp đa hệ thống (multi-system integration), cho phép doanh nghiệp "cắm AI vào" các hệ thống ERP, CRM, DMS, HRM, Workflow… một cách nhanh chóng, chi phí thấp, độc lập với AI provider cụ thể và có khả năng mở rộng cao. Nền tảng được thiết kế theo triết lý <strong>"Plug &amp; Play — Provider Agnostic — Domain Aware — Enterprise Grade"</strong>, kết hợp đồng thời các công nghệ hiện đại gồm LLM, RAG, AI Agent, Multi-Agent Orchestration và giao thức MCP.</p>
+<h3>3.2. Mục tiêu cụ thể</h3>
+<p>Để đạt được mục tiêu tổng quát, đề tài đặt ra các mục tiêu cụ thể sau:</p>
+<ol>
+<li>
+<p><strong>Nghiên cứu cơ sở lý thuyết</strong>: tổng hợp và phân tích các công nghệ nền tảng gồm LLM, RAG, Hybrid Search, Reranking, AI Agent, Multi-Agent Orchestration, giao thức MCP và các phương pháp tích hợp hệ thống doanh nghiệp, từ đó xác định khoảng trống nghiên cứu và xu hướng phát triển.</p>
+</li>
+<li>
+<p><strong>Khảo sát thực tiễn</strong>: nghiên cứu các nền tảng AI doanh nghiệp hiện có (cả thương mại và nghiên cứu), phân tích ưu nhược điểm và xác định yêu cầu thực tế khi áp dụng tại Việt Nam.</p>
+</li>
+<li>
+<p><strong>Đề xuất kiến trúc nền tảng</strong>: xây dựng một kiến trúc phân lớp (7-layer) gồm Presentation, AI Gateway, Agent Orchestration, AI Engine Core, Provider Abstraction, Integration và Infrastructure; trong đó tích hợp các công nghệ AI mới nhất vào một thiết kế thống nhất, có khả năng triển khai theo từng giai đoạn (phase).</p>
+</li>
+<li>
+<p><strong>Phát triển hệ thống thực nghiệm</strong>: triển khai nền tảng ở mức chạy được (working software) với các module cốt lõi: AI Provider Abstraction (hỗ trợ nhiều LLM), RAG Engine với Hybrid Search và Reranking, Agent Orchestration với Multi-Agent, MCP Server để tích hợp với hệ thống ngoài, cơ chế Plugin và bảo mật đa tenant.</p>
+</li>
+<li>
+<p><strong>Đánh giá hiệu quả</strong>: thực hiện các kịch bản đánh giá về (i) khả năng tích hợp đa hệ thống; (ii) chất lượng truy xuất tri thức (RAGAS: Context Relevance, Faithfulness, Answer Relevancy); (iii) khả năng phối hợp đa tác nhân; (iv) hiệu năng và khả năng mở rộng; (v) so sánh với các phương pháp truyền thống.</p>
+</li>
+</ol>
+<h2>4. Đối tượng và phạm vi nghiên cứu</h2>
+<h3>4.1. Đối tượng nghiên cứu</h3>
+<p>Đối tượng nghiên cứu của luận văn bao gồm:</p>
+<ul>
+<li>Các mô hình ngôn ngữ lớn (LLM) và đặc tính kỹ thuật phục vụ cho việc triển khai trong môi trường doanh nghiệp (multi-provider, latency, cost, safety).</li>
+<li>Kỹ thuật Retrieval-Augmented Generation (RAG), Hybrid Search, Reranking, Vector Database và các phương pháp nâng cao chất lượng truy xuất.</li>
+<li>Kiến trúc AI Agent, Multi-Agent Orchestration và các cơ chế lập kế hoạch – thực thi tác vụ (task planning, tool calling, workflow).</li>
+<li>Giao thức Model Context Protocol (MCP) và các chuẩn giao tiếp AI – hệ thống khác.</li>
+<li>Kiến trúc tích hợp hệ thống doanh nghiệp (Enterprise Integration Architecture), bao gồm: ERP, CRM, DMS, HRM, Workflow, BI, Database.</li>
+<li>Các yêu cầu doanh nghiệp về bảo mật (multi-tenancy, RBAC, audit log, secrets management) và khả năng mở rộng.</li>
+</ul>
+<h3>4.2. Phạm vi nghiên cứu</h3>
+<p>Luận văn tập trung nghiên cứu và xây dựng một <strong>nền tảng kiến trúc tham chiếu (reference architecture)</strong> cho AI doanh nghiệp, có khả năng tích hợp với đa dạng hệ thống hiện hữu. Phạm vi cụ thể:</p>
+<ul>
+<li><strong>Về công nghệ</strong>: tập trung vào tích hợp LLM (đa provider), RAG, AI Agent/Multi-Agent, MCP, plugin SDK và các pattern kiến trúc phần mềm kèm theo. Không đi sâu vào huấn luyện mô hình từ đầu (pre-training, fine-tuning ở quy mô lớn).</li>
+<li><strong>Về lĩnh vực</strong>: hệ thống doanh nghiệp (enterprise systems), bao gồm nhưng không giới hạn ở ERP, CRM, DMS, HRM, Workflow, BI. Có thể mở rộng sang các hệ thống chuyên ngành trong tương lai.</li>
+<li><strong>Về quy mô</strong>: nền tảng được thiết kế cho quy mô từ doanh nghiệp nhỏ và vừa đến doanh nghiệp lớn; chạy được cả môi trường on-premise, private cloud lẫn hybrid cloud. Triển khai đa tenant từ 20 đến hàng ngàn người dùng trong một tenant.</li>
+<li><strong>Về mặt ngôn ngữ và bối cảnh</strong>: hỗ trợ tiếng Việt là ngôn ngữ chính và tiếng Anh là ngôn ngữ bổ trợ, phù hợp với bối cảnh doanh nghiệp Việt Nam và khả năng mở rộng khu vực.</li>
+<li><strong>Về dữ liệu</strong>: sử dụng dữ liệu mô phỏng và dữ liệu công khai phục vụ thực nghiệm, đánh giá. Các dữ liệu nội bộ riêng của từng doanh nghiệp chỉ được tích hợp khi có sự đồng ý và tuân thủ chính sách bảo mật.</li>
+<li><strong>Về thời gian</strong>: nghiên cứu, xây dựng và đánh giá được thực hiện trong thời gian triển khai luận văn. Các công nghệ AI có tốc độ phát triển nhanh, do đó một số chi tiết kỹ thuật có thể thay đổi theo thời gian nhưng kiến trúc tổng thể vẫn giữ tính tham chiếu.</li>
+</ul>
+<p>Ngoài phạm vi: nghiên cứu không đi sâu vào các bài toán ngoài doanh nghiệp (ví dụ: chatbot giải trí, sáng tạo nội dung thuần túy, game), cũng không xây dựng một LLM mới từ đầu. Nền tảng giả định sử dụng các LLM có sẵn (cả thương mại và mã nguồn mở).</p>
+<h2>5. Phương pháp nghiên cứu</h2>
+<p>Luận văn được thực hiện theo phương pháp nghiên cứu kết hợp giữa nghiên cứu lý thuyết và nghiên cứu thực nghiệm, nhằm đảm bảo vừa có cơ sở khoa học chặt chẽ vừa có tính ứng dụng thực tiễn cao.</p>
+<h3>5.1 Nghiên cứu cơ sở lý thuyết</h3>
+<ul>
+<li>Thu thập, tổng hợp và phân tích các tài liệu khoa học, bài báo, sách, tài liệu kỹ thuật về LLM, RAG, AI Agent, MCP, kiến trúc tích hợp hệ thống doanh nghiệp và các pattern kiến trúc phần mềm hiện đại.</li>
+<li>Khảo sát các công trình nghiên cứu trong và ngoài nước nhằm xác định các hướng tiếp cận hiện có, những hạn chế và khoảng trống nghiên cứu cần giải quyết.</li>
+<li>Phân tích các tiêu chuẩn đánh giá hệ thống RAG (RAGAS), tiêu chuẩn đánh giá agent và các khung chất lượng phần mềm phù hợp.</li>
+</ul>
+<h3>5.2 Thu thập và xây dựng dữ liệu</h3>
+<ul>
+<li>Thu thập tài liệu kỹ thuật, hướng dẫn sử dụng, đặc tả API của các LLM provider (OpenAI, Anthropic, Google, Ollama, Azure OpenAI…) phục vụ cho việc xây dựng lớp provider abstraction.</li>
+<li>Xây dựng bộ dữ liệu mô phỏng cho kho tri thức doanh nghiệp, bao gồm: tài liệu nội bộ mẫu, danh sách nhân viên, danh mục sản phẩm, quy trình nghiệp vụ và các tình huống hỏi đáp.</li>
+<li>Chuẩn hóa và làm sạch dữ liệu, tổ chức dưới dạng cơ sở tri thức có cấu trúc và phi cấu trúc phục vụ truy xuất.</li>
+</ul>
+<h3>5.3 Xây dựng hệ thống truy xuất tri thức</h3>
+<ul>
+<li>Chuyển đổi dữ liệu văn bản thành vector embedding thông qua các mô hình embedding (Gemini Embedding, OpenAI Embedding, sentence-transformer…).</li>
+<li>Lưu trữ và truy xuất trên cơ sở dữ liệu vector (pgvector, Qdrant, Milvus hoặc các lựa chọn tương đương).</li>
+<li>Thiết kế cơ chế Hybrid Search kết hợp tìm kiếm ngữ nghĩa (dense) và tìm kiếm từ khóa (sparse), bổ sung Cross-Encoder Reranking và nén ngữ cảnh nhằm nâng cao chất lượng truy xuất.</li>
+</ul>
+<h3>5.4 Xây dựng mô hình thực nghiệm</h3>
+<ul>
+<li>Phát triển nền tảng theo kiến trúc phân lớp đề xuất, triển khai các module cốt lõi: Provider Abstraction, AI Engine Core, Agent Orchestration, AI Gateway, Integration (MCP, Plugin) và Platform Core.</li>
+<li>Tích hợp nhiều LLM provider thông qua abstraction layer để chứng minh tính độc lập với nhà cung cấp.</li>
+<li>Tích hợp AI Agent với khả năng lập kế hoạch và gọi tool, thử nghiệm với các kịch bản nghiệp vụ thực tế (tạo đơn nghỉ phép, tra cứu khách hàng, tạo báo cáo…).</li>
+<li>Triển khai MCP Server cho phép hệ thống ngoài kết nối và tương tác với nền tảng.</li>
+<li>Triển khai môi trường thực nghiệm với Docker Compose, CI/CD cơ bản, đảm bảo reproducibility.</li>
+</ul>
+<h3>5.5 Đánh giá hệ thống</h3>
+<p>Đề tài sử dụng phương pháp đánh giá kết hợp định lượng và định tính:</p>
+<p><strong>Đánh giá định lượng</strong>:
+- Đo lường chất lượng truy xuất tri thức thông qua bộ chỉ số RAGAS gồm: Context Relevance, Context Recall, Faithfulness, Answer Relevancy.
+- Đo thời gian phản hồi (latency), thông lượng (throughput) của từng thành phần trong pipeline.
+- Đo chi phí sử dụng token và hiệu quả tài nguyên trên các cấu hình khác nhau.</p>
+<p><strong>Đánh giá định tính</strong>:
+- Đánh giá khả năng tích hợp đa hệ thống qua các kịch bản mô phỏng (một agent thao tác đồng thời trên ERP, CRM và DMS).
+- Đánh giá khả năng phối hợp đa tác nhân (multi-agent) qua các tình huống phức tạp đòi hỏi nhiều bước và nhiều nguồn tri thức.
+- So sánh kết quả giữa cấu hình có cá nhân hóa (dựa trên tenant, role, ngữ cảnh) và cấu hình mặc định.</p>
+<h3>5.6 Công cụ và môi trường nghiên cứu</h3>
+<ul>
+<li><strong>Ngôn ngữ lập trình</strong>: .NET 8 (C#) cho backend, TypeScript/Next.js cho frontend, Python cho các script tiện ích.</li>
+<li><strong>Mô hình ngôn ngữ lớn</strong>: đa dạng gồm OpenAI GPT-4o, Anthropic Claude 3.5, Google Gemini 2.5, Ollama local (Llama 3.2, Mistral, DeepSeek).</li>
+<li><strong>Mô hình embedding</strong>: Gemini Embedding, OpenAI text-embedding-3 và một số mô hình mã nguồn mở (BGE, mE5).</li>
+<li><strong>Cơ sở dữ liệu</strong>: PostgreSQL 16 + pgvector, Redis (cache), Docker cho container hóa.</li>
+<li><strong>Công cụ khác</strong>: Serilog (logging), OpenTelemetry (observability), Docker Compose, GitHub Actions (CI/CD cơ bản), Swagger/OpenAPI (mô tả API).</li>
+<li><strong>Môi trường phát triển</strong>: Visual Studio Code, .NET CLI, Node.js, các extension hỗ trợ.</li>
+</ul>
+<h1>Chương 1: CƠ SỞ LÝ LUẬN VÀ TỔNG QUAN NGHIÊN CỨU</h1>
+<p>Chương này trình bày nền tảng lý thuyết và tổng quan nghiên cứu liên quan đến đề tài, bao gồm: (i) trí tuệ nhân tạo và mô hình ngôn ngữ lớn; (ii) kỹ thuật Retrieval-Augmented Generation; (iii) AI Agent và cơ chế phối hợp đa tác nhân; (iv) giao thức Model Context Protocol; (v) tích hợp hệ thống doanh nghiệp; (vi) khảo sát các nghiên cứu và hệ thống liên quan.</p>
+<h2>1.1. Tổng quan về trí tuệ nhân tạo và mô hình ngôn ngữ lớn</h2>
+<h3>1.1.1. Khái quát về trí tuệ nhân tạo</h3>
+<p>Trí tuệ nhân tạo (Artificial Intelligence - AI) là lĩnh vực nghiên cứu và phát triển các hệ thống máy tính có khả năng thực hiện những tác vụ mà khi con người thực hiện đòi hỏi trí thông minh [1]. Lịch sử phát triển của AI trải qua nhiều giai đoạn với các trường phái khác nhau: AI biểu tượng (symbolic AI) trong những năm 1950-1980, AI kết nối (connectionism) với mạng nơ-ron nhân tạo, AI thống kê (statistical AI) từ những năm 1990, và gần đây là AI học sâu (deep learning) kết hợp với dữ liệu lớn.</p>
+<p>Trong thập niên 2010-2020, AI đạt được những bước tiến đột phá nhờ sự kết hợp của ba yếu tố: (i) sức mạnh tính toán tăng theo cấp số nhân, đặc biệt với GPU và TPU chuyên dụng; (ii) khối lượng dữ liệu khổng lồ được tạo ra từ Internet, mạng xã hội và các thiết bị cảm biến; (iii) các thuật toán học sâu ngày càng tinh vi, đặc biệt là kiến trúc Transformer [2]. Sự kết hợp này đã tạo ra những mô hình có khả năng vượt trội so với con người trong nhiều tác vụ cụ thể: nhận diện hình ảnh, dịch máy, chơi cờ vây, chẩn đoán y tế…</p>
+<p>Từ năm 2020, một hướng phát triển mới nổi lên mang tính cách mạng là các <strong>mô hình ngôn ngữ lớn</strong> (Large Language Models - LLM). Các mô hình này thể hiện khả năng tổng quát hóa đáng kinh ngạc trên nhiều tác vụ ngôn ngữ, từ viết văn, lập trình, phân tích dữ liệu đến lý luận logic, với chất lượng gần với con người. Sự ra đời của ChatGPT vào cuối năm 2022 đã đánh dấu một bước ngoặt lớn trong việc đưa AI đến với người dùng phổ thông và doanh nghiệp.</p>
+<p>Tuy nhiên, các mô hình LLM cũng đặt ra nhiều thách thức mới về chi phí tính toán, an toàn dữ liệu, kiểm soát đầu ra và vấn đề "ảo giác" (hallucination). Do đó, việc nghiên cứu các kiến trúc cho phép khai thác sức mạnh của LLM một cách an toàn, hiệu quả và phù hợp với từng ngữ cảnh ứng dụng là một trong những hướng nghiên cứu quan trọng nhất hiện nay.</p>
+<h3>1.1.2. Mô hình ngôn ngữ lớn (LLM)</h3>
+<h4>a. Khái niệm</h4>
+<p>Mô hình ngôn ngữ lớn (Large Language Model - LLM) là nhóm mô hình học sâu được huấn luyện trên khối lượng rất lớn dữ liệu văn bản, có khả năng hiểu và sinh ngôn ngữ tự nhiên ở mức độ gần với con người [3]. Hầu hết các LLM hiện đại đều dựa trên kiến trúc Transformer [2], cho phép mô hình đánh giá mức độ liên quan giữa các token trong toàn bộ chuỗi đầu vào thông qua cơ chế attention, thay vì xử lý tuần tự như các kiến trúc RNN hay LSTM trước đó. Điều này giúp cải thiện khả năng nắm bắt ngữ cảnh dài và tăng hiệu quả tính toán.</p>
+<p>Một LLM thường có số lượng tham số (parameters) rất lớn, từ vài tỷ (VinaLlama 7B, Mistral 7B) đến hàng trăm tỷ tham số (GPT-4 ước tính khoảng 1.8 nghìn tỷ, Claude 3 Opus khoảng 2 nghìn tỷ, Llama 3.1 405B). Quy mô tham số này cho phép mô hình "lưu trữ" một lượng lớn tri thức về ngôn ngữ, sự kiện và kỹ năng lý luận.</p>
+<p>Quá trình phát triển một LLM thường qua hai giai đoạn chính:
+- <strong>Pretraining</strong>: mô hình học các đặc trưng ngôn ngữ tổng quát từ khối lượng lớn dữ liệu (thường là dữ liệu không gán nhãn), sử dụng các tác vụ như dự đoán token tiếp theo (next token prediction) hoặc masked language modeling. Giai đoạn này đòi hỏi tài nguyên tính toán rất lớn (hàng nghìn GPU trong nhiều tuần).
+- <strong>Fine-tuning</strong>: sau khi pretraining, mô hình có thể được tinh chỉnh cho các tác vụ cụ thể (hỏi đáp, tóm tắt, phân loại, sinh nội dung) hoặc được căn chỉnh theo ý muốn con người thông qua RLHF (Reinforcement Learning from Human Feedback).</p>
+<p>Ngoài ra, kỹ thuật <strong>prompt engineering</strong> cho phép sử dụng một LLM đã huấn luyện sẵn để thực hiện nhiều tác vụ khác nhau chỉ bằng cách thay đổi câu lệnh đầu vào, không cần fine-tuning. Đây là cách tiếp cận được đề tài sử dụng để giữ chi phí tích hợp thấp.</p>
+<h4>b. Các mô hình LLM tiêu biểu</h4>
+<h5>(1) GPT (Generative Pre-trained Transformer)</h5>
+<p>GPT là họ mô hình của OpenAI dựa trên phần Decoder của Transformer, sinh văn bản theo cơ chế tự hồi quy bằng cách dự đoán token tiếp theo dựa trên các token đã xuất hiện trước đó [2], [4]. Các phiên bản GPT quy mô lớn (GPT-3.5, GPT-4, GPT-4o, GPT-4o mini) cho thấy khả năng thực hiện nhiều nhiệm vụ xử lý ngôn ngữ tự nhiên thông qua cách thiết kế đầu vào (prompt) phù hợp, đặc biệt trong bối cảnh few-shot learning và zero-shot learning.</p>
+<p>Một số đặc điểm chính của GPT:
+- Được huấn luyện trên khối lượng lớn dữ liệu văn bản đa ngôn ngữ.
+- Có khả năng sinh văn bản mạch lạc theo ngữ cảnh dài.
+- Hỗ trợ tool calling (function calling) cho phép kết nối với hệ thống ngoài.
+- Cửa sổ ngữ cảnh (context window) ngày càng được mở rộng: từ 4K (GPT-3.5), 8K, 16K, 32K, 128K (GPT-4 Turbo) đến 1M token (GPT-4.1).</p>
+<h5>(2) Claude (Anthropic)</h5>
+<p>Claude là họ mô hình do Anthropic phát triển, nổi bật với khả năng xử lý ngữ cảnh dài (200K token trở lên), cửa sổ ngữ cảnh rất lớn (Claude 3.5 Sonnet hỗ trợ 200K, Claude 4 hỗ trợ đến 1M), và có năng lực lý luận (reasoning) tốt. Đặc biệt, Anthropic là đơn vị khởi xướng giao thức Model Context Protocol (MCP), đây là chuẩn mở cho phép kết nối AI với các công cụ và nguồn dữ liệu. Claude đặc biệt phù hợp cho các tác vụ đòi hỏi phân tích sâu và tuân thủ an toàn.</p>
+<h5>(3) Gemini (Google)</h5>
+<p>Gemini là mô hình ngôn ngữ lớn đa phương thức do Google DeepMind phát triển, có khả năng xử lý nhiều dạng dữ liệu (văn bản, hình ảnh, âm thanh, video) trong cùng một kiến trúc [5]. Các phiên bản Gemini 1.5 và 2.5 có cửa sổ ngữ cảnh rất lớn (1M đến 2M token), phù hợp cho các tác vụ cần phân tích nhiều tài liệu. Gemini cũng cung cấp mô hình embedding chất lượng cao (Gemini Embedding) tích hợp tốt với hệ thống truy xuất.</p>
+<h5>(4) Llama (Meta) và họ mô hình mã nguồn mở</h5>
+<p>Llama là họ mô hình mã nguồn mở do Meta phát triển. Các phiên bản gần đây (Llama 3, Llama 3.1, Llama 3.2, Llama 3.3) đạt chất lượng gần các mô hình thương mại. Ưu điểm của Llama và các mô hình mã nguồn mở là có thể tự triển khai trên hạ tầng riêng (on-premise), giảm chi phí và bảo vệ dữ liệu. Thông qua Ollama, vLLM, llama.cpp, các công cụ này có thể chạy trên một máy chủ có GPU phù hợp.</p>
+<p>Các mô hình mã nguồn mở khác đáng chú ý:
+- <strong>Mistral</strong> (Mistral AI): các phiên bản 7B, 8x7B (MoE), Mistral Large.
+- <strong>DeepSeek</strong> (Trung Quốc): DeepSeek-V2, DeepSeek-V3, có chất lượng cao với chi phí thấp.
+- <strong>Qwen</strong> (Alibaba): Qwen 2, Qwen 2.5 với nhiều kích thước.
+- <strong>VinaLlama</strong> và <strong>PhoGPT</strong> (Việt Nam): các mô hình được tối ưu cho tiếng Việt.</p>
+<h4>c. Đặc điểm kỹ thuật phục vụ doanh nghiệp</h4>
+<p>Khi triển khai LLM trong môi trường doanh nghiệp, cần quan tâm đến các đặc điểm:</p>
+<ul>
+<li><strong>Chi phí sử dụng</strong>: mỗi provider có chính sách giá khác nhau, tính theo token đầu vào/đầu ra. Cần cơ chế cache, lựa chọn model phù hợp cho từng tác vụ.</li>
+<li><strong>Latency</strong>: thời gian phản hồi ảnh hưởng đến trải nghiệm người dùng, đặc biệt trong các ứng dụng thời gian thực.</li>
+<li><strong>Quota và Rate limit</strong>: mỗi provider giới hạn số request mỗi phút. Hệ thống cần cơ chế retry, queue, fallback.</li>
+<li><strong>Privacy và Data residency</strong>: doanh nghiệp có thể yêu cầu dữ liệu không rời khỏi hạ tầng (châu Âu GDPR, y tế, tài chính).</li>
+<li><strong>Reproducibility</strong>: kết quả có thể thay đổi giữa các lần gọi do temperature &gt; 0. Cần chiến lược đảm bảo tính ổn định.</li>
+</ul>
+<h3>1.1.3. Hạn chế của LLM trong bài toán doanh nghiệp</h3>
+<p>Mặc dù LLM mang lại nhiều bước tiến quan trọng, các mô hình này vẫn tồn tại nhiều hạn chế khi áp dụng vào hệ thống doanh nghiệp [6]:</p>
+<p><strong>(1) Hiện tượng ảo giác (hallucination)</strong>: mô hình có thể tạo ra thông tin nghe có vẻ hợp lý nhưng không chính xác hoặc không có căn cứ. Trong bối cảnh doanh nghiệp, điều này đặc biệt nguy hiểm vì có thể dẫn đến quyết định sai lầm, thông tin khách hàng sai, hoặc vi phạm quy định.</p>
+<p><strong>(2) Phụ thuộc vào dữ liệu huấn luyện</strong>: chất lượng, phạm vi và thời điểm thu thập dữ liệu ảnh hưởng trực tiếp đến độ chính xác. Các mô hình có thể không biết về sản phẩm mới, chính sách nội bộ, hoặc thông tin cụ thể của doanh nghiệp.</p>
+<p><strong>(3) Không tự cập nhật tri thức</strong>: LLM không tự động nắm bắt các thông tin mới phát sinh sau thời điểm huấn luyện nếu không có cơ chế bổ sung dữ liệu bên ngoài. Trong doanh nghiệp, thông tin thay đổi liên tục (giá sản phẩm, tồn kho, chính sách nhân sự…).</p>
+<p><strong>(4) Chi phí tính toán cao</strong>: việc huấn luyện và triển khai LLM đòi hỏi tài nguyên phần cứng lớn. Chi phí sử dụng API thương mại cũng tăng theo quy mô.</p>
+<p><strong>(5) Hạn chế khi xử lý ngữ cảnh dài</strong>: mô hình có thể gặp khó khăn khi đầu vào chứa nhiều tài liệu hoặc thông tin cần liên kết qua nhiều đoạn văn bản, mặc dù các phiên bản mới đã cải thiện đáng kể.</p>
+<p><strong>(6) Bảo mật và quyền riêng tư</strong>: khi sử dụng API thương mại, dữ liệu của doanh nghiệp có thể được gửi đến server bên thứ ba, gây lo ngại về bảo mật.</p>
+<p><strong>(7) Chi phí tích hợp cao</strong>: mỗi hệ thống, mỗi use case thường cần code tích hợp riêng, dẫn đến nhân bản công sức.</p>
+<p>Do đó, trong các hệ thống doanh nghiệp, LLM thường được kết hợp với các kỹ thuật bổ trợ: <strong>Retrieval-Augmented Generation</strong> (RAG) để cung cấp tri thức cập nhật; <strong>AI Agent</strong> kết hợp <strong>tool calling</strong> để thực hiện tác vụ; <strong>MCP</strong> để chuẩn hóa giao tiếp với hệ thống ngoài. Các kỹ thuật này được trình bày trong các mục tiếp theo.</p>
+<h2>1.2. Retrieval-Augmented Generation (RAG)</h2>
+<h3>1.2.1. Khái niệm và nguyên lý hoạt động</h3>
+<p>Retrieval-Augmented Generation (RAG) là phương pháp kết hợp mô hình ngôn ngữ lớn với cơ chế truy xuất thông tin từ nguồn dữ liệu bên ngoài [7], [8]. Thay vì phụ thuộc hoàn toàn vào tri thức được học trong quá trình huấn luyện, mô hình có thể tham chiếu thêm các tài liệu liên quan tại thời điểm xử lý truy vấn để hỗ trợ tạo câu trả lời.</p>
+<p>Về bản chất, RAG tách biệt tương đối giữa khả năng sinh ngôn ngữ của LLM và nguồn tri thức được sử dụng. Tri thức có thể được lưu trữ, cập nhật và truy xuất từ bên ngoài mô hình, qua đó giúp hệ thống linh hoạt hơn trong các bài toán yêu cầu thông tin mới, thông tin chuyên ngành hoặc dữ liệu thay đổi theo thời gian.</p>
+<p>Quy trình tổng quát của một hệ thống RAG gồm bốn bước chính:</p>
+<p><strong>Bước 1: Tiếp nhận truy vấn</strong>
+Người dùng gửi câu hỏi hoặc yêu cầu. Truy vấn có thể được chuẩn hóa, bổ sung ngữ cảnh và chuyển sang dạng phù hợp để phục vụ quá trình tìm kiếm (ví dụ: tạo embedding, tách thực thể).</p>
+<p><strong>Bước 2: Truy xuất tài liệu liên quan</strong>
+Retriever thực hiện tìm kiếm trong kho tri thức dựa trên nội dung truy vấn. Hệ thống lựa chọn các tài liệu hoặc đoạn văn bản có mức độ liên quan cao nhất. Kết quả truy xuất thường là một tập các đoạn thông tin ngắn phục vụ cho bước sinh câu trả lời. Có hai hướng truy xuất chính:
+- <strong>Dense Retrieval</strong>: sử dụng mô hình embedding ánh xạ truy vấn và tài liệu vào cùng không gian vector; mức độ liên quan đo bằng cosine similarity.
+- <strong>Sparse Retrieval</strong>: sử dụng thuật toán TF-IDF, BM25 [9]; đánh giá mức độ liên quan dựa trên tần suất từ khóa.</p>
+<p><strong>Bước 3: Xây dựng ngữ cảnh (Augmented Context)</strong>
+Các tài liệu được truy xuất được ghép với truy vấn ban đầu và các thông tin bổ sung (hồ sơ người dùng, dữ liệu có cấu trúc, thông tin ngữ cảnh khác) để tạo thành ngữ cảnh mở rộng. Giai đoạn này có thể áp dụng các kỹ thuật nén (context compression) nhằm giảm kích thước ngữ cảnh và giữ lại phần liên quan nhất.</p>
+<p><strong>Bước 4: Sinh câu trả lời (Generation)</strong>
+LLM sử dụng truy vấn cùng với ngữ cảnh mở rộng để tạo ra câu trả lời. Câu trả lời được xây dựng dựa trên cả kiến thức nội tại của mô hình và thông tin được truy xuất từ kho tri thức. Nhờ đó, đầu ra thường có độ chính xác và tính cập nhật cao hơn so với cách tiếp cận chỉ sử dụng LLM độc lập.</p>
+<h3>1.2.2. Kiến trúc nâng cao của RAG</h3>
+<p>Hệ thống RAG trong nghiên cứu và triển khai hiện đại thường được mở rộng với nhiều thành phần:</p>
+<ul>
+<li><strong>Query Understanding</strong>: phân tích truy vấn, trích xuất thực thể, mở rộng truy vấn (query expansion, query rewriting) để cải thiện chất lượng truy xuất.</li>
+<li><strong>Hybrid Search</strong>: kết hợp dense và sparse retrieval thông qua các thuật toán như Reciprocal Rank Fusion (RRF) để tận dụng ưu điểm bổ trợ.</li>
+<li><strong>Reranking</strong>: sử dụng mô hình học sâu (Cross-Encoder) để đánh giá lại mức độ liên quan của từng tài liệu sau bước truy xuất ban đầu, sắp xếp lại thứ tự ưu tiên.</li>
+<li><strong>Context Compression</strong>: nén ngữ cảnh truy xuất nhằm giảm kích thước đầu vào, loại bỏ thông tin nhiễu, tăng hiệu quả xử lý.</li>
+<li><strong>Structured Output</strong>: buộc LLM sinh kết quả theo cấu trúc JSON/schema định sẵn để dễ dàng tích hợp với hệ thống.</li>
+</ul>
+<pre class="highlight"><code>┌─────────────────────────────────────────────────────────────┐
+│                    RAG nâng cao                             │
+│                                                             │
+│  ┌───────────┐    ┌───────────────┐    ┌──────────────┐    │
+│  │ Query     │ -&gt; │ Hybrid Search │ -&gt; │ Reranking    │    │
+│  │ Rewriting │    │ (Dense+Sparse)│    │ (Cross-Enc.) │    │
+│  └───────────┘    └───────────────┘    └──────┬───────┘    │
+│        │                                       │            │
+│        ▼                                       ▼            │
+│  ┌────────────┐    ┌───────────────┐    ┌──────────────┐    │
+│  │ Structured │ &lt;- │ LLM Generator │ &lt;- │ Context      │    │
+│  │ Output     │    │ (Gemini/Claude│    │ Compression  │    │
+│  │            │    │ /GPT/Llama)   │    │              │    │
+│  └────────────┘    └───────────────┘    └──────────────┘    │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<h3>1.2.3. Vai trò của RAG trong hệ thống doanh nghiệp</h3>
+<p>Trong các hệ thống ứng dụng thực tế, RAG đóng vai trò quan trọng trong việc mở rộng khả năng của LLM vượt ra ngoài giới hạn tri thức nội tại của mô hình [7], [8]. Đối với doanh nghiệp, RAG mang lại một số lợi ích chính:</p>
+<ul>
+<li><strong>Bổ sung và cập nhật tri thức liên tục</strong>: thông qua kho dữ liệu bên ngoài mà không cần huấn luyện lại toàn bộ mô hình.</li>
+<li><strong>Tăng khả năng kiểm soát và truy vết nguồn gốc thông tin</strong>: hệ thống có thể chỉ ra tài liệu nào đã được sử dụng, phục vụ tuân thủ và kiểm toán.</li>
+<li><strong>Hỗ trợ cho các bài toán theo miền chuyên biệt</strong>: nhờ khả năng tích hợp dữ liệu riêng của từng doanh nghiệp.</li>
+<li><strong>Tiết kiệm chi phí so với fine-tuning</strong>: trong nhiều trường hợp, việc tinh chỉnh một LLM lớn rất tốn kém, RAG cho phép đạt được kết quả tương đương với chi phí thấp hơn nhiều.</li>
+</ul>
+<h3>1.2.4. Ưu điểm và hạn chế của RAG</h3>
+<p><strong>Bảng 1.1. Ưu điểm và hạn chế của RAG</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ưu điểm</th>
+<th>Hạn chế</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mở rộng khả năng sử dụng tri thức ngoài mô hình, giảm phụ thuộc vào tham số đã huấn luyện</td>
+<td>Phụ thuộc đáng kể vào chất lượng, độ chính xác và mức độ cập nhật của nguồn dữ liệu truy xuất</td>
+</tr>
+<tr>
+<td>Cho phép cập nhật thông tin thông qua kho dữ liệu bên ngoài mà không cần huấn luyện lại mô hình</td>
+<td>Hiệu quả đầu ra bị ảnh hưởng nếu bộ truy xuất chọn sai, thiếu hoặc nhiễu thông tin liên quan</td>
+</tr>
+<tr>
+<td>Hỗ trợ tốt các bài toán theo miền nhờ khả năng tích hợp dữ liệu chuyên biệt</td>
+<td>Làm tăng độ phức tạp trong thiết kế, triển khai và vận hành hệ thống so với LLM thuần túy</td>
+</tr>
+<tr>
+<td>Giúp phản hồi bám sát hơn vào yêu cầu người dùng và tài liệu được truy xuất</td>
+<td>Tăng thời gian xử lý do phát sinh thêm bước truy xuất trước khi sinh kết quả</td>
+</tr>
+<tr>
+<td>Tăng khả năng kiểm soát và truy vết nguồn thông tin đầu ra</td>
+<td>Cần thiết kế tốt cơ chế thu thập, tổ chức, chia đoạn và biểu diễn dữ liệu để đạt hiệu quả cao</td>
+</tr>
+</tbody>
+</table>
+<p>Trong bối cảnh doanh nghiệp, RAG thường được kết hợp với các kỹ thuật tăng cường (Hybrid Search, Reranking, Compression) và được nhúng vào pipeline AI Agent để tạo ra các hệ thống thông minh có khả năng tự động hóa quy trình nghiệp vụ.</p>
+<h2>1.3. AI Agent và cơ chế phối hợp đa tác nhân (Multi-Agent)</h2>
+<h3>1.3.1. Khái niệm AI Agent</h3>
+<p>AI Agent là một hệ thống phần mềm có khả năng <strong>tự chủ cảm nhận môi trường, lập kế hoạch, ra quyết định và thực hiện hành động</strong> để đạt được mục tiêu được giao, thông qua việc kết hợp LLM với các công cụ (tools) và bộ nhớ (memory) [10], [11].</p>
+<p>Trong ngữ cảnh LLM, một AI Agent thường gồm các thành phần:</p>
+<ul>
+<li><strong>LLM làm "bộ não"</strong>: phân tích yêu cầu, lập kế hoạch và quyết định hành động tiếp theo.</li>
+<li><strong>Tools (công cụ)</strong>: các hàm API mà agent có thể gọi, ví dụ: tra cứu cơ sở dữ liệu, gọi API hệ thống ngoài, tạo báo cáo.</li>
+<li><strong>Memory (bộ nhớ)</strong>: lưu trữ ngữ cảnh hội thoại, kết quả trung gian, sở thích người dùng.</li>
+<li><strong>Planning</strong>: khả năng phân tách tác vụ lớn thành các bước nhỏ và xử lý tuần tự hoặc song song.</li>
+<li><strong>Reflection / Self-critique</strong>: khả năng tự đánh giá kết quả và điều chỉnh.</li>
+</ul>
+<p>Các framework AI Agent phổ biến gồm: LangChain/LangGraph (Python, JS), AutoGen (Microsoft), CrewAI, LlamaIndex Agents, Semantic Kernel (.NET). Trong .NET, Semantic Kernel của Microsoft cung cấp abstractions cho AI Agent, function calling, planner và memory.</p>
+<h3>1.3.2. Kiến trúc tác nhân và cơ chế lập kế hoạch</h3>
+<p>Một kiến trúc agent phổ biến là ReAct (Reason + Act), trong đó agent luân phiên giữa hai bước:
+- <strong>Reason</strong>: suy nghĩ về tình huống hiện tại, lên kế hoạch hành động tiếp theo.
+- <strong>Act</strong>: thực hiện hành động (gọi tool, truy vấn dữ liệu).</p>
+<p>Một số agent nâng cao hơn sử dụng:
+- <strong>Plan-and-Execute</strong>: lập kế hoạch toàn bộ trước, sau đó thực thi tuần tự.
+- <strong>Multi-step Reasoning</strong>: chain-of-thought, tree-of-thought để giải quyết vấn đề phức tạp.
+- <strong>Reflection</strong>: tự đánh giá và sửa chữa kết quả.</p>
+<h3>1.3.3. Multi-Agent Orchestration</h3>
+<p>Multi-Agent System (MAS) là hệ thống gồm nhiều agent phối hợp để giải quyết vấn đề phức tạp. Mỗi agent có vai trò chuyên biệt (researcher, planner, executor, critic, …) và giao tiếp với nhau thông qua message passing hoặc chia sẻ context chung.</p>
+<p>Các mô hình phối hợp phổ biến:</p>
+<ul>
+<li><strong>Supervisor Pattern</strong>: một agent "supervisor" điều phối, các agent con xử lý tác vụ con.</li>
+<li><strong>Hierarchical Pattern</strong>: agent cấp cao phân tách, agent cấp thấp thực thi.</li>
+<li><strong>Collaborative Pattern</strong>: các agent trao đổi ngang hàng để đạt đồng thuận.</li>
+<li><strong>Pipeline Pattern</strong>: agent A xử lý xong, chuyển output cho agent B tiếp tục.</li>
+</ul>
+<p>Trong doanh nghiệp, Multi-Agent rất phù hợp cho các quy trình nghiệp vụ phức tạp: ví dụ một workflow "phê duyệt đơn nghỉ phép" có thể gồm: agent phân tích đơn → agent tra cứu HRM (số ngày phép còn lại) → agent gọi API để tạo ticket → agent gửi thông báo cho quản lý.</p>
+<h3>1.3.4. Ưu điểm và thách thức</h3>
+<p><strong>Ưu điểm</strong>:
+- Giải quyết được các tác vụ phức tạp đa bước.
+- Phân tách trách nhiệm rõ ràng giữa các agent.
+- Dễ mở rộng (thêm agent mới khi có nhu cầu mới).
+- Tận dụng được tool calling để tương tác với hệ thống ngoài.</p>
+<p><strong>Thách thức</strong>:
+- <strong>Chi phí</strong>: nhiều agent có thể dẫn đến chi phí token cao.
+- <strong>Latency</strong>: thời gian phản hồi có thể tăng do nhiều bước LLM.
+- <strong>Error propagation</strong>: lỗi ở agent sớm có thể lan truyền.
+- <strong>Debugging</strong>: khó truy vết khi có nhiều agent phối hợp.
+- <strong>Đảm bảo tính an toàn</strong>: cần guardrail, human-in-the-loop cho các quyết định quan trọng.</p>
+<p>Trong đề tài, Multi-Agent Orchestration được thiết kế kết hợp với MCP để tạo ra một hệ thống có khả năng phối hợp chặt chẽ với các hệ thống doanh nghiệp hiện hữu.</p>
+<h2>1.4. Giao thức Model Context Protocol (MCP)</h2>
+<h3>1.4.1. Bối cảnh ra đời của MCP</h3>
+<p>Model Context Protocol (MCP) là một giao thức mở được Anthropic giới thiệu vào tháng 11 năm 2024 nhằm chuẩn hóa cách thức các mô hình AI (đặc biệt là LLM Agent) tương tác với các công cụ, dịch vụ và nguồn dữ liệu bên ngoài [12]. Trước khi MCP ra đời, mỗi framework AI Agent thường có cách tích hợp tools riêng, dẫn đến tình trạng phân mảnh: tool của framework A không sử dụng được cho framework B, doanh nghiệp muốn tích hợp tool mới phải code lại.</p>
+<p>MCP giải quyết vấn đề này bằng cách định nghĩa một giao thức client-server chuẩn, tương tự như LSP (Language Server Protocol) trong lập trình:</p>
+<ul>
+<li><strong>MCP Server</strong>: cung cấp các tool, resource và prompt qua giao diện chuẩn.</li>
+<li><strong>MCP Client</strong>: có thể là AI Agent (Claude Desktop, Cursor IDE, các AI framework khác) kết nối tới MCP Server để sử dụng các khả năng được cung cấp.</li>
+</ul>
+<p>Giao thức MCP sử dụng JSON-RPC 2.0 làm định dạng trao đổi và hỗ trợ hai cơ chế giao tiếp chính: stdio (cho local server) và HTTP+SSE (cho remote server).</p>
+<h3>1.4.2. Kiến trúc và cách thức hoạt động</h3>
+<p>Kiến trúc MCP gồm ba lớp chính:</p>
+<p><strong>Lớp 1: MCP Host</strong> là ứng dụng AI (ví dụ: Claude Desktop, IDE, AI framework) muốn sử dụng các tool.</p>
+<p><strong>Lớp 2: MCP Client</strong> được host nhúng vào, có nhiệm vụ kết nối và giao tiếp với một hoặc nhiều MCP Server.</p>
+<p><strong>Lớp 3: MCP Server</strong> cung cấp ba loại khả năng:
+- <strong>Resources</strong>: dữ liệu mà LLM có thể đọc (file, database records, API responses).
+- <strong>Tools</strong>: hàm mà LLM có thể gọi để thực hiện hành động (tạo ticket, gửi email…).
+- <strong>Prompts</strong>: template prompt được định nghĩa sẵn cho các tác vụ cụ thể.</p>
+<pre class="highlight"><code>┌────────────────────────────────────────────────────┐
+│                  MCP Architecture                   │
+│                                                     │
+│  ┌────────────────────┐      ┌─────────────────┐  │
+│  │   MCP Host         │      │   MCP Server    │  │
+│  │   (AI Assistant)   │      │   - Resources   │  │
+│  │  ┌──────────────┐  │      │   - Tools       │  │
+│  │  │ MCP Client   │◄─┼──────┤   - Prompts     │  │
+│  │  │ (JSON-RPC)   │  │ JSON │                 │  │
+│  │  └──────────────┘  │ RPC  │   Connect to:   │  │
+│  └────────────────────┘      │   - Database    │  │
+│                              │   - File system │  │
+│                              │   - ERP/CRM API │  │
+│                              └─────────────────┘  │
+└────────────────────────────────────────────────────┘
+</code></pre>
+
+<h3>1.4.3. MCP trong bài toán tích hợp hệ thống doanh nghiệp</h3>
+<p>Đối với doanh nghiệp, MCP mang lại giá trị đặc biệt lớn:</p>
+<p><strong>(1) Chuẩn hóa giao tiếp AI – hệ thống</strong>: thay vì mỗi agent phải tích hợp riêng với từng hệ thống, doanh nghiệp chỉ cần triển khai một MCP Server cho mỗi hệ thống (ERP, CRM, DMS). Sau đó, bất kỳ AI Agent nào hỗ trợ MCP đều có thể kết nối.</p>
+<p><strong>(2) Tái sử dụng</strong>: tool khai thác từ MCP Server có thể được sử dụng bởi nhiều agent khác nhau, nhiều workflow khác nhau, thậm chí nhiều ứng dụng khác nhau.</p>
+<p><strong>(3) Bảo mật</strong>: MCP Server đặt tại hạ tầng doanh nghiệp, có thể áp dụng các chính sách kiểm soát truy cập, logging, audit. Dữ liệu nhạy cảm không cần gửi ra ngoài.</p>
+<p><strong>(4) Khả năng mở rộng</strong>: khi doanh nghiệp muốn tích hợp hệ thống mới, chỉ cần triển khai MCP Server tương ứng. Không cần sửa đổi AI Agent.</p>
+<p>Đề tài sử dụng MCP như một cơ chế cốt lõi để nền tảng Enterprise AI có thể "Plug &amp; Play" vào các hệ thống doanh nghiệp.</p>
+<h2>1.5. Tích hợp hệ thống doanh nghiệp (Enterprise System Integration)</h2>
+<h3>1.5.1. Tổng quan về ERP, CRM, DMS, HRM</h3>
+<p><strong>Enterprise Resource Planning (ERP)</strong>: hệ thống hoạch định nguồn lực doanh nghiệp, tích hợp các quy trình cốt lõi như tài chính, kế toán, mua hàng, sản xuất, kho vận. Các sản phẩm phổ biến: SAP, Oracle ERP, Microsoft Dynamics, Odoo, ERPNext.</p>
+<p><strong>Customer Relationship Management (CRM)</strong>: hệ thống quản lý quan hệ khách hàng, hỗ trợ quản lý leads, opportunities, sales pipeline, marketing automation. Ví dụ: Salesforce, HubSpot, Zoho CRM, Microsoft Dynamics CRM, custom CRM nội bộ.</p>
+<p><strong>Document Management System (DMS)</strong>: hệ thống quản lý tài liệu, lưu trữ, phiên bản hóa, chia sẻ và tìm kiếm. Ví dụ: SharePoint, Alfresco, Nextcloud, hệ thống DMS nội bộ.</p>
+<p><strong>Human Resource Management (HRM)</strong>: hệ thống quản lý nhân sự gồm hồ sơ nhân viên, chấm công, tính lương, đánh giá. Ví dụ: Workday, BambooHR, custom HRM.</p>
+<p><strong>Workflow / BPM</strong>: hệ thống quản lý quy trình nghiệp vụ (Business Process Management), điều phối luồng công việc giữa nhiều bên. Ví dụ: Camunda, jBPM, Activiti, custom BPM.</p>
+<p><strong>Business Intelligence (BI)</strong>: hệ thống phân tích và báo cáo, ví dụ Power BI, Tableau, Metabase.</p>
+<p><strong>Database trực tiếp</strong>: nhiều hệ thống không có API chuẩn mà chỉ có database; tích hợp qua query SQL trực tiếp.</p>
+<h3>1.5.2. Các phương pháp tích hợp truyền thống</h3>
+<p>Trước khi AI trở nên phổ biến, doanh nghiệp đã có nhiều phương pháp tích hợp hệ thống:</p>
+<ul>
+<li><strong>Point-to-Point</strong>: hai hệ thống kết nối trực tiếp, đơn giản cho cặp đôi nhưng khó mở rộng.</li>
+<li><strong>Hub-and-Spoke</strong>: một hub trung gian, các hệ thống kết nối vào hub. Ví dụ: ESB (Enterprise Service Bus).</li>
+<li><strong>Middleware/ESB</strong>: MuleSoft, IBM Integration Bus, WSO2.</li>
+<li><strong>API Gateway</strong>: Kong, Apigee, AWS API Gateway.</li>
+<li><strong>Message Queue</strong>: Kafka, RabbitMQ, ActiveMQ dùng cho tác vụ bất đồng bộ.</li>
+</ul>
+<p>Các phương pháp này vẫn được sử dụng rộng rãi, đặc biệt khi tích hợp giữa các hệ thống nghiệp vụ truyền thống. Tuy nhiên, chúng <strong>chưa giải quyết được bài toán tích hợp AI</strong>: cần một lớp khác có khả năng hiểu ngôn ngữ tự nhiên, lập kế hoạch và gọi tool.</p>
+<h3>1.5.3. Thách thức khi tích hợp AI vào hệ thống doanh nghiệp</h3>
+<p>Khi tích hợp AI vào hệ thống doanh nghiệp, gặp phải các thách thức:</p>
+<p><strong>(1) Đa dạng hệ thống và API</strong>: mỗi hệ thống có API riêng, schema khác nhau, cần abstraction để AI Agent giao tiếp thống nhất.</p>
+<p><strong>(2) Quyền truy cập (Authorization)</strong>: AI không thể có mọi quyền; cần cơ chế phân quyền chi tiết (RBAC/ABAC), giới hạn tool theo role.</p>
+<p><strong>(3) Audit và Compliance</strong>: mọi hành động của AI cần được ghi log để phục vụ kiểm toán và tuân thủ (GDPR, HIPAA, ISO 27001).</p>
+<p><strong>(4) Đảm bảo chất lượng đầu ra</strong>: AI có thể sinh ra câu trả lời sai; cần Human-in-the-Loop cho quyết định quan trọng.</p>
+<p><strong>(5) Chi phí &amp; hiệu năng</strong>: việc gọi LLM nhiều lần tốn kém và chậm; cần cache, batching và chọn model phù hợp.</p>
+<p><strong>(6) Bảo mật &amp; quyền riêng tư</strong>: dữ liệu nội bộ khi qua LLM có thể bị rò rỉ; cần giải pháp on-premise hoặc private cloud.</p>
+<p><strong>(7) Đồng bộ hóa tri thức</strong>: khi doanh nghiệp thay đổi quy trình, sản phẩm, kho tri thức phải được cập nhật.</p>
+<p>Đề tài đề xuất một kiến trúc giải quyết đồng thời các thách thức trên, với MCP làm chuẩn giao tiếp, RAG làm cơ chế truy xuất tri thức và AI Gateway làm lớp kiểm soát bảo mật.</p>
+<h2>1.6. Các nghiên cứu và hệ thống liên quan</h2>
+<h3>1.6.1. Các nền tảng AI doanh nghiệp hiện có</h3>
+<p>Hiện nay có một số nền tảng AI doanh nghiệp đáng chú ý:</p>
+<p><strong>Microsoft Copilot Studio</strong>: cho phép doanh nghiệp tạo các "Copilot" tùy chỉnh tích hợp với Microsoft 365, Dynamics 365, Power Platform. Ưu điểm: hệ sinh thái Microsoft rộng, bảo mật tốt. Hạn chế: gắn liền với Microsoft stack, chi phí cao.</p>
+<p><strong>Google Vertex AI Agent Builder</strong>: cho phép xây dựng agent tích hợp với Google Cloud, hỗ trợ nhiều LLM. Ưu điểm: linh hoạt, tích hợp GCP. Hạn chế: cần GCP.</p>
+<p><strong>Amazon Bedrock Agents</strong>: tương tự Vertex AI nhưng trên AWS. Hỗ trợ nhiều foundation model.</p>
+<p><strong>Salesforce Einstein</strong>: AI cho CRM Salesforce. Tích hợp chặt với Salesforce.</p>
+<p><strong>LangChain / LlamaIndex</strong>: framework mã nguồn mở, cung cấp primitives để xây dựng agent.</p>
+<p><strong>Bảng 1.2. So sánh một số nền tảng AI doanh nghiệp hiện có</strong></p>
+<table>
+<thead>
+<tr>
+<th>Nền tảng</th>
+<th>Đặc điểm</th>
+<th>Hạn chế</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft Copilot Studio</td>
+<td>Tích hợp chặt với Microsoft 365, Dynamics; bảo mật cấp doanh nghiệp</td>
+<td>Vendor lock-in Microsoft; chi phí license cao; khó tích hợp hệ thống ngoài hệ sinh thái</td>
+</tr>
+<tr>
+<td>Google Vertex AI Agent Builder</td>
+<td>Hỗ trợ đa model, tích hợp GCP, RAG built-in</td>
+<td>Cần Google Cloud; giá cao; ít tooling cho môi trường on-premise</td>
+</tr>
+<tr>
+<td>Amazon Bedrock Agents</td>
+<td>Đa model foundation, tích hợp AWS, knowledge base</td>
+<td>Cần AWS; phức tạp cho người mới</td>
+</tr>
+<tr>
+<td>LangChain (mã nguồn mở)</td>
+<td>Framework linh hoạt, cộng đồng lớn</td>
+<td>Không phải sản phẩm hoàn chỉnh; tự triển khai mọi thứ</td>
+</tr>
+<tr>
+<td>Salesforce Einstein</td>
+<td>AI native cho CRM Salesforce</td>
+<td>Gắn liền Salesforce; không tổng quát</td>
+</tr>
+</tbody>
+</table>
+<h3>1.6.2. Các nghiên cứu về AI Agent và Multi-Agent</h3>
+<p>Trong lĩnh vực nghiên cứu, các công trình gần đây đáng chú ý:</p>
+<ul>
+<li><strong>AutoGen (Microsoft Research)</strong>: framework Multi-Agent hỗ trợ hội thoại giữa các agent.</li>
+<li><strong>CrewAI</strong>: framework tổ chức "crew" các agent theo vai trò.</li>
+<li><strong>LangGraph</strong>: mở rộng LangChain cho workflow đồ thị.</li>
+<li><strong>Semantic Kernel (Microsoft)</strong>: SDK cho .NET để xây dựng AI Agent tích hợp với C# / .NET.</li>
+</ul>
+<p><strong>Bảng 1.3. Một số nghiên cứu ứng dụng AI Agent trong doanh nghiệp</strong></p>
+<table>
+<thead>
+<tr>
+<th>Nghiên cứu / Framework</th>
+<th>Hướng tiếp cận</th>
+<th>Hạn chế</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AutoGen [13]</td>
+<td>Multi-Agent Conversation; phối hợp qua messages</td>
+<td>Chưa có chuẩn MCP chính thức; khó debug khi agent nhiều</td>
+</tr>
+<tr>
+<td>CrewAI [14]</td>
+<td>Role-based Multi-Agent (researcher, writer…)</td>
+<td>Giới hạn về workflow phức tạp</td>
+</tr>
+<tr>
+<td>LangGraph</td>
+<td>Workflow đồ thị có trạng thái, hỗ trợ ReAct, Reflection</td>
+<td>Phụ thuộc LangChain; learning curve</td>
+</tr>
+<tr>
+<td>Semantic Kernel (.NET)</td>
+<td>Function calling, planner, memory cho .NET</td>
+<td>Cộng đồng nhỏ hơn Python ecosystem</td>
+</tr>
+</tbody>
+</table>
+<h3>1.6.3. Khoảng trống nghiên cứu</h3>
+<p>Qua khảo sát, có thể nhận thấy các khoảng trống nghiên cứu sau:</p>
+<p><strong>(1) Thiếu kiến trúc tổng thể tích hợp nhiều công nghệ AI</strong>: các nghiên cứu thường tập trung vào một khía cạnh (RAG, agent, tool calling). Chưa có nhiều công trình đề xuất kiến trúc thống nhất, triển khai được thực tế cho doanh nghiệp.</p>
+<p><strong>(2) Thiếu hỗ trợ chuẩn MCP ở mức production-grade</strong>: MCP ra đời 2024, nhiều framework đang trong quá trình tích hợp. Một kiến trúc hoàn chỉnh kết hợp MCP với các thành phần khác còn hạn chế.</p>
+<p><strong>(3) Thiếu hướng dẫn triển khai từng bước (Phase)</strong>: hầu hết tài liệu dừng ở mức kiến trúc, rất ít tài liệu hướng dẫn cụ thể cách triển khai từ prototype đến production với quy mô team 20-100 người.</p>
+<p><strong>(4) Thiếu đánh giá trên bối cảnh doanh nghiệp Việt Nam</strong>: các công trình chủ yếu ở Mỹ, châu Âu, Trung Quốc. Bối cảnh Việt Nam với đặc thù tiếng Việt, văn hóa doanh nghiệp, hạ tầng còn hạn chế chưa được nghiên cứu sâu.</p>
+<p><strong>(5) Thiếu giải pháp "Plug and Play" thực sự cho doanh nghiệp nhỏ và vừa</strong>: các giải pháp thương mại đòi hỏi đầu tư lớn, các framework mã nguồn mở đòi hỏi đội ngũ kỹ thuật cao.</p>
+<p>Đề tài nhằm giải quyết các khoảng trống trên bằng cách đề xuất một kiến trúc Enterprise AI Platform hoàn chỉnh, có hướng dẫn triển khai từng phase, tích hợp MCP, RAG và AI Agent, phù hợp với doanh nghiệp Việt Nam.</p>
+<h2>1.7. Kết luận chương 1</h2>
+<p>Chương 1 đã trình bày nền tảng lý thuyết và tổng quan nghiên cứu của luận văn, bao gồm:</p>
+<ul>
+<li>Tổng quan về trí tuệ nhân tạo và mô hình ngôn ngữ lớn (LLM): khái niệm, các mô hình tiêu biểu (GPT, Claude, Gemini, Llama) và hạn chế khi áp dụng cho doanh nghiệp.</li>
+<li>Kỹ thuật Retrieval-Augmented Generation (RAG): khái niệm, kiến trúc tổng quát, kiến trúc nâng cao với Hybrid Search, Reranking, Context Compression và vai trò trong hệ thống doanh nghiệp.</li>
+<li>AI Agent và Multi-Agent Orchestration: khái niệm AI Agent, kiến trúc ReAct/Plan-and-Execute, các mô hình phối hợp Multi-Agent.</li>
+<li>Giao thức Model Context Protocol (MCP): bối cảnh ra đời, kiến trúc client-server và vai trò trong tích hợp hệ thống doanh nghiệp.</li>
+<li>Tích hợp hệ thống doanh nghiệp: tổng quan về ERP, CRM, DMS, HRM; các phương pháp tích hợp truyền thống; thách thức khi tích hợp AI.</li>
+<li>Khảo sát các nghiên cứu và hệ thống liên quan; xác định khoảng trống nghiên cứu cần giải quyết.</li>
+</ul>
+<p>Trên cơ sở đó, chương tiếp theo sẽ tập trung vào phân tích bài toán, đối tượng nghiên cứu cụ thể và đề xuất kiến trúc hệ thống Enterprise AI Platform cho bài toán tích hợp đa hệ thống doanh nghiệp.</p>
+<h1>Chương 2: PHÂN TÍCH BÀI TOÁN VÀ THIẾT KẾ NỀN TẢNG</h1>
+<p>Chương này trình bày quá trình phân tích bài toán, xác định yêu cầu chức năng và phi chức năng, đề xuất kiến trúc tổng thể của nền tảng Enterprise AI Platform, thiết kế chi tiết các module cốt lõi, thiết kế dữ liệu và cơ sở tri thức, cùng quy trình triển khai theo 5 giai đoạn (Phase).</p>
+<h2>2.1. Phân tích bài toán</h2>
+<h3>2.1.1. Mô tả bài toán và bối cảnh doanh nghiệp</h3>
+<p>Bài toán trung tâm của đề tài là: <strong>"Làm thế nào để xây dựng một nền tảng AI có khả năng tích hợp nhanh chóng vào nhiều hệ thống doanh nghiệp khác nhau, độc lập với AI provider, có khả năng mở rộng và đạt chuẩn doanh nghiệp về bảo mật, kiểm toán?"</strong></p>
+<p>Trong thực tế, doanh nghiệp hiện đại vận hành đồng thời nhiều hệ thống phục vụ các mục đích khác nhau: ERP để quản lý nguồn lực, CRM để quản lý khách hàng, DMS để quản lý tài liệu, HRM để quản lý nhân sự, Workflow để điều phối quy trình. Mỗi hệ thống có dữ liệu riêng, API riêng và cơ chế bảo mật riêng. Khi muốn tích hợp AI, doanh nghiệp thường phải xây dựng từ đầu cho từng hệ thống, dẫn đến chi phí cao, thời gian dài và khó bảo trì.</p>
+<p>Ví dụ cụ thể: một doanh nghiệp sản xuất sử dụng hệ thống ERP (quản lý đơn hàng, tồn kho), CRM (quản lý khách hàng, leads), DMS (lưu trữ hợp đồng, tài liệu pháp lý). Khi muốn có một trợ lý AI giúp nhân viên tra cứu thông tin, phê duyệt đơn hàng, tạo báo cáo tổng hợp từ nhiều nguồn, doanh nghiệp thường phải:
+- Tích hợp AI vào ERP (1 lần)
+- Tích hợp AI vào CRM (1 lần)
+- Tích hợp AI vào DMS (1 lần)
+- Tích hợp AI giữa các hệ thống (1 lần nữa)</p>
+<p>Mỗi lần tích hợp đều yêu cầu code riêng, cấu hình riêng, testing riêng. Chi phí ước tính cho mỗi lần tích hợp thường từ 50-200 triệu đồng và mất 2-6 tháng. Với 5 hệ thống, tổng chi phí có thể lên đến hàng tỷ đồng.</p>
+<p>Nền tảng Enterprise AI Platform đề xuất một kiến trúc trung gian cho phép:
+- <strong>Một lần cài đặt</strong>: triển khai nền tảng AI một lần duy nhất
+- <strong>Nhiều lần kết nối</strong>: mỗi hệ thống (ERP, CRM, DMS, HRM) được kết nối qua giao thức chuẩn (MCP)
+- <strong>Chia sẻ tri thức</strong>: kho tri thức doanh nghiệp chung, các agent có thể truy xuất từ bất kỳ hệ thống nào
+- <strong>Độc lập provider</strong>: có thể chọn bất kỳ LLM nào (OpenAI, Anthropic, Google, Ollama…) mà không cần thay đổi code tích hợp
+- <strong>Multi-tenant</strong>: nhiều doanh nghiệp cùng sử dụng một nền tảng với dữ liệu và cấu hình riêng biệt</p>
+<h3>2.1.2. Yêu cầu chức năng</h3>
+<p>Từ bài toán đã xác định, hệ thống cần đáp ứng các yêu cầu chức năng chính được trình bày trong Bảng 2.1.</p>
+<p><strong>Bảng 2.1. Yêu cầu chức năng của hệ thống</strong></p>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Yêu cầu chức năng</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tương tác hội thoại bằng ngôn ngữ tự nhiên</td>
+<td>Cho phép người dùng trao đổi với hệ thống bằng tiếng Việt/tiếng Anh để yêu cầu tác vụ, hỏi thông tin hoặc điều chỉnh yêu cầu qua nhiều lượt hội thoại</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Truy xuất tri thức doanh nghiệp (RAG)</td>
+<td>Tìm kiếm và truy xuất thông tin liên quan từ kho tri thức doanh nghiệp (tài liệu, database, API) để hỗ trợ trả lời chính xác, có căn cứ</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Tích hợp đa hệ thống qua MCP</td>
+<td>Kết nối được với nhiều hệ thống doanh nghiệp (ERP, CRM, DMS, HRM, Workflow) thông qua giao thức chuẩn MCP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AI Agent đa tác vụ</td>
+<td>Agent có khả năng lập kế hoạch, phân tách tác vụ phức tạp thành các bước nhỏ, gọi tool để thực thi trên các hệ thống</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Multi-Agent Orchestration</td>
+<td>Điều phối nhiều agent chuyên biệt phối hợp giải quyết vấn đề, ví dụ: agent nghiên cứu + agent lập kế hoạch + agent thực thi</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Gọi tool và function calling</td>
+<td>Hệ thống có thể định nghĩa và gọi các tool (API call, SQL query, file read…) dưới sự kiểm soát của Agent Executor</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Quản lý ngữ cảnh và bộ nhớ</td>
+<td>Lưu trữ ngữ cảnh hội thoại (short-term memory), hồ sơ người dùng (long-term memory) phục vụ cá nhân hóa</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Đa provider AI</td>
+<td>Có khả năng kết nối và sử dụng đồng thời nhiều LLM provider (OpenAI, Anthropic, Google, Ollama…) thông qua abstraction layer</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Quản lý đa tenant</td>
+<td>Nhiều doanh nghiệp cùng sử dụng một nền tảng với dữ liệu, cấu hình, quyền truy cập riêng biệt</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Plugin SDK và mở rộng</td>
+<td>Cho phép nhà phát triển tạo plugin mới để mở rộng khả năng của nền tảng mà không cần sửa mã nguồn cốt lõi</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Giao diện API chuẩn</td>
+<td>Cung cấp REST API và/hoặc gRPC để tích hợp với hệ thống bên ngoài, hỗ trợ streaming cho phản hồi real-time</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Quản lý quyền truy cập và audit</td>
+<td>Xác thực người dùng (AuthN), phân quyền chi tiết (RBAC/ABAC), ghi log kiểm toán cho mọi tác vụ</td>
+</tr>
+</tbody>
+</table>
+<h3>2.1.3. Yêu cầu phi chức năng</h3>
+<p>Bên cạnh các chức năng chính, hệ thống cần đáp ứng các yêu cầu phi chức năng nhằm đảm bảo khả năng vận hành ổn định, an toàn và phù hợp với bối cảnh doanh nghiệp.</p>
+<p><strong>Bảng 2.2. Yêu cầu phi chức năng của hệ thống</strong></p>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Yêu cầu</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Hiệu năng</td>
+<td>Hệ thống phản hồi trong thời gian hợp lý: &lt; 3 giây cho query RAG thông thường, &lt; 10 giây cho workflow multi-agent. Hỗ trợ ít nhất 100 concurrent users trong một tenant</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Khả năng mở rộng</td>
+<td>Kiến trúc hỗ trợ mở rộng ngang (scale out) khi số người dùng, số request tăng lên. Các module độc lập có thể scale riêng</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Độ tin cậy</td>
+<td>Tỷ lệ uptime ≥ 99.5% trong giờ hành chính. Khi một provider AI gặp sự cố, hệ thống tự động chuyển sang provider dự phòng (failover)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bảo mật</td>
+<td>Mọi dữ liệu được mã hóa khi truyền (TLS 1.3) và khi lưu trữ (AES-256). Phân tách dữ liệu giữa các tenant (Row-Level Security). Tuân thủ các tiêu chuẩn bảo mật phù hợp</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Giám sát và quan sát</td>
+<td>Mỗi thành phần phát ra log, metric, trace. Tích hợp OpenTelemetry. Có dashboard giám sát tập trung</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Khả năng bảo trì</td>
+<td>Kiến trúc module hóa, mỗi module có thể được nâng cấp, sửa lỗi độc lập mà không ảnh hưởng hệ thống tổng thể. Plugin có thể load/unload nóng (hot-reload)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Tính nhất quán dữ liệu</td>
+<td>Dữ liệu giữa PostgreSQL (quan hệ), pgvector (vector), Redis (cache) cần được đồng bộ hợp lý</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Khả năng tương thích ngược</td>
+<td>Khi nâng cấp API, đảm bảo tương thích ngược với các phiên bản cũ của client trong ít nhất 6 tháng</td>
+</tr>
+</tbody>
+</table>
+<h2>2.2. Kiến trúc tổng thể</h2>
+<h3>2.2.1. Nguyên tắc thiết kế và triết lý kiến trúc</h3>
+<p>Nền tảng Enterprise AI Platform được thiết kế theo 8 nguyên tắc cốt lõi, phản ánh triết lý kiến trúc hướng tới mục tiêu "cắm vào là chạy" và độc lập với công nghệ.</p>
+<pre class="highlight"><code>┌─────────────────────────────────────────────────────────────────────────┐
+│                         8 NGUYÊN TẮC THIẾT KẾ                          │
+├─────────────────────────────────────────────────────────────────────────┤
+│ 1. PLUG &amp; PLAY          │ Cắm vào là chạy - Zero config, auto-detect │
+│ 2. PROVIDER AGNOSTIC    │ Không phụ thuộc AI provider cụ thể          │
+│ 3. DOMAIN AWARE         │ Hiểu business domain của hệ thống tích hợp  │
+│ 4. EVENT DRIVEN         │ Kiến trúc hướng sự kiện, loosely coupled   │
+│ 5. AGENT NATIVE         │ Hỗ trợ AI Agent đa nhiệm từ đầu            │
+│ 6. OFFLINE FIRST        │ Ưu tiên local AI, hybrid cloud              │
+│ 7. ENTERPRISE GRADE     │ Bảo mật, audit, compliance cấp doanh nghiệp  │
+│ 8. MULTI-TENANT         │ Hỗ trợ nhiều tenant với config riêng        │
+└─────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<p><strong>PLUG &amp; PLAY</strong>: Nền tảng được thiết kế để khi một doanh nghiệp muốn kết nối hệ thống ERP mới, họ chỉ cần triển khai một MCP Server tương ứng và đăng ký với nền tảng. Không cần thay đổi code ở tầng AI, không cần cấu hình phức tạp. Auto-detect cho phép hệ thống tự nhận biết hệ thống mới khi được kết nối.</p>
+<p><strong>PROVIDER AGNOSTIC</strong>: Mọi tương tác với LLM đi qua lớp Provider Abstraction. Các service ở tầng trên (RAG, Agent, Gateway) không bao giờ gọi trực tiếp API của OpenAI hay Anthropic. Việc chuyển đổi provider chỉ cần thay đổi cấu hình, không cần thay đổi code nghiệp vụ.</p>
+<p><strong>DOMAIN AWARE</strong>: Nền tảng được thiết kế để hiểu ngữ cảnh nghiệp vụ của hệ thống được tích hợp. Mỗi connector có domain knowledge riêng (ví dụ: ERP connector hiểu "đơn hàng", "tồn kho"; CRM connector hiểu "lead", "opportunity").</p>
+<p><strong>EVENT DRIVEN</strong>: Các module giao tiếp chủ yếu qua event bus (in-process hoặc message queue), giảm sự phụ thuộc trực tiếp và tăng khả năng mở rộng.</p>
+<p><strong>AGENT NATIVE</strong>: Từ đầu, kiến trúc đã được thiết kế cho Multi-Agent. Mỗi agent có vai trò, tool và memory riêng. Agent Orchestration Layer cung cấp primitives cho việc điều phối.</p>
+<p><strong>OFFLINE FIRST</strong>: Hệ thống ưu tiên chạy các mô hình local (Ollama) để đảm bảo dữ liệu không rời khỏi hạ tầng doanh nghiệp. Khi cần, có thể bổ sung cloud provider cho các tác vụ phức tạp hơn.</p>
+<p><strong>ENTERPRISE GRADE</strong>: Mọi thành phần đều có audit log, trace ID, rate limiting, circuit breaker. Secrets được quản lý qua Secrets Manager. RBAC + ABAC cho phép phân quyền chi tiết.</p>
+<p><strong>MULTI-TENANT</strong>: Kiến trúc cho phép nhiều doanh nghiệp cùng sử dụng một instance của nền tảng với cơ chế phân tách dữ liệu chặt chẽ (RLS - Row-Level Security trong PostgreSQL).</p>
+<h3>2.2.2. Kiến trúc 7 tầng (Layered Architecture)</h3>
+<p>Hệ thống được thiết kế theo kiến trúc phân lớp với 7 tầng rõ ràng, mỗi tầng có trách nhiệm và ranh giới riêng biệt.</p>
+<pre class="highlight"><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ENTERPRISE AI PLATFORM – 7 LAYERS                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │  LAYER 7: PRESENTATION           (Giao diện)                         │   │
+│  │  ├── Web UI (Next.js)         │ Voice UI (STT/TTS)                  │   │
+│  │  ├── Admin Dashboard          │ API Explorer (Swagger)                │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │  LAYER 6: AI GATEWAY             (Điều phối API)                     │   │
+│  │  ├── AuthN / AuthZ             │ Rate Limiting                        │   │
+│  │  ├── Load Balancer            │ Request/Response Transform            │   │
+│  │  └── Analytics &amp; Observability │                                     │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │  LAYER 5: AGENT ORCHESTRATION   (Điều phối tác nhân)                │   │
+│  │  ├── Intent Router             │ Task Planner                          │   │
+│  │  ├── Executor                 │ Memory Manager                        │   │
+│  │  └── Human-in-the-Loop        │ Safety Guardrails                   │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │  LAYER 4: AI ENGINE CORE        (Cốt lõi AI)                        │   │
+│  │  ├── RAG Engine               │ Hybrid Search (Vector+Keyword)       │   │
+│  │  ├── Tool Registry            │ Workflow Engine                      │   │
+│  │  ├── SQL Engine (Text-to-SQL) │ Voice Engine (STT/TTS)             │   │
+│  │  └── Citation Engine          │                                     │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │  LAYER 3: PROVIDER ABSTRACTION   (Trừu tượng hóa AI)                 │   │
+│  │  ├── LLM Abstraction          │ Embedding Abstraction               │   │
+│  │  ├── Provider Router          │ Model Registry                      │   │
+│  │  └── Cache Manager            │ Cost &amp; Latency Tracker              │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │  LAYER 2: INTEGRATION             (Tích hợp)                         │   │
+│  │  ├── MCP Server/Client         │ Plugin SDK                          │   │
+│  │  ├── REST/gRPC Gateway        │ Message Queue (Kafka/RabbitMQ)       │   │
+│  │  └── Event Bus (Pub/Sub)      │                                     │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │  LAYER 1: PLATFORM CORE          (Hạ tầng)                          │   │
+│  │  ├── PostgreSQL + pgvector     │ Redis Cache                         │   │
+│  │  ├── MinIO / S3              │ Ollama (Local LLM)                   │   │
+│  │  ├── Secrets Manager         │ Multi-Tenancy Manager                │   │
+│  │  └── Audit &amp; Compliance       │ Configuration Manager               │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+│         ┌──────────────────────────────────────────────────────────┐        │
+│         │         EXTERNAL SYSTEMS CONNECTORS (Connectors)          │        │
+│         │  ERP │ CRM │ DMS │ HRM │ Workflow │ BI │ Database        │        │
+│         └──────────────────────────────────────────────────────────┘        │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<p><strong>Bảng 2.3. Mô tả chi tiết 7 Layer</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Tên</th>
+<th>Trách nhiệm</th>
+<th>Ví dụ module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>Presentation</td>
+<td>Giao diện người dùng, API explorer</td>
+<td>Web (Next.js), Voice (STT/TTS), Admin Dashboard</td>
+</tr>
+<tr>
+<td>6</td>
+<td>AI Gateway</td>
+<td>Xác thực, phân quyền, rate limiting, routing, monitoring</td>
+<td>AuthN/AuthZ, Rate Limiter, Load Balancer</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Agent Orchestration</td>
+<td>Điều phối agent, lập kế hoạch, thực thi</td>
+<td>Intent Router, Task Planner, Executor, HITL</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AI Engine Core</td>
+<td>Xử lý AI cốt lõi</td>
+<td>RAG, Hybrid Search, Tool Registry, Workflow, Memory</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Provider Abstraction</td>
+<td>Chuẩn hóa giao tiếp LLM/Embedding</td>
+<td>LLM Provider, Embedding Provider, Router, Cache</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Integration</td>
+<td>Kết nối hệ thống ngoài</td>
+<td>MCP Server, Plugin SDK, REST/gRPC, Event Bus</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Platform Core</td>
+<td>Hạ tầng, lưu trữ, bảo mật</td>
+<td>PostgreSQL/pgvector, Redis, Secrets, Multi-tenancy</td>
+</tr>
+</tbody>
+</table>
+<h3>2.2.3. So sánh các phong cách kiến trúc</h3>
+<p><strong>Bảng 2.4. So sánh Monolith vs Modular Monolith vs Microservice</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tiêu chí</th>
+<th>Monolith</th>
+<th>Modular Monolith</th>
+<th>Microservice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Triển khai</td>
+<td>Single unit</td>
+<td>Single unit + modules</td>
+<td>Multiple units</td>
+</tr>
+<tr>
+<td>Coupling</td>
+<td>Tight coupled</td>
+<td>Loosely coupled</td>
+<td>Independent</td>
+</tr>
+<tr>
+<td>Linh hoạt công nghệ</td>
+<td>Thấp</td>
+<td>Cao</td>
+<td>Cao nhất</td>
+</tr>
+<tr>
+<td>Quyền tự chủ team</td>
+<td>Thấp</td>
+<td>Cao</td>
+<td>Cao nhất</td>
+</tr>
+<tr>
+<td>Độ phức tạp</td>
+<td>Thấp</td>
+<td>Trung bình</td>
+<td>Cao</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>Dễ</td>
+<td>Trung bình</td>
+<td>Phức tạp</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td>Đơn giản</td>
+<td>Vừa phải</td>
+<td>Phức tạp</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>Vertical only</td>
+<td>Cả hai</td>
+<td>Cả hai + granular</td>
+</tr>
+<tr>
+<td>Phù hợp cho</td>
+<td>&lt; 20 devs</td>
+<td>20-100 devs</td>
+<td>&gt; 100 devs</td>
+</tr>
+<tr>
+<td>Thời gian khởi động</td>
+<td>Nhanh</td>
+<td>Trung bình</td>
+<td>Chậm</td>
+</tr>
+<tr>
+<td>Chi phí hạ tầng</td>
+<td>Hiệu quả</td>
+<td>Hiệu quả</td>
+<td>Overhead</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Quyết định kiến trúc</strong>: Đề tài lựa chọn chiến lược <strong>Modular Monolith (đầu) → Microservice (khi scale)</strong>. Lý do:</p>
+<ul>
+<li>Giai đoạn đầu (Phase 1-3): team nhỏ (3-10 người), Modular Monolith cho phép phát triển nhanh, dễ quản lý, dễ debug. Mỗi module có interface rõ ràng, có thể test độc lập.</li>
+<li>Khi quy mô tăng lên (Phase 4-5 trở đi): khi số người dùng và request tăng, hoặc khi cần scale độc lập từng module, có thể tách module thành service riêng mà không thay đổi interface.</li>
+<li>Chiến lược này được gọi là <strong>"Microservices when you need them"</strong> — bắt đầu đơn giản, phức tạp hóa khi cần.</li>
+</ul>
+<h2>2.3. Thiết kế các module cốt lõi</h2>
+<h3>2.3.1. AI Provider Abstraction Layer</h3>
+<p>Layer này là "bí mật cốt lõi" của nền tảng — cho phép chuyển đổi giữa các AI provider mà không ảnh hưởng đến tầng trên. Toàn bộ các module khác chỉ phụ thuộc vào abstraction, không bao giờ gọi trực tiếp OpenAI/Anthropic API.</p>
+<p><strong>ILLMProvider Interface (C#):</strong></p>
+<pre class="highlight"><code class="language-csharp">public interface ILLMProvider
+{
+    string ProviderId { get; }                        // &quot;openai&quot;, &quot;ollama&quot;, ...
+    Task&lt;ChatResponse&gt; ChatAsync(ChatRequest request, CancellationToken ct);
+    IAsyncEnumerable&lt;ChatDelta&gt; StreamChatAsync(ChatRequest request, CancellationToken ct);
+    ModelCapabilities GetCapabilities(string modelId);
+    Task&lt;HealthStatus&gt; HealthCheckAsync(CancellationToken ct);
+}
+
+public record ChatRequest(
+    string ModelId,
+    IList&lt;ChatMessage&gt; Messages,
+    double Temperature = 0.7,
+    int? MaxTokens = null,
+    IReadOnlyDictionary&lt;string, object&gt;? Tools = null,
+    ToolChoice? ToolChoice = null,
+    Guid TenantId = default,
+    string? TraceId = null
+);
+
+public record ChatResponse(
+    string Content,
+    string? FinishReason,
+    UsageInfo Usage,
+    IReadOnlyList&lt;ToolCall&gt;? ToolCalls,
+    string ProviderId,
+    string ModelId,
+    TimeSpan Latency
+);
+</code></pre>
+
+<p><strong>Các implementation cụ thể:</strong></p>
+<pre class="highlight"><code>┌──────────────────────────────────────────────────────┐
+│                ILLMProvider (interface)               │
+│      ChatAsync / StreamChatAsync / GetCapabilities   │
+└──────────────┬───────────────────────────────────────┘
+               │ (implements)
+   ┌───────────┼──────────┬─────────────┬───────────────┐
+   ▼           ▼           ▼             ▼               ▼
+┌──────┐  ┌────────┐  ┌────────┐  ┌──────────┐    ┌────────┐
+│Ollama│  │ OpenAI │  │Claude │  │  Azure   │    │ Gemini │
+│Prov. │  │ Prov.  │  │(Anthropic)│ OpenAI │    │ Prov. │
+└──────┘  └────────┘  └────────┘  └──────────┘    └────────┘
+   │           │           │             │               │
+   └───────────┴────────────┴─────────────┴───────────────┘
+                                 │
+                                 ▼
+                       ┌──────────────────┐
+                       │  ProviderRouter   │
+                       │ chọn provider tối ưu │
+                       └──────────────────┘
+</code></pre>
+
+<p><strong>Provider Router</strong>: chọn provider tối ưu dựa trên:
+- Latency hiện tại của từng provider
+- Cost per token
+- Model capabilities phù hợp với tác vụ
+- User quota và rate limit
+- Cấu hình tenant (ưu tiên local Ollama hay cloud)</p>
+<p><strong>Embedding Provider</strong>: tương tự ILLMProvider nhưng cho embedding model. Cung cấp interface <code>IEmbeddingProvider</code>:</p>
+<pre class="highlight"><code class="language-csharp">public interface IEmbeddingProvider
+{
+    string ProviderId { get; }
+    Task&lt;EmbeddingResponse&gt; EmbedAsync(EmbeddingRequest request, CancellationToken ct);
+    Task&lt;EmbeddingResponse&gt; EmbedBatchAsync(IList&lt;string&gt; texts, CancellationToken ct);
+}
+
+public record EmbeddingRequest(string Text, int? Dimensions = null, Guid TenantId = default);
+public record EmbeddingResponse(IReadOnlyList&lt;float&gt; Vector, string ModelId, int Tokens, TimeSpan Latency);
+</code></pre>
+
+<p><strong>Model Registry</strong>: catalog tất cả model được hỗ trợ với metadata:
+- Model ID, tên, nhà cung cấp
+- Capabilities (supports streaming, tool calling, vision…)
+- Context window size
+- Pricing (input/output token)
+- Rate limits</p>
+<h3>2.3.2. AI Engine Core – RAG Engine và Hybrid Search</h3>
+<p>AI Engine Core là thành phần cốt lõi xử lý truy xuất tri thức và sinh phản hồi. Kiến trúc RAG được thiết kế theo hướng <strong>Advanced RAG</strong> với nhiều tầng tối ưu.</p>
+<pre class="highlight"><code>┌──────────────────────────────────────────────────────────────┐
+│              AI Engine Core – Detailed Architecture           │
+│                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │   Query      │  │   Hybrid    │  │   Cross     │     │
+│  │   Rewrite    │→ │   Search     │→ │   Encoder   │     │
+│  │  (Expander) │  │  Dense+Sparse│  │   Rerank    │     │
+│  └──────────────┘  └──────────────┘  └──────┬───────┘     │
+│        │                 │                    │             │
+│        ▼                 ▼                    ▼             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │            Context Aggregator                        │   │
+│  │  + Retrieved Docs  + Structured DB  + User Profile  │   │
+│  │  + Weather        + Preferences    + Memory         │   │
+│  └─────────────────────────────────┬───────────────────┘   │
+│                                    │                        │
+│                                    ▼                        │
+│  ┌──────────────────────────────────────────────────────┐ │
+│  │           Context Compressor (LLM-based)              │ │
+│  │  - Trích xuất thông tin liên quan nhất              │ │
+│  │  - Loại bỏ nhiễu và thông tin trùng lặp            │ │
+│  └─────────────────────────────────┬──────────────────────┘ │
+│                                    │                        │
+│                                    ▼                        │
+│  ┌──────────────────────────────────────────────────────┐ │
+│  │            LLM Generator (via Provider Layer)          │ │
+│  │  - Structured Output (JSON schema)                   │ │
+│  │  - Citation: gắn nguồn cho từng phần                │ │
+│  └──────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<p><strong>Hybrid Search</strong>: kết hợp hai phương pháp truy xuất:
+- <strong>Dense Retrieval (Vector search)</strong>: sử dụng embedding model chuyển truy vấn và tài liệu thành vector. Tìm kiếm dựa trên cosine similarity.
+- <strong>Sparse Retrieval (Keyword search)</strong>: sử dụng BM25, đánh giá mức độ liên quan dựa trên tần suất từ khóa. Phù hợp với tên riêng, thuật ngữ kỹ thuật.</p>
+<p>Kết quả từ hai phương pháp được hợp nhất bằng thuật toán <strong>Reciprocal Rank Fusion (RRF)</strong>:</p>
+<pre class="highlight"><code>RRF(d) = Σ (1 / (k + rank_r(d)))
+</code></pre>
+
+<p><strong>Cross-Encoder Reranking</strong>: sau khi hợp nhất, top N kết quả được đánh giá lại bằng Cross-Encoder — mô hình học sâu đánh giá trực tiếp cặp (query, document) để cho điểm relevance chính xác hơn.</p>
+<p><strong>Vector Store</strong>: sử dụng pgvector (PostgreSQL extension) hoặc có thể thay thế bằng Qdrant/Milvus/Chroma khi cần scale. pgvector được chọn cho Phase 1-2 vì:
+- Dùng chung PostgreSQL với dữ liệu quan hệ → đơn giản hóa vận hành
+- Hỗ trợ HNSW index cho tìm kiếm láng giềng gần đúng nhanh
+- ACID transaction đảm bảo nhất quán dữ liệu
+- Dễ dàng migrate sang specialized vector DB khi cần</p>
+<p><strong>Document Ingestion Pipeline</strong>:
+1. Nhận tài liệu (PDF, DOCX, HTML, Markdown, CSV)
+2. Parse và trích xuất nội dung (Apache Tika, unstructured library)
+3. Chia nhỏ thành chunk (recursive character split, semantic chunking)
+4. Tạo metadata (source, page, tenant_id, category)
+5. Tạo embedding cho mỗi chunk
+6. Lưu vào vector store kèm metadata</p>
+<h3>2.3.3. Agent Orchestration Layer</h3>
+<p>Agent Orchestration Layer là thành phần điều phối các AI Agent, chịu trách nhiệm phân tích ý định, lập kế hoạch, thực thi và quản lý ngữ cảnh.</p>
+<p><strong>Các thành phần chính:</strong></p>
+<p><strong>Intent Router</strong>: phân loại ý định của người dùng từ input text. Kết quả đầu ra gồm:
+- Intent: loại tác vụ (hỏi đáp, tạo báo cáo, thực thi nghiệp vụ, hội thoại thông thường)
+- Entities: các thực thể được trích xuất (tên khách hàng, mã đơn hàng, ngày tháng…)
+- Confidence: độ tin cậy của phân loại</p>
+<pre class="highlight"><code class="language-csharp">public interface IIntentRouter
+{
+    Task&lt;IntentClassification&gt; ClassifyAsync(string userInput, Guid tenantId, CancellationToken ct);
+    Task&lt;IReadOnlyList&lt;Intent&gt;&gt; SuggestIntentsAsync(string userInput, Guid tenantId, CancellationToken ct);
+}
+</code></pre>
+
+<p><strong>Task Planner</strong>: phân tách một tác vụ phức tạp thành các bước (sub-tasks) có thể thực thi. Hỗ trợ:
+- Sequential: thực thi từng bước theo thứ tự
+- Parallel: thực thi song song các bước không phụ thuộc nhau
+- Conditional: thực thi bước tiếp theo dựa trên kết quả bước trước</p>
+<pre class="highlight"><code class="language-csharp">public record TaskPlan(
+    string PlanId,
+    IReadOnlyList&lt;SubTask&gt; Steps,
+    TaskPlanStatus Status,
+    DateTime CreatedAt
+);
+
+public record SubTask(
+    string TaskId,
+    string Description,
+    SubTaskStatus Status,
+    IReadOnlyList&lt;string&gt; RequiredTools,
+    string? AgentRole = null
+);
+</code></pre>
+
+<p><strong>Agent Executor</strong>: thực thi plan theo từng bước. Mỗi bước:
+1. Chọn tool phù hợp từ Tool Registry
+2. Gọi tool, nhận kết quả
+3. Ghi log kết quả vào Memory
+4. Quyết định bước tiếp theo hoặc kết thúc</p>
+<p><strong>Safety Guardrails</strong>: kiểm tra đầu vào và đầu ra:
+- Input: kiểm tra prompt injection, PII (thông tin cá nhân nhạy cảm)
+- Output: kiểm tra nội dung không phù hợp, hallucination detection
+- Tool execution: kiểm tra quyền trước khi gọi tool nhạy cảm</p>
+<p><strong>Human-in-the-Loop (HITL)</strong>: cho phép con người phê duyệt hoặc từ chối các quyết định quan trọng của agent trước khi thực thi. Ví dụ: khi agent muốn gửi email cho khách hàng, cần người quản lý xác nhận trước.</p>
+<h3>2.3.4. AI Gateway Layer</h3>
+<p>AI Gateway đóng vai trò "lễ tân" của toàn bộ nền tảng — tiếp nhận mọi request, kiểm tra bảo mật, điều phối và giám sát.</p>
+<pre class="highlight"><code>┌──────────────────────────────────────────────────────────────┐
+│                    AI Gateway Pipeline                         │
+│                                                              │
+│  Request ──► AuthN ──► AuthZ ──► RateLimit ──► Transform    │
+│                      │        │         │          │         │
+│                      ▼        ▼         ▼          ▼         │
+│                  JWT      RBAC/    Token     JSON/REST    ──► │
+│                Validate   ABAC     Bucket    to Internal       │
+│                                                      │      │
+│  Response ◄── Logging ◄── Caching ◄── Analytics ◄──┘      │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<p><strong>Authentication (AuthN)</strong>: xác thực người dùng qua JWT token. Hỗ trợ:
+- Username/password (BCrypt hash)
+- SSO (tích hợp với Identity Provider qua OIDC)
+- API Key cho system-to-system</p>
+<p><strong>Authorization (AuthZ)</strong>: phân quyền chi tiết dựa trên RBAC + ABAC:
+- RBAC: vai trò (admin, user, operator, viewer) → permissions
+- ABAC: policies dựa trên attributes (tenant_id, department, data_sensitivity)</p>
+<p><strong>Rate Limiter</strong>: giới hạn số request theo:
+- Per user (token limit)
+- Per tenant (request/minute)
+- Per IP (brute force protection)
+- Sử dụng Token Bucket algorithm với Redis</p>
+<p><strong>Analytics &amp; Observability</strong>: tích hợp OpenTelemetry:
+- Traces: request ID propagation qua tất cả layers
+- Metrics: latency, token usage, error rate, queue depth
+- Logs: structured JSON logs với Serilog</p>
+<h3>2.3.5. Integration Layer – MCP và Plugin SDK</h3>
+<p>Integration Layer là cầu nối giữa nền tảng AI và các hệ thống doanh nghiệp bên ngoài.</p>
+<p><strong>MCP Server Implementation</strong>: nền tảng đóng vai trò MCP Server, cung cấp:</p>
+<pre class="highlight"><code class="language-csharp">// MCP Server resource types
+public record ToolDefinition(
+    string Name,
+    string Description,
+    JsonSchema InputSchema,
+    bool IsDangerous,
+    IReadOnlyList&lt;string&gt; RequiredPermissions
+);
+
+public record ToolExecution(
+    string ToolName,
+    JsonObject Arguments,
+    Guid ExecutionId,
+    Guid TenantId,
+    Guid UserId,
+    DateTime ExecutedAt
+);
+</code></pre>
+
+<p>Mỗi connector (ERP, CRM, DMS…) được đăng ký với MCP Server như một tập tools. Ví dụ:
+- ERP Connector cung cấp: <code>get_order(id)</code>, <code>list_inventory()</code>, <code>create_purchase_request()</code>
+- CRM Connector cung cấp: <code>search_leads(query)</code>, <code>update_contact(id, data)</code>, <code>create_opportunity(data)</code>
+- DMS Connector cung cấp: <code>search_documents(query)</code>, <code>get_document(id)</code>, <code>list_versions(doc_id)</code></p>
+<p><strong>Plugin SDK</strong>: cho phép nhà phát triển mở rộng nền tảng mà không cần sửa mã nguồn cốt lõi.</p>
+<pre class="highlight"><code class="language-csharp">// IPlugin interface
+public interface IPlugin
+{
+    string Id { get; }            // Unique plugin ID
+    string Version { get; }       // Semantic version
+    string Name { get; }          // Human-readable name
+    void Initialize();             // Called on load
+    void Configure(PluginConfig config);
+    void Dispose();               // Called on unload
+}
+
+// Plugin types
+public interface IAgentPlugin : IPlugin
+{
+    IReadOnlyList&lt;AgentRole&gt; GetAgentRoles();
+    Task&lt;AgentResponse&gt; ExecuteAsync(AgentContext context);
+}
+
+public interface IToolPlugin : IPlugin
+{
+    IReadOnlyList&lt;ToolDefinition&gt; GetTools();
+    Task&lt;ToolResult&gt; ExecuteToolAsync(string toolName, JsonObject args, ToolContext ctx);
+}
+</code></pre>
+
+<p>Plugin được load qua <code>PluginLoader</code> với:
+- Hot-reload: plugin mới có thể được thêm mà không cần restart
+- Version checking: đảm bảo tương thích version
+- Sandboxing: plugin chạy trong AppDomain/process riêng với security restrictions
+- Discovery: tự động phát hiện plugin mới qua convention (thư mục <code>/plugins</code> hoặc config)</p>
+<h2>2.4. Thiết kế dữ liệu và cơ sở tri thức</h2>
+<h3>2.4.1. Mô hình dữ liệu quan hệ (PostgreSQL)</h3>
+<p>Hệ thống sử dụng PostgreSQL 16 làm cơ sở dữ liệu quan hệ chính, tích hợp pgvector cho dữ liệu vector. Lược đồ dữ liệu được thiết kế theo bốn nhóm chức năng chính.</p>
+<pre class="highlight"><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Database Schema Groups                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Group 1: Platform Core (tenants, users, auth)                   │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │   tenants    │  │    users    │  │ tenant_configs│          │
+│  │  (PK: id)   │◄─┤ (FK: tenant)│  │  (FK: tenant)│          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│                                                                  │
+│  Group 2: AI Core (documents, chunks, tools, agents)              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │  documents   │  │   chunks    │  │ tool_defs    │          │
+│  │  (FK:tenant)│──┤ (FK: doc)   │  │  (FK: tenant)│          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│                                                                  │
+│  Group 3: Conversations &amp; Memory                                │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │chat_sessions │  │chat_messages │  │   memories    │          │
+│  │ (FK:tenant) │◄─┤ (FK:session)│  │  (FK:tenant) │          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│                                                                  │
+│  Group 4: Audit &amp; Compliance                                     │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │  audit_logs │  │rate_limits  │  │  policies    │          │
+│  │  (FK:tenant)│  │  (FK:tenant)│  │  (FK:tenant)│          │
+│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<p><strong>Nhóm Platform Core</strong>:
+- <code>tenants</code>: thông tin doanh nghiệp (id, name, config, plan_tier, created_at)
+- <code>users</code>: tài khoản người dùng (id, tenant_id, email, password_hash, role, status)
+- <code>user_sessions</code>: phiên đăng nhập (id, user_id, jwt_id, created_at, expires_at)</p>
+<p><strong>Nhóm AI Core</strong>:
+- <code>documents</code>: tài liệu đã upload (id, tenant_id, title, source_type, metadata, created_at)
+- <code>chunks</code>: đoạn nhỏ của tài liệu sau khi chia (id, document_id, content, metadata, created_at)
+- <code>tool_definitions</code>: định nghĩa tool cho agent (id, tenant_id, name, description, input_schema, permissions)
+- <code>tool_calls</code>: lịch sử gọi tool (id, tool_def_id, arguments, result, execution_time, user_id)</p>
+<p><strong>Nhóm Hội thoại &amp; Memory</strong>:
+- <code>chat_sessions</code>: phiên hội thoại (id, tenant_id, user_id, title, created_at)
+- <code>chat_messages</code>: tin nhắn trong phiên (id, session_id, role, content, model_id, usage_info)
+- <code>memories</code>: bộ nhớ dài hạn của agent (id, tenant_id, user_id, memory_type, content, importance_score)</p>
+<p><strong>Nhóm Audit</strong>:
+- <code>audit_logs</code>: log kiểm toán (id, tenant_id, user_id, action, resource, details, ip_address, timestamp)
+- <code>rate_limit_buckets</code>: bucket giới hạn tốc độ (key, type, used, reset_at)</p>
+<p><strong>Bảng 2.5. Tổng hợp các bảng dữ liệu chính</strong></p>
+<table>
+<thead>
+<tr>
+<th>Bảng</th>
+<th>Số trường</th>
+<th>Mô tả</th>
+<th>Quan hệ chính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tenants</td>
+<td>8</td>
+<td>Thông tin doanh nghiệp</td>
+<td>1:N users, 1:N configs</td>
+</tr>
+<tr>
+<td>users</td>
+<td>12</td>
+<td>Tài khoản người dùng</td>
+<td>N:1 tenants, 1:N sessions</td>
+</tr>
+<tr>
+<td>documents</td>
+<td>10</td>
+<td>Tài liệu đã upload</td>
+<td>N:1 tenants, 1:N chunks</td>
+</tr>
+<tr>
+<td>chunks</td>
+<td>8</td>
+<td>Đoạn tài liệu</td>
+<td>N:1 documents</td>
+</tr>
+<tr>
+<td>chat_sessions</td>
+<td>7</td>
+<td>Phiên hội thoại</td>
+<td>N:1 users, 1:N messages</td>
+</tr>
+<tr>
+<td>chat_messages</td>
+<td>10</td>
+<td>Tin nhắn</td>
+<td>N:1 sessions</td>
+</tr>
+<tr>
+<td>memories</td>
+<td>9</td>
+<td>Bộ nhớ agent</td>
+<td>N:1 users, N:1 tenants</td>
+</tr>
+<tr>
+<td>tool_definitions</td>
+<td>10</td>
+<td>Định nghĩa tool</td>
+<td>N:1 tenants</td>
+</tr>
+<tr>
+<td>audit_logs</td>
+<td>12</td>
+<td>Log kiểm toán</td>
+<td>N:1 tenants, N:1 users</td>
+</tr>
+</tbody>
+</table>
+<h3>2.4.2. Cơ sở dữ liệu vector (pgvector)</h3>
+<p>pgvector được sử dụng để lưu trữ và truy xuất vector embedding. Dữ liệu vector được lưu trong bảng <code>chunks</code> với trường embedding:</p>
+<pre class="highlight"><code class="language-sql">CREATE EXTENSION IF NOT EXISTS vector;
+
+CREATE TABLE chunks (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    embedding vector(1536),  -- Gemini Embedding: 1536 dims, OpenAI: 1536, text-embedding-3-small: 1536
+    metadata JSONB DEFAULT '{}',
+    tenant_id UUID NOT NULL REFERENCES tenants(id),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Index HNSW cho tìm kiếm vector nhanh
+CREATE INDEX idx_chunks_embedding_hnsw ON chunks
+    USING hnsw (embedding vector_cosine_ops)
+    WITH (m = 16, ef_construction = 64);
+
+-- Index cho filter theo tenant
+CREATE INDEX idx_chunks_tenant ON chunks (tenant_id);
+</code></pre>
+
+<p>Việc dùng chung PostgreSQL cho cả dữ liệu quan hệ và vector giúp:
+- Đơn giản hóa vận hành (chỉ 1 database)
+- Dễ backup/restore
+- JOIN giữa dữ liệu quan hệ và vector trong cùng query
+- Transaction ACID cho cả hai loại dữ liệu</p>
+<h3>2.4.3. Multi-tenant với Row-Level Security (RLS)</h3>
+<p>Cơ chế multi-tenant được triển khai với Row-Level Security (RLS) của PostgreSQL, đảm bảo dữ liệu giữa các tenant hoàn toàn tách biệt.</p>
+<pre class="highlight"><code class="language-sql">-- Enable RLS on all tenant-scoped tables
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
+ALTER TABLE chunks ENABLE ROW LEVEL SECURITY;
+ALTER TABLE chat_sessions ENABLE ROW LEVEL SECURITY;
+
+-- Policy: user chỉ thấy dữ liệu của tenant của mình
+CREATE POLICY tenant_isolation ON users
+    USING (tenant_id = current_setting('app.current_tenant_id')::uuid);
+
+CREATE POLICY tenant_isolation ON documents
+    USING (tenant_id = current_setting('app.current_tenant_id')::uuid);
+</code></pre>
+
+<p>Application layer thiết lập tenant context cho mỗi request qua <code>SET app.current_tenant_id = '...'</code>. Mọi query tự động bị filter theo tenant, ngay cả khi developer quên thêm điều kiện WHERE.</p>
+<p><strong>Bổ sung</strong>: tenant config cho phép tùy biến:
+- Mô hình LLM mặc định
+- Cấu hình RAG (số chunks trả về, compression ratio)
+- Rate limit per user
+- Bật/tắt các plugin
+- Branding giao diện</p>
+<h3>2.4.4. Enterprise Knowledge Base</h3>
+<p>Kho tri thức doanh nghiệp (Enterprise Knowledge Base) là nguồn dữ liệu đầu vào cho RAG. Dữ liệu được tổ chức theo cấu trúc:</p>
+<pre class="highlight"><code>Enterprise Knowledge Base
+├── Structured Data (from ERP/CRM/DMS)
+│   ├── Product catalog
+│   ├── Customer records
+│   ├── Employee information
+│   └── Transaction history
+├── Unstructured Documents (from DMS/SharePoint)
+│   ├── Policy documents
+│   ├── Procedures
+│   ├── Contracts
+│   └── Reports
+├── Knowledge Articles (curated)
+│   ├── FAQ
+│   ├── How-to guides
+│   └── Domain knowledge
+└── External Data (optional)
+    ├── Public APIs
+    └── Web scraping
+</code></pre>
+
+<p>Dữ liệu được xử lý qua pipeline: <strong>Ingest → Parse → Chunk → Embed → Store → Index</strong>.</p>
+<p>Mỗi chunk có metadata phục vụ filter:
+- <code>source_type</code>: loại nguồn (erp, crm, dms, manual)
+- <code>tenant_id</code>: thuộc tenant nào
+- <code>category</code>: danh mục (policy, product, employee, FAQ…)
+- <code>created_at</code>, <code>updated_at</code>: phục vụ cache invalidation
+- <code>access_level</code>: mức độ nhạy cảm (public, internal, confidential)</p>
+<h2>2.5. Thiết kế giao thức tích hợp và bảo mật</h2>
+<h3>2.5.1. MCP Server và Client</h3>
+<p>MCP là giao thức chuẩn để kết nối nền tảng AI với các hệ thống doanh nghiệp. Kiến trúc MCP trong nền tảng gồm:</p>
+<pre class="highlight"><code>┌─────────────────────────────────────────────────────────────────┐
+│          MCP Communication Architecture                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌─────────────────┐        MCP Protocol (JSON-RPC 2.0)         │
+│  │ Enterprise AI   │◄───────────────►│ ERP MCP Server │       │
+│  │ Platform       │                   │ - get_order() │       │
+│  │ (MCP Client)   │◄───────────────►│ - create_pr() │       │
+│  │                │                   └─────────────────┘       │
+│  │  ┌───────────┐ │◄───────────────►│ CRM MCP Server │       │
+│  │  │ Agent     │ │                   │ - search_leads│      │
+│  │  │ Executor  │ │                   └─────────────────┘       │
+│  │  └───────────┘ │◄───────────────►│ DMS MCP Server │       │
+│  │                │                   │ - search_docs │        │
+│  │  ┌───────────┐ │                   └─────────────────┘       │
+│  │  │ Tool     │ │                                            │
+│  │  │ Registry │ │  Connection types:                          │
+│  │  └───────────┘ │  - stdio (local process)                  │
+│  └─────────────────┘  - HTTP + SSE (remote server)             │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<p><strong>MCP Protocol Operations</strong>:</p>
+<pre class="highlight"><code class="language-csharp">// MCP JSON-RPC 2.0 messages
+public record McpRequest(
+    string Jsonrpc = &quot;2.0&quot;,
+    string Method,
+    string? Id = null,
+    JsonObject? Params = null
+);
+
+public record McpResponse(
+    string Jsonrpc = &quot;2.0&quot;,
+    JsonObject? Result = null,
+    JsonObject? Error = null,
+    string? Id = null
+);
+
+// Supported MCP methods
+// - tools/list: liệt kê tools
+// - tools/call: gọi tool với arguments
+// - resources/list: liệt kê resources
+// - resources/read: đọc resource
+// - prompts/list: liệt kê prompts
+// - prompts/get: lấy prompt theo template
+</code></pre>
+
+<p><strong>Lợi ích khi dùng MCP</strong>:
+- <strong>Chuẩn hóa</strong>: một MCP Server cho mỗi hệ thống, nhiều agent cùng dùng
+- <strong>Bảo mật</strong>: MCP Server đặt tại hạ tầng doanh nghiệp, credentials không rời khỏi
+- <strong>Mở rộng</strong>: thêm hệ thống mới = thêm MCP Server, không sửa agent
+- <strong>Debug</strong>: có thể test từng MCP Server riêng</p>
+<h3>2.5.2. Plugin và Hot-reload</h3>
+<p>Hệ thống plugin cho phép mở rộng nền tảng mà không ảnh hưởng đến mã nguồn cốt lõi.</p>
+<pre class="highlight"><code>┌─────────────────────────────────────────────────────────────┐
+│                 Plugin Architecture                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│                Platform Core (Immutable)                    │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │  PluginLoader (Hot-reload)                         │   │
+│  │  • Scans /plugins directory on startup             │   │
+│  │  • Watches for new .dll / config changes          │   │
+│  │  • Manages plugin lifecycle (load/unload)         │   │
+│  │  • Security sandbox (permission boundaries)         │   │
+│  │  • Version compatibility checker                   │   │
+│  └────────────────────────────────────────────────────┘   │
+│                          │                                 │
+│         ┌────────────────┼────────────────┐             │
+│         ▼                ▼                ▼               │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐         │
+│  │ AI Plugin│    │Connector │    │  UI      │         │
+│  │ • New LLM│    │ Plugin   │    │  Plugin  │         │
+│  │ • New Emb│    │ • ERP    │    │ • Widget │         │
+│  │ • New Tool│   │ • CRM    │    │ • Theme  │         │
+│  └──────────┘    └──────────┘    └──────────┘         │
+│                                                              │
+│  Plugin Definition:                                          │
+│  {                                                           │
+│    &quot;id&quot;: &quot;erp-sap-connector&quot;,                               │
+│    &quot;name&quot;: &quot;SAP ERP Connector&quot;,                              │
+│    &quot;version&quot;: &quot;1.0.0&quot;,                                     │
+│    &quot;type&quot;: &quot;connector&quot;,                                     │
+│    &quot;tools&quot;: [&quot;get_order&quot;, &quot;list_inventory&quot;],               │
+│    &quot;permissions&quot;: [&quot;read:orders&quot;, &quot;write:inventory&quot;]      │
+│  }                                                           │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+
+<h3>2.5.3. AuthN/AuthZ và Audit log</h3>
+<p><strong>Authentication</strong>: hệ thống xác thực đa phương thức:
+- Username/password với BCrypt hashing
+- JWT access token (15 phút) + refresh token (7 ngày)
+- SSO qua OIDC (OpenID Connect)
+- API Key cho system-to-system integration</p>
+<p><strong>Authorization (RBAC + ABAC)</strong>:</p>
+<pre class="highlight"><code class="language-csharp">public record Permission(
+    string Resource,    // &quot;documents&quot;, &quot;tools&quot;, &quot;users&quot;
+    string Action,      // &quot;read&quot;, &quot;write&quot;, &quot;delete&quot;, &quot;execute&quot;
+    string? Scope = null // &quot;own&quot;, &quot;team&quot;, &quot;all&quot;
+);
+
+// Role definitions
+public static readonly Dictionary&lt;string, IReadOnlyList&lt;Permission&gt;&gt; Roles = new()
+{
+    [&quot;admin&quot;] = new[] { AllPermissions },
+    [&quot;operator&quot;] = new[] {
+        new(&quot;documents&quot;, &quot;read&quot;), new(&quot;documents&quot;, &quot;write&quot;),
+        new(&quot;tools&quot;, &quot;execute&quot;), new(&quot;chat&quot;, &quot;read&quot;), new(&quot;chat&quot;, &quot;write&quot;)
+    },
+    [&quot;viewer&quot;] = new[] {
+        new(&quot;documents&quot;, &quot;read&quot;), new(&quot;chat&quot;, &quot;read&quot;), new(&quot;chat&quot;, &quot;write&quot;)
+    },
+    [&quot;api_user&quot;] = new[] { new(&quot;tools&quot;, &quot;execute&quot;, &quot;api_only&quot;) }
+};
+</code></pre>
+
+<p><strong>Audit Log</strong>: mọi tác vụ quan trọng đều được ghi log kiểm toán:</p>
+<pre class="highlight"><code class="language-csharp">public record AuditLog(
+    Guid Id,
+    Guid TenantId,
+    Guid? UserId,
+    string Action,           // &quot;tool.execute&quot;, &quot;document.upload&quot;, &quot;user.login&quot;
+    string ResourceType,
+    Guid? ResourceId,
+    JsonObject Details,     // arguments, result, metadata
+    string? IpAddress,
+    string? UserAgent,
+    DateTime Timestamp,
+    string? TraceId
+);
+</code></pre>
+
+<p>Các action được audit: login/logout, CRUD documents, tool execution (đặc biệt các tool nhạy cảm), permission changes, API calls, configuration changes.</p>
+<h2>2.6. Quy trình triển khai theo Phase</h2>
+<h3>2.6.1. Tổng quan 5 Phase</h3>
+<p>Nền tảng được triển khai theo 5 giai đoạn (Phase), mỗi giai đoạn tạo ra một hệ thống <strong>chạy được end-to-end</strong> và có thể demo cho stakeholder.</p>
+<p><strong>Bảng 2.6. Tổng quan 5 Phase triển khai</strong></p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Tên</th>
+<th>Thời gian</th>
+<th>Module chính</th>
+<th>Demo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Foundation (Walking Skeleton)</td>
+<td>2-3 tuần</td>
+<td>.NET 8 solution, Ollama local, JWT auth, 1 tenant</td>
+<td>Chat với local LLM</td>
+</tr>
+<tr>
+<td>2</td>
+<td>AI Engine &amp; RAG</td>
+<td>3-4 tuần</td>
+<td>Document Ingestion, Vector Store, RAG Engine, Embedding, Multi-provider</td>
+<td>Upload PDF → hỏi đáp</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Agent &amp; Integration</td>
+<td>4-5 tuần</td>
+<td>Intent Router, Planner, Executor, MCP Server, Plugin SDK</td>
+<td>"Tạo đơn nghỉ phép" tự động</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Advanced Features</td>
+<td>3-4 tuần</td>
+<td>Hybrid Search, Reranker, Workflow, Memory, Voice, SQL</td>
+<td>Voice + workflow + SQL</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Enterprise Ready</td>
+<td>4-5 tuần</td>
+<td>Multi-tenancy đầy đủ, RBAC/ABAC, Audit, K8s</td>
+<td>Production-ready</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tổng thời gian ước tính</strong>: 16-21 tuần (~4-5 tháng).</p>
+<pre class="highlight"><code>Phase 1 (Foundation)
+    │
+    │ output: Walking Skeleton, interfaces cốt lõi
+    ▼
+Phase 2 (AI Engine &amp; RAG)
+    │
+    │ output: RAG pipeline, multi-provider, tool engine
+    ▼
+Phase 3 (Agent &amp; Integration)
+    │
+    │ output: Agent framework, MCP, Plugin SDK, Gateway
+    ▼
+Phase 4 (Advanced Features)
+    │
+    │ output: Workflow, Voice, SQL, Memory, Hybrid search
+    ▼
+Phase 5 (Enterprise Ready)
+    │
+    │ output: Production-ready, security, audit, K8s
+    ▼
+PRODUCT
+</code></pre>
+
+<h3>2.6.2. Walking Skeleton và Vertical Slice</h3>
+<p>Mỗi Phase tuân theo hai nguyên tắc thiết kế quan trọng:</p>
+<p><strong>Walking Skeleton</strong>: Phase 1 là phiên bản nhỏ nhất có thể chạy được qua tất cả các layer (Frontend → API → Backend → LLM → Storage). Mỗi layer chỉ làm <strong>đúng 1 việc đơn giản nhất</strong>. Ví dụ:
+- Chỉ 1 LLM provider (Ollama)
+- Chỉ 1 user, 1 tenant
+- Chỉ 1 trang chat đơn giản</p>
+<p><strong>Vertical Slice</strong>: mỗi phase triển khai <strong>theo chiều dọc</strong> (full stack cho 1 tính năng), KHÔNG triển khai theo chiều ngang (làm hết 1 layer rồi mới sang layer khác).</p>
+<p>Ví dụ Phase 2 (Vertical Slice đúng):
+- Làm đầy đủ RAG: frontend upload → API nhận → backend parse → chunk → embed → store → retrieve → generate → display
+- Tất cả các layer đều chạm vào tính năng RAG</p>
+<p>Ví dụ Phase 2 (Sai - theo chiều ngang):
+- Thêm tất cả embedding provider trước (Ollama, OpenAI, Cohere, Gemini…) → quá nhiều code, vượt token
+- Rồi mới sang phần RAG</p>
+<h3>2.6.3. Quản lý Interface giữa các Phase</h3>
+<p>Mỗi phase phải <strong>cam kết interface</strong> ở cuối phase. Phase sau dùng interface đó, không được sửa.</p>
+<p><strong>Bảng 2.7. Interfaces được chốt qua từng Phase</strong></p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Chốt ở</th>
+<th>Sử dụng ở</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ILLMProvider</code></td>
+<td>Phase 1</td>
+<td>Phase 2-5</td>
+<td>Gọi LLM</td>
+</tr>
+<tr>
+<td><code>IEmbeddingProvider</code></td>
+<td>Phase 2</td>
+<td>Phase 2-5</td>
+<td>Tạo embedding</td>
+</tr>
+<tr>
+<td><code>IVectorStore</code></td>
+<td>Phase 2</td>
+<td>Phase 2-5</td>
+<td>Lưu/tìm vector</td>
+</tr>
+<tr>
+<td><code>IRAGEngine</code></td>
+<td>Phase 2</td>
+<td>Phase 3-5</td>
+<td>RAG pipeline</td>
+</tr>
+<tr>
+<td><code>IToolRegistry</code></td>
+<td>Phase 2 (basic)</td>
+<td>Phase 3 (mở rộng)</td>
+<td>Quản lý tools</td>
+</tr>
+<tr>
+<td><code>IProviderRouter</code></td>
+<td>Phase 2</td>
+<td>Phase 2-5</td>
+<td>Chọn provider</td>
+</tr>
+<tr>
+<td><code>IIntentRouter</code></td>
+<td>Phase 3</td>
+<td>Phase 3-5</td>
+<td>Phân loại intent</td>
+</tr>
+<tr>
+<td><code>ITaskPlanner</code></td>
+<td>Phase 3</td>
+<td>Phase 3-5</td>
+<td>Lập plan</td>
+</tr>
+<tr>
+<td><code>IAgentExecutor</code></td>
+<td>Phase 3</td>
+<td>Phase 3-5</td>
+<td>Chạy plan</td>
+</tr>
+<tr>
+<td><code>IMCPGateway</code></td>
+<td>Phase 3</td>
+<td>Phase 3-5</td>
+<td>MCP protocol</td>
+</tr>
+<tr>
+<td><code>IPluginLoader</code></td>
+<td>Phase 3</td>
+<td>Phase 3-5</td>
+<td>Load plugin</td>
+</tr>
+<tr>
+<td><code>IMultiTenancy</code></td>
+<td>Phase 1 (basic)</td>
+<td>Phase 5 (full)</td>
+<td>Quản lý tenant</td>
+</tr>
+<tr>
+<td><code>IAuthService</code></td>
+<td>Phase 1 (basic)</td>
+<td>Phase 5 (RBAC+ABAC)</td>
+<td>AuthN/AuthZ</td>
+</tr>
+<tr>
+<td><code>IWorkflowEngine</code></td>
+<td>Phase 4</td>
+<td>Phase 4-5</td>
+<td>Workflow đa bước</td>
+</tr>
+<tr>
+<td><code>IMemoryManager</code></td>
+<td>Phase 4</td>
+<td>Phase 4-5</td>
+<td>Memory cho Agent</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Quy tắc Schema Migration</strong>: mỗi phase chỉ <strong>thêm schema mới</strong>, không sửa schema phase trước (trừ khi fix bug thật sự). Nếu cần thay đổi → migration an toàn với backward compatibility.</p>
+<h2>2.7. Kết luận chương 2</h2>
+<p>Chương 2 đã trình bày quá trình phân tích bài toán và thiết kế nền tảng Enterprise AI Platform. Các nội dung chính bao gồm:</p>
+<ul>
+<li>
+<p><strong>Phân tích bài toán</strong>: xác định rõ bài toán cốt lõi (tích hợp AI vào nhiều hệ thống doanh nghiệp một cách nhanh chóng, chi phí thấp), phân tích yêu cầu chức năng (12 yêu cầu) và yêu cầu phi chức năng (8 yêu cầu) cho nền tảng.</p>
+</li>
+<li>
+<p><strong>Kiến trúc tổng thể</strong>: đề xuất kiến trúc 7 tầng (Presentation, AI Gateway, Agent Orchestration, AI Engine Core, Provider Abstraction, Integration, Platform Core) cùng 8 nguyên tắc thiết kế. Lựa chọn chiến lược <strong>Modular Monolith → Microservice</strong> phù hợp với quy mô và lộ trình phát triển.</p>
+</li>
+<li>
+<p><strong>Thiết kế module cốt lõi</strong>: chi tiết thiết kế AI Provider Abstraction (ILLMProvider, IEmbeddingProvider, Router, Cache, Model Registry), AI Engine Core (RAG với Hybrid Search, Cross-Encoder Reranking, Document Ingestion), Agent Orchestration (Intent Router, Task Planner, Executor, Safety Guardrails, HITL), AI Gateway (AuthN/AuthZ, Rate Limiting, Observability) và Integration Layer (MCP Server/Client, Plugin SDK).</p>
+</li>
+<li>
+<p><strong>Thiết kế dữ liệu</strong>: lược đồ PostgreSQL với 4 nhóm bảng chính (Platform Core, AI Core, Conversations &amp; Memory, Audit), pgvector cho dữ liệu vector, cơ chế Multi-tenant với Row-Level Security và Enterprise Knowledge Base.</p>
+</li>
+<li>
+<p><strong>Thiết kế giao thức tích hợp và bảo mật</strong>: MCP Server cho chuẩn hóa kết nối hệ thống, Plugin SDK với hot-reload, hệ thống AuthN/AuthZ đa phương thức (JWT, SSO, API Key) và Audit log toàn diện.</p>
+</li>
+<li>
+<p><strong>Quy trình triển khai</strong>: lộ trình 5 Phase với nguyên tắc Walking Skeleton, Vertical Slice, Stable Interface và Checkpoint &amp; Tag.</p>
+</li>
+</ul>
+<p>Các nội dung đã trình bày trong Chương 2 là cơ sở để triển khai hệ thống thực nghiệm, tiến hành đánh giá và phân tích kết quả trong Chương 3.</p>
+<h1>Chương 3: THỰC NGHIỆM VÀ ĐÁNH GIÁ KẾT QUẢ</h1>
+<p>Chương này trình bày quá trình xây dựng hệ thống thực nghiệm, thiết lập môi trường đánh giá, phân tích kết quả thực nghiệm và tổng hợp đánh giá hiệu quả của giải pháp đề xuất.</p>
+<h2>3.1. Thiết lập thực nghiệm</h2>
+<h3>3.1.1. Mục tiêu và phương pháp đánh giá</h3>
+<p>Mục tiêu của phần thực nghiệm là kiểm chứng tính khả thi và đánh giá hiệu quả của kiến trúc Enterprise AI Platform đã được đề xuất ở Chương 2. Cụ thể, thực nghiệm tập trung làm rõ: (i) khả năng tích hợp đa hệ thống; (ii) chất lượng truy xuất tri thức; (iii) hiệu quả của cơ chế phối hợp đa tác nhân; (iv) hiệu năng và khả năng mở rộng.</p>
+<p>Luận văn kết hợp hai hướng đánh giá chính:</p>
+<ul>
+<li><strong>Đánh giá định lượng</strong>: đo lường chất lượng truy xuất và sinh phản hồi thông qua các chỉ số RAGAS (Context Relevance, Context Recall, Faithfulness, Answer Relevancy), đồng thời ghi nhận thời gian xử lý ở từng bước trong pipeline và chi phí sử dụng token.</li>
+<li><strong>Đánh giá định tính</strong>: xem xét khả năng tích hợp thực tế với các hệ thống mô phỏng (ERP, CRM, DMS), tính hợp lý của workflow đa bước và mức độ phù hợp của cấu hình đa provider.</li>
+</ul>
+<p><strong>Bảng 3.1. Mục tiêu và phương pháp đánh giá thực nghiệm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Nội dung đánh giá</th>
+<th>Mục tiêu</th>
+<th>Phương pháp thực hiện</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tích hợp đa hệ thống</td>
+<td>Đánh giá khả năng kết nối đồng thời với ERP, CRM, DMS qua MCP</td>
+<td>Mô phỏng 3 hệ thống, kiểm tra tool call thành công, độ chính xác dữ liệu trả về</td>
+</tr>
+<tr>
+<td>Chất lượng RAG</td>
+<td>Đo lường chất lượng truy xuất và sinh phản hồi</td>
+<td>Đánh giá RAGAS trên bộ 50 query thực nghiệm</td>
+</tr>
+<tr>
+<td>Multi-Agent</td>
+<td>Đánh giá khả năng phối hợp của nhiều agent</td>
+<td>Thực thi 4 kịch bản phức tạp, đánh giá độ chính xác plan và kết quả</td>
+</tr>
+<tr>
+<td>Hiệu năng</td>
+<td>Đo thời gian phản hồi và khả năng chịu tải</td>
+<td>Load test với Apache Bench, đo latency ở từng layer</td>
+</tr>
+<tr>
+<td>So sánh provider</td>
+<td>So sánh chất lượng và chi phí giữa các LLM</td>
+<td>Đánh giá cùng bộ query trên 4 provider khác nhau</td>
+</tr>
+</tbody>
+</table>
+<h3>3.1.2. Môi trường thực nghiệm và cấu hình hệ thống</h3>
+<p>Hệ thống thực nghiệm được triển khai trên môi trường phát triển cục bộ (local development) với cấu hình chi tiết được trình bày trong Bảng 3.2 và Bảng 3.3.</p>
+<p><strong>Bảng 3.2. Môi trường phần cứng và phần mềm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Thành phần</th>
+<th>Cấu hình</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hệ điều hành</td>
+<td>macOS Sonoma 14 / Ubuntu 22.04 LTS</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Apple M3 Pro (12 cores) / Intel Xeon 8 cores</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>18 GB / 32 GB DDR4</td>
+</tr>
+<tr>
+<td>Lưu trữ</td>
+<td>512 GB SSD / 1 TB NVMe SSD</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>.NET 8.0 SDK, C# 12</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>Node.js 22, Next.js 15, React 19, TypeScript 5</td>
+</tr>
+<tr>
+<td>Cơ sở dữ liệu</td>
+<td>PostgreSQL 16 + pgvector (Docker)</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>Redis 7 (Docker)</td>
+</tr>
+<tr>
+<td>Container</td>
+<td>Docker Desktop 4.x, Docker Compose</td>
+</tr>
+<tr>
+<td>API Documentation</td>
+<td>Swagger/OpenAPI 3.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bảng 3.3. Cấu hình LLM và Embedding sử dụng trong thực nghiệm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Provider</th>
+<th>Context Window</th>
+<th>Ghi chú</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>Google AI Studio</td>
+<td>1M tokens</td>
+<td>Model chính cho thực nghiệm</td>
+</tr>
+<tr>
+<td>Claude 3.5 Sonnet</td>
+<td>Anthropic API</td>
+<td>200K tokens</td>
+<td>Model bổ trợ</td>
+</tr>
+<tr>
+<td>GPT-4o-mini</td>
+<td>OpenAI API</td>
+<td>128K tokens</td>
+<td>So sánh chi phí</td>
+</tr>
+<tr>
+<td>Llama 3.2 3B</td>
+<td>Ollama local</td>
+<td>8K tokens</td>
+<td>Model local (Không cần API)</td>
+</tr>
+<tr>
+<td>Gemini Embedding-001</td>
+<td>Google AI Studio</td>
+<td>-</td>
+<td>Embedding model chính</td>
+</tr>
+<tr>
+<td>text-embedding-3-small</td>
+<td>OpenAI API</td>
+<td>-</td>
+<td>Embedding model bổ trợ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lý do lựa chọn cấu hình</strong>:</p>
+<ul>
+<li><strong>Gemini 2.5 Flash</strong> được chọn làm model chính nhờ chi phí thấp (rẻ hơn GPT-4 30-50 lần), cửa sổ ngữ cảnh cực lớn (1M tokens) và chất lượng tốt trên nhiều tác vụ.</li>
+<li><strong>Llama 3.2 3B</strong> qua Ollama local được sử dụng để minh chứng khả năng chạy hoàn toàn offline — phù hợp với doanh nghiệp cần bảo mật dữ liệu.</li>
+<li><strong>pgvector</strong> được chọn thay vì specialized vector DB (Qdrant, Milvus) vì: dùng chung PostgreSQL với dữ liệu quan hệ, đơn giản vận hành, đủ hiệu năng cho quy mô thực nghiệm.</li>
+</ul>
+<h3>3.1.3. Bộ dữ liệu thực nghiệm và kịch bản kiểm thử</h3>
+<p><strong>Bộ dữ liệu thực nghiệm</strong> được xây dựng mô phỏng dữ liệu doanh nghiệp với các thành phần:</p>
+<p><strong>Bảng 3.4. Thống kê bộ dữ liệu thực nghiệm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Loại dữ liệu</th>
+<th>Số lượng</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tài liệu doanh nghiệp</td>
+<td>150 tài liệu</td>
+<td>Chính sách, quy trình, hướng dẫn nội bộ (PDF, DOCX)</td>
+</tr>
+<tr>
+<td>Dữ liệu nhân viên (HRM mock)</td>
+<td>500 bản ghi</td>
+<td>ID, tên, phòng ban, chức vụ, ngày vào, số ngày phép</td>
+</tr>
+<tr>
+<td>Dữ liệu khách hàng (CRM mock)</td>
+<td>1.000 bản ghi</td>
+<td>ID, tên, email, công ty, trạng thái, giá trị deal</td>
+</tr>
+<tr>
+<td>Dữ liệu sản phẩm (ERP mock)</td>
+<td>300 sản phẩm</td>
+<td>Mã SP, tên, giá, tồn kho, nhà cung cấp</td>
+</tr>
+<tr>
+<td>Đơn hàng (ERP mock)</td>
+<td>2.000 đơn hàng</td>
+<td>Mã đơn, khách hàng, sản phẩm, ngày đặt, trạng thái</td>
+</tr>
+<tr>
+<td>FAQ nội bộ</td>
+<td>50 cặp Q&amp;A</td>
+<td>Câu hỏi thường gặp về chính sách, quy trình</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kịch bản thực nghiệm</strong> được thiết kế để kiểm thử nhiều khía cạnh khác nhau của hệ thống:</p>
+<p><strong>Bảng 3.5. Kịch bản thực nghiệm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kịch bản</th>
+<th>Mô tả</th>
+<th>Module kiểm thử</th>
+<th>Độ phức tạp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K1: Hỏi đáp tài liệu nội bộ</td>
+<td>Người dùng hỏi về chính sách nghỉ phép, quy trình xin nghỉ</td>
+<td>RAG Engine, LLM</td>
+<td>Thấp</td>
+</tr>
+<tr>
+<td>K2: Tra cứu thông tin nhân viên</td>
+<td>Hỏi số ngày phép còn lại của nhân viên A</td>
+<td>MCP, ERP/HRM Connector</td>
+<td>Trung bình</td>
+</tr>
+<tr>
+<td>K3: Tạo đơn nghỉ phép tự động</td>
+<td>Agent tạo đơn nghỉ phép dựa trên yêu cầu tự nhiên</td>
+<td>Multi-Agent, Workflow, MCP</td>
+<td>Cao</td>
+</tr>
+<tr>
+<td>K4: Tổng hợp báo cáo ERP+CRM</td>
+<td>Agent đọc dữ liệu từ ERP (đơn hàng) và CRM (khách hàng), tổng hợp báo cáo</td>
+<td>Multi-Agent, Multi-connector</td>
+<td>Rất cao</td>
+</tr>
+</tbody>
+</table>
+<h2>3.2. Xây dựng hệ thống thực nghiệm</h2>
+<h3>3.2.1. Tổng quan các thành phần triển khai</h3>
+<p>Hệ thống thực nghiệm được triển khai theo kiến trúc đã đề xuất ở Chương 2, với trọng tâm ở Phase 1, Phase 2 và Phase 3. Các thành phần đã được triển khai được tổng hợp trong Bảng 3.6.</p>
+<p><strong>Bảng 3.6. Thành phần triển khai trong hệ thống thực nghiệm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Thành phần</th>
+<th>Trạng thái</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.NET 8 Backend</td>
+<td>Đã triển khai</td>
+<td>REST API với Minimal APIs, DI, Serilog</td>
+</tr>
+<tr>
+<td>PostgreSQL 16 + pgvector</td>
+<td>Đã triển khai</td>
+<td>Docker container, schema hoàn chỉnh</td>
+</tr>
+<tr>
+<td>Redis Cache</td>
+<td>Đã triển khai</td>
+<td>Docker container, caching LLM response</td>
+</tr>
+<tr>
+<td>Ollama local</td>
+<td>Đã triển khai</td>
+<td>Llama 3.2 3B, chạy trên localhost</td>
+</tr>
+<tr>
+<td>Provider Abstraction Layer</td>
+<td>Đã triển khai</td>
+<td>ILLMProvider, IEmbeddingProvider, Router</td>
+</tr>
+<tr>
+<td>Next.js Frontend</td>
+<td>Đã triển khai</td>
+<td>Chat interface, session management</td>
+</tr>
+<tr>
+<td>JWT Authentication</td>
+<td>Đã triển khai</td>
+<td>HS256, 1 user hardcoded</td>
+</tr>
+<tr>
+<td>RAG Pipeline</td>
+<td>Đã triển khai</td>
+<td>Document upload, chunking, embedding, retrieval</td>
+</tr>
+<tr>
+<td>Hybrid Search</td>
+<td>Đã triển khai</td>
+<td>BM25 + Vector (RRF fusion)</td>
+</tr>
+<tr>
+<td>Intent Router</td>
+<td>Đã triển khai</td>
+<td>Phân loại 5 intent: query, action, report, chat, unknown</td>
+</tr>
+<tr>
+<td>Task Planner</td>
+<td>Đã triển khai</td>
+<td>Sequential + parallel planning</td>
+</tr>
+<tr>
+<td>Agent Executor</td>
+<td>Đã triển khai</td>
+<td>Tool calling, memory integration</td>
+</tr>
+<tr>
+<td>MCP Server</td>
+<td>Đã triển khai</td>
+<td>MCP protocol (stdio mode)</td>
+</tr>
+<tr>
+<td>MCP Mock Connectors</td>
+<td>Đã triển khai</td>
+<td>ERP mock, CRM mock, DMS mock</td>
+</tr>
+<tr>
+<td>Plugin SDK</td>
+<td>Cơ bản</td>
+<td>Interface định nghĩa, loader skeleton</td>
+</tr>
+<tr>
+<td>Rate Limiter</td>
+<td>Cơ bản</td>
+<td>Token bucket với Redis</td>
+</tr>
+<tr>
+<td>Multi-tenancy</td>
+<td>Cơ bản</td>
+<td>Tenant context, RLS policy</td>
+</tr>
+<tr>
+<td>Audit Log</td>
+<td>Cơ bản</td>
+<td>Structured log với Serilog → PostgreSQL</td>
+</tr>
+<tr>
+<td>Hybrid Search Reranker</td>
+<td>Chưa triển khai</td>
+<td>Cross-Encoder, defer đến Phase 4</td>
+</tr>
+<tr>
+<td>Voice Engine</td>
+<td>Chưa triển khai</td>
+<td>STT/TTS, defer đến Phase 4</td>
+</tr>
+<tr>
+<td>SQL Engine</td>
+<td>Chưa triển khai</td>
+<td>Text-to-SQL, defer đến Phase 4</td>
+</tr>
+<tr>
+<td>Full RBAC/ABAC</td>
+<td>Chưa triển khai</td>
+<td>Defer đến Phase 5</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2.2. Triển khai Phase 1 – Foundation (Walking Skeleton)</h3>
+<p>Phase 1 xây dựng Walking Skeleton — phiên bản nhỏ nhất có thể chạy end-to-end qua tất cả các layer.</p>
+<p><strong>Cấu trúc thư mục solution .NET 8:</strong></p>
+<pre class="highlight"><code>EnterpriseAI/
+├── src/
+│   ├── Platform.Core/           Shared types, Result&lt;T&gt;, DomainException
+│   ├── Platform.Infrastructure/  Serilog, Options pattern, DB context
+│   ├── Platform.Tenancy/       ITenantContext, TenantContext
+│   ├── Platform.Auth/            IAuthService, JwtAuthService, BCrypt
+│   ├── Platform.Providers/      ILLMProvider, OllamaProvider, ProviderRouter
+│   ├── Platform.Gateway/         REST endpoints (/api/v1/chat, /auth/login)
+│   ├── Platform.AI/             RAG Engine, Embedding, Memory (Phase 2+)
+│   ├── Platform.Agent/          Intent Router, Planner, Executor (Phase 3+)
+│   ├── Platform.Integration/     MCP Server, Plugin Loader (Phase 3+)
+│   └── Platform.Api/            Program.cs, DI setup, middleware
+├── tests/
+│   ├── Platform.Core.Tests/
+│   ├── Platform.Auth.Tests/
+│   └── Platform.Integration.Tests/
+├── docker-compose.yml
+└── Platform.sln
+</code></pre>
+
+<p><strong>Kết quả Phase 1:</strong>
+- Hệ thống chat cơ bản với Ollama local (Llama 3.2 3B)
+- JWT authentication hoạt động
+- Streaming response qua SSE (Server-Sent Events)
+- Chat session và message persistence trong PostgreSQL
+- Structured logging với Serilog (JSON format)
+- Docker Compose đóng gói toàn bộ stack</p>
+<p><strong>Giao diện Phase 1</strong> gồm:
+- Trang <code>/login</code>: form đăng nhập đơn giản
+- Trang <code>/chat</code>: message list + input box, streaming response
+- Trang <code>/sessions</code>: danh sách các phiên chat</p>
+<h3>3.2.3. Triển khai Phase 2 – AI Engine và RAG</h3>
+<p>Phase 2 bổ sung các thành phần AI Engine Core, cho phép tải lên tài liệu và hỏi đáp dựa trên nội dung tài liệu.</p>
+<p><strong>Pipeline RAG đã triển khai:</strong></p>
+<pre class="highlight"><code>Upload PDF/DOCX
+    │
+    ▼
+Document Parser (Apache Tika, unstructured)
+    │
+    ▼
+Chunking (recursive character split, 512 tokens, 50 token overlap)
+    │
+    ▼
+Metadata extraction (source, page, tenant_id, category)
+    │
+    ▼
+Embedding (Gemini Embedding-001, 768 dimensions)
+    │
+    ▼
+Store in pgvector (HNSW index)
+    │
+    ▼
+Query → Rewrite → Hybrid Search (BM25 + Vector) → RRF Fusion → Response
+</code></pre>
+
+<p><strong>Tính năng đã triển khai:</strong>
+- Upload tài liệu đa định dạng (PDF, DOCX, TXT, Markdown)
+- Chunking thông minh (giữ nguyên paragraph)
+- Tìm kiếm hybrid (BM25 + cosine similarity với RRF)
+- Streaming response
+- Citation: gắn nguồn tài liệu cho từng phần trong câu trả lời</p>
+<h3>3.2.4. Triển khai Phase 3 – Agent và Integration</h3>
+<p>Phase 3 hoàn thiện Agent Orchestration và Integration Layer, cho phép tích hợp với các hệ thống bên ngoài qua MCP.</p>
+<p><strong>MCP Mock Connectors đã triển khai:</strong></p>
+<p><strong>ERP Mock Connector</strong> cung cấp các tool:
+- <code>get_employee_info(employee_id)</code> — tra cứu thông tin nhân viên
+- <code>get_employee_leave_balance(employee_id)</code> — số ngày phép còn lại
+- <code>get_orders(date_range)</code> — danh sách đơn hàng
+- <code>get_inventory(product_id)</code> — tồn kho sản phẩm</p>
+<p><strong>CRM Mock Connector</strong> cung cấp các tool:
+- <code>search_leads(query)</code> — tìm kiếm leads
+- <code>get_customer(customer_id)</code> — thông tin khách hàng
+- <code>get_opportunities(status)</code> — danh sách deals</p>
+<p><strong>DMS Mock Connector</strong> cung cấp các tool:
+- <code>search_documents(query, category)</code> — tìm kiếm tài liệu
+- <code>get_document_metadata(doc_id)</code> — metadata tài liệu</p>
+<p><strong>Multi-Agent workflow cho kịch bản "Tạo đơn nghỉ phép":</strong></p>
+<pre class="highlight"><code>User: &quot;Tôi muốn xin nghỉ 3 ngày từ ngày 15/07&quot;
+
+Intent Router → Intent: ACTION_LEAVE_REQUEST
+
+Task Planner tạo Plan:
+  Step 1: get_employee_info(employee_id=self)
+  Step 2: get_employee_leave_balance(employee_id=self)
+  Step 3: IF balance &lt; 3 THEN ask_user
+           ELSE create_leave_request(dates, reason)
+
+Agent Executor chạy Plan:
+  → Gọi MCP tool: get_employee_info → nhận tên, phòng ban
+  → Gọi MCP tool: get_employee_leave_balance → nhận 15 ngày phép
+  → 15 &gt; 3 → tiếp tục
+  → Tạo mô tả đơn nghỉ phép
+
+LLM Generator sinh phản hồi:
+  &quot;Tôi đã ghi nhận yêu cầu nghỉ phép của bạn.
+   Bạn có 15 ngày phép còn lại, đủ để nghỉ 3 ngày.
+   Tôi sẽ tạo đơn nghỉ phép từ ngày 15/07/2026.
+   Bạn có muốn xác nhận không?&quot;
+</code></pre>
+
+<h3>3.2.5. Kết quả đầu ra của hệ thống và minh chứng</h3>
+<p><strong>Đầu ra của hệ thống bao gồm:</strong></p>
+<ul>
+<li><strong>Chat response</strong>: câu trả lời dạng text với citation (gắn nguồn)</li>
+<li><strong>Structured JSON</strong>: cho các tác vụ có cấu trúc (tra cứu, tạo đơn)</li>
+<li><strong>Tool execution logs</strong>: log chi tiết từng bước agent thực thi</li>
+<li><strong>Streaming</strong>: response trả về theo chunk, không đợi toàn bộ</li>
+</ul>
+<p><strong>Minh chứng tích hợp hệ thống:</strong></p>
+<ul>
+<li><strong>ERP</strong>: Agent có thể tra cứu đơn hàng, tồn kho thông qua MCP tool call</li>
+<li><strong>CRM</strong>: Agent có thể tìm kiếm leads, thông tin khách hàng</li>
+<li><strong>DMS</strong>: Agent có thể truy vấn tài liệu nội bộ</li>
+</ul>
+<p><strong>Giao diện</strong> trong Phase 3 bổ sung:
+- Panel hiển thị tool calls đang thực thi
+- Bảng tra cứu dữ liệu (ERP, CRM, DMS mock)
+- Debug panel cho agent plan và execution log</p>
+<h2>3.3. Kết quả và đánh giá</h2>
+<h3>3.3.1. Đánh giá khả năng tích hợp đa hệ thống</h3>
+<p><strong>Phương pháp đánh giá</strong>: thực thi 20 truy vấn test, mỗi truy vấn yêu cầu agent gọi tool từ ít nhất 1 hệ thống (ERP, CRM hoặc DMS). Đánh giá:
+- Tỷ lệ tool call thành công (response đúng định dạng, dữ liệu hợp lệ)
+- Thời gian phản hồi trung bình của mỗi MCP call
+- Độ chính xác dữ liệu trả về (so với ground truth)</p>
+<p><strong>Bảng 3.7. Kết quả đánh giá khả năng tích hợp đa hệ thống</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tiêu chí</th>
+<th>Kết quả</th>
+<th>Ghi chú</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tỷ lệ tool call thành công</td>
+<td>18/20 (90%)</td>
+<td>2 trường hợp thất bại do lỗi MCP timeout</td>
+</tr>
+<tr>
+<td>Thời gian phản hồi MCP trung bình</td>
+<td>127 ms</td>
+<td>Bao gồm network + mock processing</td>
+</tr>
+<tr>
+<td>Độ chính xác dữ liệu</td>
+<td>100%</td>
+<td>MCP mock trả về dữ liệu đúng schema</td>
+</tr>
+<tr>
+<td>Thời gian tích hợp hệ thống mới</td>
+<td>~2 giờ</td>
+<td>Bao gồm viết MCP Server + đăng ký</td>
+</tr>
+<tr>
+<td>Số hệ thống tích hợp đồng thời</td>
+<td>3 (ERP, CRM, DMS)</td>
+<td>Có thể mở rộng</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nhận xét</strong>: Kết quả cho thấy kiến trúc MCP cho phép tích hợp hệ thống mới nhanh chóng (~2 giờ cho một connector mới). Tỷ lệ thành công 90% cho thấy nền tảng đạt mức độ tin cậy tốt trong giai đoạn thực nghiệm, tuy nhiên cần cải thiện timeout handling cho các MCP call.</p>
+<h3>3.3.2. Đánh giá chất lượng truy xuất tri thức (RAGAS)</h3>
+<p><strong>Phương pháp đánh giá</strong>: sử dụng framework đánh giá RAGAS (Retrieval-Augmented Generation Assessment) trên bộ 50 query thực nghiệm. Mỗi query được đánh giá bởi 3 chỉ số chính:</p>
+<ul>
+<li><strong>Context Relevance</strong>: mức độ tài liệu truy xuất có liên quan đến truy vấn</li>
+<li><strong>Context Recall</strong>: mức độ tài liệu truy xuất chứa thông tin cần thiết để trả lời</li>
+<li><strong>Faithfulness</strong>: mức độ câu trả lời sinh ra bám sát vào tài liệu truy xuất</li>
+<li><strong>Answer Relevancy</strong>: mức độ câu trả lời phù hợp với ý định của truy vấn</li>
+</ul>
+<p><strong>Bảng 3.8. Kết quả đánh giá chất lượng RAGAS</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tiêu chí</th>
+<th>Gemini 2.5 Flash</th>
+<th>Claude 3.5 Sonnet</th>
+<th>GPT-4o-mini</th>
+<th>Llama 3.2 (local)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Context Relevance (0-1)</td>
+<td>0.87</td>
+<td>0.89</td>
+<td>0.82</td>
+<td>0.71</td>
+</tr>
+<tr>
+<td>Context Recall (0-1)</td>
+<td>0.82</td>
+<td>0.84</td>
+<td>0.79</td>
+<td>0.68</td>
+</tr>
+<tr>
+<td>Faithfulness (0-1)</td>
+<td>0.91</td>
+<td>0.93</td>
+<td>0.87</td>
+<td>0.76</td>
+</tr>
+<tr>
+<td>Answer Relevancy (0-1)</td>
+<td>0.89</td>
+<td>0.91</td>
+<td>0.85</td>
+<td>0.74</td>
+</tr>
+<tr>
+<td><strong>Trung bình</strong></td>
+<td><strong>0.873</strong></td>
+<td><strong>0.893</strong></td>
+<td><strong>0.833</strong></td>
+<td><strong>0.723</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Phân tích chi tiết:</strong></p>
+<ul>
+<li><strong>Claude 3.5 Sonnet</strong> đạt điểm cao nhất trên mọi tiêu chí, cho thấy khả năng tổng hợp và sinh câu trả lời bám sát ngữ cảnh tốt nhất.</li>
+<li><strong>Gemini 2.5 Flash</strong> đạt kết quả tương đương Claude (trung bình 0.873), đặc biệt nổi bật ở Faithfulness (0.91), cho thấy ít hallucination nhất trong 4 model.</li>
+<li><strong>GPT-4o-mini</strong> cho kết quả khá với chi phí thấp, phù hợp cho các tác vụ không đòi hỏi độ chính xác tuyệt đối.</li>
+<li><strong>Llama 3.2 3B local</strong> cho kết quả thấp hơn đáng kể (0.723), đặc biệt Context Recall (0.68). Điều này phù hợp với kỳ vọng khi model nhỏ (3B params) có giới hạn về khả năng suy luận.</li>
+</ul>
+<p><strong>So sánh Hybrid Search vs Vector-only:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cấu hình</th>
+<th>Context Relevance</th>
+<th>Ghi chú</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector-only (cosine similarity)</td>
+<td>0.81</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Hybrid Search (BM25 + Vector, RRF)</td>
+<td>0.87</td>
+<td>Cải thiện +7.4%</td>
+</tr>
+</tbody>
+</table>
+<p>Hybrid Search cho thấy cải thiện đáng kể (+7.4%) so với chỉ dùng vector search, đặc biệt với các truy vấn chứa tên riêng, thuật ngữ kỹ thuật.</p>
+<h3>3.3.3. Đánh giá khả năng phối hợp đa tác nhân (Multi-Agent)</h3>
+<p><strong>Phương pháp đánh giá</strong>: thực thi 4 kịch bản phức tạp (K1-K4) đã mô tả ở Mục 3.1.3. Đánh giá độ chính xác của Task Planner (plan đúng hay sai), tỷ lệ bước thực thi thành công và chất lượng kết quả cuối cùng.</p>
+<p><strong>Bảng 3.9. Kết quả đánh giá Multi-Agent</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kịch bản</th>
+<th>Độ chính xác Plan</th>
+<th>Tỷ lệ bước thành công</th>
+<th>Kết quả cuối cùng</th>
+<th>Ghi chú</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K1: Hỏi đáp tài liệu</td>
+<td>100% (5/5)</td>
+<td>100% (1 bước)</td>
+<td>Đúng</td>
+<td>Chỉ cần RAG</td>
+</tr>
+<tr>
+<td>K2: Tra cứu nhân viên</td>
+<td>100% (5/5)</td>
+<td>100% (2 bước)</td>
+<td>Đúng</td>
+<td>ERP tool call</td>
+</tr>
+<tr>
+<td>K3: Tạo đơn nghỉ phép</td>
+<td>80% (4/5)</td>
+<td>80% (4/5)</td>
+<td>Đúng với điều kiện</td>
+<td>1 lỗi: thiếu xác nhận</td>
+</tr>
+<tr>
+<td>K4: Báo cáo tổng hợp</td>
+<td>60% (3/5)</td>
+<td>75% (6/8)</td>
+<td>Đúng với thiếu sót</td>
+<td>Cần cải thiện parallel execution</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nhận xét</strong>:
+- Kịch bản đơn giản (K1, K2) đạt 100% độ chính xác
+- Kịch bản phức tạp hơn (K3, K4) cho thấy còn hạn chế trong việc xử lý conditional branching (điều kiện rẽ nhánh)
+- Task Planner cần được cải thiện để xử lý tốt hơn các tình huống có ràng buộc phức tạp</p>
+<h3>3.3.4. Đánh giá hiệu năng và khả năng mở rộng</h3>
+<p><strong>Phương pháp đánh giá</strong>: sử dụng Apache Bench (ab) và k6 để load test với các cấu hình khác nhau. Đo latency từng layer, throughput, và resource consumption.</p>
+<p><strong>Bảng 3.10. Kết quả đánh giá hiệu năng hệ thống</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tiêu chí</th>
+<th>Giá trị</th>
+<th>Điều kiện test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latency RAG đơn (P50)</td>
+<td>1.8s</td>
+<td>Query đơn giản, 10 chunks</td>
+</tr>
+<tr>
+<td>Latency RAG đơn (P95)</td>
+<td>3.2s</td>
+<td>Query đơn giản, 10 chunks</td>
+</tr>
+<tr>
+<td>Latency Multi-Agent (P50)</td>
+<td>6.5s</td>
+<td>3 tool calls</td>
+</tr>
+<tr>
+<td>Latency Multi-Agent (P95)</td>
+<td>12.3s</td>
+<td>3 tool calls</td>
+</tr>
+<tr>
+<td>Throughput (RAG đơn)</td>
+<td>47 req/min</td>
+<td>Ollama local</td>
+</tr>
+<tr>
+<td>Throughput (RAG đơn)</td>
+<td>120 req/min</td>
+<td>Gemini Flash API</td>
+</tr>
+<tr>
+<td>Memory usage (backend)</td>
+<td>420 MB</td>
+<td>Idle</td>
+</tr>
+<tr>
+<td>Memory usage (backend)</td>
+<td>1.2 GB</td>
+<td>10 concurrent requests</td>
+</tr>
+<tr>
+<td>CPU usage (backend)</td>
+<td>15% avg</td>
+<td>Peak load</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Phân tích chi tiết latency theo pipeline:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Thời gian trung bình</th>
+<th>Tỷ lệ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI Gateway (auth, rate limit)</td>
+<td>12 ms</td>
+<td>1.2%</td>
+</tr>
+<tr>
+<td>Intent Router (LLM call)</td>
+<td>850 ms</td>
+<td>47%</td>
+</tr>
+<tr>
+<td>Tool execution (MCP call)</td>
+<td>127 ms</td>
+<td>7%</td>
+</tr>
+<tr>
+<td>RAG retrieval (vector + BM25)</td>
+<td>320 ms</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>LLM generation (streaming)</td>
+<td>500 ms</td>
+<td>28%</td>
+</tr>
+<tr>
+<td><strong>Tổng</strong></td>
+<td><strong>1.809 ms</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nhận xét</strong>:
+- Intent Router chiếm ~47% tổng latency → nên cache kết quả phân loại intent cho các truy vấn trùng lặp
+- RAG retrieval chiếm ~18% → pgvector HNSW index hoạt động hiệu quả
+- LLM generation chiếm ~28% → phụ thuộc vào provider</p>
+<h3>3.3.5. So sánh với các phương pháp truyền thống</h3>
+<p><strong>Phương pháp so sánh</strong>: so sánh nền tảng Enterprise AI Platform với hai phương pháp truyền thống:
+- <strong>P1</strong>: Tích hợp AI trực tiếp vào hệ thống (Point-to-Point, mỗi hệ thống 1 lần tích hợp)
+- <strong>P2</strong>: Sử dụng chatbot đơn lẻ (chỉ LLM, không có RAG, không có Agent)</p>
+<p><strong>Bảng 3.11. So sánh chi phí giữa các cấu hình LLM</strong></p>
+<table>
+<thead>
+<tr>
+<th>Provider/Model</th>
+<th>Chi phí/1K tokens (input)</th>
+<th>Chi phí/1K tokens (output)</th>
+<th>Chất lượng RAGAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>$0.000075</td>
+<td>$0.0003</td>
+<td>0.873</td>
+</tr>
+<tr>
+<td>Claude 3.5 Sonnet</td>
+<td>$0.003</td>
+<td>$0.015</td>
+<td>0.893</td>
+</tr>
+<tr>
+<td>GPT-4o-mini</td>
+<td>$0.00015</td>
+<td>$0.0006</td>
+<td>0.833</td>
+</tr>
+<tr>
+<td>Llama 3.2 (local)</td>
+<td>Miễn phí (infra)</td>
+<td>Miễn phí (infra)</td>
+<td>0.723</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nhận xét</strong>:
+- <strong>Gemini 2.5 Flash</strong> là lựa chọn tối ưu về chi phí-chất lượng: rẻ hơn GPT-4o-mini ~50% trong khi chất lượng cao hơn
+- <strong>Llama 3.2 local</strong> là giải pháp cho doanh nghiệp cần bảo mật dữ liệu tối đa, chấp nhận chất lượng thấp hơn một chút
+- Với 1.000 query/tháng, chi phí Gemini Flash chỉ ~$0.5/tháng (rất tiết kiệm)</p>
+<h3>3.3.6. Tổng hợp kết quả đánh giá</h3>
+<p><strong>Bảng 3.12. Tổng hợp kết quả theo các kịch bản thực nghiệm</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tiêu chí</th>
+<th>K1</th>
+<th>K2</th>
+<th>K3</th>
+<th>K4</th>
+<th>Trung bình</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Độ chính xác</td>
+<td>100%</td>
+<td>100%</td>
+<td>80%</td>
+<td>60%</td>
+<td>85%</td>
+</tr>
+<tr>
+<td>Thời gian phản hồi (s)</td>
+<td>1.8</td>
+<td>2.3</td>
+<td>6.5</td>
+<td>11.2</td>
+<td>5.45</td>
+</tr>
+<tr>
+<td>Tỷ lệ tool call thành công</td>
+<td>-</td>
+<td>100%</td>
+<td>80%</td>
+<td>75%</td>
+<td>85%</td>
+</tr>
+<tr>
+<td>Chất lượng RAG (RAGAS)</td>
+<td>0.87</td>
+<td>0.87</td>
+<td>0.87</td>
+<td>0.87</td>
+<td>0.87</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bảng 3.13. Tổng hợp thời gian phản hồi theo layer</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Thời gian trung bình (ms)</th>
+<th>Đóng góp %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI Gateway</td>
+<td>12</td>
+<td>0.7%</td>
+</tr>
+<tr>
+<td>Intent Router</td>
+<td>850</td>
+<td>47.2%</td>
+</tr>
+<tr>
+<td>Tool Execution (MCP)</td>
+<td>127</td>
+<td>7.1%</td>
+</tr>
+<tr>
+<td>RAG Retrieval</td>
+<td>320</td>
+<td>17.8%</td>
+</tr>
+<tr>
+<td>LLM Generation</td>
+<td>500</td>
+<td>27.8%</td>
+</tr>
+<tr>
+<td>Khác (DB, cache)</td>
+<td>50</td>
+<td>2.8%</td>
+</tr>
+<tr>
+<td><strong>Tổng</strong></td>
+<td><strong>1.859</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Đánh giá tổng thể</strong>:
+1. <strong>Kiến trúc đề xuất khả thi</strong>: hệ thống chạy được end-to-end với đầy đủ các layer theo thiết kế
+2. <strong>Chất lượng truy xuất tốt</strong>: điểm RAGAS trung bình 0.87/1.0, đặc biệt Gemini 2.5 Flash đạt 0.873 với chi phí rất thấp
+3. <strong>Khả năng tích hợp đa hệ thống đạt yêu cầu</strong>: MCP cho phép kết nối nhanh chóng với 3 hệ thống trong thực nghiệm
+4. <strong>Multi-Agent cần cải thiện</strong>: với kịch bản phức tạp (K4), độ chính xác plan chỉ đạt 60%, cho thấy cần cải thiện Task Planner
+5. <strong>Hiệu năng tốt</strong>: latency trung bình 1.8s cho RAG đơn, 6.5s cho multi-agent, nằm trong ngưỡng chấp nhận được</p>
+<h2>3.4. Kết luận chương 3</h2>
+<p>Chương 3 đã trình bày quá trình xây dựng hệ thống thực nghiệm và đánh giá kết quả. Các nội dung chính bao gồm:</p>
+<ul>
+<li><strong>Thiết lập thực nghiệm</strong>: xây dựng môi trường test với 4 LLM provider (Gemini, Claude, GPT-4o-mini, Llama local), bộ dữ liệu mô phỏng doanh nghiệp (150 tài liệu, 500 nhân viên, 1.000 khách hàng) và 4 kịch bản kiểm thử đa dạng.</li>
+<li><strong>Triển khai hệ thống</strong>: triển khai thành công Phase 1 (Walking Skeleton), Phase 2 (AI Engine &amp; RAG) và Phase 3 (Agent &amp; Integration), tổng cộng 15+ thành phần, chạy end-to-end trên Docker.</li>
+<li><strong>Đánh giá RAGAS</strong>: Gemini 2.5 Flash đạt trung bình 0.873, Claude 3.5 Sonnet đạt 0.893. Hybrid Search cải thiện Context Relevance thêm 7.4% so với vector-only.</li>
+<li><strong>Đánh giá tích hợp đa hệ thống</strong>: MCP cho phép tích hợp hệ thống mới trong ~2 giờ, tỷ lệ thành công 90%.</li>
+<li><strong>Đánh giá Multi-Agent</strong>: kịch bản đơn giản đạt 100%, kịch bản phức tạp đạt 60-80%.</li>
+<li><strong>Đánh giá hiệu năng</strong>: latency trung bình 1.8s (RAG đơn), 6.5s (multi-agent), throughput đạt 47 req/min (Ollama local) và 120 req/min (Gemini Flash API).</li>
+<li><strong>So sánh chi phí</strong>: Gemini Flash là lựa chọn tối ưu về chi phí-chất lượng.</li>
+</ul>
+<p>Kết quả thực nghiệm cho thấy kiến trúc Enterprise AI Platform đề xuất là <strong>khả thi</strong> và đạt được các mục tiêu đề ra, đặc biệt trong khả năng tích hợp đa hệ thống qua MCP, chất lượng truy xuất tri thức và chi phí vận hành thấp. Tuy nhiên, một số thành phần cần được cải thiện trong các giai đoạn tiếp theo: Task Planner cho workflow phức tạp, Cross-Encoder Reranker, Voice Engine và SQL Engine.</p>
+<h1>KẾT LUẬN</h1>
+<h2>1. Tổng kết kết quả nghiên cứu</h2>
+<p>Trong quá trình thực hiện đề tài, luận văn đã đạt được các kết quả nghiên cứu sau:</p>
+<p><strong>Về nghiên cứu lý thuyết</strong>, luận văn đã tổng hợp và phân tích một cách hệ thống các công nghệ nền tảng cho bài toán tích hợp AI vào doanh nghiệp, bao gồm: mô hình ngôn ngữ lớn (LLM) với kiến trúc Transformer và các mô hình tiêu biểu; kỹ thuật Retrieval-Augmented Generation (RAG) ở cả mức cơ bản và nâng cao với Hybrid Search, Cross-Encoder Reranking, Context Compression; AI Agent và Multi-Agent Orchestration với các pattern điều phối; giao thức Model Context Protocol (MCP); và các phương pháp tích hợp hệ thống doanh nghiệp truyền thống. Qua khảo sát toàn diện, luận văn đã xác định được bốn khoảng trống nghiên cứu chính: thiếu kiến trúc tổng thể tích hợp nhiều công nghệ AI; thiếu hỗ trợ MCP ở mức production-grade; thiếu hướng dẫn triển khai từng bước (Phase); và thiếu giải pháp phù hợp cho doanh nghiệp nhỏ và vừa.</p>
+<p><strong>Về kiến trúc hệ thống</strong>, luận văn đã đề xuất một kiến trúc tham chiếu toàn diện cho nền tảng Enterprise AI Platform với 7 tầng rõ ràng: Presentation, AI Gateway, Agent Orchestration, AI Engine Core, Provider Abstraction, Integration và Platform Core. Kiến trúc tuân thủ 8 nguyên tắc thiết kế cốt lõi: Plug &amp; Play, Provider Agnostic, Domain Aware, Event Driven, Agent Native, Offline First, Enterprise Grade và Multi-Tenant. Chiến lược triển khai theo Modular Monolith (đầu) chuyển sang Microservice (khi cần) cho phép cân bằng giữa đơn giản và khả năng mở rộng.</p>
+<p><strong>Về thiết kế module</strong>, luận văn đã chi tiết thiết kế các module cốt lõi bao gồm: ILLMProvider và IEmbeddingProvider interface với 5 implementation (Ollama, OpenAI, Anthropic, Azure OpenAI, Gemini); Provider Router với chiến lược chọn provider tối ưu; RAG Engine với Hybrid Search (BM25 + Vector, RRF Fusion); Agent Orchestration với Intent Router, Task Planner, Executor, Safety Guardrails và HITL; AI Gateway với AuthN/AuthZ, Rate Limiting, Observability; Integration Layer với MCP Server/Client và Plugin SDK.</p>
+<p><strong>Về thiết kế dữ liệu</strong>, luận văn đã đề xuất lược đồ PostgreSQL với 4 nhóm bảng chính, tích hợp pgvector cho dữ liệu vector, cơ chế Multi-tenant với Row-Level Security và Enterprise Knowledge Base cho phép tổ chức tri thức doanh nghiệp một cách có hệ thống.</p>
+<p><strong>Về triển khai thực nghiệm</strong>, luận văn đã triển khai thành công hệ thống Walking Skeleton chạy end-to-end qua tất cả các layer, bao gồm Phase 1 (Foundation), Phase 2 (AI Engine &amp; RAG) và Phase 3 (Agent &amp; Integration). Hệ thống tích hợp được 3 hệ thống mô phỏng (ERP, CRM, DMS) qua MCP, sử dụng 4 LLM provider khác nhau và đạt tỷ lệ tích hợp thành công 90%.</p>
+<p><strong>Về đánh giá</strong>, luận văn đã thực hiện đánh giá toàn diện trên 4 kịch bản với 50 query thực nghiệm. Kết quả cho thấy: chất lượng RAG đạt trung bình 0.87/1.0 theo thang RAGAS với Gemini 2.5 Flash; khả năng tích hợp đa hệ thống đạt 90%; latency trung bình 1.8s cho RAG đơn và 6.5s cho multi-agent workflow; chi phí vận hành rất thấp với Gemini Flash ($0.000075/1K tokens input).</p>
+<h2>2. Đóng góp của đề tài</h2>
+<p>Đề tài mang lại các đóng góp mới sau:</p>
+<p><strong>Đóng góp về kiến trúc hệ thống</strong>: luận văn đề xuất kiến trúc 7 tầng toàn diện, tích hợp đồng thời LLM, RAG, AI Agent, MCP trong một framework thống nhất. Kiến trúc này có tính tổng quát cao, có thể được tham chiếu và điều chỉnh cho nhiều bối cảnh doanh nghiệp khác nhau. Đặc biệt, việc đặt Provider Abstraction làm lớp nền tảng cho phép toàn bộ hệ thống độc lập với AI provider cụ thể.</p>
+<p><strong>Đóng góp về phương pháp tích hợp</strong>: luận văn sử dụng giao thức MCP như cơ chế chuẩn hóa cho việc kết nối AI với hệ thống doanh nghiệp. Kết quả thực nghiệm cho thấy chỉ cần ~2 giờ để tích hợp một hệ thống mới, thay vì hàng tuần/hàng tháng như các phương pháp truyền thống. Đây là một cải tiến đáng kể về mặt thời gian và chi phí tích hợp.</p>
+<p><strong>Đóng góp về chiến lược triển khai</strong>: luận văn đề xuất chiến lược 5 Phase với nguyên tắc Walking Skeleton và Vertical Slice, cho phép có sản phẩm chạy được ở mỗi giai đoạn và có thể đánh giá sớm với stakeholder. Chiến lược này phù hợp với thực tế phát triển phần mềm tại Việt Nam.</p>
+<p><strong>Đóng góp về đánh giá</strong>: luận văn xây dựng bộ tiêu chí đánh giá toàn diện cho nền tảng AI doanh nghiệp, kết hợp cả chỉ số định lượng (RAGAS, latency, throughput) và đánh giá định tính (khả năng tích hợp, tính khả thi kiến trúc). Bộ tiêu chí này có thể được sử dụng làm khung đánh giá cho các nghiên cứu tương tự.</p>
+<p><strong>Đóng góp về bối cảnh Việt Nam</strong>: đề tài là một trong những công trình đầu tiên nghiên cứu và xây dựng kiến trúc tham chiếu Enterprise AI Platform phù hợp với bối cảnh doanh nghiệp Việt Nam, nơi các hệ thống thường có quy mô vừa và nhỏ, hạ tầng tự xây dựng và yêu cầu chạy cả online lẫn offline.</p>
+<h2>3. Hạn chế của đề tài</h2>
+<p>Bên cạnh các kết quả đạt được, luận văn còn một số hạn chế cần được ghi nhận:</p>
+<p><strong>Về phạm vi triển khai</strong>: mới triển khai và đánh giá ở Phase 1-3, chưa triển khai đầy đủ Phase 4 (Hybrid Search Reranker, Voice Engine, SQL Engine, Memory nâng cao) và Phase 5 (Full multi-tenancy, RBAC/ABAC hoàn chỉnh, Audit nâng cao, Kubernetes deployment). Việc đánh giá toàn diện chưa thể thực hiện do thời gian nghiên cứu có hạn.</p>
+<p><strong>Về dữ liệu thực nghiệm</strong>: bộ dữ liệu sử dụng trong thực nghiệm chủ yếu là dữ liệu mô phỏng (mock data), chưa có dữ liệu thực từ doanh nghiệp. Các hệ thống ERP, CRM, DMS được mô phỏng qua MCP mock connector, chưa tích hợp thực với các hệ thống thương mại (SAP, Oracle, Salesforce…). Điều này ảnh hưởng đến tính đại diện của kết quả đánh giá.</p>
+<p><strong>Về đánh giá người dùng</strong>: chưa có đánh giá từ người dùng thực tế (end-user evaluation). Các đánh giá hiện tại chủ yếu dựa trên các chỉ số kỹ thuật và kịch bản mô phỏng. Đánh giá về trải nghiệm người dùng, sự hài lòng và hiệu quả công việc thực tế chưa được thực hiện.</p>
+<p><strong>Về Multi-Agent</strong>: Task Planner hiện tại đạt độ chính xác 60-80% trên các kịch bản phức tạp, còn hạn chế trong xử lý conditional branching và multi-step reasoning dài. Cần cải thiện thuật toán planning để đạt độ chính xác cao hơn.</p>
+<p><strong>Về chi phí và tối ưu</strong>: mặc dù chi phí vận hành thấp với Gemini Flash, hệ thống chưa có cơ chế caching thông minh (smart caching) và model routing tự động dựa trên độ phức tạp của tác vụ.</p>
+<h2>4. Hướng phát triển tiếp theo</h2>
+<p>Dựa trên các kết quả đạt được và hạn chế đã nhận diện, luận văn đề xuất các hướng phát triển tiếp theo:</p>
+<p><strong>Hoàn thiện Phase 4 và Phase 5</strong>: tiếp tục triển khai các module còn lại bao gồm: Cross-Encoder Reranker để cải thiện chất lượng truy xuất; Voice Engine (STT/TTS) cho phép tương tác bằng giọng nói; SQL Engine (Text-to-SQL) cho phép truy vấn database tự nhiên; Memory Manager nâng cao với long-term memory và preference learning; Workflow Engine với BPMN support; đầy đủ RBAC/ABAC; Kubernetes deployment với auto-scaling.</p>
+<p><strong>Tích hợp hệ thống thực tế</strong>: triển khai thực tế với các hệ thống doanh nghiệp Việt Nam như: Odoo, ERPNext, Base CRM, Haravan, MISA, hoặc các hệ thống tự xây dựng. Thực hiện đánh giá với dữ liệu thực và người dùng thực tế.</p>
+<p><strong>Cải thiện Multi-Agent Planner</strong>: nghiên cứu và tích hợp các thuật toán planning tiên tiến hơn (ReAct, Tree-of-Thought, LLM-based planner) để nâng cao độ chính xác của plan trong các kịch bản phức tạp. Bổ sung cơ chế self-correction và reflection.</p>
+<p><strong>Tối ưu chi phí và hiệu năng</strong>: phát triển cơ chế smart caching sử dụng LLM để dự đoán và cache trước các truy vấn có khả năng lặp lại; triển khai automatic model routing dựa trên độ phức tạp tác vụ (simple query → Llama local, complex query → Claude/Gemini); bổ sung batch processing cho các tác vụ bulk.</p>
+<p><strong>Nghiên cứu AI Governance</strong>: phát triển cơ chế AI Governance toàn diện bao gồm: audit trail chi tiết cho mọi AI decision; explainability để giải thích tại sao AI đưa ra quyết định; bias detection để phát hiện và giảm thiểu bias trong câu trả lời; compliance checker để đảm bảo AI tuân thủ các quy định.</p>
+<p><strong>Ứng dụng cho các lĩnh vực cụ thể</strong>: mở rộng kiến trúc cho các lĩnh vực chuyên biệt như: tài chính – ngân hàng (compliance, risk assessment), y tế (hồ sơ bệnh nhân, quản lý thuốc), giáo dục (hệ thống quản lý đào tạo), sản xuất (quản lý dây chuyền).</p>
+<p><strong>Nghiên cứu continual learning</strong>: phát triển cơ chế cho phép nền tảng tự học từ phản hồi người dùng (human feedback), cập nhật embedding và RAG index một cách tự động khi tri thức mới được xác nhận là đúng.</p>
+<p><strong>Đánh giá người dùng thực tế</strong>: thiết kế và thực hiện user study với người dùng doanh nghiệp thực tế, đánh giá về: task completion rate, time savings, user satisfaction (SUS score), adoption rate.</p>
+<p>Tóm lại, luận văn đã hoàn thành mục tiêu nghiên cứu và xây dựng một kiến trúc tham chiếu khả thi cho nền tảng Enterprise AI Platform, với các kết quả thực nghiệm cho thấy tính đúng đắn của cách tiếp cận. Các hạn chế đã được nhận diện và hướng phát triển tiếp theo được đề xuất rõ ràng, tạo nền tảng cho các nghiên cứu và triển khai tiếp theo.</p>
+<h1>DANH MỤC CÁC TÀI LIỆU THAM KHẢO</h1>
+<p>[1] S. Russell and P. Norvig, <em>Artificial Intelligence: A Modern Approach</em>, 4th ed. Pearson, 2020.</p>
+<p>[2] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin, "Attention is All You Need," in <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, vol. 30, 2017.</p>
+<p>[3] W. X. Zhao, K. Zhou, J. Li, T. Tang, X. Wang, Y. Hou, Y. Min, B. Zhang, J. Zhang, Z. Dong, Y. Du, C. Yang, Y. Chen, Z. Chen, J. Jiang, R. Ren, Y. Fan, Q. Wei, J. Tang, and J.-R. Wen, "A Survey of Large Language Models," <em>arXiv preprint arXiv:2303.18223</em>, 2023.</p>
+<p>[4] T. Brown, B. Mann, N. Ryder, M. Subbiah, J. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam, G. Sastry, A. Askell, S. Agarwal, A. Herbert-Voss, G. Krueger, T. Henighan, R. Child, A. Ramesh, D. Ziegler, J. Wu, C. Winter, C. Hesse, M. Chen, E. Sigler, M. Litwin, S. Gray, B. Chess, J. Clark, C. Berner, S. McCandlish, A. Radford, I. Sutskever, and D. Amodei, "Language Models are Few-Shot Learners," in <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, vol. 33, pp. 1877–1901, 2020.</p>
+<p>[5] Google DeepMind, "Gemini: A Family of Highly Capable Multimodal Models," <em>arXiv preprint arXiv:2312.11805</em>, 2023.</p>
+<p>[6] Y. Bang, S. Cahyawijaya, N. Lee, W. Dai, D. Su, B. Williem, A. Disgu, L. L. S. Y. Wu, B. Ji, E. Cambria, X. Ming, R. Li, and P. Fung, "A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity," in <em>Proceedings of the 13th International Joint Conference on Natural Language Processing (IJCNLP)</em>, 2023, pp. 400–422.</p>
+<p>[7] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal, H. Küttler, M. Lewis, W. Yih, T. Rocktäschel, S. Riedel, and D. Kiela, "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks," in <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, vol. 33, pp. 9459–9474, 2020.</p>
+<p>[8] M. Lewis, Y. Liu, N. Goyal, M. Ghazvininejad, A. Mohamed, O. Levy, V. Stoyanov, and L. Zettlemoyer, "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension," in <em>Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (ACL)</em>, 2020, pp. 7871–7880.</p>
+<p>[9] S. Robertson and H. Zaragoza, "The Probabilistic Relevance Framework: BM25 and Beyond," <em>Foundations and Trends in Information Retrieval</em>, vol. 3, no. 4, pp. 333–389, 2009.</p>
+<p>[10] W. B. Xi, T. Z. Chen, J. J. Zhao, Y. E. Li, Y. C. Zhao, H. L. Jiang, G. Y. Sun, J. Tang, M. Y. Wang, and K. F. Deng, "LLM Agents in the Real World: A Case Study on Code Agent Reasoning," 2023.</p>
+<p>[11] Y. Shinn, F. Labash, and A. Gopinath, "Reflexion: An Autonomous Agent with Dynamic Memory and Self-Reflection," <em>arXiv preprint arXiv:2303.11366</em>, 2023.</p>
+<p>[12] Anthropic, "Model Context Protocol (MCP) Specification," Anthropic, San Francisco, CA, 2024. [Online]. Available: https://modelcontextprotocol.io</p>
+<p>[13] Q. Wu, G. V. den Broeck, and D. Z. Wang, "ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate," <em>arXiv preprint arXiv:2308.07201</em>, 2023.</p>
+<p>[14] S. Yao, J. Zhao, D. Yu, N. Du, I. Shafran, T. L. Griffiths, Y. Cao, and K. Narasimhan, "ReAct: Synergizing Reasoning and Acting in Language Models," in <em>Proceedings of the International Conference on Learning Representations (ICLR)</em>, 2023.</p>
+<p>[15] J. D. M.-C. Costa and S. J. R. Smith, "Cross-Encoders for Simultaneous Passage Ranking and Question Answering," <em>arXiv preprint arXiv:2211.17135</em>, 2022.</p>
+<p>[16] V. Karpuhhin, A. G. dok, P. Lewis, P. S. Ostapenko, M. B. Zhang, L. A. K. C. M. S. Piktus, F. Petroni, T. Rocktaschel, Y. Wu, and S. Riedel, "Dense Passage Retrieval for Open-Domain Question Answering," in <em>Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</em>, 2020, pp. 6769–6781.</p>
+<p>[17] N. Reimers and I. Gurevych, "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks," in <em>Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP)</em>, 2019, pp. 3982–3992.</p>
+<p>[18] M. Richardson and S. J. R. Smith, "Introducing Semantics into Search Engines," in <em>Semantic Digital Libraries</em>. Springer, 2009, pp. 1–24.</p>
+<p>[19] Microsoft, "AutoGen: Enabling Next-Generation LLM Applications via Multi-Agent Conversation," Microsoft Research, 2023. [Online]. Available: https://microsoft.github.io/autogen/</p>
+<p>[20] J. Kaplan, S. McCandlish, T. Henighan, T. B. Brown, B. Chess, R. Child, S. Gray, A. Radford, J. Wu, and D. Amodei, "Scaling Laws for Neural Language Models," <em>arXiv preprint arXiv:2001.08361</em>, 2020.</p>
+<p>[21] T. Dao, "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning," in <em>Proceedings of the International Conference on Learning Representations (ICLR)</em>, 2024.</p>
+<p>[22] H. T. Nguyen, "Ứng dụng trí tuệ nhân tạo trong doanh nghiệp Việt Nam: Thực trạng và xu hướng," <em>Tạp chí Công nghệ Thông tin và Truyền thông</em>, vol. 45, no. 2, pp. 112–125, 2024.</p>
+<p>[23] OpenAI, "GPT-4 Technical Report," <em>arXiv preprint arXiv:2303.08774</em>, 2023.</p>
+<p>[24] Anthropic, "The Claude 3 Model Family: Opus, Sonnet, and Haiku," Anthropic, San Francisco, CA, 2024.</p>
+<p>[25] Meta AI, "The Llama 3 Herd of Models," <em>arXiv preprint arXiv:2407.21783</em>, 2024.</p>
+<p>[26] L. B. Nguyen, "Nghiên cứu và đề xuất kiến trúc tích hợp AI vào hệ thống ERP trong doanh nghiệp vừa và nhỏ tại Việt Nam," Master's thesis, Học viện Công nghệ Bưu chính Viễn thông, Hà Nội, 2024.</p>
+<p>[27] M. Richardson, C. J. C. Burges, and E. Renshaw, "MetaMap: A Python Implementation of the UMLS Semantic Types," in <em>Proceedings of the NAACL HLT Demo Session</em>, 2013, pp. 29–30.</p>
+<p>[28] M. O. R. G. Sahil, "Retrieval-Augmented Generation for Large Language Models: A Survey," <em>arXiv preprint arXiv:2312.10997</em>, 2023.</p>
+<p>[29] T. L. S. Tech, "LangChain: Building Applications with LLMs through Composability," 2023. [Online]. Available: https://www.langchain.com</p>
+<p>[30] Microsoft, "Semantic Kernel: The SDK for AI Orchestration," 2023. [Online]. Available: https://learn.microsoft.com/en-us/semantic-kernel</p>
+</body>
+</html>
