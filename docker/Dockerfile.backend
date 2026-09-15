@@ -12,19 +12,16 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy project files trước để tận dụng Docker layer caching
-COPY ["src/Be/AIBaseFramework.API/AIBaseFramework.API.csproj", "src/Be/AIBaseFramework.API/"]
-COPY ["src/Be/AIBaseFramework.Core/AIBaseFramework.Core.csproj", "src/Be/AIBaseFramework.Core/"]
-COPY ["src/Be/AIBaseFramework.Infrastructure/AIBaseFramework.Infrastructure.csproj", "src/Be/AIBaseFramework.Infrastructure/"]
-COPY ["src/Be/AIBaseFramework.Shared/AIBaseFramework.Shared.csproj", "src/Be/AIBaseFramework.Shared/"]
+COPY ["src/backend/src/AIBaseFramework.API/AIBaseFramework.API.csproj", "src/backend/src/AIBaseFramework.API/"]
 
 # Restore dependencies
-RUN dotnet restore "src/Be/AIBaseFramework.API/AIBaseFramework.API.csproj"
+RUN dotnet restore "src/backend/src/AIBaseFramework.API/AIBaseFramework.API.csproj"
 
 # Copy source code
-COPY src/Be/ /src/src/Be/
+COPY src/backend/ /src/src/backend/
 
 # Build và publish
-WORKDIR "/src/src/Be/AIBaseFramework.API"
+WORKDIR "/src/src/backend/src/AIBaseFramework.API"
 RUN dotnet build "AIBaseFramework.API.csproj" -c Release -o /app/build
 RUN dotnet publish "AIBaseFramework.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 

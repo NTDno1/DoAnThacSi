@@ -3,11 +3,9 @@
 # Đề tài Thạc sĩ: Semantic Search + RAG Chatbot
 # ==============================================================================
 # Cách sử dụng:
-#   Production: docker-compose -f docker-compose.prod.yml up -d
-#   Logs:      docker-compose -f docker-compose.prod.yml logs -f [service]
+#   Production: docker compose -f docker-compose.prod.yml up -d
+#   Logs:      docker compose -f docker-compose.prod.yml logs -f [service]
 # ==============================================================================
-
-version: "3.8"
 
 services:
   # ---------------------------------------------------------------------------
@@ -166,7 +164,7 @@ services:
   backend:
     build:
       context: ..
-      dockerfile: DoAnThacSi/docker/Dockerfile.backend
+      dockerfile: docker/Dockerfile.backend
     container_name: aibf_backend_prod
     restart: always
     environment:
@@ -238,7 +236,7 @@ services:
   frontend:
     build:
       context: ..
-      dockerfile: DoAnThacSi/docker/Dockerfile.frontend
+      dockerfile: docker/Dockerfile.frontend
     container_name: aibf_frontend_prod
     restart: always
     environment:

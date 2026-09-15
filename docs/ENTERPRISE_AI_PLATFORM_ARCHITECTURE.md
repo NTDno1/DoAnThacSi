@@ -1563,7 +1563,7 @@ COMPONENT SCALING:
 
 ```
 Tasks:
-├── Sửa tất cả lỗi compile (xem DIEM_BAT_HOP_LY.md)
+├── Sửa tất cả lỗi compile (xem 12.AUDIT/DIEM_BAT_HOP_LY.md)
 ├── Chọn 1 tên dự án (AIBaseFramework), đồng bộ toàn bộ
 ├── Tách solution thành multi-project:
 │   ├── AIBaseFramework.SharedKernel

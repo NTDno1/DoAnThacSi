@@ -6,18 +6,16 @@
 # LLM: Sử dụng Ollama thay vì OpenAI API (KHÔNG cần Internet)
 # ==============================================================================
 # Cách sử dụng:
-#   Development: docker-compose up -d
-#   Xem logs:   docker-compose logs -f [service_name]
-#   Stop:       docker-compose down
-#   Rebuild:    docker-compose up -d --build
+#   Development: docker compose up -d
+#   Xem logs:   docker compose logs -f [service_name]
+#   Stop:       docker compose down
+#   Rebuild:    docker compose up -d --build
 #
 # LƯU Ý QUAN TRỌNG:
 #   - Hệ thống chạy 100% offline (không cần OpenAI API key)
 #   - Ollama cung cấp LLM và Embedding models local
 #   - Models được download tự động hoặc pre-download
 # ==============================================================================
-
-version: "3.8"
 
 services:
   # ---------------------------------------------------------------------------
@@ -135,7 +133,7 @@ services:
   backend:
     build:
       context: ..
-      dockerfile: DoAnThacSi/docker/Dockerfile.backend
+      dockerfile: docker/Dockerfile.backend
     container_name: aibf_backend
     restart: unless-stopped
     ports:
@@ -189,7 +187,7 @@ services:
       ollama:
         condition: service_healthy
     volumes:
-      - ../src:/app
+      - ../src/backend:/workspace/src/backend
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
       interval: 30s
@@ -205,7 +203,7 @@ services:
   frontend:
     build:
       context: ..
-      dockerfile: DoAnThacSi/docker/Dockerfile.frontend
+      dockerfile: docker/Dockerfile.frontend
     container_name: aibf_frontend
     restart: unless-stopped
     ports:
@@ -217,7 +215,7 @@ services:
     depends_on:
       - backend
     volumes:
-      - ../src/Fe:/app
+      - ../src/frontend:/app
       - /app/node_modules
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
