@@ -1,0 +1,103 @@
+# ============================================
+# .NET / Backend
+# ============================================
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+.vs/
+*.pdb
+*.cachefile
+[Tt]humbs.db
+
+# ============================================
+# Node.js / Frontend
+# ============================================
+node_modules/
+.next/
+out/
+build/
+dist/
+.npm/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+next-env.d.ts
+
+# ============================================
+# Python (tooling scripts in archive/tools/)
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+.eggs/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ============================================
+# Docker
+# ============================================
+.docker/
+docker-compose.override.yml
+
+# ============================================
+# IDE / Editor
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ============================================
+# Secrets / Local config
+# ============================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+appsettings.Development.json
+appsettings.Local.json
+
+# ============================================
+# Logs / Temp / Backup
+# ============================================
+*.log
+logs/
+*.bak
+*.tmp
+*.orig
+*.rej
+~*
+
+# ============================================
+# Database / Data volumes
+# ============================================
+postgres-data/
+redis-data/
+minio-data/
+ollama-data/
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================
+# OS specific
+# ============================================
+.DS_Store
+desktop.ini

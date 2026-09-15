@@ -1,0 +1,3 @@
+# DANH MỤC BẢNG
+
+[[LIST_OF_TABLES]]

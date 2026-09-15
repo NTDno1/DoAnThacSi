@@ -1,0 +1,3 @@
+# DANH MỤC HÌNH
+
+[[LIST_OF_FIGURES]]

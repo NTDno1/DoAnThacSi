@@ -1,0 +1,311 @@
+Bộ Tài Chính
+ 
+
+
+
+TÀI LIỆU 
+THIẾT KẾ CHỨC NĂNG
+
+
+Hợp đồng số: .................
+Gói thầu ................. 
+Thuộc dự án Văn phòng số Bộ Tài Chính 
+
+
+
+
+Chủ đầu tư: Bộ Tài Chính
+Đơn vị thi công: Mobifone Solutions
+Phiên bản tài liệu: 1.0
+
+
+
+
+Hà Nội – 2026
+
+ 
+TRANG KÝ
+ĐẠI DIỆN CHỦ ĐẦU TƯ
+<CHỨC DANH>
+                            
+
+
+<Họ và tên>
+
+ĐẠI DIỆN 
+ĐƠN VỊ TƯ VẤN THIẾT KẾ                  
+<CHỨC DANH>	ĐẠI DIỆN 
+ĐƠN VỊ TƯ VẤN GIÁM SÁT
+<CHỨC DANH>
+
+
+
+
+<Họ và tên>	
+
+
+
+<Họ và tên>
+	
+ĐẠI DIỆN 
+ĐƠN VỊ KIỂM THỬ            
+<CHỨC DANH>	ĐẠI DIỆN NHÀ THẦU
+<CHỨC DANH>
+
+
+
+<Họ và tên>	
+
+
+<Họ và tên>
+
+
+BẢNG GHI NHẬN THAY ĐỔI TÀI LIỆU
+Ngày thay đổi	Vị trí thay đổi	Lý do	Nguồn gốc	Phiên bản cũ	Mô tả thay đổi	Phiên bản mới
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+
+
+ 
+MỤC LỤC
+I.	TỔNG QUAN	5
+I.1.	Mục đích	5
+I.2.	Phạm vi hệ thống	5
+I.3.	Tài liệu liên quan	5
+I.4.	Thuật ngữ và các từ viết tắt	5
+II.	MÔ HÌNH KIẾN TRÚC	6
+II.1.	Mô hình kiến trúc hệ thống	6
+II.2.	Mô hình phân rã chức năng	6
+II.3.	Mô hình tích hợp hệ thống	6
+II.4.	Mô hình triển khai hệ thống	6
+THIẾT KẾ CHI TIẾT CHỨC NĂNG	7
+II.5.	Hệ thống ….	7
+II.5.1.	Trang/Màn hình/Phân hệ…..	7
+
+
+
+	
+I.	TỔNG QUAN
+I.1.	Mục đích
+Tài liệu được xây dựng nhằm mô tả tổng thể yêu cầu, phạm vi nghiệp vụ, chức năng và các yêu cầu liên quan phục vụ xây dựng Phần mềm Văn phòng số Bộ Tài chính, làm cơ sở thống nhất giữa đơn vị quản lý, đơn vị sử dụng, đơn vị chuyên trách công nghệ thông tin và đơn vị triển khai trong quá trình phân tích, thiết kế, phát triển, kiểm thử, nghiệm thu, triển khai và vận hành Hệ thống.
+Tài liệu hướng tới các mục tiêu chính sau:
+•	Chuẩn hóa các yêu cầu nghiệp vụ và chức năng của Hệ thống trên cơ sở các quy định hiện hành về công tác văn thư, quản lý văn bản điện tử, hồ sơ công việc, lưu trữ điện tử, ký số và các quy trình nghiệp vụ đang áp dụng tại Bộ Tài chính.
+•	Xác định đầy đủ phạm vi các phân hệ, chức năng, đối tượng sử dụng, vai trò tham gia và mối quan hệ giữa các nghiệp vụ trong Hệ thống.
+•	Chuẩn hóa các quy trình xử lý trên môi trường điện tử, bảo đảm tính thống nhất nhưng vẫn đáp ứng yêu cầu phân cấp, phân quyền và đặc thù tổ chức của các đơn vị thuộc Bộ Tài chính từ Trung ương đến địa phương.
+•	Làm cơ sở cho việc phân tích và thiết kế kiến trúc hệ thống, kiến trúc dữ liệu, cơ sở dữ liệu, giao diện người sử dụng, quy trình xử lý, cơ chế phân quyền, tích hợp và liên thông với các hệ thống có liên quan.
+•	Làm căn cứ để xây dựng tài liệu thiết kế, tài liệu hướng dẫn sử dụng, kịch bản kiểm thử, kiểm thử chấp nhận người dùng (UAT), đào tạo, chuyển đổi dữ liệu, triển khai và nghiệm thu Hệ thống.
+•	Bảo đảm Hệ thống được xây dựng theo hướng tập trung, thống nhất, có khả năng mở rộng, tích hợp và liên thông; đáp ứng yêu cầu cải cách hành chính, chuyển đổi số, chỉ đạo điều hành và hình thành môi trường làm việc số trong toàn Bộ Tài chính.
+•	Tạo nền tảng để từng bước ứng dụng trí tuệ nhân tạo (AI), tự động hóa, tìm kiếm thông minh và khai thác dữ liệu nhằm hỗ trợ người sử dụng, nâng cao năng suất xử lý công việc và chất lượng công tác quản lý, chỉ đạo, điều hành.
+
+I.2.	Phạm vi hệ thống
+Phần mềm Văn phòng số Bộ Tài chính được xây dựng theo định hướng là nền tảng làm việc số thống nhất, phục vụ công tác quản lý văn bản, hồ sơ công việc, chỉ đạo điều hành và quản trị nội bộ của các đơn vị thuộc Bộ Tài chính.
+Hệ thống được định hướng triển khai thống nhất cho các đơn vị thuộc Bộ Tài chính từ Trung ương đến địa phương; đáp ứng các mô hình tổ chức nhiều cấp, nhiều loại hình đơn vị và quy mô người sử dụng lớn. Hệ thống hỗ trợ quản trị tập trung kết hợp phân cấp quản trị cho từng đơn vị, bảo đảm mỗi đơn vị có thể chủ động tổ chức hoạt động nghiệp vụ trong phạm vi được phân quyền nhưng vẫn tuân thủ kiến trúc, dữ liệu, quy trình và cơ chế quản trị chung của toàn Bộ.
+Phạm vi chức năng chính của Hệ thống bao gồm:
+1.	Phân hệ Quản lý Văn bản & Hồ sơ công việc
+
+2.	Phân hệ Chỉ đạo điều hành
+
+3.	Các giải pháp quản trị nội bộ
+
+4.	Các giải pháp về AI và tự động hóa khác
+
+5.	Phân hệ Tích hợp & Liên thông
+
+Về phạm vi tổ chức, Hệ thống phải đáp ứng đồng thời nhiều mô hình tổ chức trong Bộ Tài chính, bao gồm cơ quan Bộ, các Cục và đơn vị thuộc Bộ, các đơn vị có tổ chức theo nhiều cấp từ Trung ương đến địa phương và cơ sở. Việc thiết kế không phụ thuộc cứng vào một mô hình tổ chức cụ thể mà phải cho phép cấu hình linh hoạt cơ cấu tổ chức, cấp quản lý, chức danh, thẩm quyền và quy trình nghiệp vụ.
+Về phạm vi người sử dụng, Hệ thống phục vụ Lãnh đạo Bộ, lãnh đạo các đơn vị, lãnh đạo các đơn vị trực thuộc, văn thư, thư ký, chuyên viên, cán bộ quản trị và các nhóm người sử dụng khác được cấp quyền. Hệ thống được thiết kế theo quy mô toàn ngành, hướng tới khả năng phục vụ khoảng 60.000 tài khoản người sử dụng, đồng thời bảo đảm khả năng mở rộng khi cơ cấu tổ chức, số lượng người sử dụng, dữ liệu và phạm vi nghiệp vụ thay đổi.
+Về phạm vi dữ liệu, Hệ thống quản lý xuyên suốt vòng đời của văn bản, hồ sơ, nhiệm vụ và các đối tượng nghiệp vụ liên quan, từ thời điểm hình thành hoặc tiếp nhận, xử lý, phê duyệt, phát hành, theo dõi thực hiện đến khi hoàn thành và chuyển sang lưu trữ theo quy định.
+Về phạm vi kỹ thuật, Hệ thống được định hướng xây dựng theo kiến trúc hiện đại, có khả năng triển khai tập trung, mở rộng theo chiều ngang, tích hợp qua các giao diện và dịch vụ chuẩn; bảo đảm hiệu năng, tính sẵn sàng, an toàn thông tin, khả năng giám sát, sao lưu, phục hồi và vận hành ổn định trong môi trường hạ tầng của Bộ Tài chính.
+Hệ thống phải bảo đảm nguyên tắc kế thừa các quy trình nghiệp vụ đã được chuẩn hóa, đồng thời thiết kế theo hướng mở và cấu hình linh hoạt, hạn chế phụ thuộc vào quy trình hoặc cơ cấu tổ chức cố định, qua đó đáp ứng yêu cầu thay đổi về tổ chức bộ máy, quy định nghiệp vụ và nhu cầu mở rộng trong các giai đoạn tiếp theo.
+I.3.	Tài liệu liên quan
+STT	Tên tài liệu	Mã tài liệu/Nguồn
+1.			
+2.			
+I.4.	Thuật ngữ và các từ viết tắt
+STT	Thuật ngữ/chữ viết tắt	Mô tả
+1.			
+2.			
+3.			
+4.			
+5.			
+6.			
+7.			
+8.			
+9.			
+10.			
+11.			
+II.	MÔ HÌNH KIẾN TRÚC
+II.1.	Mô hình kiến trúc hệ thống
+ 
+
+Kiến trúc Hệ thống Quản lý văn bản và điều hành được xây dựng theo định hướng hình thành một nền tảng Văn phòng số dùng chung, quản lý tập trung, phân cấp theo đơn vị, phục vụ xuyên suốt hoạt động quản lý văn bản, hồ sơ công việc, chỉ đạo điều hành và quản trị nội bộ của Bộ Tài chính từ Trung ương đến địa phương.
+Kiến trúc được thiết kế trên cơ sở kế thừa các quy trình nghiệp vụ đã được chuẩn hóa của Chương trình Quản lý văn bản và điều hành, đồng thời tổ chức lại theo kiến trúc dịch vụ hiện đại nhằm đáp ứng yêu cầu về quy mô lớn, khả năng mở rộng, tích hợp liên thông, an toàn thông tin và vận hành tập trung. Quyết định số 258/QĐ-BTC xác định Chương trình VBĐH là nền tảng phục vụ quản lý, chỉ đạo, điều hành, gửi nhận văn bản, hồ sơ công việc, lịch, phòng họp, xe và kết nối các trục liên thông. Tài liệu chuẩn hóa nghiệp vụ tiếp tục cụ thể hóa các quy trình văn bản đến, văn bản đi, tờ trình, văn bản nội bộ, giao việc, hồ sơ công việc, lịch, phòng họp, xe và liên thông.
+Định hướng mới năm 2026 mở rộng phạm vi thành Phần mềm Văn phòng số triển khai cho tất cả các đơn vị thuộc Bộ Tài chính từ Trung ương đến địa phương, bổ sung các nhóm chức năng chỉ đạo điều hành, quản trị nội bộ, AI, tự động hóa và tích hợp các hệ thống toàn ngành.
+II.1.1.	Mục tiêu kiến trúc
+Mục tiêu của kiến trúc là xây dựng một nền tảng kỹ thuật thống nhất, có khả năng phục vụ toàn bộ vòng đời nghiệp vụ Văn phòng số, từ tiếp nhận thông tin, xử lý nghiệp vụ, phê duyệt, ký số, phát hành, giao việc, theo dõi thực hiện đến lưu trữ, tra cứu và khai thác dữ liệu.
+Kiến trúc phải giải quyết đồng thời hai yêu cầu. Một mặt, Hệ thống phải bảo đảm các quy trình nghiệp vụ đặc thù của cơ quan nhà nước, trong đó văn bản và hồ sơ được xử lý theo cơ cấu tổ chức, chức danh, thẩm quyền và luồng phê duyệt. Mặt khác, Hệ thống phải có khả năng phục vụ số lượng lớn đơn vị và người sử dụng mà không tạo ra các hệ thống kỹ thuật riêng biệt khó quản lý cho từng đơn vị.
+Theo phạm vi mới, Hệ thống hướng tới quản lý thống nhất, tập trung xuyên suốt toàn ngành Tài chính và triển khai cho các đơn vị từ Trung ương đến địa phương. Quy mô tổ chức có sự khác biệt đáng kể giữa các khối như cơ quan Bộ, Thuế, Kho bạc Nhà nước, Hải quan, Ủy ban Chứng khoán Nhà nước, Dự trữ, Thống kê và Bảo hiểm xã hội Việt Nam; có đơn vị tổ chức hai cấp, ba cấp và số lượng người sử dụng rất khác nhau. Vì vậy, kiến trúc không được phụ thuộc cứng vào một mô hình tổ chức cụ thể.
+	Các mục tiêu trọng tâm của kiến trúc gồm: bảo đảm quản trị tập trung nhưng có khả năng phân cấp; tách biệt các miền nghiệp vụ; chuẩn hóa cơ chế tích hợp; bảo đảm an toàn và kiểm soát truy cập xuyên suốt; hỗ trợ HA và scale-out; cho phép triển khai Multi-tenant; đồng thời tạo nền tảng cho việc mở rộng AI, tìm kiếm thông minh, báo cáo và các dịch vụ Văn phòng số trong các giai đoạn tiếp theo.
+II.1.2.	Nguyên tắc thiết kế kiến trúc
+
+II.1.3.	Kiến trúc tổng thể
+
+II.1.4.	Kiến trúc ứng dụng
+
+II.1.5.	Kiến trúc dịch vụ
+
+II.1.6.	Kiến trúc tích hợp
+
+II.1.7.	Kiến trúc dữ liệu
+
+II.1.8.	Kiến trúc hạ tầng và triển khai
+
+II.1.9.	Kiến trúc an toàn, bảo mật
+
+II.1.10.	Giám sát và vận hành
+
+II.1.11.	Khả năng mở rộng hệ thống
+
+II.2.	Mô hình phân rã chức năng
+–	<Insert mô hình phân rã chức năng>
+–	<Mô tả chức năng>
+
+STT	Chức năng	Mô tả
+1.			
+2.			
+		
+3.			
+II.3.	Mô hình tích hợp hệ thống
+–	<Insert mô hình tích hợp hệ thống>
+–	<Mô tả tích hợp>
+
+Hệ thống liên thông	Giao thức liên thông	Chuẩn dữ liệu	Các loại dữ liệu liên thông
+			
+			
+			
+			
+II.4.	Mô hình triển khai hệ thống 
+ 
+
+ 
+II.4.1.	Vùng Biên 
+Đây là lớp bảo vệ đầu tiên trước các yêu cầu truy cập đến hê thống.
+o	Cấu phần:
+•	Cụm Firewall biên:
+o	Triển khai theo mô hình đáp ứng tải cao (High Availability - HA).
+o	Đóng vai trò Web Application Firewall (WAF) + Firewall lớp biên.
+o	Lọc tấn độc hại, chống DDoS, kiểm soát truy cập từ Internet/Intranet.
+o	Chức năng chính:
+•	Chặn tấn từ bên ngoài.
+•	Chỉ cho phép các cổng và giao thức hợp lệ (thường là 443/HTTPS).
+•	Thực hiện kiểm tra/thiết lập kết nối bảo mật, an toà
+II.4.2.	Vùng Load Balancer biên
+Sau Firewall biên là các thiết bị cân bằng tải.
+o	Cấu phần:
+	Cụm Load Balancer, Switch chia tải.
+o	Chức năng:
+•	Phân tải lưu lượng đến 2 cụm HA Proxy server.
+•	Kiểm tra khả năng kết nối đến các cụm bên trong, kiểm tra SSL (nếu cấu hình), điều hướng kết nối về máy chủ theo phiên làm việc (sticky session) nếu cần.
+•	Tách biệt mạng công cộng và mạng nội bộ (DMZ).
+
+II.4.3.	Vùng Proxy / API Gateway (HA Proxy Server Zone)
+o	Đây là vùng trung gian quan trọng, gồm 2 cụm HA Proxy server để đảm bảo tính sẵn sàng cao.
+o	Cấu phần trong mỗi cụm HA Proxy server:
+	NGINX: Reverse Proxy, SSL Termination, Caching tĩnh, Rate limiting cơ bản
+	Kong Gateway: API Gateway chính, Rate limiting nâng cao, điều phối truy cập đến các ứng dụng nghiệp vụ, các Portal làm việc.
+o	Đặc điểm:
+•	Triển khai 2 node HA (Active-Active hoặc Active-Passive).
+•	Kong Gateway đóng vai trò trung tâm điều phối API của toàn hệ thống.
+•	Tất cả request từ người dùng đều phải đi qua lớp này trước khi vào hệ thống các ứng dụng nghiệp vụ.
+
+II.4.4.	 Vùng Firewall Core (Core Security Zone)
+o	Lớp đứng sau Vùng Proxy / API Gateway kiểm soát  kết nối trước khi vào đến vùng ứng dụng nghiệp vụ.
+o	Chức năng:
+•	Tường lửa lớp lõi, phân tách rõ ràng giữa vùng Proxy và vùng ứng dụng nghiệp vụ nội bộ.
+•	Kiểm soát lưu lượng theo policy chi tiết (micro-segmentation).
+•	Chỉ cho phép các luồng cần thiết từ Kong/NGINX vào Kubernetes và các dịch vụ nội bộ.
+•	Thường kết hợp với IDS/IPS (Phát hiện và chặn hành vi bất thường ngay lập tức).
+o	Sau Firewall CORE có thêm một cụm Load Balancer nội bộ (thanh vàng) để phân tải vào các cluster ứng dụng.
+
+II.4.5.	Vùng Ứng dụng & Xử lý (Application / Compute Zone)
+Đây là vùng lõi xử lý nghiệp vụ của hệ thống.
+II.4.5.1.	 K8s Cluster (Kubernetes Cluster)
+•	Chạy các microservices của hệ thống.
+•	Bao gồm các service: tiếp nhận văn bản, xử lý luồng công việc (workflow), quản lý hồ sơ, tìm kiếm, báo cáo, tích hợp liên thông…
+•	Triển khai theo mô hình multi-node, có thể có nhiều worker node.
+•	Sử dụng các thành phần kỹ thuật trong K8s: Deployment, StatefulSet, Service, Ingress, ConfigMap, Secret…
+II.4.5.2.	AI Infrastructure Cluster
+•	Cụm hạ tầng chuyên biệt cho các tác vụ AI/ML.
+•	Bao gồm:
+o	Mô hình OCR (nhận dạng chữ trên văn bản scan).
+o	Phân loại văn bản tự động.
+o	Tóm tắt nội dung văn bản.
+o	Gợi ý xử lý / định tuyến văn bản.
+o	Semantic search.
+•	Chạy trên các cụm máy chủ có GPU phục vụ các dịch vụ AI nội bộ.
+II.4.6.	Vùng Bể sự kiện và dữ liệu đệm (Event-Driven & Caching)
+II.4.6.1.	 Event Bus Cluster (Kafka)
+•	Cụm Kafka Cluster: 1 Leader + 2 Kafka Broker.
+•	Đóng vai trò Bể sự kiện/Điều phối sự kiện trung tâm (Event Bus / Message Broker).
+•	Sử dụng cho:
+o	Asynchronous processing (xử lý bất đồng bộ).
+o	Event-driven architecture giữa các microservice.
+o	Audit log, notification, đồng bộ dữ liệu giữa các module.
+o	Tích hợp với các hệ thống bên ngoài (liên thông văn bản).
+•	7.2. Caching Cluster
+•	3 node Redis (Node 1, Node 2, Node 3) – mô hình Redis Cluster hoặc Redis Sentinel.
+•	Cache session, dữ liệu tra cứu thường xuyên, kết quả tìm kiếm, metadata văn bản…
+•	Giảm tải cho PostgreSQL và tăng tốc độ phản hồi.
+________________________________________
+•	8. Vùng Dữ liệu (Data Zone) – được bảo vệ bởi DB Firewall
+o	Trước khi vào vùng dữ liệu có 2 cụm DBFW (Database Firewall) màu đỏ.
+o	Chức năng DBFW:
+•	Bảo vệ trực tiếp cơ sở dữ liệu.
+•	Chống SQL Injection, kiểm soát truy cập theo user/role, audit query, mask dữ liệu nhạy cảm.
+•	Chỉ cho phép kết nối từ các service hợp lệ trong K8s/AI Cluster.
+•	8.1. Patroni Cluster / PostgreSQL
+•	Cụm PostgreSQL được quản lý bởi Patroni (High Availability).
+•	Ít nhất 3 node (1 Primary + 2 Replica) hoặc theo mô hình Leader + Sync/Async Replica.
+•	Lưu trữ toàn bộ dữ liệu nghiệp vụ: văn bản, hồ sơ, luồng xử lý, người dùng, phân quyền, lịch sử…
+•	Patroni đảm bảo tự động failover, không mất dữ liệu khi node chính chết.
+•	8.2. File Server
+•	Hệ thống lưu trữ file đính kèm (văn bản scan, file PDF, Word, hình ảnh…).
+•	Có thể là:
+o	NFS / Ceph / MinIO / Object Storage nội bộ.
+o	Hoặc hệ thống file server truyền thống với replication.
+•	Được tách biệt với database để tối ưu hiệu năng và backup.
+
+
+THIẾT KẾ CHI TIẾT CHỨC NĂNG
+II.5.	Hệ thống ….
+II.5.1.	Trang/Màn hình/Phân hệ…..
+II.5.1.1.	Mô tả chức năng
+II.5.1.2.	Luồng xử lý chức năng
+<Insert luồng xử lý>
+<Mô tả các bước xử lý>
+Bước	Xử lý
+	
+II.5.1.3.	Tài liệu liên quan
+II.5.1.4.	Tên module
+STT	Tên module	Mô tả
+		
+II.5.1.5.	Thiết kế giao diện
+<Insert màn hình giao diện chức năng>
+II.5.1.6.	Thành phần giao diện
+Tên control	Bắt buộc nhập	Định dạng	Vai trò	Ghi chú
+				
+				
+II.5.1.7.	Thiết kế hàm thủ tục
+
